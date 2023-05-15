@@ -21,17 +21,31 @@
     "@types/node": "18.15.11",
     "@types/react": "18.0.31",
     "@types/react-dom": "18.0.11",
+    "axios": "^1.4.0",
     "date-fns": "^2.29.3",
     "dayjs": "^1.11.7",
     "eslint": "8.37.0",
     "eslint-config-next": "13.2.4",
+    "exceljs": "^4.3.0",
+    "file-saver": "^2.0.5",
     "jsonwebtoken": "^8.5.1",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.5.28",
+    "jszip": "^3.10.1",
+    "moment": "^2.29.4",
     "next": "13.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-icons": "^4.8.0",
     "react-redux": "^8.0.5",
+    "shpjs": "^4.0.4",
     "styled-components": "^5.3.9",
     "typescript": "5.0.2",
+    "xlsx": "^0.18.5",
     "xml-js": "^1.6.11"
+  },
+  "devDependencies": {
+    "@types/file-saver": "^2.0.5",
+    "@types/shpjs": "^3.4.2"
   }
 }

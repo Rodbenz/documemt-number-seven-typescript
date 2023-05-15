@@ -1,20 +1,23 @@
 import React from 'react'
-import style from '../../../../styles/Home.module.css'
+import style from '../../../Home.module.css'
 import HeaderSummarrize from './@component/headerSummarize'
 import MenuSummarize from './@component/menuSummarize'
-import { useCartContext } from '@/context/Cartcontext'
 import LandApartment from './@component/RegistrationInformation/LandApartment'
 import FoundInformationRegistrationInformation from './@component/RegistrationInformation/foundInformationRegistrationInformation'
 import RegisteredTradingInformation from './@component/RegisteredTrading/RegisteredTradingInformation'
 import PlotInformation from './@component/PlotInformation'
 import FoundInformationPlotInformation from './@component/PlotInformation/foundInformationPlotInformation'
 import FoundInformationRegisteredTrading from './@component/RegisteredTrading/foundInformationRegisteredTrading'
+import { useCartContext } from '@/context/Cartcontext'
+import LanBuildingTax from './@component/LanBuildingTax'
+import FoundInformationLanBuilding from './@component/LanBuildingTax/foundInformationLanBuilding'
 
 
 export default function ReportSummarize() {
-  const { dataSearch, isMenuSummarize, setIsMenuSummarize } = useCartContext();
+  const { isMenuSummarize, dataInformationList, dataLandApartmentList, dataRegisteredTradingInformationList, dataLanBuildingList } = useCartContext();
+
   return (
-    <div className={style.box} style={{ height: 'calc(1024px - 256px)' }}>
+    <div >
       {/* หัวข้อ */}
       <HeaderSummarrize />
       {/* เมนู */}
@@ -25,7 +28,7 @@ export default function ReportSummarize() {
         <PlotInformation />
       )}
       {/* รายงานค้นหา 1*/}
-      {Object.keys(isMenuSummarize).length > 0 && dataSearch.length > 0 && (
+      {Object.keys(isMenuSummarize).length > 0 && dataInformationList.length > 0 && (
         isMenuSummarize.id == 1 &&
         <FoundInformationPlotInformation />
       )}
@@ -35,7 +38,7 @@ export default function ReportSummarize() {
         <LandApartment />
       )}
       {/* รายงานค้นหา 2*/}
-      {Object.keys(isMenuSummarize).length > 0 && dataSearch.length > 0 && (
+      {Object.keys(isMenuSummarize).length > 0 && dataLandApartmentList.length > 0 && (
         isMenuSummarize.id == 2 &&
         <FoundInformationRegistrationInformation />
       )}
@@ -45,9 +48,19 @@ export default function ReportSummarize() {
         <RegisteredTradingInformation />
       )}
       {/* รายงานค้นหา 3*/}
-      {Object.keys(isMenuSummarize).length > 0 && dataSearch.length > 0 && (
+      {Object.keys(isMenuSummarize).length > 0 && dataRegisteredTradingInformationList.length > 0 && (
         isMenuSummarize.id == 3 &&
         <FoundInformationRegisteredTrading />
+      )}
+      {/* ค้นหา 4 */}
+      {Object.keys(isMenuSummarize).length > 0 && (
+        isMenuSummarize.id == 4 &&
+        <LanBuildingTax />
+      )}
+      {/* รายงานค้นหา 3*/}
+      {Object.keys(isMenuSummarize).length > 0 && dataLanBuildingList.length > 0 && (
+        isMenuSummarize.id == 4 &&
+        <FoundInformationLanBuilding dataSearch={dataLanBuildingList}/>
       )}
     </div>
   )

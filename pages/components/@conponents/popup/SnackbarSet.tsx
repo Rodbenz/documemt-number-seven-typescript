@@ -44,7 +44,7 @@ export default function SnackBarDiaLog() {
         horizontal: 'center',
       }}
     >
-      <Alert onClose={handleClose} severity={type} sx={{ width: '100%' }}>
+      <Alert onClose={handleClose}  variant="filled" severity={type} sx={{ width: '100%' }}>
         {message}
       </Alert>
     </Snackbar>

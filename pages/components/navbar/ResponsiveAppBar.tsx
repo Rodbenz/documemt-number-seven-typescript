@@ -22,7 +22,7 @@ interface ResponsiveAppBarProps {
 
 function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
   const router = useRouter();
-  const { setDataSearch, setIsMenuSummarize } = useCartContext();
+  const { setDataSearch, setIsMenuSummarize, setDataInformationList, setDataLandApartmentList, setDataRegisteredTradingInformationList, setDataLanBuildingList, setDatalistEpv } = useCartContext();
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -30,18 +30,25 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
   const handleOpenNavMenu = (event:any) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event:any) => {
-    setAnchorElUser(event.currentTarget);
-  };
+  // const handleOpenUserMenu = (event:any) => {
+  //   setAnchorElUser(event.currentTarget);
+  // };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
     setIsMenu(true)
+    setDataSearch([])
+    setIsMenuSummarize({})
+    setDataInformationList([])
+    setDataLandApartmentList([])
+    setDataRegisteredTradingInformationList([])
+    setDatalistEpv([])
+    setDataLanBuildingList([])
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  // const handleCloseUserMenu = () => {
+  //   setAnchorElUser(null);
+  // };
 
   return (
     <AppBar position="static" sx={{ backgroundColor: '#006e61' }}>
@@ -97,34 +104,32 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
               <MenuItem onClick={() => {
                 router.push('/')
                 handleCloseNavMenu()
-                setIsMenuSummarize({})
-                setDataSearch([])
               }}>
                 <Typography textAlign="center">หน้าหลัก</Typography>
               </MenuItem>
               <MenuItem onClick={() => {
                 router.push('/components/menu/reportImport')
                 handleCloseNavMenu()
-                setIsMenuSummarize({})
-                setDataSearch([])
               }}>
                 <Typography textAlign="center">รายงานนำเข้าข้อมูล</Typography>
               </MenuItem>
               <MenuItem onClick={() => {
                 router.push('/components/menu/reportSummarize')
                 handleCloseNavMenu()
-                setIsMenuSummarize({})
-                setDataSearch([])
               }}>
                 <Typography textAlign="center">รายงานสรุป</Typography>
               </MenuItem>
               <MenuItem onClick={() => {
                 router.push('/components/menu/reportExport')
                 handleCloseNavMenu()
-                setIsMenuSummarize({})
-                setDataSearch([])
               }}>
                 <Typography textAlign="center">รายงานส่งออก</Typography>
+              </MenuItem>
+              <MenuItem onClick={() => {
+                router.push('/components/menu/EPVLink');
+                handleCloseNavMenu()
+              }}>
+                <Typography textAlign="center">การเชื่อมโยงธนารักษ์ (EPV)</Typography>
               </MenuItem>
             </Menu>
           </Box>
@@ -151,10 +156,8 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
               onClick={() => {
                 router.push('/components/menu/reportImport')
                 handleCloseNavMenu()
-                setIsMenuSummarize({})
-                setDataSearch([])
               }}
-              sx={{ my: 2, color: 'white', display: 'block' }}
+              sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, fontSize:18 }}
             >
               รายงานนำเข้าข้อมูล
             </Button>
@@ -162,10 +165,8 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
               onClick={() => {
                 router.push('/components/menu/reportSummarize')
                 handleCloseNavMenu()
-                setIsMenuSummarize({})
-                setDataSearch([])
               }}
-              sx={{ my: 2, color: 'white', display: 'block' }}
+              sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, fontSize:18 }}
             >
               รายงานสรุป
             </Button>
@@ -173,13 +174,21 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
               onClick={() => {
                 router.push('/components/menu/reportExport')
                 handleCloseNavMenu()
-                setIsMenuSummarize({})
-                setDataSearch([])
               }}
 
-              sx={{ my: 2, color: 'white', display: 'block' }}
+              sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, fontSize:18 }}
             >
               รายงานส่งออก
+            </Button>
+            <Button
+              onClick={() => {
+                router.push('/components/menu/EPVLink');
+                handleCloseNavMenu()
+              }}
+
+              sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, fontSize:18 }}
+            >
+              การเชื่อมโยงธนารักษ์ (EPV)
             </Button>
           </Box>
         </Toolbar>

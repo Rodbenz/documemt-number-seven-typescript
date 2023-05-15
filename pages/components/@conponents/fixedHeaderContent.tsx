@@ -7,15 +7,21 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import VariantButtonGroup from './buttonGroups';
 
 interface FixedHeaderContent {
-  dataList: any,
-  colum: any,
-  colorHeader?: string
+  dataList: any;
+  colum: any;
+  colorHeader?: string;
+  btnExport?: any;
+  btnGrpup?: any;
+  typeTable?:number;
 }
 
 
-export default function FixedHeaderContent({ dataList, colum, colorHeader = '#006e61' }: FixedHeaderContent) {
+export default function FixedHeaderContent({ dataList, colum, colorHeader = '#006e61', btnExport, btnGrpup, typeTable}: FixedHeaderContent) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -29,7 +35,7 @@ export default function FixedHeaderContent({ dataList, colum, colorHeader = '#00
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440, width: '100%' }}>
+      <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead >
             <TableRow>
@@ -67,7 +73,7 @@ export default function FixedHeaderContent({ dataList, colum, colorHeader = '#00
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
+        rowsPerPageOptions={[5,10, 25, 100]}
         component="div"
         count={colum?.length}
         rowsPerPage={rowsPerPage}
@@ -75,6 +81,16 @@ export default function FixedHeaderContent({ dataList, colum, colorHeader = '#00
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
+      {btnExport && btnExport &&(
+        <Stack direction={'row'} justifyContent={'end'} py={2} pr={2}>
+          <Button variant={'contained'} onClick={btnExport()}>ส่งออก</Button>
+        </Stack>
+      )}
+      {btnGrpup && btnGrpup &&(
+        <Stack direction={'row'} justifyContent={'end'} py={2} pr={2}>
+          <VariantButtonGroup dataList={dataList} colum={colum} typeTable={typeTable}/>
+        </Stack>
+      )}
     </Paper>
   )
 }

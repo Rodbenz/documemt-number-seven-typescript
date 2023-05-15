@@ -10,7 +10,12 @@ const nextConfig = {
 
   env: {
     v : "1.0002" ,
-    privateKey: process.env.privateKey,
+    REACT_APP_API_PRIVATEKEY: process.env.REACT_APP_API_PRIVATEKEY,
+    REACT_APP_API_HOST: process.env.REACT_APP_API_HOST,
+    REACT_APP_API_URL: process.env.REACT_APP_API_URL,
+    REACT_APP_API_AUTH: process.env.REACT_APP_API_AUTH,
+    REACT_APP_API_EPVLINK: process.env.REACT_APP_API_EPVLINK,
+    REACT_APP_API_BETW: process.env.REACT_APP_API_BETW,
   }
  
 }

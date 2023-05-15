@@ -4,15 +4,19 @@ import TextField from '@mui/material/TextField';
 import ProsType from 'prop-types';
 
 interface IWidthTextField {
+  values?: any;
   onchanges: (newValue: any) => void,
   nameText?: string,
-  value?: any
 }
 
-export default function WidthTextField({ onchanges, nameText='กรุณาเลือกรายการ', value }: IWidthTextField) {
+export default function WidthTextField({ onchanges, nameText='กรุณาเลือกรายการ', values }: IWidthTextField) {
+  const [value, setValue] = React.useState(null);
   const handleChange = (event:any) => {
     onchanges(event.target.value)
   }
+  React.useEffect(() => {
+    setValue(values)
+  }, [values]);
   return (
     <Box
       sx={{
@@ -25,6 +29,7 @@ export default function WidthTextField({ onchanges, nameText='กรุณาเ
         label={nameText}
         id="fullWidth"
         onChange={handleChange}
+        value={value}
         size='medium'
       />
     </Box>

@@ -1,19 +1,24 @@
 import { Box, Grid, Typography } from '@mui/material'
 import React from 'react'
 import FixedHeaderContent from '../../../@conponents/fixedHeaderContent';
-import ButtonEdit from '@/pages/components/@conponents/ButtonEdit';
 import { useCartContext } from '@/context/Cartcontext';
+import ButtonEdit from '../../../@conponents/ButtonEdit';
+import { dateFormatTimeTHSlash } from '@/libs/outputDatas';
 
-const dataList = [{ name: 'สำนักงานปลัดกระทรวง', type: 'ข้อมูลทั่วไป', list: 'ข้อมูลทั่วไป', date: '01/01/2564' }]
+interface Props {
+  dataSearch?: any
+}
 
-export default function FoundInformation() {
-  const { setOpenDialogEdit } = useCartContext();
+export default function FoundInformation({ dataSearch }: Props) {
+  const { setDataEdit } = useCartContext();
   const [data, setData] = React.useState<any[]>([])
 
   const res_dataSearch = () => {
     let newData:any[] = []
-    for (let i = 0; i < dataList.length; i++) {
-      let dataitem:any = dataList[i];
+    for (let i = 0; i < dataSearch.length; i++) {
+      let dataitem:any = dataSearch[i];
+      dataitem.ROWNUMBER = i+1;
+      dataitem.IMPORT_ = dateFormatTimeTHSlash(dataitem.IMPORT_DATE)
       dataitem.active = (
         <ButtonEdit onclickEdit={()=>handleCloseDialogEdit(dataitem)}/>
       )
@@ -23,34 +28,40 @@ export default function FoundInformation() {
   }
 
   const handleCloseDialogEdit = (data:any) => {
-    setOpenDialogEdit(true)
+    setDataEdit([data])
+    
   }
 
   const colum = [
     {
+      name: 'ลำดับที่',
+      listname: 'ROWNUMBER',
+      align: 'center',
+    },
+    {
       name: 'หน่วยงาน',
-      listname: 'name',
+      listname: 'GOV_NAME',
       align: 'left',
     },
     {
       name: 'ประเภทข้อมูล',
-      listname: 'type',
+      listname: 'SUB_NAME',
       align: 'left',
     },
     {
       name: 'รายการนำเข้าข้อมูล',
-      listname: 'list',
+      listname: 'SEMI_NAME',
       align: 'left',
     },
     {
       name: 'วันที่นำเข้า',
-      listname: 'date',
+      listname: 'IMPORT_',
       align: 'left',
     },
     {
       name: 'รายละเอียด',
       listname: 'active',
-      align: 'left',
+      align: 'center',
     },
   ]
   React.useEffect(() => {

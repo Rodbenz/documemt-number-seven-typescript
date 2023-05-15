@@ -35,9 +35,10 @@ export default function HaederNavbar({ setIsMenu}: Props) {
                         display: { xs: 'none', md: 'flex' },
                         fontFamily: 'monospace',
                         fontWeight: 700,
-                        letterSpacing: '.3rem',
+                        // letterSpacing: '.3rem',
                         color: 'inherit',
                         textDecoration: 'none',
+                        marginLeft: -20,
                     }}
                 >
                     ระบบเชื่อมโยงแลกเปลี่ยนข้อมูล

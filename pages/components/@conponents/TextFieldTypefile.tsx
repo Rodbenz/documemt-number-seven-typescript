@@ -1,31 +1,73 @@
 import React, { useState, useRef } from 'react';
-import { TextField, Button, Grid, Stack, Tooltip } from '@mui/material';
+import { Box, TextField, Button, Grid, Stack, Tooltip, FormControl, InputLabel } from '@mui/material';
 import BackupIcon from '@mui/icons-material/Backup';
 import { styled } from '@mui/material/styles';
+import { readDataAll, readFileChangeZip } from '@/libs/readfilezip';
+import { AnyAaaaRecord } from 'dns';
+import { CheckFormate, SplitDataTypeFile } from '@/libs/dataControl';
+import { readDataPracelShp } from '@/libs/readData';
+import { SnackbarSet } from './popup/SnackbarSet';
 
-interface ITextFieldTypefile { }
+interface ITextFieldTypefile {
+    setFilename?: (val: string) => void;
+    onChangeDataPracel?: (obj: any) => void;
+    ischeck?: boolean;
+    typesFile?: string;
+}
 
 
-const TextFieldTypefile = (props: ITextFieldTypefile) => {
+const TextFieldTypefile = ({ setFilename, onChangeDataPracel, ischeck, typesFile }: ITextFieldTypefile) => {
     const inputFile = useRef<HTMLInputElement>(null);
-    const [selectedFile, setSelectedFile] = useState(null);
+    const [selectedFile, setSelectedFile] = useState('');
     const [filedata, setFiledata] = useState<false>(false);
 
-    const handleFileChange = (event: any) => {
-        // try {
-        setSelectedFile(event.target.files[0].name);
-        let fileData: any = {
-            filename: event.target.files[0].name,
-            file: event.target.files[0]
-        }
-        console.log("fileData", fileData);
-        setFiledata(fileData)
-        event.target.value = null;
-        // } catch {
-        //     setSelectedFile('')
-        //     setFiledata(false)
+    const handleFileChange = async (event: any) => {
+        try {
+            let datatypefile = SplitDataTypeFile(typesFile);
+            let fileName_ = event.target.files[0].name.split('.').pop();
+            if (!datatypefile.includes(fileName_)) {
+                SnackbarSet('กรุณาเลือกไฟล์ ' + typesFile, 'error', 3000);
+                setSelectedFile('')
+                onChangeDataPracel && onChangeDataPracel([])
+                return false;
+            }
+            let file = event.target.files[0];
+            let dataPracel = await readDataAll(file)
+            console.log(dataPracel, 'dataPracel');
 
-        // }
+            if (dataPracel == undefined) {
+                SnackbarSet('ฟอร์แมตไฟล์ไม่ตรง', 'error', 3000);
+                setSelectedFile('')
+                onChangeDataPracel && onChangeDataPracel([])
+                return false;
+            }
+            if(fileName_ == 'zip'){
+                let data = await readDataPracelShp(dataPracel, '', '')           
+                if(CheckFormate(data) == false){
+                    SnackbarSet('ฟอร์แมตไฟล์ไม่ตรง', 'error', 3000);
+                    setSelectedFile('')
+                    onChangeDataPracel && onChangeDataPracel([])
+                    return false;
+                }
+            }
+            if (fileName_ == 'xlsx' || fileName_ == 'txt') {
+                if(CheckFormate(dataPracel) == false){
+                    SnackbarSet('ฟอร์แมตไฟล์ไม่ตรง', 'error', 3000);
+                    setSelectedFile('')
+                    onChangeDataPracel && onChangeDataPracel([])
+                    return false;
+                }
+            }
+
+            setFilename && await setFilename(event.target.files[0].name)
+            setSelectedFile(event.target.files[0].name);
+            onChangeDataPracel && await onChangeDataPracel(dataPracel)
+            event.target.value = null;
+        } catch(e) {
+            setSelectedFile('')
+            setFiledata(false)
+            console.log(e);
+        }
     };
 
     const startUploadFile = () => {
@@ -44,8 +86,9 @@ const TextFieldTypefile = (props: ITextFieldTypefile) => {
     };
 
 
+
     return (
-        <Grid sx={{width:"100%"}}>
+        <Grid sx={{ width: "100%" }}>
             <Stack direction="row" spacing={0}>
                 <div style={{ width: '100%', position: 'relative' }}>
                     <input
@@ -53,16 +96,17 @@ const TextFieldTypefile = (props: ITextFieldTypefile) => {
                         onChange={handleFileChange}
                         ref={inputFile}
                         style={{ display: "none" }}
-                        accept={".text,.pdf,.shp"}
+                        accept={typesFile}
                     />
                     <TextField
                         disabled
                         fullWidth
                         size='medium'
-                        label={selectedFile == null ? 'กรุณาอัปโหลดไฟล์' : selectedFile}
+                        label={selectedFile == '' ? 'กรุณาอัปโหลดไฟล์' : selectedFile}
+                        error={ischeck}
                     />
                 </div>
-                <div style={{ position: 'relative'}}>
+                <div style={{ position: 'relative' }}>
                     <Tooltip title="กรุณาอัปโหลดไฟล์">
                         <Button
                             variant={"text"}

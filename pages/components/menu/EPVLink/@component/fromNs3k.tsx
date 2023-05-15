@@ -1,0 +1,99 @@
+import React from 'react'
+import { Grid } from '@mui/material';
+import WidthTextField from '../../../@conponents/TextFieldInput';
+import AutocompleteUTMMAP2 from '../../../@conponents/Autocopletes/AutocompleteUTMMAP2';
+import AutocompleteUTMASCALE from '../../../@conponents/Autocopletes/AutocompleteUTMASCALE';
+import AutocompleteAmphur from '../../../@conponents/Autocopletes/AutocompleteAmphur';
+import AutocompleteTumbul from '../../../@conponents/Autocopletes/AutocompleteTumbul';
+import { useCartContext } from '@/context/Cartcontext';
+
+interface IFromNs3k {
+    types?: number;
+    province?: any;
+    branch?: any;
+}
+export default function FromNs3k({ types, province, branch }: IFromNs3k) {
+    const { setDataLandList } = useCartContext()
+    const [landNo, setLandNo] = React.useState<string>('');
+    const [landUTMMAP1, setLandUTMMAP1] = React.useState<string>('');
+    const [landUTMMAP2, setLandUTMMAP2] = React.useState<any>(null);
+    const [landUTMMAP3, setLandUTMMAP3] = React.useState<any>('');
+    const [landUTMMAP4, setLandUTMMAP4] = React.useState<any>('');
+    const [landUTMSCALE, setLandUTMSCALE] = React.useState<any>(null);
+    const [chanode, setChanode] = React.useState<any>('');
+    const [page, setPage] = React.useState<any>('');
+    const [amphur, setAmphur] = React.useState<any>(null);
+    const [tombol, setTombol] = React.useState<any>(null);
+
+    const handlelandNo = (value: string) => {
+        setLandNo(value);
+    }
+    const handlelandUTMMAP1 = (value: string) => {
+        setLandUTMMAP1(value);
+    }
+    const handlelandUTMMAP2 = (value: string) => {
+        setLandUTMMAP2(value);
+    }
+    const handlelandUTMMAP4 = (value: string) => {
+        setLandUTMMAP4(value);
+    }
+    const handleChanode = (value: string) => {
+        setChanode(value);
+    }
+    const handleAmphur = (value: string) => {
+        setAmphur(value);
+        setTombol(null);
+    }
+    const handleTombol = (value: string) => {
+        setTombol(value);
+    }
+
+    React.useEffect(() => {
+        let newDataObj: any = new Object();
+        newDataObj.LAND_NO = landNo != '' ? landNo : '';
+        newDataObj.UTMMAP1 = landUTMMAP1 != '' ? landUTMMAP1 : '';
+        newDataObj.UTMMAP2 = landUTMMAP2 != null ? landUTMMAP2.value : '';
+        newDataObj.UTMMAP3 = landUTMMAP3 != '' ? landUTMMAP3 : '';
+        newDataObj.UTMMAP4 = landUTMMAP4 != '' ? landUTMMAP4 : '';
+        newDataObj.UTMSCALE = landUTMSCALE != null ? landUTMSCALE.value : '';
+        Object.keys(newDataObj).length > 0 && setDataLandList(newDataObj); 
+    }, [landNo, landUTMMAP1, landUTMMAP2, landUTMMAP3, landUTMMAP4, landUTMSCALE])
+
+    return (
+        <div>
+            {types == 1 &&
+                <Grid container justifyContent="center" spacing={2} pb={2}>
+                    <Grid item xs={5}>
+                        <WidthTextField values={landNo} onchanges={handlelandNo} nameText='เลขที่ดิน' />
+                    </Grid>
+                    <Grid item xs={3}>
+                        <WidthTextField values={landUTMMAP1} onchanges={handlelandUTMMAP1} nameText='แผ่นที่ภูมิประเทศ (ตัวอย่าง 4925)' />
+                    </Grid>
+                    <Grid item xs={2}>
+                        <AutocompleteUTMMAP2 values={landUTMMAP2} onchange={handlelandUTMMAP2} nameLabel='UTMMAP2' />
+                    </Grid>
+                    <Grid item xs={5}>
+                        <WidthTextField values={landUTMMAP4} onchanges={handlelandUTMMAP4} nameText='แผ่นที่ (ตัวอย่าง 03)' />
+                    </Grid>
+                    <Grid item xs={5}>
+                    </Grid>
+                </Grid>
+            }
+            {types == 2 &&
+                <Grid container justifyContent="center" spacing={2} pb={2}>
+                    <Grid item xs={5}>
+                        <WidthTextField values={chanode} onchanges={handleChanode} nameText='เลขที่ น.ส 3ก.' />
+                    </Grid>
+                    <Grid item xs={5}>
+                        <AutocompleteAmphur values={amphur} onchange={handleAmphur} nameLabel='อำเภอ' province={province} branch={branch} />
+                    </Grid>
+                    <Grid item xs={5}>
+                        <AutocompleteTumbul values={tombol} onchange={handleTombol} nameLabel='ตำบล' province={province} amphur={amphur} />
+                    </Grid>
+                    <Grid item xs={5}>
+                    </Grid>
+                </Grid>
+            }
+        </div>
+    )
+}

@@ -3,14 +3,17 @@ import React from 'react'
 import ButtonSearch from '../../../@conponents/ButtonSearch';
 import ButtonAdd from '../../../@conponents/ButtonAdd';
 import { useCartContext } from '@/context/Cartcontext';
-import AutocompleteType from '@/pages/components/@conponents/Autocopletes/AutocompleteType';
+import AutocompleteType from '../../../@conponents/Autocopletes/AutocompleteType';
+import AutocompleteChond from '../../../@conponents/Autocopletes/AutocompleteChond';
+import AutocompleteProvine from '../../../@conponents/Autocopletes/AutocompleteProvine';
+import AutocompleteBranch from '../../../@conponents/Autocopletes/AutocompleteBranch';
+import AutocompleteTypes from '../../../@conponents/Autocopletes/AutocompleteTypes';
+import MyDatePicker from '../../../@conponents/MyDatePicker';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import MyDatePicker from '@/pages/components/@conponents/MyDatePicker';
-import AutocompleteChond from '@/pages/components/@conponents/Autocopletes/AutocompleteChond';
-import AutocompleteProvine from '@/pages/components/@conponents/Autocopletes/AutocompleteProvine';
-import AutocompleteBranch from '@/pages/components/@conponents/Autocopletes/AutocompleteBranch';
-import AutocompleteTypes from '@/pages/components/@conponents/Autocopletes/AutocompleteTypes';
-
+import AutocompletePeriods from '../../../@conponents/Autocopletes/AutocompletePeriods';
+import AutocompleteTypeMore from '../../../@conponents/Autocopletes/AutocompleteTypeMore';
+import { SelTranferDataTal } from '@/service/report';
+import { SnackbarSet } from '@/pages/components/@conponents/popup/SnackbarSet';
 
 const style = {
   marginTop: '-35px',
@@ -23,21 +26,85 @@ const style = {
 }
 
 export default function SearchReprtExport() {
+  const { setDataExport, setDataSandExport } = useCartContext();
+  const [periods, setPeriods] = React.useState<any>(null)
+  const [licenseTypes, setLicenseTypes] = React.useState<any>(null)
+  const [province, setProvince] = React.useState<any>(null)
+  const [branch, setBranch] = React.useState<any>(null)
+  const [valueTypes, setValueTypes] = React.useState<any>(null)
+  const [startDate, setStartDate] = React.useState<any>(null)
+  const [endDate, setEndDate] = React.useState<any>(null)
 
-  const { datasearch, setDataSearch, setOpenDialog } = useCartContext();
-
+  const onchangesPeriods = (value: any) => {
+    setPeriods(value)
+  }
+  const onchangesLicenseTypes = (value: any) => {
+    setLicenseTypes(value)
+  }
+  const onchangesProvinc = (value: any) => {
+    setProvince(value)
+    setBranch(null)
+    console.log(value);
+  }
+  const onchangesBranch = (value: any) => {
+    setBranch(value)
+  }
   const onchangesTypes = (value: any) => {
+    setValueTypes(value)
+  }
+  const onchangesStartDate = (value: any) => {
+    setStartDate(value)
+  }
+  const onchangesEndDate = (value: any) => {
+    setEndDate(value)
+  }
+
+  const handleOnsearch = () => {
+    let datasend: any = new Object();
+    datasend.CHANGWAT_CODE = province != null ? province.PROVINCE_ID : ''
+    datasend.BRANCH_CODE = branch != null ? branch.BRANCH : ''
+    datasend.PARCELTYPE = licenseTypes != null ? String(licenseTypes.ID) : '';
+    datasend.PERIODS_ID = periods != null ? String(periods.ID) : '';
+    datasend.START_DATE = startDate != null ? startDate : '';
+    datasend.END_DATE = endDate != null ? endDate : '';
+    datasend.STATUS = valueTypes != null ? String(valueTypes.ID) : '';
+
+    console.log(datasend, 'datasend');
+    res_search(datasend);
+    setDataSandExport([datasend])
 
   }
-  const handleOnsearch = () => {
-    console.log('search');
-    let data: any[] = []
-    data.push('search')
-    setDataSearch(data)
+  const res_search = async (datasend: any) => {
+    await setDataExport([]);
+    try {
+      let selTranferDataTal = await SelTranferDataTal(datasend);
+      console.log(selTranferDataTal, 'selTranferDataTal');
+      if (selTranferDataTal) {
+        if (selTranferDataTal.length > 0 || selTranferDataTal != '') {
+          await setDataExport(selTranferDataTal);
+        } else {
+          await setDataExport([]);
+          SnackbarSet('ไม่พบข้อมูล', 'error', 3000)
+          return;
+        }
+      }else{
+        await setDataExport([]);
+        SnackbarSet('ไม่พบข้อมูล', 'error', 3000)
+        return;
+      }
+    } catch (e) {
+      console.log(e);
+    }
   }
-  const handleOpenDialogImport = () => {
-    console.log('add');
-    setOpenDialog(true)
+  const handleCancel = () => {
+    setDataExport([]);
+    setPeriods(null)
+    setLicenseTypes(null)
+    setStartDate(null)
+    setEndDate(null)
+    setProvince(null)
+    setBranch(null)
+    setValueTypes(null)
   }
   return (
     <>
@@ -51,36 +118,36 @@ export default function SearchReprtExport() {
                   <Grid container py={5} px={5} spacing={2}>
                     <Grid item xs={12} sm={12} md={3}>
                       <Typography variant="subtitle1" component="div" gutterBottom>รอบบัญชี พ.ศ.</Typography>
-                      <AutocompleteType nameLabel='กรุณาเลือกประเภทข้อมูล' onchange={onchangesTypes} />
+                      <AutocompletePeriods values={periods} nameLabel='กรุณาเลือกประเภทข้อมูล' onchange={onchangesPeriods} />
                     </Grid>
                     <Grid item xs={12} sm={12} md={6}>
                       <Typography variant="subtitle1" component="div" gutterBottom>วัน/เดือน/ปี ที่ประกาศ</Typography>
                       <Grid item sx={{ display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
-                        <MyDatePicker />
+                        <MyDatePicker values={startDate} onChange={onchangesStartDate} />
                         <Typography variant="subtitle1" component="div" sx={{ paddingLeft: 3, paddingRight: 3 }} p={2}>ถึง</Typography>
-                        <MyDatePicker />
+                        <MyDatePicker values={endDate} onChange={onchangesEndDate} />
                       </Grid>
                     </Grid>
                     <Grid item xs={12} sm={12} md={3}>
                       <Typography variant="subtitle1" component="div" gutterBottom>ประเภทเอกสารสิทธิ์</Typography>
-                      <AutocompleteChond nameLabel='กรุณาเลือกประเภทข้อมูล' onchange={onchangesTypes} />
+                      <AutocompleteChond values={licenseTypes} nameLabel='กรุณาเลือกประเภทข้อมูล' onchange={onchangesLicenseTypes} />
                     </Grid>
                     <Grid item xs={12} sm={12} md={3}>
                       <Typography variant="subtitle1" component="div" gutterBottom>จังหวัด</Typography>
-                      <AutocompleteProvine nameLabel='กรุณาเลือกประเภทข้อมูล' onchange={onchangesTypes} />
+                      <AutocompleteProvine values={province} nameLabel='กรุณาเลือกประเภทข้อมูล' onchange={onchangesProvinc} />
                     </Grid>
                     <Grid item xs={12} sm={12} md={3}>
                       <Typography variant="subtitle1" component="div" gutterBottom>สำนักงานที่ดิน</Typography>
-                      <AutocompleteBranch nameLabel='กรุณาเลือกประเภทข้อมูล' onchange={onchangesTypes} />
+                      <AutocompleteBranch values={branch} nameLabel='กรุณาเลือกประเภทข้อมูล' onchange={onchangesBranch} datalist={province} />
                     </Grid>
                     <Grid item xs={12} sm={12} md={3}>
                       <Typography variant="subtitle1" component="div" gutterBottom>ประเภท</Typography>
-                      <AutocompleteTypes nameLabel='กรุณาเลือกประเภทข้อมูล' onchange={onchangesTypes} />
+                      <AutocompleteTypeMore values={valueTypes} nameLabel='กรุณาเลือกประเภทข้อมูล' onchange={onchangesTypes} />
                     </Grid>
                     <Grid item xs={12} sm={12} md={3} >
                       <Stack direction="row" spacing={2} justifyContent="flex-end" p={4}>
                         <ButtonSearch onsubmit={() => handleOnsearch()} />
-                        <Button variant="contained" >ยกเลิก</Button>
+                        <Button variant="contained" onClick={handleCancel}>ยกเลิก</Button>
                       </Stack>
                     </Grid>
                   </Grid>

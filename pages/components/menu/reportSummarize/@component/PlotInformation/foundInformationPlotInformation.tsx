@@ -1,61 +1,78 @@
 import { Box, Grid, Typography } from '@mui/material'
 import React from 'react'
-import ButtonEdit from '@/pages/components/@conponents/ButtonEdit';
 import { useCartContext } from '@/context/Cartcontext';
-import FixedHeaderContent from '@/pages/components/@conponents/fixedHeaderContent';
+import ButtonEdit from '../../../../@conponents/ButtonEdit';
+import FixedHeaderContent from '../../../../@conponents/fixedHeaderContent';
+import ColumnGroupingTable from '../../../../@conponents/datatable/ColumnGroupingTable';
+import { SplitData } from '@/libs/dataControl';
 
-const dataList = [{ name: '1', type: 'นส 3ก.', list: '1000', date: 1000 }]
+interface Column {
+  id: string;
+  label: string;
+  minWidth?: number;
+  align?: 'right' | 'center';
+  row?: 'rowSpan' | 'colSpan';
+  sizeSpan?: number;
+  format?: (value: number) => string;
+}
 
 export default function FoundInformationPlotInformation() {
-  const { setOpenDialogEdit } = useCartContext();
+  const { setDataEdit, dataInformationList } = useCartContext();
   const [data, setData] = React.useState<any>([])
 
   const res_dataSearch = () => {
-    let newData:any[] = []
-    for (let i = 0; i < dataList.length; i++) {
-      let dataitem:any = dataList[i];
-      dataitem.active = (
-        <ButtonEdit onclickEdit={()=>handleCloseDialogEdit(dataitem)}/>
-      )
+    let newData: any[] = []
+    for (let i = 0; i < dataInformationList.length; i++) {
+      let dataitem: any = dataInformationList[i];
+      dataitem.NUMBER = i + 1
+      // if(Object.keys(dataitem).length > 0) {
+      // let dataset: any = {
+      //   NUMBER: i + 1,
+      //   LAND_TYPE: dataitem.LAND_TYPE ? dataitem.LAND_TYPE : '-',
+      //   COUNT_47_: dataitem.COUNT_47 ? SplitData(String(dataitem.COUNT_47)): '-',
+      //   COUNT_48: dataitem.COUNT_48 ? (dataitem.COUNT_48) : '-',
+      //   RAWANG: dataitem.RAWANG ? dataitem.RAWANG : '-',
+      // }
       newData.push(dataitem)
+      // } 
     }
+    console.log(newData, 'newData');
+
     setData(newData)
   }
 
-  const handleCloseDialogEdit = (data:any) => {
-    setOpenDialogEdit(true)
+  const handleCloseDialogEdit = (data: any) => {
+    setDataEdit([data])
   }
+
 
   const colum = [
     {
       name: 'ลำดับ',
-      listname: 'name',
-      align: 'left',
+      listname: 'NUMBER',
+      align: 'center',
     },
     {
-      name: 'รายการข้อมูลทะเบียน',
-      listname: 'type',
-      align: 'left',
-    },
-    {
-      name: 'รายการนำเข้าข้อมูล',
-      listname: 'list',
+      name: 'ประเภทรูปแปลงที่ดิน',
+      listname: 'SEMI_NAME',
       align: 'left',
     },
     {
       name: 'กรมที่ดิน-กรมธนารักษ์',
-      listname: 'date',
-      align: 'left',
+      listname: 'COUNT',
+      align: 'center',
     },
     {
       name: 'กรมธนารักษ์-กรมที่ดิน',
-      listname: 'active',
-      align: 'left',
+      listname: '',
+      align: 'center',
     },
   ]
   React.useEffect(() => {
     res_dataSearch()
   }, [])
+  console.log(dataInformationList);
+
   return (
     <div style={{ width: '100%', position: 'relative', zIndex: 1 }}>
       <Grid container >
@@ -65,7 +82,8 @@ export default function FoundInformationPlotInformation() {
               <Grid item >
                 <Grid container py={5} px={5} spacing={2}>
                   <Grid item xs={12} sm={12} md={12}>
-                    <FixedHeaderContent dataList={data} colum={colum} colorHeader='#006e61' />
+                    {/* <FixedHeaderContent dataList={data} colum={colum} colorHeader='#006e61' /> */}
+                    <FixedHeaderContent colum={colum} dataList={data} btnGrpup typeTable={1} />
                   </Grid>
                 </Grid>
               </Grid>

@@ -1,56 +1,44 @@
 import { Box, Grid, Typography } from '@mui/material'
 import React from 'react'
-import ButtonEdit from '@/pages/components/@conponents/ButtonEdit';
-import FixedHeaderContent from '@/pages/components/@conponents/fixedHeaderContent';
 import { useCartContext } from '@/context/Cartcontext';
+import ButtonEdit from '../../../../@conponents/ButtonEdit';
+import FixedHeaderContent from '../../../../@conponents/fixedHeaderContent';
 
-const dataList = [{ name: '1', type: 'นส 3ก.', list: '1000', date: 1000 }]
 
 export default function FoundInformationRegistrationInformation() {
-  const { setOpenDialogEdit } = useCartContext();
+  const {  dataLandApartmentList  } = useCartContext();
   const [data, setData] = React.useState<any>([])
 
   const res_dataSearch = () => {
     let newData:any[] = []
-    for (let i = 0; i < dataList.length; i++) {
-      let dataitem:any = dataList[i];
-      dataitem.active = (
-        <ButtonEdit onclickEdit={()=>handleCloseDialogEdit(dataitem)}/>
-      )
+    for (let i = 0; i < dataLandApartmentList.length; i++) {
+      let dataitem:any = dataLandApartmentList[i];
+      dataitem['NUMBER'] = i + 1
       newData.push(dataitem)
     }
     setData(newData)
   }
 
-  const handleCloseDialogEdit = (data:any) => {
-    setOpenDialogEdit(true)
-  }
-
   const colum = [
     {
       name: 'ลำดับ',
-      listname: 'name',
-      align: 'left',
+      listname: 'NUMBER',
+      align: 'center',
     },
     {
       name: 'รายการข้อมูลทะเบียน',
-      listname: 'type',
-      align: 'left',
-    },
-    {
-      name: 'รายการนำเข้าข้อมูล',
-      listname: 'list',
+      listname: 'SEMI_NAME',
       align: 'left',
     },
     {
       name: 'กรมที่ดิน-กรมธนารักษ์',
-      listname: 'date',
-      align: 'left',
+      listname: 'COUNT',
+      align: 'center',
     },
     {
-      name: 'กรมธนารักษ์-กรมที่ดิน',
+      name: 'กรมธนารักษ์-กรมที่ดิน (บัญชีราคาประเมิน)',
       listname: 'active',
-      align: 'left',
+      align: 'center',
     },
   ]
   React.useEffect(() => {
@@ -65,7 +53,7 @@ export default function FoundInformationRegistrationInformation() {
               <Grid item >
                 <Grid container py={5} px={5} spacing={2}>
                   <Grid item xs={12} sm={12} md={12}>
-                    <FixedHeaderContent dataList={data} colum={colum} colorHeader='#006e61' />
+                    <FixedHeaderContent dataList={data} colum={colum} colorHeader='#006e61' btnGrpup typeTable={2}/>
                   </Grid>
                 </Grid>
               </Grid>

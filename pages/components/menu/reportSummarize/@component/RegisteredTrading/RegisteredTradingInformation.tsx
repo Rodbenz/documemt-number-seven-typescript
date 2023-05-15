@@ -1,14 +1,18 @@
-import { useCartContext } from '@/context/Cartcontext';
-import AutocompleteType from '@/pages/components/@conponents/Autocopletes/AutocompleteType';
+
 import { Button, Grid, Stack, Typography } from '@mui/material';
 import React from 'react'
 import AssignmentIcon from '@mui/icons-material/Assignment';
-import AutocompleteProvine from '@/pages/components/@conponents/Autocopletes/AutocompleteProvine';
-import AutocompleteBranch from '@/pages/components/@conponents/Autocopletes/AutocompleteBranch';
-import AutocompleteOpt from '@/pages/components/@conponents/Autocopletes/AutocompleteOpt';
-import AutocompleteMonth from '@/pages/components/@conponents/Autocopletes/AutocompleteMonth';
-import AutocompleteYear from '@/pages/components/@conponents/Autocopletes/AutocompleteYear';
-import ButtonSearch from '@/pages/components/@conponents/ButtonSearch';
+import { useCartContext } from '@/context/Cartcontext';
+import AutocompleteProvine from '../../../../@conponents/Autocopletes/AutocompleteProvine';
+import AutocompleteBranch from '../../../../@conponents/Autocopletes/AutocompleteBranch';
+import AutocompleteTypes from '../../../../@conponents/Autocopletes/AutocompleteTypes';
+import TextFieldInput from '../../../../@conponents/TextFieldInput';
+import AutocompleteMonth from '../../../../@conponents/Autocopletes/AutocompleteMonth';
+import AutocompleteYear from '../../../../@conponents/Autocopletes/AutocompleteYear';
+import ButtonSearch from '../../../../@conponents/ButtonSearch';
+import BasicDateTimePicker from '../../../../@conponents/MyDatePicker';
+import { ReportChangChanodeDol, ReportChangData, ReportChangNs3k } from '@/service/report';
+import { SnackbarSet } from '@/pages/components/@conponents/popup/SnackbarSet';
 
 const style = {
     marginTop: '-35px',
@@ -21,20 +25,71 @@ const style = {
 }
 
 export default function RegisteredTradingInformation() {
-    const { datasearch, setDataSearch, setOpenDialog } = useCartContext();
+    const { setDataRegisteredTradingInformationList } = useCartContext();
 
-    const onchangesTypes = (value:any) => {
+    const [province, setProvince] = React.useState<any>(null)
+    const [branch, setBranch] = React.useState<any>(null)
+    // const [valueType, setValueType] = React.useState<any>(null)
+    const [valueOpt, setValueOpt] = React.useState<any>('')
+    const [startDate, setStartDate] = React.useState<any>(null)
+    const [endDate, setEndDate] = React.useState<any>(null)
 
+    const onchangesProvinc = (value: any) => {
+        setProvince(value)
+        setBranch(null)
+        console.log(value);
     }
-    const handleOnsearch = () => {
-        console.log('search');
-        let data = []
-        data.push('search')
-        setDataSearch(data)
+    const onchangesBranch = (value: any) => {
+        setBranch(value)
     }
-    const handleOpenDialogImport = () => {
-        console.log('add');
-        setOpenDialog(true)
+    const onchangesOpt = (value: any) => {
+        setValueOpt(value)
+    }
+    const onchangesStartDate = (value: any) => {
+        setStartDate(value)
+    }
+    const onchangesEndDate = (value: any) => {
+        setEndDate(value)
+    }
+
+    const handleOnsearch = async () => {
+        let datasend: any = new Object();
+        datasend.PROVINCECODE = province != null ? province.PROVINCE_ID : '';
+        datasend.BRANCH_CODE = branch != null ? branch.BRANCH : '';
+        datasend.OPT_CODE = valueOpt != null ? valueOpt : '';
+        datasend.START_DATE = startDate != null ? startDate : '';
+        datasend.END_DATE = endDate != null ? endDate : '';
+        console.log(datasend, 'datasend');
+        await res_getSearch(datasend)
+    }
+    const res_getSearch = async (datasand: any) => {
+        await setDataRegisteredTradingInformationList([])
+        try {
+            let reportChangData = await ReportChangData(datasand)
+            console.log(reportChangData, 'reportChangData');
+            let reportChangChanodeDol = await ReportChangChanodeDol(datasand)
+            console.log(reportChangChanodeDol, 'reportChangChanodeDol');
+            let reportChangNs3k = await ReportChangNs3k(datasand)
+            console.log(reportChangNs3k, 'reportChangNs3k');
+
+            if(reportChangData.length > 0){
+                await setDataRegisteredTradingInformationList(reportChangData)
+            }else{
+                await setDataRegisteredTradingInformationList([])
+                SnackbarSet('ไม่พบข้อมูล', 'error', 3000)
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    const handleCancel = () => {
+        setDataRegisteredTradingInformationList([])
+        setProvince(null)
+        setBranch(null)
+        // setValueType(null)
+        setValueOpt('')
+        setStartDate(null)
+        setEndDate(null)
     }
     return (
         <>
@@ -46,34 +101,34 @@ export default function RegisteredTradingInformation() {
                                 <HeaderSearch />
                                 <Grid item sx={style}>
                                     <Grid container py={5} px={5} spacing={2}>
-                                        <Grid item xs={12} sm={12} md={4}>
+                                        <Grid item xs={12} sm={12} md={6}>
                                             <Typography variant="subtitle1" component="div" gutterBottom>จังหวัด</Typography>
-                                            <AutocompleteProvine size='small' />
+                                            <AutocompleteProvine values={province} onchange={onchangesProvinc} size='small' />
                                         </Grid>
-                                        <Grid item xs={12} sm={12} md={4}>
+                                        <Grid item xs={12} sm={12} md={6}>
                                             <Typography variant="subtitle1" component="div" gutterBottom>สำนักงานจังหวัด</Typography>
-                                            <AutocompleteBranch size='small' />
+                                            <AutocompleteBranch values={branch} onchange={onchangesBranch} datalist={province} size='small' />
                                         </Grid>
-                                        <Grid item xs={12} sm={12} md={4}>
+                                        {/* <Grid item xs={12} sm={12} md={4}>
                                             <Typography variant="subtitle1" component="div" gutterBottom>ประเภทข้อมูล</Typography>
-                                            <AutocompleteType size='small' />
-                                        </Grid>
-                                        <Grid item xs={12} sm={12} md={4}>
+                                            <AutocompleteTypes onchange={onchangesTypes} size='small' />
+                                        </Grid> */}
+                                        {/* <Grid item xs={12} sm={12} md={4}>
                                             <Typography variant="subtitle1" component="div" gutterBottom>รหัส อปท.</Typography>
-                                            <AutocompleteOpt size='small' />
+                                            <TextFieldInput values={valueOpt} onchanges={onchangesOpt} nameText='กรุณากรอกรหัส อปท' /> 
+                                        </Grid>*/}
+                                        <Grid item xs={12} sm={12} md={3}>
+                                            <Typography variant="subtitle1" component="div" gutterBottom>ตั้งแต่วันที่</Typography>
+                                            <BasicDateTimePicker values={startDate} onChange={onchangesStartDate} />
                                         </Grid>
-                                        <Grid item xs={12} sm={12} md={2}>
-                                            <Typography variant="subtitle1" component="div" gutterBottom>เดือน</Typography>
-                                            <AutocompleteMonth size='small' />
+                                        <Grid item xs={12} sm={12} md={3}>
+                                            <Typography variant="subtitle1" component="div" gutterBottom>ถึง</Typography>
+                                            <BasicDateTimePicker values={endDate} onChange={onchangesEndDate} />
                                         </Grid>
-                                        <Grid item xs={12} sm={12} md={2}>
-                                            <Typography variant="subtitle1" component="div" gutterBottom>ปี</Typography>
-                                            <AutocompleteYear size='small' />
-                                        </Grid>
-                                        <Grid item xs={12} sm={12} md={4}>
+                                        <Grid item xs={12} sm={12} md={6}>
                                             <Stack direction="row" spacing={2} justifyContent="flex-end" p={4}>
                                                 <ButtonSearch onsubmit={() => handleOnsearch()} />
-                                                <Button variant="contained" >ยกเลิก</Button>
+                                                <Button variant="contained" onClick={handleCancel}>ยกเลิก</Button>
                                             </Stack>
                                         </Grid>
                                     </Grid>
