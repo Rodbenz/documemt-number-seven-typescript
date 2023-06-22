@@ -5,37 +5,39 @@ import { useCartContext } from '@/context/Cartcontext';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Datatable from '@/pages/components/@conponents/datatable/datatable';
 import FixedHeaderContent from '@/pages/components/@conponents/fixedHeaderContent';
-import { REPORT_RECEIVE_BranchCode } from '@/service/report';
+import { REPORT_RECEIVE_changwat } from '@/service/report';
 import { dateFormatTime } from '@/libs/outputDatas';
 import { SplitDataType, SplitDataTypeFile } from '@/libs/dataControl';
 
-interface IFReportReceiving {
+interface IFReportDataExport {
   setOnDetail?: any;
   dataSendDepartMent?: any;
-  dataSendListBranch?: any;
-  setDataSendListPlot?: any;
+  setDataSendListBranch?: any;
 }
 
-export default function ReportReceivingBracnh({ setOnDetail, dataSendDepartMent, dataSendListBranch, setDataSendListPlot }: IFReportReceiving) {
+export default function ReportDataExport({ setOnDetail, dataSendDepartMent, setDataSendListBranch }: IFReportDataExport) {
+  const { isMenuSeq } = useCartContext();
   const [dataCount, setDataCount] = React.useState<any>([]);
 
+
   const _resDataList = async () => {
-    let newData:any = [];
-    try{
-      let res = await REPORT_RECEIVE_BranchCode(dataSendListBranch)
+    let datasend: any = new Object();
+    datasend.SEMI_CODE = dataSendDepartMent != null ? String(dataSendDepartMent.SEMI_CODE) : '';
+    try {
+      let newData:any = [];
+      let res = await REPORT_RECEIVE_changwat(datasend)
       for(let i = 0; i < res.length; i++){
         let dataItems = res[i];
         dataItems.ROWNUMBER = String(i+1);
         dataItems.FILENAME = SplitDataTypeFile(dataItems.FILE_NAME);
         dataItems.TYPEFILE = SplitDataType(dataItems.FILE_NAME);
         dataItems.COUNT_ = String(dataItems.COUNT_);
-        dataItems.DATEIMPORT = dateFormatTime(dataItems.IMPORT_DATE)
+        dataItems.IMPORT_DATE_ = dateFormatTime(dataItems.IMPORT_DATE)
         newData.push(dataItems);
       }
       console.log(newData, 'newData');
       await setDataCount(newData)
-      
-    }catch(e){
+    } catch (e) {
       console.log(e);
     }
   }
@@ -43,14 +45,10 @@ export default function ReportReceivingBracnh({ setOnDetail, dataSendDepartMent,
   const onhandleClickCount = async (el: any) => {
     console.log(el, 'el');
     if (el.COUNTIMPORT !== 0) {
-      setOnDetail && setOnDetail(4);
-      setDataSendListPlot && setDataSendListPlot(el);
+      setOnDetail && setOnDetail(3);
+      setDataSendListBranch && setDataSendListBranch(el);
     }
 
-  }
-
-  const onHandleRetropective = async () => {
-    setOnDetail && setOnDetail(2);
   }
 
   const colum = [
@@ -61,7 +59,7 @@ export default function ReportReceivingBracnh({ setOnDetail, dataSendDepartMent,
     },
     {
       name: 'สำนักงานที่ดิน',
-      listname: 'BRANCHNAME',
+      listname: 'PROVINCENAME',
       align: 'left',
     },
     {
@@ -86,25 +84,25 @@ export default function ReportReceivingBracnh({ setOnDetail, dataSendDepartMent,
     },
     {
       name: 'วัน/เดือน/ปี',
-      listname: 'DATEIMPORT',
+      listname: 'IMPORT_DATE_',
       align: 'center',
     },
   ]
 
   React.useEffect(() => {
-    console.log(dataSendListBranch, 'dataSendListBranch');
-    if (dataSendListBranch !== null) {
+    console.log(dataSendDepartMent, 'dataSendDepartMent');
+    if (dataSendDepartMent) {
       _resDataList();
     }
-  }, [dataSendListBranch])
+  }, [dataSendDepartMent])
   return (
     <Grid container pl={2} pr={2}>
       <>
         <Stack direction={'row'} justifyContent={'flex-start'} alignItems={'center'} columnGap={1}>
           <Tooltip title="ย้อนกลับ" placement="right">
             <IconButton size='small' onClick={() => {
-              setOnDetail(2),
-                setDataSendListPlot(null)
+              setOnDetail(1),
+                setDataSendListBranch(null)
             }}
             >
               <Avatar sx={{ bgcolor: '#aae8e6', width: 50, height: 50 }}>
@@ -117,7 +115,7 @@ export default function ReportReceivingBracnh({ setOnDetail, dataSendDepartMent,
         <Table>
           <TableHead>
             <TableRow>
-              <FixedHeaderContent dataList={dataCount} colum={colum} onhandleClickCount={onhandleClickCount} onHandleRetropective={onHandleRetropective}/>
+              <FixedHeaderContent dataList={dataCount} colum={colum} onhandleClickCount={onhandleClickCount}/>
             </TableRow>
           </TableHead>
         </Table>

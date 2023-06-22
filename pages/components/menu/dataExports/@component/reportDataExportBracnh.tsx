@@ -9,14 +9,15 @@ import { REPORT_RECEIVE_BranchCode } from '@/service/report';
 import { dateFormatTime } from '@/libs/outputDatas';
 import { SplitDataType, SplitDataTypeFile } from '@/libs/dataControl';
 
-interface IFReportReceiving {
+interface IFReportDataExportBracnh {
   setOnDetail?: any;
   dataSendDepartMent?: any;
   dataSendListBranch?: any;
   setDataSendListPlot?: any;
 }
 
-export default function ReportReceivingBracnh({ setOnDetail, dataSendDepartMent, dataSendListBranch, setDataSendListPlot }: IFReportReceiving) {
+export default function ReportDataExportBracnh({ setOnDetail, dataSendDepartMent, dataSendListBranch, setDataSendListPlot }: IFReportDataExportBracnh) {
+  const { isMenuSeq } = useCartContext();
   const [dataCount, setDataCount] = React.useState<any>([]);
 
   const _resDataList = async () => {
@@ -49,10 +50,6 @@ export default function ReportReceivingBracnh({ setOnDetail, dataSendDepartMent,
 
   }
 
-  const onHandleRetropective = async () => {
-    setOnDetail && setOnDetail(2);
-  }
-
   const colum = [
     {
       name: 'ลำดับที่',
@@ -82,7 +79,7 @@ export default function ReportReceivingBracnh({ setOnDetail, dataSendDepartMent,
     {
       name: 'จำนวน',
       listname: 'COUNT_',
-      align: 'right',
+      align: 'left',
     },
     {
       name: 'วัน/เดือน/ปี',
@@ -117,7 +114,7 @@ export default function ReportReceivingBracnh({ setOnDetail, dataSendDepartMent,
         <Table>
           <TableHead>
             <TableRow>
-              <FixedHeaderContent dataList={dataCount} colum={colum} onhandleClickCount={onhandleClickCount} onHandleRetropective={onHandleRetropective}/>
+              <FixedHeaderContent dataList={dataCount} colum={colum} onhandleClickCount={onhandleClickCount}/>
             </TableRow>
           </TableHead>
         </Table>

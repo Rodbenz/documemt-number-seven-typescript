@@ -5,37 +5,36 @@ import { useCartContext } from '@/context/Cartcontext';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Datatable from '@/pages/components/@conponents/datatable/datatable';
 import FixedHeaderContent from '@/pages/components/@conponents/fixedHeaderContent';
-import { REPORT_RECEIVE_BranchCode } from '@/service/report';
-import { dateFormatTime } from '@/libs/outputDatas';
+import { REPORT_RECEIVE_ALL } from '@/service/report';
 import { SplitDataType, SplitDataTypeFile } from '@/libs/dataControl';
+import { dateFormatTime, setUTM_NO_P } from '@/libs/outputDatas';
 
-interface IFReportReceiving {
+interface IFReportDataExportPlot {
   setOnDetail?: any;
   dataSendDepartMent?: any;
   dataSendListBranch?: any;
-  setDataSendListPlot?: any;
+  dataSendListPlot?: any;
 }
 
-export default function ReportReceivingBracnh({ setOnDetail, dataSendDepartMent, dataSendListBranch, setDataSendListPlot }: IFReportReceiving) {
+export default function ReportDataExportPlot({ setOnDetail, dataSendDepartMent, dataSendListBranch, dataSendListPlot }: IFReportDataExportPlot) {
+  const { isMenuSeq } = useCartContext();
   const [dataCount, setDataCount] = React.useState<any>([]);
 
   const _resDataList = async () => {
-    let newData:any = [];
-    try{
-      let res = await REPORT_RECEIVE_BranchCode(dataSendListBranch)
-      for(let i = 0; i < res.length; i++){
+    let newData: any = [];
+    try {
+      let res = await REPORT_RECEIVE_ALL(dataSendListPlot)
+      for (let i = 0; i < res.length; i++) {
         let dataItems = res[i];
-        dataItems.ROWNUMBER = String(i+1);
-        dataItems.FILENAME = SplitDataTypeFile(dataItems.FILE_NAME);
-        dataItems.TYPEFILE = SplitDataType(dataItems.FILE_NAME);
-        dataItems.COUNT_ = String(dataItems.COUNT_);
+        dataItems.ROWNUMBER = String(i + 1);
+        dataItems.UTM = String(dataItems.UTMMAP1 + ' ' + setUTM_NO_P(dataItems.UTMMAP2) + ' ' + dataItems.UTMMAP3);
         dataItems.DATEIMPORT = dateFormatTime(dataItems.IMPORT_DATE)
         newData.push(dataItems);
       }
       console.log(newData, 'newData');
       await setDataCount(newData)
-      
-    }catch(e){
+
+    } catch (e) {
       console.log(e);
     }
   }
@@ -44,13 +43,8 @@ export default function ReportReceivingBracnh({ setOnDetail, dataSendDepartMent,
     console.log(el, 'el');
     if (el.COUNTIMPORT !== 0) {
       setOnDetail && setOnDetail(4);
-      setDataSendListPlot && setDataSendListPlot(el);
     }
 
-  }
-
-  const onHandleRetropective = async () => {
-    setOnDetail && setOnDetail(2);
   }
 
   const colum = [
@@ -60,53 +54,59 @@ export default function ReportReceivingBracnh({ setOnDetail, dataSendDepartMent,
       align: 'center',
     },
     {
-      name: 'สำนักงานที่ดิน',
-      listname: 'BRANCHNAME',
-      align: 'left',
-    },
-    {
-      name: 'รายการนำเข้า',
-      listname: 'SEMI_NAME',
-      align: 'left',
-    },
-    {
-      name: 'ชื่อไฟล์',
-      listname: 'FILENAME',
-      align: 'left',
-    },
-    {
-      name: 'ประเภทไฟล์',
-      listname: 'TYPEFILE',
-      align: 'left',
-    },
-    {
-      name: 'จำนวน',
-      listname: 'COUNT_',
+      name: 'ระวาง',
+      listname: 'UTM',
       align: 'right',
+    },
+    {
+      name: 'แผ่นที่',
+      listname: 'UTMMAP4',
+      align: 'right',
+    },
+    {
+      name: 'มาตราส่วน',
+      listname: 'UTMSCALE',
+      align: 'right',
+    },
+    {
+      name: 'เลขที่ดิน',
+      listname: 'LAND_NO',
+      align: 'right',
+    },
+    // {
+    //   name: 'เลขที่โฉนด',
+    //   listname: 'DATEIMPORT',
+    //   align: 'right',
+    // },
+    {
+      name: 'อำเภอ',
+      listname: 'AMPHOE_NAME',
+      align: 'Left',
+    },
+    {
+      name: 'ตำบล',
+      listname: 'TAMBOL_NAME',
+      align: 'Left',
     },
     {
       name: 'วัน/เดือน/ปี',
       listname: 'DATEIMPORT',
-      align: 'center',
+      align: 'left',
     },
   ]
 
   React.useEffect(() => {
-    console.log(dataSendListBranch, 'dataSendListBranch');
-    if (dataSendListBranch !== null) {
+    console.log(dataSendListPlot, 'dataSendListPlot');
+    if (dataSendListPlot !== null) {
       _resDataList();
     }
-  }, [dataSendListBranch])
+  }, [dataSendListPlot])
   return (
     <Grid container pl={2} pr={2}>
       <>
         <Stack direction={'row'} justifyContent={'flex-start'} alignItems={'center'} columnGap={1}>
           <Tooltip title="ย้อนกลับ" placement="right">
-            <IconButton size='small' onClick={() => {
-              setOnDetail(2),
-                setDataSendListPlot(null)
-            }}
-            >
+            <IconButton size='small' onClick={() => setOnDetail(3)}>
               <Avatar sx={{ bgcolor: '#aae8e6', width: 50, height: 50 }}>
                 <KeyboardArrowDownIcon fontSize="large" />
               </Avatar>
@@ -117,7 +117,7 @@ export default function ReportReceivingBracnh({ setOnDetail, dataSendDepartMent,
         <Table>
           <TableHead>
             <TableRow>
-              <FixedHeaderContent dataList={dataCount} colum={colum} onhandleClickCount={onhandleClickCount} onHandleRetropective={onHandleRetropective}/>
+              <FixedHeaderContent dataList={dataCount} colum={colum} />
             </TableRow>
           </TableHead>
         </Table>

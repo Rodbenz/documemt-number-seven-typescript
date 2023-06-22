@@ -38,12 +38,8 @@ export default function ReportReceivingPlot({ setOnDetail, dataSendDepartMent, d
     }
   }
 
-  const onhandleClickCount = async (el: any) => {
-    console.log(el, 'el');
-    if (el.COUNTIMPORT !== 0) {
-      setOnDetail && setOnDetail(4);
-    }
-
+  const onHandleRetropective = async () => {
+    setOnDetail && setOnDetail(3);
   }
 
   const colum = [
@@ -116,7 +112,7 @@ export default function ReportReceivingPlot({ setOnDetail, dataSendDepartMent, d
         <Table>
           <TableHead>
             <TableRow>
-              <FixedHeaderContent dataList={dataCount} colum={colum} />
+              <FixedHeaderContent dataList={dataCount} colum={colum} onHandleRetropective={onHandleRetropective}/>
             </TableRow>
           </TableHead>
         </Table>

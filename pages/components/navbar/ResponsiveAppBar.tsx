@@ -31,6 +31,7 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
     setDataLanBuildingList, 
     setDatalistEpv ,
     setIsMenuReceiving,
+    setIsMenuDataExport
   } = useCartContext();
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -54,6 +55,7 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
     setDatalistEpv([])
     setDataLanBuildingList([])
     setIsMenuReceiving({})
+    setIsMenuDataExport({})
   };
 
   // const handleCloseUserMenu = () => {
@@ -123,6 +125,12 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
               }}>
                 <Typography textAlign="center">การรับข้อมูล</Typography>
               </MenuItem>
+              <MenuItem onClick={() => {
+                router.push('/components/menu/dataExports')
+                handleCloseNavMenu()
+              }}>
+                <Typography textAlign="center">การส่งออกข้อมูล</Typography>
+              </MenuItem>
               {/* <MenuItem onClick={() => {
                 router.push('/components/menu/reportImport')
                 handleCloseNavMenu()
@@ -176,6 +184,15 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
               sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, fontSize: 18 }}
             >
               การรับข้อมูล
+            </Button>
+            <Button
+              onClick={() => {
+                router.push('/components/menu/dataExports')
+                handleCloseNavMenu()
+              }}
+              sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, fontSize: 18 }}
+            >
+              การส่งออกข้อมูล
             </Button>
             {/* <Button
               onClick={() => {

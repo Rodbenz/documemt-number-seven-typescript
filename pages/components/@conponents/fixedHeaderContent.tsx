@@ -12,9 +12,10 @@ import TableRow from '@mui/material/TableRow';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
-// import VariantButtonGroup from './buttonGroups';
+import VariantButtonGroup from './buttonGroups';
 import { Grid, Pagination, Typography, TextField, IconButton, Box } from '@mui/material';
-// import VariantButtonGroup from './buttonGroups';
+import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
+
 
 
 interface FixedHeaderContent {
@@ -25,10 +26,11 @@ interface FixedHeaderContent {
   btnGrpup?: any;
   typeTable?: number;
   onhandleClickCount?: any;
+  onHandleRetropective?: any;
 }
 
 
-export default function FixedHeaderContent({ dataList, colum, colorHeader = '#006e61', btnExport, btnGrpup, typeTable, onhandleClickCount }: FixedHeaderContent) {
+export default function FixedHeaderContent({ dataList, colum, colorHeader = '#006e61', btnExport, btnGrpup, typeTable, onhandleClickCount, onHandleRetropective }: FixedHeaderContent) {
   const [page, setPage] = React.useState(1);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [filter, setFilter] = React.useState('');
@@ -83,7 +85,7 @@ export default function FixedHeaderContent({ dataList, colum, colorHeader = '#00
           </Fade>
         )}
       </Popper>
-      <TableContainer sx={{ maxHeight: 440 }}>
+      <TableContainer sx={{ maxHeight: 500 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead >
             <TableRow>
@@ -125,7 +127,7 @@ export default function FixedHeaderContent({ dataList, colum, colorHeader = '#00
                                   {value}
                                 </IconButton>
                               </>
-                            ):
+                            ) :
                               value == null || value == '' ? '-' : value
                           }
                         </TableCell>
@@ -169,9 +171,14 @@ export default function FixedHeaderContent({ dataList, colum, colorHeader = '#00
       )}
       {btnGrpup && btnGrpup && (
         <Stack direction={'row'} justifyContent={'end'} py={2} pr={2}>
-          {/* <VariantButtonGroup dataList={dataList} colum={colum} typeTable={typeTable}/> */}
+          <VariantButtonGroup dataList={dataList} colum={colum} typeTable={typeTable} />
         </Stack>
       )}
+      {onHandleRetropective && onHandleRetropective &&
+        <Stack direction={'row'} justifyContent={'end'} py={2} pr={2}>
+          <Button variant={'contained'} onClick={()=>onHandleRetropective()} ><KeyboardDoubleArrowLeftIcon /> ย้อนกลับ</Button>
+        </Stack>
+      }
     </Paper>
   )
 }

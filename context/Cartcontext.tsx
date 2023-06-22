@@ -26,7 +26,7 @@ export function CartProvider({ children }: any) {
     const [datalicense, setDataLicense] = useState<any>(null);
     // receivingInformation
     const [isMenuReceiving, setIsMenuReceiving] = useState({});
-    const [isMenuSeq, setIsMenuSeq] = React.useState({})
+    const [isMenuDataExport, setIsMenuDataExport] = React.useState({})
 
     const handleCloseDialog = () => {
         setOpenDialog(false);
@@ -77,8 +77,8 @@ export function CartProvider({ children }: any) {
         // receivingInformation
         isMenuReceiving,
         setIsMenuReceiving,
-        isMenuSeq,
-        setIsMenuSeq
+        isMenuDataExport,
+        setIsMenuDataExport
     };
 
     return <CartContext.Provider value={value}>

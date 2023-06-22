@@ -50,6 +50,10 @@ export default function ReportReceiving({ setOnDetail, dataSendDepartMent, setDa
 
   }
 
+  const onHandleRetropective = async () => {
+    setOnDetail && setOnDetail(1);
+  }
+
   const colum = [
     {
       name: 'ลำดับที่',
@@ -114,26 +118,11 @@ export default function ReportReceiving({ setOnDetail, dataSendDepartMent, setDa
         <Table>
           <TableHead>
             <TableRow>
-              <FixedHeaderContent dataList={dataCount} colum={colum} onhandleClickCount={onhandleClickCount}/>
+              <FixedHeaderContent dataList={dataCount} colum={colum} onhandleClickCount={onhandleClickCount} onHandleRetropective={onHandleRetropective}/>
             </TableRow>
           </TableHead>
         </Table>
       </>
     </Grid>
-  )
-}
-
-interface ICountActive {
-  el: any;
-  onhandleClickCount?: any;
-}
-
-function CountActive({ el, onhandleClickCount }: ICountActive) {
-  return (
-    <>
-      <IconButton size='small' onClick={() => onhandleClickCount(el)}>
-        {el.COUNTIMPORT}
-      </IconButton>
-    </>
   )
 }
