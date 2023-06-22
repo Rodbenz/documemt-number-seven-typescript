@@ -20,7 +20,7 @@ export default function ReportReceiving({ setOnDetail, dataSendDepartMent, setDa
 
   const _resDataList = async () => {
     let datasend: any = new Object();
-    datasend.SEMI_CODE = dataSendDepartMent != null ? String(dataSendDepartMent.SEMI_CODE) : '';
+    datasend.SEMI_CODE = Object.keys(dataSendDepartMent).length > 0 ? String(dataSendDepartMent.SEMI_CODE) : '';
     try {
       let newData:any = [];
       let res = await REPORT_RECEIVE_changwat(datasend)
@@ -42,7 +42,7 @@ export default function ReportReceiving({ setOnDetail, dataSendDepartMent, setDa
 
   const onhandleClickCount = async (el: any) => {
     console.log(el, 'el');
-    if (el.COUNTIMPORT !== 0) {
+    if (el.COUNTIMPORT != 0) {
       setOnDetail && setOnDetail(3);
       setDataSendListBranch && setDataSendListBranch(el);
     }
@@ -93,7 +93,7 @@ export default function ReportReceiving({ setOnDetail, dataSendDepartMent, setDa
 
   React.useEffect(() => {
     console.log(dataSendDepartMent, 'dataSendDepartMent');
-    if (dataSendDepartMent) {
+    if (Object.keys(dataSendDepartMent).length > 0) {
       _resDataList();
     }
   }, [dataSendDepartMent])

@@ -91,7 +91,7 @@ export default function ReportReceivingPlot({ setOnDetail, dataSendDepartMent, d
 
   React.useEffect(() => {
     console.log(dataSendListPlot, 'dataSendListPlot');
-    if (dataSendListPlot !== null) {
+    if (Object.keys(dataSendListPlot).length > 0) {
       _resDataList();
     }
   }, [dataSendListPlot])

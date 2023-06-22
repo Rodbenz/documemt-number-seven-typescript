@@ -16,14 +16,13 @@ interface IFReportDataExportBracnh {
 }
 
 export default function ReportDataExportBracnh({ setOnDetail, dataSendDepartMent, dataSendListBranch, setDataSendListPlot }: IFReportDataExportBracnh) {
-  const { isMenuSeq } = useCartContext();
   const [dataCount, setDataCount] = React.useState<any>([]);
 
   const _resDataList = async () => {
     let newData:any = [];
     try{
       let res = await REPORT_RECEIVE_BranchCode(dataSendListBranch)
-      for(let i = 0; i < res.length; i++){
+      for(let i = 0; i < res?.length; i++){
         let dataItems = res[i];
         dataItems.ROWNUMBER = String(i+1);
         dataItems.FILENAME = SplitDataTypeFile(dataItems.FILE_NAME);
@@ -41,15 +40,14 @@ export default function ReportDataExportBracnh({ setOnDetail, dataSendDepartMent
   }
 
   const onhandleClickCount = async (el: any) => {
-    console.log(el, 'el');
-    if (el.COUNTIMPORT !== 0) {
-      setOnDetail && setOnDetail(4);
-      setDataSendListPlot && setDataSendListPlot(el);
+    if (el?.COUNTIMPORT !== 0) {
+      setOnDetail(4);
+      setDataSendListPlot(el);
     }
 
   }
 
-  const colum = [
+  const colum: any = [
     {
       name: 'ลำดับที่',
       listname: 'ROWNUMBER',
@@ -88,8 +86,7 @@ export default function ReportDataExportBracnh({ setOnDetail, dataSendDepartMent
   ]
 
   React.useEffect(() => {
-    console.log(dataSendListBranch, 'dataSendListBranch');
-    if (dataSendListBranch != null) {
+    if (Object.keys(dataSendListBranch).length > 0) {
       _resDataList();
     }
   }, [dataSendListBranch])
@@ -108,7 +105,7 @@ export default function ReportDataExportBracnh({ setOnDetail, dataSendDepartMent
               </Avatar>
             </IconButton>
           </Tooltip>
-          <Typography variant='h5'>{Object.keys(dataSendDepartMent).length > 0 ? dataSendDepartMent.SEMI_NAME : ''}</Typography>
+          <Typography variant='h5'>{Object.keys(dataSendDepartMent).length > 0 ? dataSendDepartMent?.SEMI_NAME : ''}</Typography>
         </Stack>
         <Table>
           <TableHead>
@@ -119,20 +116,5 @@ export default function ReportDataExportBracnh({ setOnDetail, dataSendDepartMent
         </Table>
       </>
     </Grid>
-  )
-}
-
-interface ICountActive {
-  el: any;
-  onhandleClickCount?: any;
-}
-
-function CountActive({ el, onhandleClickCount }: ICountActive) {
-  return (
-    <>
-      <IconButton size='small' onClick={() => onhandleClickCount(el)}>
-        {el.COUNTIMPORT}
-      </IconButton>
-    </>
   )
 }

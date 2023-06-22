@@ -38,13 +38,6 @@ export default function ReportDataExportPlot({ setOnDetail, dataSendDepartMent, 
     }
   }
 
-  const onhandleClickCount = async (el: any) => {
-    console.log(el, 'el');
-    if (el.COUNTIMPORT !== 0) {
-      setOnDetail && setOnDetail(4);
-    }
-
-  }
 
   const colum = [
     {
@@ -96,7 +89,7 @@ export default function ReportDataExportPlot({ setOnDetail, dataSendDepartMent, 
 
   React.useEffect(() => {
     console.log(dataSendListPlot, 'dataSendListPlot');
-    if (dataSendListPlot != null) {
+    if (Object.keys(dataSendListPlot).length > 0) {
       _resDataList();
     }
   }, [dataSendListPlot])

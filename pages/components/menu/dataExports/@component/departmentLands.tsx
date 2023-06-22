@@ -31,12 +31,12 @@ interface IFDepartmentLands {
 
 export default function DepartmentLands({ dataList, hendname }: IFDepartmentLands) {
     const [onDetail, setOnDetail] = useState(1)
-    const [dataSendDepartMent, setDataSendDepartMent] = useState<any>(null)
-    const [dataSendListBranch, setDataSendListBranch] = useState<any>(null)
-    const [dataSendListPlot, setDataSendListPlot] = useState<any>(null)
+    const [dataSendDepartMent, setDataSendDepartMent] = useState<any>({})
+    const [dataSendListBranch, setDataSendListBranch] = useState<any>({})
+    const [dataSendListPlot, setDataSendListPlot] = useState<any>({})
 
     const handleOnClick = async (el: any) => {
-        if (el.COUNTIMPORT !== 0) {
+        if (el.COUNTIMPORT != 0) {
             await setOnDetail(2)
             await setDataSendDepartMent(el)
         }
@@ -59,7 +59,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                     <TableHead>
                                         <TableRow>
                                             {/* <TableCell align='center' sx={{width:10}}></TableCell> */}
-                                            {hendname.map((item: any, index: any) => (
+                                            {hendname?.map((item: any, index: any) => (
                                                 <TableCell
                                                     align='center'
                                                     key={index}
@@ -130,7 +130,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                     )}
                 {onDetail === 2 &&
                     (
-                        dataSendDepartMent && (
+                        Object.keys(dataSendDepartMent).length > 0 && (
                             <ReportDataExport
                                 setOnDetail={setOnDetail}
                                 dataSendDepartMent={dataSendDepartMent}
@@ -140,7 +140,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                     )}
                 {onDetail === 3 &&
                     (
-                        dataSendDepartMent && dataSendListBranch && (
+                        Object.keys(dataSendDepartMent).length > 0 && Object.keys(dataSendListBranch).length > 0 && (
                             <ReportDataExportBracnh
                                 setOnDetail={setOnDetail}
                                 dataSendDepartMent={dataSendDepartMent}
@@ -151,7 +151,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                     )}
                 {onDetail === 4 &&
                     (
-                        dataSendDepartMent && dataSendListBranch && dataSendListPlot && (
+                        Object.keys(dataSendDepartMent).length > 0 && Object.keys(dataSendListBranch).length > 0  && Object.keys(dataSendListPlot).length > 0  && (
                             <ReportDataExportPlot
                                 setOnDetail={setOnDetail}
                                 dataSendDepartMent={dataSendDepartMent}

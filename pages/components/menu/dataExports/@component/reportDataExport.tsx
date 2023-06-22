@@ -21,7 +21,7 @@ export default function ReportDataExport({ setOnDetail, dataSendDepartMent, setD
 
   const _resDataList = async () => {
     let datasend: any = new Object();
-    datasend.SEMI_CODE = dataSendDepartMent != null ? String(dataSendDepartMent.SEMI_CODE) : '';
+    datasend.SEMI_CODE = Object.keys(dataSendDepartMent).length > 0 ? String(dataSendDepartMent.SEMI_CODE) : '';
     try {
       let newData:any = [];
       let res = await REPORT_SEND_changwat()
@@ -105,7 +105,7 @@ export default function ReportDataExport({ setOnDetail, dataSendDepartMent, setD
 
   React.useEffect(() => {
     console.log(dataSendDepartMent, 'dataSendDepartMent');
-    if (dataSendDepartMent != null) {
+    if (Object.keys(dataSendDepartMent).length > 0) {
       _resDataList();
     }
   }, [dataSendDepartMent])

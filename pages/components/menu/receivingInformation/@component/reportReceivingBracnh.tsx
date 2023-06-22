@@ -92,7 +92,7 @@ export default function ReportReceivingBracnh({ setOnDetail, dataSendDepartMent,
 
   React.useEffect(() => {
     console.log(dataSendListBranch, 'dataSendListBranch');
-    if (dataSendListBranch !== null) {
+    if (Object.keys(dataSendListBranch).length > 0 ) {
       _resDataList();
     }
   }, [dataSendListBranch])
