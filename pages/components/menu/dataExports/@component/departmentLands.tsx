@@ -17,6 +17,7 @@ import React from 'react'
 import { useState } from 'react';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+
 import ReportDataExport from './reportDataExport';
 import { dateFormatTime } from '@/libs/outputDatas';
 import ReportDataExportBracnh from './reportDataExportBracnh';
@@ -42,30 +43,10 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
 
     }
 
-    const haedlist = [
-        ...hendname,
-        {
-            name: 'จำนวนที่จัดส่ง',
-            width: 10,
-        },
-        {
-            name: 'จำนวนที่รับข้อมูลได้',
-            width: 10,
-        },
-        {
-            name: 'จำนวนที่รับข้อมูลไม่ได้',
-            width: 10,
-        },
-        {
-            name: 'วันที่ รับข้อมูล',
-            width: 10,
-        },
-        {
-            name: 'ที่จัดเก็บข้อมูล',
-            width: 100,
-        },
-    ]
-
+    React.useEffect(() => {
+        console.log(dataList,'dataList');
+        
+    }, [dataList])
 
     return (
         <Grid container >
@@ -78,7 +59,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                     <TableHead>
                                         <TableRow>
                                             {/* <TableCell align='center' sx={{width:10}}></TableCell> */}
-                                            {haedlist.map((item: any, index: any) => (
+                                            {hendname.map((item: any, index: any) => (
                                                 <TableCell
                                                     align='center'
                                                     key={index}
@@ -86,7 +67,8 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                         minWidth: item.width,
                                                         fontSize: 21,
                                                         fontWeight: 'bold',
-                                                        border: 'none'
+                                                        border: 'none',
+                                                        color: item.color,
                                                     }}
 
                                                 >
@@ -105,7 +87,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                         </Avatar>
                                                         <Typography>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Typography>
                                                         <Typography variant={'body1'} sx={{ ml: 1 }} >
-                                                            {`${index + 1}.${item.SEMI_NAME}`}
+                                                            {`${index + 1}.${item.REPORT}`}
                                                         </Typography>
                                                     </div>
                                                 </TableCell>
@@ -115,7 +97,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
 
                                                     }}>
                                                         <Typography >
-                                                            {item.COUNTDOL}
+                                                            {item.POST_DOL1}
                                                         </Typography>
                                                     </Box>
                                                 </TableCell>
@@ -125,7 +107,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                         // width: 100
                                                     }}>
                                                         <Typography sx={{ cursor: 'pointer' }} onClick={() => handleOnClick(item)}>
-                                                            {item.COUNTIMPORT}
+                                                            {item.POST_DOL2}
                                                         </Typography>
                                                     </Box>
                                                 </TableCell>
@@ -135,12 +117,10 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                         // width: 100
                                                     }}>
                                                         <Typography >
-                                                            {item.DEF}
+                                                            {item.POST_DOL1}
                                                         </Typography>
                                                     </Box>
                                                 </TableCell>
-                                                <TableCell align='center' sx={{ border: 'none' }}>{dateFormatTime(item.IMPORT_DATE)}</TableCell>
-                                                <TableCell align='left' sx={{ border: 'none' }}>{item.TABLE_NAME}</TableCell>
                                             </TableRow>
                                         ))}
                                     </TableBody>

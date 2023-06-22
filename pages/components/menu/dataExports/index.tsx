@@ -1,8 +1,9 @@
 import { useCartContext } from '@/context/Cartcontext'
 import React from 'react'
 import DepartmentLands from './@component/departmentLands'
-import { REPORT_RECEIVE } from '@/service/report'
+import { REPORT_RECEIVE, REPORT_SEND } from '@/service/report'
 import MenuDataExport from './@component/menuDataExport'
+import { haedlistMenuExport } from '@/libs/headName'
 
 export default function DataExPort() {
     const { isMenuDataExport} = useCartContext();
@@ -10,11 +11,8 @@ export default function DataExPort() {
     const [hendname, setHendname] = React.useState<any>([])
 
     const _selMenu = async (el: any) => {
-        let datasend:any ={
-            "GOV_TYPE" :  String(el.id),
-        }
         try{
-            let res = await REPORT_RECEIVE(datasend)
+            let res = await REPORT_SEND()
             console.log(res,'res');
             await setDataList(res)
         }catch(err){
@@ -28,11 +26,11 @@ export default function DataExPort() {
             _selMenu(isMenuDataExport)
         }
         if(Object.keys(isMenuDataExport).length > 0){
-           let head1:any = [{name: 'รายการรับข้อมูล จาก กรมที่ดิน',width: 100,}]
-           let head2:any = [{name: 'รายการรับข้อมูล จาก กรมส่งเสริมการปกครองท้องถิ่น',width: 100,}]
+           let head1:any = haedlistMenuExport
+        //    let head2:any = haedlistMenuExport
            setHendname([])
            isMenuDataExport.id === 1 && setHendname(head1)
-           isMenuDataExport.id === 2 && setHendname(head2)   
+        //    isMenuDataExport.id === 2 && setHendname(head2)   
         }
         if(Object.keys(isMenuDataExport).length === 0){
             setDataList([])

@@ -224,3 +224,16 @@ export async function REPORT_RECEIVE_ALL(datasend:any) {
         return false
     }
 }
+export async function REPORT_SEND() {
+    let url = `${process.env.REACT_APP_API_HOST}/REPORT/REPORT_SEND`;
+    AddLoading()
+    try {
+        let res = await axios.get(url)
+        let data = res.data
+        RemoveLoading()
+        return data.result
+    } catch {
+        RemoveLoading()
+        return false
+    }
+}
