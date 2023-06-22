@@ -17,7 +17,6 @@ interface IFReportReceiving {
 }
 
 export default function ReportReceivingBracnh({ setOnDetail, dataSendDepartMent, dataSendListBranch, setDataSendListPlot }: IFReportReceiving) {
-  const { isMenuSeq } = useCartContext();
   const [dataCount, setDataCount] = React.useState<any>([]);
 
   const _resDataList = async () => {

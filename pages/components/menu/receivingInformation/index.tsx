@@ -6,7 +6,7 @@ import ReportReceiving from './@component/reportReceiving'
 import { REPORT_RECEIVE } from '@/service/report'
 
 export default function ReceivingInformation() {
-    const { isMenuReceiving, isMenuSeq, setIsMenuSeq} = useCartContext();
+    const { isMenuReceiving} = useCartContext();
     const [dataList, setDataList] = React.useState<any>([])
     const [hendname, setHendname] = React.useState<any>([])
 

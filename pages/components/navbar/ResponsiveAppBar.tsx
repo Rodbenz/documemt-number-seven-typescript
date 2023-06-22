@@ -31,7 +31,6 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
     setDataLanBuildingList, 
     setDatalistEpv ,
     setIsMenuReceiving,
-    setIsMenuSeq
   } = useCartContext();
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -55,7 +54,6 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
     setDatalistEpv([])
     setDataLanBuildingList([])
     setIsMenuReceiving({})
-    setIsMenuSeq({})
   };
 
   // const handleCloseUserMenu = () => {
