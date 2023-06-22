@@ -96,7 +96,7 @@ export default function ReportDataExportPlot({ setOnDetail, dataSendDepartMent, 
 
   React.useEffect(() => {
     console.log(dataSendListPlot, 'dataSendListPlot');
-    if (dataSendListPlot !== null) {
+    if (dataSendListPlot != null) {
       _resDataList();
     }
   }, [dataSendListPlot])

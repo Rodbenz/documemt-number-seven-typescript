@@ -74,3 +74,56 @@ export const headNameReceiving2 = [
         width: 100,
     },
 ]
+
+const colum = [
+    {
+      name: 'ลำดับที่',
+      listname: 'ROWNUMBER',
+      align: 'center',
+    },
+    {
+      name: 'จังหวัด',
+      listname: 'PROVINCENAME',
+      align: 'left',
+    },
+    {
+      name: 'อำเภอ',
+      listname: 'SEMI_NAME',
+      align: 'left',
+    },
+    {
+      name: 'ตำบล',
+      listname: 'SEMI_NAME',
+      align: 'left',
+    },
+    {
+      name: 'สำนักงานที่ดิน',
+      listname: 'SEMI_NAME',
+      align: 'left',
+    },
+    {
+      name: 'สำนักงานที่ดิน',
+      listname: 'SEMI_NAME',
+      align: 'left',
+    },
+    {
+      name: 'ชื่อไฟล์',
+      listname: 'FILENAME',
+      align: 'left',
+    },
+    {
+      name: 'ประเภทไฟล์',
+      listname: 'TYPEFILE',
+      align: 'left',
+    },
+    {
+      name: 'จำนวน',
+      listname: 'COUNT_',
+      align: 'right',
+    },
+    {
+      name: 'วัน/เดือน/ปี',
+      listname: 'IMPORT_DATE_',
+      align: 'center',
+    },
+  ]

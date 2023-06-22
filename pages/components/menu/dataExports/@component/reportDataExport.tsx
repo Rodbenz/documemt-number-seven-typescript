@@ -4,7 +4,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useCartContext } from '@/context/Cartcontext';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import FixedHeaderContent from '@/pages/components/@conponents/fixedHeaderContent';
-import { REPORT_RECEIVE_changwat } from '@/service/report';
+import { REPORT_RECEIVE_changwat, REPORT_SEND_changwat } from '@/service/report';
 import { dateFormatTime } from '@/libs/outputDatas';
 import { SplitDataType, SplitDataTypeFile } from '@/libs/dataControl';
 
@@ -24,18 +24,18 @@ export default function ReportDataExport({ setOnDetail, dataSendDepartMent, setD
     datasend.SEMI_CODE = dataSendDepartMent != null ? String(dataSendDepartMent.SEMI_CODE) : '';
     try {
       let newData:any = [];
-      let res = await REPORT_RECEIVE_changwat(datasend)
+      let res = await REPORT_SEND_changwat()
       for(let i = 0; i < res.length; i++){
         let dataItems = res[i];
         dataItems.ROWNUMBER = String(i+1);
-        dataItems.FILENAME = SplitDataTypeFile(dataItems.FILE_NAME);
-        dataItems.TYPEFILE = SplitDataType(dataItems.FILE_NAME);
-        dataItems.COUNT_ = String(dataItems.COUNT_);
-        dataItems.IMPORT_DATE_ = dateFormatTime(dataItems.IMPORT_DATE)
+        // dataItems.FILENAME = SplitDataTypeFile(dataItems.FILE_NAME);
+        // dataItems.TYPEFILE = SplitDataType(dataItems.FILE_NAME);
+        // dataItems.COUNT_ = String(dataItems.COUNT_);
+        // dataItems.IMPORT_DATE_ = dateFormatTime(dataItems.IMPORT_DATE)
         newData.push(dataItems);
       }
       console.log(newData, 'newData');
-      await setDataCount(newData)
+      await setDataCount([])
     } catch (e) {
       console.log(e);
     }
@@ -43,7 +43,7 @@ export default function ReportDataExport({ setOnDetail, dataSendDepartMent, setD
 
   const onhandleClickCount = async (el: any) => {
     console.log(el, 'el');
-    if (el.COUNTIMPORT !== 0) {
+    if (el.COUNTIMPORT != 0) {
       setOnDetail && setOnDetail(3);
       setDataSendListBranch && setDataSendListBranch(el);
     }
@@ -57,12 +57,27 @@ export default function ReportDataExport({ setOnDetail, dataSendDepartMent, setD
       align: 'center',
     },
     {
-      name: 'สำนักงานที่ดิน',
+      name: 'จังหวัด',
       listname: 'PROVINCENAME',
       align: 'left',
     },
     {
-      name: 'รายการนำเข้า',
+      name: 'อำเภอ',
+      listname: 'SEMI_NAME',
+      align: 'left',
+    },
+    {
+      name: 'ตำบล',
+      listname: 'SEMI_NAME',
+      align: 'left',
+    },
+    {
+      name: 'สำนักงานที่ดิน',
+      listname: 'SEMI_NAME',
+      align: 'left',
+    },
+    {
+      name: 'สำนักงานที่ดิน',
       listname: 'SEMI_NAME',
       align: 'left',
     },
@@ -120,20 +135,5 @@ export default function ReportDataExport({ setOnDetail, dataSendDepartMent, setD
         </Table>
       </>
     </Grid>
-  )
-}
-
-interface ICountActive {
-  el: any;
-  onhandleClickCount?: any;
-}
-
-function CountActive({ el, onhandleClickCount }: ICountActive) {
-  return (
-    <>
-      <IconButton size='small' onClick={() => onhandleClickCount(el)}>
-        {el.COUNTIMPORT}
-      </IconButton>
-    </>
   )
 }

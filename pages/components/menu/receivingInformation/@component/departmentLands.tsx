@@ -35,7 +35,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
     const [dataSendListPlot, setDataSendListPlot] = useState<any>(null)
 
     const handleOnClick = async (el: any) => {
-        if (el.COUNTIMPORT !== 0) {
+        if (el.COUNTIMPORT != 0) {
             await setOnDetail(2)
             await setDataSendDepartMent(el)
         }

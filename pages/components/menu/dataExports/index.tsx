@@ -45,11 +45,11 @@ export default function DataExPort() {
                 isMenuDataExport.id === 1 &&
                 <DepartmentLands hendname={hendname} dataList={dataList}/>
             )}
-            {Object.keys(isMenuDataExport).length > 0  && (
+            {/* {Object.keys(isMenuDataExport).length > 0  && (
                 Array.isArray(dataList) && dataList.length > 0 &&
                 isMenuDataExport.id === 2 &&
                 <DepartmentLands hendname={hendname} dataList={dataList}/>
-            )}
+            )} */}
         </div>
     )
 }

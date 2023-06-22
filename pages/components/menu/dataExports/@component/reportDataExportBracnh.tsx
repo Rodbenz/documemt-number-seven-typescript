@@ -89,7 +89,7 @@ export default function ReportDataExportBracnh({ setOnDetail, dataSendDepartMent
 
   React.useEffect(() => {
     console.log(dataSendListBranch, 'dataSendListBranch');
-    if (dataSendListBranch !== null) {
+    if (dataSendListBranch != null) {
       _resDataList();
     }
   }, [dataSendListBranch])

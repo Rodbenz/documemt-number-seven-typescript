@@ -63,7 +63,7 @@ export default function FixedHeaderContent({ dataList, colum, colorHeader = '#00
   }
 
   const filteredData = dataList.filter((row: any) =>
-    row[lestName.listname] && row[lestName.listname].toLowerCase().includes(filter.toLowerCase())
+    Object.keys(row).length > 0 && row[lestName.listname].toLowerCase().includes(filter.toLowerCase())
   );
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }} >
