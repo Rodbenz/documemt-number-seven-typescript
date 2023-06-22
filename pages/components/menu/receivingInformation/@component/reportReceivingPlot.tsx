@@ -28,10 +28,7 @@ export default function ReportReceivingPlot({ setOnDetail, dataSendDepartMent, d
         let dataItems = res[i];
         dataItems.ROWNUMBER = String(i + 1);
         dataItems.UTM = String(dataItems.UTMMAP1 + ' ' + setUTM_NO_P(dataItems.UTMMAP2) + ' ' + dataItems.UTMMAP3);
-        // dataItems.FILENAME = SplitDataTypeFile(dataItems.FILE_NAME);
-        // dataItems.TYPEFILE = SplitDataType(dataItems.FILE_NAME);
-        // dataItems.COUNT_ = String(dataItems.COUNT_);
-        // dataItems.DATEIMPORT = dateFormatTime(dataItems.IMPORT_DATE)
+        dataItems.DATEIMPORT = dateFormatTime(dataItems.IMPORT_DATE)
         newData.push(dataItems);
       }
       console.log(newData, 'newData');
@@ -76,25 +73,25 @@ export default function ReportReceivingPlot({ setOnDetail, dataSendDepartMent, d
       listname: 'LAND_NO',
       align: 'right',
     },
-    {
-      name: 'เลขที่โฉนด',
-      listname: 'DATEIMPORT',
-      align: 'right',
-    },
+    // {
+    //   name: 'เลขที่โฉนด',
+    //   listname: 'DATEIMPORT',
+    //   align: 'right',
+    // },
     {
       name: 'อำเภอ',
-      listname: 'DATEIMPORT',
-      align: 'center',
+      listname: 'AMPHOE_NAME',
+      align: 'Left',
     },
     {
       name: 'ตำบล',
-      listname: 'DATEIMPORT',
-      align: 'center',
+      listname: 'TAMBOL_NAME',
+      align: 'Left',
     },
     {
       name: 'วัน/เดือน/ปี',
       listname: 'DATEIMPORT',
-      align: 'center',
+      align: 'left',
     },
   ]
 

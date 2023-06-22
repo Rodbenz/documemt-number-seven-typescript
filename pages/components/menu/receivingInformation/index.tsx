@@ -46,6 +46,12 @@ export default function ReceivingInformation() {
             {Object.keys(isMenuReceiving).length === 0 && <MenuReceiving />}
             {Object.keys(isMenuReceiving).length > 0  && (
                 Array.isArray(dataList) && dataList.length > 0 &&
+                isMenuReceiving.id === 1 &&
+                <DepartmentLands hendname={hendname} dataList={dataList}/>
+            )}
+            {Object.keys(isMenuReceiving).length > 0  && (
+                Array.isArray(dataList) && dataList.length > 0 &&
+                isMenuReceiving.id === 2 &&
                 <DepartmentLands hendname={hendname} dataList={dataList}/>
             )}
         </div>

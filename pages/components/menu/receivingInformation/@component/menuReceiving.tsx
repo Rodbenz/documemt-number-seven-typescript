@@ -16,6 +16,18 @@ const style = {
   cursor: 'pointer'
 
 }
+const style2 = {
+  display: 'flex',
+  backgroundColor: "#ffffff",
+  width: '100%',
+  height: 110,
+  borderRadius: 5,
+  borderRight: '10px solid #006e61',
+  // justifyContent: 'center',
+  alignItems: 'center',
+  // cursor: 'pointer'
+
+}
 const bull = (
   <Box
     component="span"
@@ -37,7 +49,7 @@ const options = [
   { id: 9, name: 'การเคหะแห่งชาติ', img: '../../../image/send.png', width: 60, height: 60, paddingLeft: 10 },
 ]
 
-
+const iddisable =  [1,2];
 export default function MenuReceiving() {
   const { isMenuReceiving, setIsMenuReceiving } = useCartContext();
 
@@ -53,14 +65,29 @@ export default function MenuReceiving() {
               <Grid item sx={{ paddingTop: 10, paddingLeft: 10, paddingRight: 10 }}>
                 <Grid container py={5} px={5} pl={30} pr={30} spacing={10} justifyContent={'center'} alignItems={'center'}>
                   {options.map((el, index) => (
+                    iddisable.includes(el.id) ?
                     <Grid item xs={12} sm={12} md={4} key={index}>
                       <Paper elevation={6} sx={{ borderRadius: 1 }}>
-                        <div style={style} itemType='button' onClick={() => handleOnClick(el)}>
+                        <div style={style} itemType='button' onClick={() => handleOnClick(el)} >
                           <img src={el.img} width={el.width} height={el.height} style={{ marginLeft:20, paddingLeft: el.paddingLeft }} alt='icon' />
                           <div style={{ width: '100%', display: 'block', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }} >
                             <Typography variant="h5" sx={{ color: '#006e61', fontWeight: 'bold', letterSpacing: '.2rem', ontFamily: 'monospace', }} pl={2}>{el.name}</Typography>
                             {el.subname &&
                               <Typography variant="h5" sx={{ color: '#006e61', fontWeight: 'bold', letterSpacing: '.2rem', ontFamily: 'monospace', }} pl={2}>{el.subname}</Typography>
+                            }
+                          </div>
+                        </div>
+                      </Paper>
+                    </Grid>
+                    :
+                    <Grid item xs={12} sm={12} md={4} key={index}>
+                      <Paper elevation={6} sx={{ borderRadius: 1 }}>
+                        <div style={style2} itemType='button' >
+                          <img src={el.img} width={el.width} height={el.height} style={{ marginLeft:20, paddingLeft: el.paddingLeft }} alt='icon' />
+                          <div style={{ width: '100%', display: 'block', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }} >
+                            <Typography variant="h5" sx={{ color: '#e1e4e5', fontWeight: 'bold', letterSpacing: '.2rem', ontFamily: 'monospace', }} pl={2}>{el.name}</Typography>
+                            {el.subname &&
+                              <Typography variant="h5" sx={{ color: '#e1e4e5', fontWeight: 'bold', letterSpacing: '.2rem', ontFamily: 'monospace', }} pl={2}>{el.subname}</Typography>
                             }
                           </div>
                         </div>
