@@ -4,6 +4,7 @@ import MenuReceiving from './@component/menuReceiving'
 import DepartmentLands from './@component/departmentLands'
 import ReportReceiving from './@component/reportReceiving'
 import { REPORT_RECEIVE } from '@/service/report'
+import { headNameReceiving1, headNameReceiving2 } from '@/libs/headName'
 
 export default function ReceivingInformation() {
     const { isMenuReceiving} = useCartContext();
@@ -29,11 +30,13 @@ export default function ReceivingInformation() {
             _selMenu(isMenuReceiving)
         }
         if(Object.keys(isMenuReceiving).length > 0){
-           let head1 = [{name: 'รายการรับข้อมูล จาก กรมที่ดิน',width: 100,}]
-           let head2 = [{name: 'รายการรับข้อมูล จาก กรมส่งเสริมการปกครองท้องถิ่น',width: 100,}]
            setHendname([])
-            isMenuReceiving.id === 1 && setHendname(head1)
-            isMenuReceiving.id === 2 && setHendname(head2)   
+            if(isMenuReceiving.id === 1){
+                setHendname(headNameReceiving1)
+            }
+            if(isMenuReceiving.id === 2){
+                setHendname(headNameReceiving2)
+            }
         }
         if(Object.keys(isMenuReceiving).length === 0){
             setDataList([])

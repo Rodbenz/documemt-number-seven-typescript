@@ -42,30 +42,6 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
 
     }
 
-    const haedlist = [
-        ...hendname,
-        {
-            name: 'จำนวนที่จัดส่ง',
-            width: 10,
-        },
-        {
-            name: 'จำนวนที่รับข้อมูลได้',
-            width: 10,
-        },
-        {
-            name: 'จำนวนที่รับข้อมูลไม่ได้',
-            width: 10,
-        },
-        {
-            name: 'วันที่ รับข้อมูล',
-            width: 10,
-        },
-        {
-            name: 'ที่จัดเก็บข้อมูล',
-            width: 100,
-        },
-    ]
-
 
     return (
         <Grid container >
@@ -78,7 +54,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                     <TableHead>
                                         <TableRow>
                                             {/* <TableCell align='center' sx={{width:10}}></TableCell> */}
-                                            {haedlist.map((item: any, index: any) => (
+                                            {hendname.map((item: any, index: any) => (
                                                 <TableCell
                                                     align='center'
                                                     key={index}

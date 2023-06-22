@@ -20,4 +20,57 @@ export const haedlistMenuExport: any = [
         width: 10,
         color: '#f90c0f',
     },
+];
+
+export const headNameReceiving1 = [
+    {
+        name: 'รายการรับข้อมูล จาก กรมที่ดิน',
+        width: 100,
+    },
+    {
+        name: 'จำนวนที่จัดส่ง',
+        width: 10,
+    },
+    {
+        name: 'จำนวนที่รับข้อมูลได้',
+        width: 10,
+    },
+    {
+        name: 'จำนวนที่รับข้อมูลไม่ได้',
+        width: 10,
+    },
+    {
+        name: 'วันที่ รับข้อมูล',
+        width: 10,
+    },
+    {
+        name: 'ที่จัดเก็บข้อมูล',
+        width: 100,
+    },
+]
+export const headNameReceiving2 = [
+    {
+        name: 'รายการรับข้อมูล จาก กรมส่งเสริมการปกครองท้องถิ่น',
+        width: 100
+    },
+    {
+        name: 'จำนวนที่จัดส่ง',
+        width: 10,
+    },
+    {
+        name: 'จำนวนที่รับข้อมูลได้',
+        width: 10,
+    },
+    {
+        name: 'จำนวนที่รับข้อมูลไม่ได้',
+        width: 10,
+    },
+    {
+        name: 'วันที่ รับข้อมูล',
+        width: 10,
+    },
+    {
+        name: 'ที่จัดเก็บข้อมูล',
+        width: 100,
+    },
 ]

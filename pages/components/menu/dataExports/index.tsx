@@ -26,11 +26,10 @@ export default function DataExPort() {
             _selMenu(isMenuDataExport)
         }
         if(Object.keys(isMenuDataExport).length > 0){
-           let head1:any = haedlistMenuExport
-        //    let head2:any = haedlistMenuExport
            setHendname([])
-           isMenuDataExport.id === 1 && setHendname(head1)
-        //    isMenuDataExport.id === 2 && setHendname(head2)   
+            if(isMenuDataExport.id === 1){
+                setHendname(haedlistMenuExport)
+            }
         }
         if(Object.keys(isMenuDataExport).length === 0){
             setDataList([])
