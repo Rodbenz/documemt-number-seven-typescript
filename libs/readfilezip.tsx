@@ -1,5 +1,4 @@
 import JSZip from 'jszip';
-import * as shapefile from "shapefile";
 import * as shpjs from 'shpjs';
 import * as XLSX from 'xlsx';
 
