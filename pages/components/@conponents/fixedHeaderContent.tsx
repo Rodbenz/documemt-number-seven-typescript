@@ -63,11 +63,8 @@ export default function FixedHeaderContent({ dataList, colum, colorHeader = '#00
   }
 
   const filteredData = dataList.filter((row: any) =>
-    // console.log('row', row),
-    row[lestName.listname].toLowerCase().includes(filter.toLowerCase())
-    // row[lestName.listname].toLowerCase().includes(filter.toLowerCase())
+    row[lestName.listname] && row[lestName.listname].toLowerCase().includes(filter.toLowerCase())
   );
-
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }} >
       <Popper open={open} anchorEl={anchorEl} placement={placement} transition>
@@ -176,7 +173,7 @@ export default function FixedHeaderContent({ dataList, colum, colorHeader = '#00
       )}
       {onHandleRetropective && onHandleRetropective &&
         <Stack direction={'row'} justifyContent={'end'} py={2} pr={2}>
-          <Button variant={'contained'} onClick={()=>onHandleRetropective()} ><KeyboardDoubleArrowLeftIcon /> ย้อนกลับ</Button>
+          <Button variant={'contained'} onClick={() => onHandleRetropective()} ><KeyboardDoubleArrowLeftIcon /> ย้อนกลับ</Button>
         </Stack>
       }
     </Paper>

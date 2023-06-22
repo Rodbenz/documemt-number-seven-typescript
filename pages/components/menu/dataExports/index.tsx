@@ -28,8 +28,8 @@ export default function DataExPort() {
             _selMenu(isMenuDataExport)
         }
         if(Object.keys(isMenuDataExport).length > 0){
-           let head1 = [{name: 'รายการรับข้อมูล จาก กรมที่ดิน',width: 100,}]
-           let head2 = [{name: 'รายการรับข้อมูล จาก กรมส่งเสริมการปกครองท้องถิ่น',width: 100,}]
+           let head1:any = [{name: 'รายการรับข้อมูล จาก กรมที่ดิน',width: 100,}]
+           let head2:any = [{name: 'รายการรับข้อมูล จาก กรมส่งเสริมการปกครองท้องถิ่น',width: 100,}]
            setHendname([])
            isMenuDataExport.id === 1 && setHendname(head1)
            isMenuDataExport.id === 2 && setHendname(head2)   

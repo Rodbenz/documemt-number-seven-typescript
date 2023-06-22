@@ -17,7 +17,6 @@ import React from 'react'
 import { useState } from 'react';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import Datatable from '@/pages/components/@conponents/datatable/datatable';
 import ReportReceiving from './reportReceiving';
 import { dateFormatTime } from '@/libs/outputDatas';
 import ReportReceivingBracnh from './reportReceivingBracnh';
