@@ -28,16 +28,19 @@
     "eslint-config-next": "13.2.4",
     "exceljs": "^4.3.0",
     "file-saver": "^2.0.5",
+    "install": "^0.13.0",
     "jsonwebtoken": "^8.5.1",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.5.28",
     "jszip": "^3.10.1",
     "moment": "^2.29.4",
     "next": "13.2.4",
+    "npm": "^9.7.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
     "react-redux": "^8.0.5",
+    "react-table": "^7.8.0",
     "shpjs": "^4.0.4",
     "styled-components": "^5.3.9",
     "typescript": "5.0.2",
@@ -46,6 +49,7 @@
   },
   "devDependencies": {
     "@types/file-saver": "^2.0.5",
+    "@types/react-table": "^7.7.14",
     "@types/shpjs": "^3.4.2"
   }
 }

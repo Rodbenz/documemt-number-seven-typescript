@@ -172,3 +172,55 @@ export async function ReportSelPDS_Val(datasend:any) {
         return false
     }
 }
+export async function REPORT_RECEIVE(datasend:any) {
+    let url = `${process.env.REACT_APP_API_HOST}/REPORT/REPORT_RECEIVE`;
+    AddLoading()
+    try {
+        let res = await axios.post(url,datasend)
+        let data = res.data
+        RemoveLoading()
+        return data.result
+    } catch {
+        RemoveLoading()
+        return false
+    }
+}
+export async function REPORT_RECEIVE_changwat(datasend:any) {
+    let url = `${process.env.REACT_APP_API_HOST}/REPORT/REPORT_RECEIVE_changwat`;
+    AddLoading()
+    try {
+        let res = await axios.post(url,datasend)
+        let data = res.data
+        RemoveLoading()
+        return data.result
+    } catch {
+        RemoveLoading()
+        return false
+    }
+}
+export async function REPORT_RECEIVE_BranchCode(datasend:any) {
+    let url = `${process.env.REACT_APP_API_HOST}/REPORT/REPORT_RECEIVE_BranchCode`;
+    AddLoading()
+    try {
+        let res = await axios.post(url,datasend)
+        let data = res.data
+        RemoveLoading()
+        return data.result
+    } catch {
+        RemoveLoading()
+        return false
+    }
+}
+export async function REPORT_RECEIVE_ALL(datasend:any) {
+    let url = `${process.env.REACT_APP_API_HOST}/REPORT/REPORT_RECEIVE_ALL`;
+    AddLoading()
+    try {
+        let res = await axios.post(url,datasend)
+        let data = res.data
+        RemoveLoading()
+        return data.result
+    } catch {
+        RemoveLoading()
+        return false
+    }
+}

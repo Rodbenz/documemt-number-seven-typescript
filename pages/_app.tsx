@@ -12,6 +12,7 @@ import CheckLogin from './login/checklogin';
 import ConfirmDialog2 from './components/@conponents/popup/ComfirmDialog';
 import SnackBarDiaLog from './components/@conponents/popup/SnackbarSet';
 import LoadingScreen from './components/@conponents/loadingscreen';
+import BoxFooters from './components/footers';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [isMenu, setIsMenu] = React.useState(false);
@@ -28,15 +29,16 @@ export default function App({ Component, pageProps }: AppProps) {
           <LoadingScreen />
           <div style={{
             backgroundImage: "url(/image/building-2.png)", backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: 'center',
-            height: '100vh', width: '100%', overflowY: 'hidden', overflowX: 'hidden'
+            height: '93vh', width: '100%', overflowY: 'hidden', overflowX: 'hidden'
           }} >
             <div className={router.route == '/' ? "" : styles.box}>
               {skipPage.includes(router.route) ? null : <HaederNavbar setIsMenu={setIsMenu} />}
-              <div style={{ width: '100%', height: '85vh', overflowY: 'auto', overflowX: 'hidden' }}>
+              <div style={{ width: '100%', height: '75vh', overflowY: 'auto', overflowX: 'hidden' }}>
                 <Component {...pageProps} />
               </div>
             </div>
           </div>
+          <BoxFooters/>
         </CartProvider>
       </div>
     </Provider>

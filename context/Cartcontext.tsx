@@ -24,6 +24,9 @@ export function CartProvider({ children }: any) {
     const [dataLandList, setDataLandList] = useState<any>(null);
     const [datalistEpv, setDatalistEpv] = useState<any[]>([]);
     const [datalicense, setDataLicense] = useState<any>(null);
+    // receivingInformation
+    const [isMenuReceiving, setIsMenuReceiving] = useState({});
+    const [isMenuSeq, setIsMenuSeq] = React.useState({})
 
     const handleCloseDialog = () => {
         setOpenDialog(false);
@@ -70,7 +73,12 @@ export function CartProvider({ children }: any) {
         datalistEpv,
         setDatalistEpv,
         datalicense,
-        setDataLicense
+        setDataLicense,
+        // receivingInformation
+        isMenuReceiving,
+        setIsMenuReceiving,
+        isMenuSeq,
+        setIsMenuSeq
     };
 
     return <CartContext.Provider value={value}>

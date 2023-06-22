@@ -74,8 +74,7 @@ export function SplitData(data:any) {
 export function SplitDataType(data:any) { 
     try {
         let dataSplit = data.split('.')
-        console.log(dataSplit, 'dataSplit');
-        return dataSplit[1]
+        return dataSplit.pop()
     } catch {
         return '-'
     }

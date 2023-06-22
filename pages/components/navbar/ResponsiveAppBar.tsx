@@ -22,12 +22,22 @@ interface ResponsiveAppBarProps {
 
 function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
   const router = useRouter();
-  const { setDataSearch, setIsMenuSummarize, setDataInformationList, setDataLandApartmentList, setDataRegisteredTradingInformationList, setDataLanBuildingList, setDatalistEpv } = useCartContext();
+  const { 
+    setDataSearch, 
+    setIsMenuSummarize, 
+    setDataInformationList, 
+    setDataLandApartmentList, 
+    setDataRegisteredTradingInformationList, 
+    setDataLanBuildingList, 
+    setDatalistEpv ,
+    setIsMenuReceiving,
+    setIsMenuSeq
+  } = useCartContext();
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const handleOpenNavMenu = (event:any) => {
+  const handleOpenNavMenu = (event: any) => {
     setAnchorElNav(event.currentTarget);
   };
   // const handleOpenUserMenu = (event:any) => {
@@ -44,6 +54,8 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
     setDataRegisteredTradingInformationList([])
     setDatalistEpv([])
     setDataLanBuildingList([])
+    setIsMenuReceiving({})
+    setIsMenuSeq({})
   };
 
   // const handleCloseUserMenu = () => {
@@ -108,6 +120,12 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
                 <Typography textAlign="center">หน้าหลัก</Typography>
               </MenuItem>
               <MenuItem onClick={() => {
+                router.push('/components/menu/receivingInformation')
+                handleCloseNavMenu()
+              }}>
+                <Typography textAlign="center">การรับข้อมูล</Typography>
+              </MenuItem>
+              {/* <MenuItem onClick={() => {
                 router.push('/components/menu/reportImport')
                 handleCloseNavMenu()
               }}>
@@ -130,7 +148,7 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
                 handleCloseNavMenu()
               }}>
                 <Typography textAlign="center">การเชื่อมโยงธนารักษ์ (EPV)</Typography>
-              </MenuItem>
+              </MenuItem> */}
             </Menu>
           </Box>
           {/* <Typography
@@ -153,6 +171,15 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
             </Typography> */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Button
+              onClick={() => {
+                router.push('/components/menu/receivingInformation')
+                handleCloseNavMenu()
+              }}
+              sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, fontSize: 18 }}
+            >
+              การรับข้อมูล
+            </Button>
+            {/* <Button
               onClick={() => {
                 router.push('/components/menu/reportImport')
                 handleCloseNavMenu()
@@ -189,7 +216,7 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
               sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, fontSize:18 }}
             >
               การเชื่อมโยงธนารักษ์ (EPV)
-            </Button>
+            </Button> */}
           </Box>
         </Toolbar>
       </Container>
