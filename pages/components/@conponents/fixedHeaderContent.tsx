@@ -15,7 +15,7 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import VariantButtonGroup from './buttonGroups';
 import { Grid, Pagination, Typography, TextField, IconButton, Box } from '@mui/material';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
-
+import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
 
 
 interface FixedHeaderContent {
@@ -33,11 +33,12 @@ interface FixedHeaderContent {
 export default function FixedHeaderContent({ dataList, colum, colorHeader = '#006e61', btnExport, btnGrpup, typeTable, onhandleClickCount, onHandleRetropective }: FixedHeaderContent) {
   const [page, setPage] = React.useState(1);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [filter, setFilter] = React.useState<string>('');
+  const [filterValues, setFilterValues] = React.useState<{ [key: string]: string }>({});
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
   const [open, setOpen] = React.useState(false);
   const [placement, setPlacement] = React.useState<PopperPlacementType>();
   const [lestName, setLestName] = React.useState<any>({ name: '', listname: 'ROWNUMBER', align: '' });
+  const [closeFilter, setCloseFilter] = React.useState<any>([]);
 
   const handleChangePage = (event: any, newPage: number) => {
     setPage(newPage);
@@ -48,7 +49,11 @@ export default function FixedHeaderContent({ dataList, colum, colorHeader = '#00
   };
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFilter(event.target.value);
+    const { name, value } = event.target;
+    setFilterValues((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   const handleClickFilter = (event: React.MouseEvent<HTMLButtonElement>, value: any) => {
@@ -61,10 +66,40 @@ export default function FixedHeaderContent({ dataList, colum, colorHeader = '#00
   const handleCloseFilter = () => {
     setOpen(false);
   }
+  const handleListKeyDown = (id: any) => {
+    let data = ([...closeFilter, id]);
+    setCloseFilter(data);
+  }
+  const handleRemoveFilter = (id: any) => {
+    let data = closeFilter.filter((item: any) => item !== id);
+    setCloseFilter(data);
+  }
 
-  const filteredData = dataList?.filter((row: any) =>
-    Object.keys(row).length > 0 && row[lestName?.listname].toLowerCase().includes(filter?.toLowerCase())
-  );
+  const filteredData = dataList?.filter((row: any) => {
+    for (const key in filterValues) {
+      if (filterValues[key] !== '' && row[key] !== undefined) {
+        if (
+          row[key]
+            .toString()
+            .toLowerCase()
+            .includes(filterValues[key].toLowerCase())
+        ) {
+          continue;
+        }
+        return false;
+      }
+    }
+    return true;
+  });
+
+  React.useEffect(() => {
+    let newObj: any = new Object();
+    for (let i = 0; i < colum.length; i++) {
+      Object.assign(newObj, { [colum[i].listname]: "" });
+    }
+    console.log(newObj, 'newObj');
+    setFilterValues(newObj);
+  }, [colum])
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }} >
@@ -75,7 +110,8 @@ export default function FixedHeaderContent({ dataList, colum, colorHeader = '#00
               {/* <Typography sx={{ p: 2 }}>The content of the Popper.</Typography> */}
               <TextField
                 label={lestName.name}
-                value={filter}
+                name={lestName.listname}
+                value={filterValues[lestName?.listname]}
                 onChange={handleFilterChange}
                 variant="outlined"
               />
@@ -95,9 +131,25 @@ export default function FixedHeaderContent({ dataList, colum, colorHeader = '#00
                 >
                   <Stack direction={'row'} justifyContent={'space-evenly'} alignItems={'center'}>
                     <Typography>{column.name}</Typography>
-                    <IconButton onClick={(e) => handleClickFilter(e, column)}>
-                      <FilterAltIcon />
-                    </IconButton>
+                    {filterValues[column?.listname] == '' ?
+                      (
+                        <IconButton onClick={(e) => {
+                          handleClickFilter(e, column);
+                          handleListKeyDown(index);
+                        }}>
+                          <FilterAltIcon />
+                        </IconButton>
+                      )
+                      :
+                      (
+                        <IconButton onClick={(e) => {
+                          handleClickFilter(e, column);
+                          handleRemoveFilter(index);
+                        }}>
+                          <FilterAltOffIcon />
+                        </IconButton>
+                      )
+                    }
                   </Stack>
                 </TableCell>
               ))}
@@ -150,13 +202,13 @@ export default function FixedHeaderContent({ dataList, colum, colorHeader = '#00
                 page={page}
                 onChange={handleChangePage}
                 // color="error"
-                count={isNaN(Math.ceil(dataList?.length / rowsPerPage)) ? 0 : Math.ceil(dataList?.length / rowsPerPage)}
+                count={isNaN(Math.ceil(filteredData?.length / rowsPerPage)) ? 0 : Math.ceil(filteredData?.length / rowsPerPage)}
               />
             </Grid>
             <Grid item>
               <Typography fontSize={14}>
-                {dataList?.length > 0 &&
-                  "จำนวนรายการทั้งหมด " + dataList.length + " รายการ"}
+                {filteredData?.length > 0 &&
+                  "จำนวนรายการทั้งหมด " + filteredData?.length + " รายการ"}
               </Typography>
             </Grid>
           </Grid>
