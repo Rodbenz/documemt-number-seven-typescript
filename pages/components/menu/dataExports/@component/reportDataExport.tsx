@@ -17,6 +17,7 @@ interface IFReportDataExport {
 export default function ReportDataExport({ setOnDetail, dataSendDepartMent, setDataSendListBranch }: IFReportDataExport) {
   const { isMenuSeq } = useCartContext();
   const [dataCount, setDataCount] = React.useState<any>([]);
+  const [headValue, setHeadValue] = React.useState<string>('');
 
 
   const _resDataList = async () => {
@@ -107,6 +108,7 @@ export default function ReportDataExport({ setOnDetail, dataSendDepartMent, setD
     console.log(dataSendDepartMent, 'dataSendDepartMent');
     if (Object.keys(dataSendDepartMent).length > 0) {
       _resDataList();
+      setHeadValue(dataSendDepartMent.SEMI_NAME);
     }
   }, [dataSendDepartMent])
   return (
@@ -124,7 +126,7 @@ export default function ReportDataExport({ setOnDetail, dataSendDepartMent, setD
               </Avatar>
             </IconButton>
           </Tooltip>
-          <Typography variant='h5'>{Object.keys(dataSendDepartMent).length > 0 ? dataSendDepartMent.SEMI_NAME : ''}</Typography>
+          <Typography variant='h5'>{headValue}</Typography>
         </Stack>
         <Table>
           <TableHead>

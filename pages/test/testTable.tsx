@@ -59,7 +59,7 @@ export default function FixedHeaderContent({ colorHeader = '#006e61', btnExport,
     React.useEffect(() => {
         console.log('open', open);
     }, [open]);
-    const colum = [
+    const colum:any = [
         {
             name: 'ลำดับที่',
             listname: 'ROWNUMBER',
@@ -92,7 +92,7 @@ export default function FixedHeaderContent({ colorHeader = '#006e61', btnExport,
         },
     ]
 
-    const dataList = [
+    const dataList:any = [
         {
             ROWNUMBER: '1',
             BRANCH_NAME: 'สำนักงานที่ดินจังหวัดเชียงใหม่',

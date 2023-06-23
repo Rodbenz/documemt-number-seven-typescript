@@ -16,6 +16,7 @@ interface IFReportReceiving {
 
 export default function ReportReceiving({ setOnDetail, dataSendDepartMent, setDataSendListBranch }: IFReportReceiving) {
   const [dataCount, setDataCount] = React.useState<any>([]);
+  const [headValue, setHeadValue] = React.useState<string>('');
 
 
   const _resDataList = async () => {
@@ -95,6 +96,7 @@ export default function ReportReceiving({ setOnDetail, dataSendDepartMent, setDa
     console.log(dataSendDepartMent, 'dataSendDepartMent');
     if (Object.keys(dataSendDepartMent).length > 0) {
       _resDataList();
+      setHeadValue(dataSendDepartMent.SEMI_NAME);
     }
   }, [dataSendDepartMent])
   return (
@@ -104,7 +106,7 @@ export default function ReportReceiving({ setOnDetail, dataSendDepartMent, setDa
           <Tooltip title="ย้อนกลับ" placement="right">
             <IconButton size='small' onClick={() => {
               setOnDetail(1),
-                setDataSendListBranch(null)
+                setDataSendListBranch({})
             }}
             >
               <Avatar sx={{ bgcolor: '#aae8e6', width: 50, height: 50 }}>
@@ -112,7 +114,7 @@ export default function ReportReceiving({ setOnDetail, dataSendDepartMent, setDa
               </Avatar>
             </IconButton>
           </Tooltip>
-          <Typography variant='h5'>{Object.keys(dataSendDepartMent).length > 0 ? dataSendDepartMent.SEMI_NAME : ''}</Typography>
+          <Typography variant='h5'>{headValue}</Typography>
         </Stack>
         <Table>
           <TableHead>

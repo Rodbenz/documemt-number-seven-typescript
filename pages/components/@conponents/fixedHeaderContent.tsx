@@ -33,7 +33,7 @@ interface FixedHeaderContent {
 export default function FixedHeaderContent({ dataList, colum, colorHeader = '#006e61', btnExport, btnGrpup, typeTable, onhandleClickCount, onHandleRetropective }: FixedHeaderContent) {
   const [page, setPage] = React.useState(1);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [filter, setFilter] = React.useState('');
+  const [filter, setFilter] = React.useState<string>('');
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
   const [open, setOpen] = React.useState(false);
   const [placement, setPlacement] = React.useState<PopperPlacementType>();
@@ -62,9 +62,10 @@ export default function FixedHeaderContent({ dataList, colum, colorHeader = '#00
     setOpen(false);
   }
 
-  const filteredData = dataList.filter((row: any) =>
-    Object.keys(row).length > 0 && row[lestName.listname].toLowerCase().includes(filter.toLowerCase())
+  const filteredData = dataList?.filter((row: any) =>
+    Object.keys(row).length > 0 && row[lestName?.listname].toLowerCase().includes(filter?.toLowerCase())
   );
+
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }} >
       <Popper open={open} anchorEl={anchorEl} placement={placement} transition>

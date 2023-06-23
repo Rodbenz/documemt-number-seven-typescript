@@ -17,14 +17,15 @@ interface IFReportDataExportBracnh {
 
 export default function ReportDataExportBracnh({ setOnDetail, dataSendDepartMent, dataSendListBranch, setDataSendListPlot }: IFReportDataExportBracnh) {
   const [dataCount, setDataCount] = React.useState<any>([]);
+  const [headValue, setHeadValue] = React.useState<string>('');
 
   const _resDataList = async () => {
-    let newData:any = [];
-    try{
+    let newData: any = [];
+    try {
       let res = await REPORT_RECEIVE_BranchCode(dataSendListBranch)
-      for(let i = 0; i < res?.length; i++){
-        let dataItems = res[i];
-        dataItems.ROWNUMBER = String(i+1);
+      for (let i = 0; i < res?.length; i++) {
+        let dataItems: any = res[i];
+        dataItems.ROWNUMBER = String(i + 1);
         dataItems.FILENAME = SplitDataTypeFile(dataItems.FILE_NAME);
         dataItems.TYPEFILE = SplitDataType(dataItems.FILE_NAME);
         dataItems.COUNT_ = String(dataItems.COUNT_);
@@ -33,8 +34,8 @@ export default function ReportDataExportBracnh({ setOnDetail, dataSendDepartMent
       }
       console.log(newData, 'newData');
       await setDataCount(newData)
-      
-    }catch(e){
+
+    } catch (e) {
       console.log(e);
     }
   }
@@ -90,14 +91,19 @@ export default function ReportDataExportBracnh({ setOnDetail, dataSendDepartMent
       _resDataList();
     }
   }, [dataSendListBranch])
+  React.useEffect(() => {
+    if (Object.keys(dataSendDepartMent).length > 0) {
+      setHeadValue(dataSendDepartMent?.SEMI_NAME)
+    }
+  }, [dataSendDepartMent])
   return (
     <Grid container pl={2} pr={2}>
       <>
         <Stack direction={'row'} justifyContent={'flex-start'} alignItems={'center'} columnGap={1}>
           <Tooltip title="ย้อนกลับ" placement="right">
             <IconButton size='small' onClick={() => {
-              setOnDetail(2),
-                setDataSendListPlot(null)
+              setOnDetail(2)
+              setDataSendListPlot({})
             }}
             >
               <Avatar sx={{ bgcolor: '#aae8e6', width: 50, height: 50 }}>
@@ -105,12 +111,12 @@ export default function ReportDataExportBracnh({ setOnDetail, dataSendDepartMent
               </Avatar>
             </IconButton>
           </Tooltip>
-          <Typography variant='h5'>{Object.keys(dataSendDepartMent).length > 0 ? dataSendDepartMent?.SEMI_NAME : ''}</Typography>
+          <Typography variant='h5'>{headValue}</Typography>
         </Stack>
         <Table>
           <TableHead>
             <TableRow>
-              <FixedHeaderContent dataList={dataCount} colum={colum} onhandleClickCount={onhandleClickCount}/>
+              <FixedHeaderContent dataList={dataCount} colum={colum} onhandleClickCount={onhandleClickCount} />
             </TableRow>
           </TableHead>
         </Table>

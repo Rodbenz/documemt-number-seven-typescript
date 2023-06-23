@@ -54,7 +54,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                     <TableHead>
                                         <TableRow>
                                             {/* <TableCell align='center' sx={{width:10}}></TableCell> */}
-                                            {hendname.map((item: any, index: any) => (
+                                            {hendname?.map((item: any, index: any) => (
                                                 <TableCell
                                                     align='center'
                                                     key={index}

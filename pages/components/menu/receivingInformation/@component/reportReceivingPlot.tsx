@@ -17,6 +17,7 @@ interface IFReportReceiving {
 
 export default function ReportReceivingPlot({ setOnDetail, dataSendDepartMent, dataSendListBranch, dataSendListPlot }: IFReportReceiving) {
   const [dataCount, setDataCount] = React.useState<any>([]);
+  const [headValue, setHeadValue] = React.useState<string>('');
 
   const _resDataList = async () => {
     let newData: any = [];
@@ -98,6 +99,11 @@ export default function ReportReceivingPlot({ setOnDetail, dataSendDepartMent, d
       _resDataList();
     }
   }, [dataSendListPlot])
+  React.useEffect(() => {
+    if (Object.keys(dataSendDepartMent).length > 0) {
+      setHeadValue(dataSendDepartMent.SEMI_NAME)
+    }
+  }, [dataSendDepartMent])
   return (
     <Grid container pl={2} pr={2}>
       <>
@@ -109,7 +115,7 @@ export default function ReportReceivingPlot({ setOnDetail, dataSendDepartMent, d
               </Avatar>
             </IconButton>
           </Tooltip>
-          <Typography variant='h5'>{Object.keys(dataSendDepartMent).length > 0 ? dataSendDepartMent.SEMI_NAME : ''}</Typography>
+          <Typography variant='h5'>{headValue}</Typography>
         </Stack>
         <Table>
           <TableHead>
