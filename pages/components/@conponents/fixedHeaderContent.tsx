@@ -174,7 +174,7 @@ export default function FixedHeaderContent({ dataList, colum, colorHeader = '#00
                             onhandleClickCount ? (
                               <>
                                 <IconButton size='small' onClick={() => onhandleClickCount(row)}>
-                                  {value}
+                                  <Typography sx={{ textDecoration: 'underline' }}>{value}</Typography>
                                 </IconButton>
                               </>
                             ) :

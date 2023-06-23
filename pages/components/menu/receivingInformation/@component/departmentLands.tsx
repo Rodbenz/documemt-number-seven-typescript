@@ -100,7 +100,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                         backgroundColor: '#FFE817',
                                                         // width: 100
                                                     }}>
-                                                        <Typography sx={{ cursor: 'pointer' }} onClick={() => handleOnClick(item)}>
+                                                        <Typography sx={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={() => handleOnClick(item)}>
                                                             {item.COUNTIMPORT}
                                                         </Typography>
                                                     </Box>
