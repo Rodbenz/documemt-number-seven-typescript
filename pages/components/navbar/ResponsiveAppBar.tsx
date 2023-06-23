@@ -22,21 +22,25 @@ interface ResponsiveAppBarProps {
 
 function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
   const router = useRouter();
-  const { 
-    setDataSearch, 
-    setIsMenuSummarize, 
-    setDataInformationList, 
-    setDataLandApartmentList, 
-    setDataRegisteredTradingInformationList, 
-    setDataLanBuildingList, 
-    setDatalistEpv ,
+  const {
+    setDataSearch,
+    setIsMenuSummarize,
+    setDataInformationList,
+    setDataLandApartmentList,
+    setDataRegisteredTradingInformationList,
+    setDataLanBuildingList,
+    setDatalistEpv,
     setIsMenuReceiving,
     setIsMenuDataExport
   } = useCartContext();
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [activeItem, setActiveItem] = React.useState('item1');
 
+  const handleClick = (item: any) => {
+    setActiveItem(item);
+  };
   const handleOpenNavMenu = (event: any) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -66,7 +70,7 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
     <AppBar position="static" sx={{ backgroundColor: '#006e61' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography
+          {/* <Typography
             variant="h6"
             noWrap
             component="a"
@@ -82,7 +86,8 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
             }}
           >
             หน้าหลัก
-          </Typography>
+          </Typography> */}
+          
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -116,19 +121,24 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
               <MenuItem onClick={() => {
                 router.push('/')
                 handleCloseNavMenu()
-              }}>
+              }}
+                selected={activeItem === 'item1'}
+              >
                 <Typography textAlign="center">หน้าหลัก</Typography>
               </MenuItem>
               <MenuItem onClick={() => {
                 router.push('/components/menu/receivingInformation')
                 handleCloseNavMenu()
-              }}>
+              }}
+                selected={activeItem === 'item2'}
+              >
                 <Typography textAlign="center">การรับข้อมูล</Typography>
               </MenuItem>
               <MenuItem onClick={() => {
                 router.push('/components/menu/dataExports')
                 handleCloseNavMenu()
-              }}>
+              }}
+              >
                 <Typography textAlign="center">การส่งออกข้อมูล</Typography>
               </MenuItem>
               {/* <MenuItem onClick={() => {
@@ -178,10 +188,21 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Button
               onClick={() => {
+                router.push('/')
+                handleCloseNavMenu()
+                handleClick('item1')
+              }}
+              sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, fontSize: 18, backgroundColor: activeItem === 'item1' ? '#06534a' : '' }}
+            >
+              หน้าหลัก
+            </Button>
+            <Button
+              onClick={() => {
                 router.push('/components/menu/receivingInformation')
                 handleCloseNavMenu()
+                handleClick('item2')
               }}
-              sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, fontSize: 18 }}
+              sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, fontSize: 18, backgroundColor: activeItem === 'item2' ? '#06534a' : '' }}
             >
               การรับข้อมูล
             </Button>
@@ -189,8 +210,9 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
               onClick={() => {
                 router.push('/components/menu/dataExports')
                 handleCloseNavMenu()
+                handleClick('item3')
               }}
-              sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, fontSize: 18 }}
+              sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, fontSize: 18, backgroundColor: activeItem === 'item3' ? '#06534a' : '' }}
             >
               การส่งออกข้อมูล
             </Button>
