@@ -60,7 +60,7 @@ export default function ReportReceiving({ setOnDetail, dataSendDepartMent, setDa
       align: 'center',
     },
     {
-      name: 'สำนักงานที่ดิน',
+      name: 'จังหวัด',
       listname: 'PROVINCENAME',
       align: 'left',
     },
