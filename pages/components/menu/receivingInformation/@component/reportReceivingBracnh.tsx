@@ -22,8 +22,6 @@ export default function ReportReceivingBracnh({ setOnDetail, dataSendDepartMent,
     let newData:any = [];
     let datasend = dataSendListBranch;
     datasend.IMPORT_DATE = datasend.IMPORT_DATE.split('T')[0];
-    console.log(datasend, '555555555555555');
-    
     try{
       let res = await REPORT_RECEIVE_BranchCode(datasend)
       for(let i = 0; i < res.length; i++){

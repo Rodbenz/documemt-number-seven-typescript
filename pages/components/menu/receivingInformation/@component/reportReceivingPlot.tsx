@@ -20,8 +20,11 @@ export default function ReportReceivingPlot({ setOnDetail, dataSendDepartMent, d
 
   const _resDataList = async () => {
     let newData: any = [];
+    let datasend = dataSendListPlot;
+    datasend.IMPORT_DATE = datasend.IMPORT_DATE.split('T')[0];
+
     try {
-      let res = await REPORT_RECEIVE_ALL(dataSendListPlot)
+      let res = await REPORT_RECEIVE_ALL(datasend)
       for (let i = 0; i < res.length; i++) {
         let dataItems = res[i];
         dataItems.ROWNUMBER = String(i + 1);
