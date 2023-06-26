@@ -44,8 +44,8 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
     }
 
     React.useEffect(() => {
-        console.log(dataList,'dataList');
-        
+        console.log(dataList, 'dataList');
+
     }, [dataList])
 
     return (
@@ -93,32 +93,50 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                 </TableCell>
                                                 <TableCell align='center' sx={{ border: 'none' }} >
                                                     <Box py={1} sx={{
-                                                        backgroundColor: '#53F8AA',
+                                                        backgroundColor: '#e3f2fd',
 
                                                     }}>
-                                                        <Typography >
-                                                            {item.POST_DOL1}
-                                                        </Typography>
+                                                        {item.POST_DOL1 == 0 ? (
+                                                            <Typography >
+                                                                {item.POST_DOL1}
+                                                            </Typography>
+                                                        ) : (
+                                                            <Typography sx={{ textDecoration: 'underline', cursor: 'pointer' }}>
+                                                                {item.POST_DOL1}
+                                                            </Typography>
+                                                        )}
                                                     </Box>
                                                 </TableCell>
                                                 <TableCell align='center' sx={{ border: 'none' }}>
                                                     <Box py={1} sx={{
-                                                        backgroundColor: '#FFE817',
+                                                        backgroundColor: '#e3f2fd',
                                                         // width: 100
                                                     }}>
-                                                        <Typography sx={{ cursor: 'pointer' }} onClick={() => handleOnClick(item)}>
-                                                            {item.POST_DOL2}
-                                                        </Typography>
+                                                        {item.POST_DOL2 == 0 ? (
+                                                            <Typography >
+                                                                {item.POST_DOL2}
+                                                            </Typography>
+                                                        ) : (
+                                                            <Typography sx={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={() => handleOnClick(item)}>
+                                                                {item.POST_DOL2}
+                                                            </Typography>
+                                                        )}
                                                     </Box>
                                                 </TableCell>
                                                 <TableCell align='center' sx={{ border: 'none' }}>
                                                     <Box py={1} sx={{
-                                                        backgroundColor: '#B9B9B9',
+                                                        backgroundColor: '#e3f2fd',
                                                         // width: 100
                                                     }}>
-                                                        <Typography >
-                                                            {item.POST_DOL1}
-                                                        </Typography>
+                                                        {item.POST_DOL3 == 0 ? (
+                                                            <Typography >
+                                                                {item.POST_DOL3}
+                                                            </Typography>
+                                                        ) : (
+                                                            <Typography sx={{ cursor: 'pointer', textDecoration: 'underline' }}>
+                                                                {item.POST_DOL3}
+                                                            </Typography>
+                                                        )}
                                                     </Box>
                                                 </TableCell>
                                             </TableRow>
@@ -151,7 +169,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                     )}
                 {onDetail === 4 &&
                     (
-                        Object.keys(dataSendDepartMent).length > 0 && Object.keys(dataSendListBranch).length > 0  && Object.keys(dataSendListPlot).length > 0  && (
+                        Object.keys(dataSendDepartMent).length > 0 && Object.keys(dataSendListBranch).length > 0 && Object.keys(dataSendListPlot).length > 0 && (
                             <ReportDataExportPlot
                                 setOnDetail={setOnDetail}
                                 dataSendDepartMent={dataSendDepartMent}

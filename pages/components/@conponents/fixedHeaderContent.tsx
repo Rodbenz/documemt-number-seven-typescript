@@ -13,7 +13,7 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import VariantButtonGroup from './buttonGroups';
-import { Grid, Pagination, Typography, TextField, IconButton, Box } from '@mui/material';
+import { Grid, Pagination, Typography, TextField, IconButton, Box, TableSortLabel } from '@mui/material';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
 
@@ -39,6 +39,9 @@ export default function FixedHeaderContent({ dataList, colum, colorHeader = '#00
   const [placement, setPlacement] = React.useState<PopperPlacementType>();
   const [lestName, setLestName] = React.useState<any>({ name: '', listname: 'ROWNUMBER', align: '' });
   const [closeFilter, setCloseFilter] = React.useState<any>([]);
+  const [sortConfig, setSortConfig] = React.useState<{ key: string; direction: 'asc' | 'desc' } | null>(
+    null
+  );
 
   const handleChangePage = (event: any, newPage: number) => {
     setPage(newPage);
@@ -75,7 +78,16 @@ export default function FixedHeaderContent({ dataList, colum, colorHeader = '#00
     setCloseFilter(data);
   }
 
-  const filteredData = dataList?.filter((row: any) => {
+  const handleSort = (key: string) => {
+    let direction: 'asc' | 'desc' = 'asc';
+    if (sortConfig && sortConfig.key === key && sortConfig.direction === 'asc') {
+      direction = 'desc';
+    }
+    setSortConfig({ key, direction });
+  };
+
+  const sortedData = dataList;
+  const filteredData = sortedData?.filter((row: any) => {
     for (const key in filterValues) {
       if (filterValues[key] !== '' && row[key] !== undefined) {
         if (
@@ -92,6 +104,29 @@ export default function FixedHeaderContent({ dataList, colum, colorHeader = '#00
     return true;
   });
 
+  if (sortConfig !== null) {
+    sortedData.sort((a: any, b: any) => {
+      const { key, direction }: any = sortConfig;
+      console.log(a[key], b[key],direction);
+      
+      if (Number(a[key]) < Number(b[key])) {
+        return direction === 'asc' ? -1 : 1;
+      }
+      if (Number(a[key]) > Number(b[key])) {
+        return direction === 'asc' ? 1 : -1;
+      }
+      if (String(a[key]) < String(b[key])) {
+        return direction === 'asc' ? -1 : 1;
+      }
+      if (String(a[key]) > String(b[key])) {
+        return direction === 'asc' ? 1 : -1;
+      }
+      return 0;
+    });
+  }
+
+  // console.log(sortedData, 'sortedData');
+  
   React.useEffect(() => {
     let newObj: any = new Object();
     for (let i = 0; i < colum.length; i++) {
@@ -129,8 +164,15 @@ export default function FixedHeaderContent({ dataList, colum, colorHeader = '#00
                   align={column.align}
                   style={{ minWidth: column.minWidth, backgroundColor: colorHeader, color: 'white', fontWeight: 'bold', borderLeftColor: 'white', borderRightColor: 'white', borderRightWidth: 1, borderRightStyle: 'solid', borderLeftWidth: 1, borderLeftStyle: 'solid' }}
                 >
-                  <Stack direction={'row'} justifyContent={'space-evenly'} alignItems={'center'}>
-                    <Typography>{column.name}</Typography>
+                  <Stack direction={'row'} justifyContent={'center'} alignItems={'center'}>
+                    {/* <Typography>{column.name}</Typography> */}
+                    <TableSortLabel
+                      active={sortConfig?.key === column.listname}
+                      direction={sortConfig?.key === String(column.listname) ? sortConfig.direction : 'asc'}
+                      onClick={() => handleSort(column.listname)}
+                    >
+                      {column.name}
+                    </TableSortLabel>
                     {filterValues[column?.listname] == '' ?
                       (
                         <IconButton onClick={(e) => {

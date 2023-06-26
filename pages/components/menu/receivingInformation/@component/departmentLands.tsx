@@ -90,9 +90,15 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                         backgroundColor: '#53F8AA',
 
                                                     }}>
-                                                        <Typography >
-                                                            {item.COUNTDOL}
-                                                        </Typography>
+                                                        {item.COUNTDOL === 0 ? (
+                                                            <Typography >
+                                                                {item.COUNTDOL}
+                                                            </Typography>
+                                                        ) : (
+                                                            <Typography sx={{ cursor: 'pointer', textDecoration: 'underline' }}>
+                                                                {item.COUNTDOL}
+                                                            </Typography>
+                                                        )}
                                                     </Box>
                                                 </TableCell>
                                                 <TableCell align='center' sx={{ border: 'none' }}>
@@ -100,9 +106,15 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                         backgroundColor: '#FFE817',
                                                         // width: 100
                                                     }}>
-                                                        <Typography sx={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={() => handleOnClick(item)}>
-                                                            {item.COUNTIMPORT}
-                                                        </Typography>
+                                                        {item.COUNTIMPORT === 0 ? (
+                                                            <Typography >
+                                                                {item.COUNTIMPORT}
+                                                            </Typography>
+                                                        ) : (
+                                                            <Typography sx={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={() => handleOnClick(item)}>
+                                                                {item.COUNTIMPORT}
+                                                            </Typography>
+                                                        )}
                                                     </Box>
                                                 </TableCell>
                                                 <TableCell align='center' sx={{ border: 'none' }}>
@@ -110,9 +122,15 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                         backgroundColor: '#B9B9B9',
                                                         // width: 100
                                                     }}>
-                                                        <Typography >
-                                                            {item.DEF}
-                                                        </Typography>
+                                                        {item.DEF === 0 ? (
+                                                            <Typography >
+                                                                {item.DEF}
+                                                            </Typography>
+                                                        ) : (
+                                                            <Typography sx={{cursor:'pointer', textDecoration:'underline'}}>
+                                                                {item.DEF}
+                                                            </Typography>
+                                                        )}
                                                     </Box>
                                                 </TableCell>
                                                 <TableCell align='center' sx={{ border: 'none' }}>{dateFormatTime(item.IMPORT_DATE)}</TableCell>
@@ -147,7 +165,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                     )}
                 {onDetail === 4 &&
                     (
-                        Object.keys(dataSendDepartMent).length > 0 && Object.keys(dataSendListBranch).length > 0  && Object.keys(dataSendListPlot).length > 0 && (
+                        Object.keys(dataSendDepartMent).length > 0 && Object.keys(dataSendListBranch).length > 0 && Object.keys(dataSendListPlot).length > 0 && (
                             <ReportReceivingPlot
                                 setOnDetail={setOnDetail}
                                 dataSendDepartMent={dataSendDepartMent}
