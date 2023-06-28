@@ -16,6 +16,7 @@ import VariantButtonGroup from './buttonGroups';
 import { Grid, Pagination, Typography, TextField, IconButton, Box, TableSortLabel } from '@mui/material';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
+import ButtonGroupsReport from './buttonGroupsReport';
 
 
 interface FixedHeaderContent {
@@ -27,10 +28,11 @@ interface FixedHeaderContent {
   typeTable?: number;
   onhandleClickCount?: any;
   onHandleRetropective?: any;
+  exportReport?: any;
 }
 
 
-export default function FixedHeaderContent({ dataList, colum, colorHeader = '#006e61', btnExport, btnGrpup, typeTable, onhandleClickCount, onHandleRetropective }: FixedHeaderContent) {
+export default function FixedHeaderContent({ dataList, colum, colorHeader = '#006e61', btnExport, btnGrpup, typeTable, onhandleClickCount, onHandleRetropective, exportReport }: FixedHeaderContent) {
   const [page, setPage] = React.useState(1);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [filterValues, setFilterValues] = React.useState<{ [key: string]: string }>({});
@@ -107,8 +109,8 @@ export default function FixedHeaderContent({ dataList, colum, colorHeader = '#00
   if (sortConfig !== null) {
     sortedData.sort((a: any, b: any) => {
       const { key, direction }: any = sortConfig;
-      console.log(a[key], b[key],direction);
-      
+      // console.log(a[key], b[key],direction);
+
       if (Number(a[key]) < Number(b[key])) {
         return direction === 'asc' ? -1 : 1;
       }
@@ -126,7 +128,7 @@ export default function FixedHeaderContent({ dataList, colum, colorHeader = '#00
   }
 
   // console.log(sortedData, 'sortedData');
-  
+
   React.useEffect(() => {
     let newObj: any = new Object();
     for (let i = 0; i < colum.length; i++) {
@@ -137,8 +139,8 @@ export default function FixedHeaderContent({ dataList, colum, colorHeader = '#00
   }, [colum])
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }} >
-      <Popper open={open} anchorEl={anchorEl} placement={placement} transition>
+    <React.Fragment>
+      <Popper sx={{ zIndex: 100 }} open={open} anchorEl={anchorEl} placement={placement} transition>
         {({ TransitionProps }) => (
           <Fade {...TransitionProps} timeout={350}>
             <Paper sx={{ marginTop: 2.5 }}>
@@ -154,123 +156,127 @@ export default function FixedHeaderContent({ dataList, colum, colorHeader = '#00
           </Fade>
         )}
       </Popper>
-      <TableContainer sx={{ maxHeight: 500 }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead >
-            <TableRow>
-              {colum?.map((column: any, index: number) => (
-                <TableCell
-                  key={index}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth, backgroundColor: colorHeader, color: 'white', fontWeight: 'bold', borderLeftColor: 'white', borderRightColor: 'white', borderRightWidth: 1, borderRightStyle: 'solid', borderLeftWidth: 1, borderLeftStyle: 'solid' }}
-                >
-                  <Stack direction={'row'} justifyContent={'center'} alignItems={'center'}>
-                    {/* <Typography>{column.name}</Typography> */}
-                    <TableSortLabel
-                      active={sortConfig?.key === column.listname}
-                      direction={sortConfig?.key === String(column.listname) ? sortConfig.direction : 'asc'}
-                      onClick={() => handleSort(column.listname)}
-                    >
-                      {column.name}
-                    </TableSortLabel>
-                    {filterValues[column?.listname] == '' ?
-                      (
-                        <IconButton onClick={(e) => {
-                          handleClickFilter(e, column);
-                          handleListKeyDown(index);
-                        }}>
-                          <FilterAltIcon />
-                        </IconButton>
-                      )
-                      :
-                      (
-                        <IconButton onClick={(e) => {
-                          handleClickFilter(e, column);
-                          handleRemoveFilter(index);
-                        }}>
-                          <FilterAltOffIcon />
-                        </IconButton>
-                      )
-                    }
-                  </Stack>
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {filteredData && filteredData
-              .slice((page - 1) * rowsPerPage, page * rowsPerPage)
-              .map((row: any, index: number) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-                    {colum?.map((column: any, index: number) => {
-                      const value = row[column.listname];
-                      return (
-                        <TableCell key={index} align={column.align}>
+      <Paper sx={{ width: '100%' }} >
+        <TableContainer sx={{ maxHeight: 500 }}>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead >
+              <TableRow>
+                {colum?.map((column: any, index: number) => (
+                  <TableCell
+                    key={index}
+                    align={'center'}
+                    style={{ minWidth: column.minWidth, backgroundColor: colorHeader, color: 'white', fontWeight: 'bold', borderLeftColor: 'white', borderRightColor: 'white', borderRightWidth: 1, borderRightStyle: 'solid', borderLeftWidth: 1, borderLeftStyle: 'solid' }}
+                  >
+                    <Stack direction={'row'} justifyContent={'center'} alignItems={'center'}>
+                      {/* <Typography>{column.name}</Typography> */}
+                      <TableSortLabel
+                        active={sortConfig?.key === column.listname}
+                        direction={sortConfig?.key === String(column.listname) ? sortConfig.direction : 'asc'}
+                        onClick={() => handleSort(column.listname)}
+                      >
+                        {column.name}
+                      </TableSortLabel>
+                      {filterValues[column?.listname] == '' ?
+                        (
+                          <IconButton onClick={(e) => {
+                            handleClickFilter(e, column);
+                            handleListKeyDown(index);
+                          }}>
+                            <FilterAltIcon />
+                          </IconButton>
+                        )
+                        :
+                        (
+                          <IconButton onClick={(e) => {
+                            handleClickFilter(e, column);
+                            handleRemoveFilter(index);
+                          }}>
+                            <FilterAltOffIcon />
+                          </IconButton>
+                        )
+                      }
+                    </Stack>
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {filteredData && filteredData
+                .slice((page - 1) * rowsPerPage, page * rowsPerPage)
+                .map((row: any, index: number) => {
+                  return (
+                    <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+                      {colum?.map((column: any, index: number) => {
+                        const value = row[column.listname];
+                        return (
+                          <TableCell key={index} align={column.align}>
 
-                          {column.listname !== 'COUNT_' ?
-                            column.format && typeof value === 'number'
-                              ? column.format(value)
-                              : value == null || value == '' ? '-' : value
-                            :
-                            onhandleClickCount ? (
-                              <>
-                                <IconButton size='small' onClick={() => onhandleClickCount(row)}>
-                                  <Typography sx={{ textDecoration: 'underline' }}>{value}</Typography>
-                                </IconButton>
-                              </>
-                            ) :
-                              value == null || value == '' ? '-' : value
-                          }
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <Grid container>
-        <Grid item xs={12} py={1}>
-          <Grid
-            container
-            justifyContent={"flex-end"}
-            alignItems={"center"}
-            px={2}
-          >
-            <Grid item>
-              <Pagination
-                page={page}
-                onChange={handleChangePage}
-                // color="error"
-                count={isNaN(Math.ceil(filteredData?.length / rowsPerPage)) ? 0 : Math.ceil(filteredData?.length / rowsPerPage)}
-              />
-            </Grid>
-            <Grid item>
-              <Typography fontSize={14}>
-                {filteredData?.length > 0 &&
-                  "จำนวนรายการทั้งหมด " + filteredData?.length + " รายการ"}
-              </Typography>
+                            {column.listname !== 'COUNT_' ?
+                              column.format && typeof value === 'number'
+                                ? column.format(value)
+                                : value == null || value == '' ? '-' : value
+                              :
+                              onhandleClickCount ? (
+                                <>
+                                  <IconButton size='small' onClick={() => onhandleClickCount(row)}>
+                                    <Typography sx={{ textDecoration: 'underline' }}>{value}</Typography>
+                                  </IconButton>
+                                </>
+                              ) :
+                                value == null || value == '' ? '-' : value
+                            }
+                          </TableCell>
+                        );
+                      })}
+                    </TableRow>
+                  );
+                })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <Grid container>
+          <Grid item xs={12} py={1}>
+            <Grid
+              container
+              justifyContent={"flex-end"}
+              alignItems={"center"}
+              px={2}
+            >
+              <Grid item>
+                <Pagination
+                  page={page}
+                  onChange={handleChangePage}
+                  // color="error"
+                  count={isNaN(Math.ceil(filteredData?.length / rowsPerPage)) ? 0 : Math.ceil(filteredData?.length / rowsPerPage)}
+                />
+              </Grid>
+              <Grid item>
+                <Typography fontSize={14}>
+                  {filteredData?.length > 0 &&
+                    "จำนวนรายการทั้งหมด " + filteredData?.length + " รายการ"}
+                </Typography>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
-      {btnExport && btnExport && (
-        <Stack direction={'row'} justifyContent={'end'} py={2} pr={2}>
-          <Button variant={'contained'} onClick={btnExport()}>ส่งออก</Button>
+
+        <Stack direction={'row'} justifyContent={'end'} py={2} pr={2} spacing={2}>
+          {btnExport && btnExport && (
+            <Button variant={'contained'} onClick={btnExport()}>ส่งออก</Button>
+          )}
+          {btnGrpup && btnGrpup && (
+            <VariantButtonGroup dataList={dataList} colum={colum} typeTable={typeTable} />
+          )}
+          {exportReport && exportReport && (
+            <ButtonGroupsReport dataList={dataList} colum={colum} typeTable={typeTable} />
+          )}
+          {onHandleRetropective && onHandleRetropective &&
+            <Stack py={2} pr={2}>
+              <Button variant={'contained'} onClick={() => onHandleRetropective()} ><KeyboardDoubleArrowLeftIcon /> ย้อนกลับ</Button>
+            </Stack>
+          }
         </Stack>
-      )}
-      {btnGrpup && btnGrpup && (
-        <Stack direction={'row'} justifyContent={'end'} py={2} pr={2}>
-          <VariantButtonGroup dataList={dataList} colum={colum} typeTable={typeTable} />
-        </Stack>
-      )}
-      {onHandleRetropective && onHandleRetropective &&
-        <Stack direction={'row'} justifyContent={'end'} py={2} pr={2}>
-          <Button variant={'contained'} onClick={() => onHandleRetropective()} ><KeyboardDoubleArrowLeftIcon /> ย้อนกลับ</Button>
-        </Stack>
-      }
-    </Paper>
+      </Paper>
+    </React.Fragment>
   )
 }

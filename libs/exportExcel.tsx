@@ -3,7 +3,7 @@ import { saveAs } from 'file-saver';
 
 export function exportExcel(colum: any, dataList: any, type: number) {
     console.log('exportExcel', colum, dataList, type);
-    
+
     if (type == 1) {
         exportExcel1(dataList)
     }
@@ -223,14 +223,15 @@ function __createData2(datalist: any) {
             NUMBER: datalist[i].NUMBER ? datalist[i].NUMBER : '-',
             SEMI_NAME: datalist[i].SEMI_NAME ? datalist[i].SEMI_NAME : '-',
             COUNT: datalist[i].COUNT ? datalist[i].COUNT : '-',
-            COUNT_: datalist[i].COUNT_ ? datalist[i].COUNT_ : '-',        }
+            COUNT_: datalist[i].COUNT_ ? datalist[i].COUNT_ : '-',
+        }
         data.push(setdata)
     }
     return data
 }
 function __createData3(datalist: any) {
     console.log(datalist);
-    
+
     let data: any = []
     for (let i = 0; i < datalist.length; i++) {
         let setdata = {
@@ -245,7 +246,7 @@ function __createData3(datalist: any) {
 }
 function __createData4(datalist: any) {
     console.log(datalist);
-    
+
     let data: any = []
     for (let i = 0; i < datalist.length; i++) {
         let setdata = {
@@ -266,3 +267,36 @@ function __createData4(datalist: any) {
     return data
 }
 
+
+export async function exportExcelReport(colum: any, dataList: any) {
+    let columnName: any = [];
+    let fieldColumn: any = [];
+    for (let i = 0; i < colum.length; i++) {
+        columnName.push(colum[i].name)
+        let setField = {
+            key: colum[i].listname,
+            width: 20
+        }
+        fieldColumn.push(setField)
+    }
+    console.log(columnName, fieldColumn);
+    const workbook = new Excel.Workbook();
+    const worksheet = workbook.addWorksheet("Document");
+
+    worksheet.getRow(1).values = columnName;
+    worksheet.getRow(1).font = { bold: true };
+    worksheet.getRow(1).height = 20.25;
+    worksheet.getRow(1).alignment = { vertical: 'middle', horizontal: 'center' };
+
+    worksheet.columns = fieldColumn;
+
+    worksheet.addRows(dataList);
+
+    const buffer: any = await workbook.xlsx.writeBuffer();
+    const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+    const fileExtension = '.xlsx';
+
+    const blob = new Blob([buffer], { type: fileType });
+
+    saveAs(blob, 'test' + fileExtension);
+}

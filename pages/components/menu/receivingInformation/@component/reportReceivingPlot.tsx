@@ -6,8 +6,8 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import FixedHeaderContent from '@/pages/components/@conponents/fixedHeaderContent';
 import { REPORT_RECEIVE_ALL } from '@/service/report';
 import { SplitDataType, SplitDataTypeFile } from '@/libs/dataControl';
-import { dateFormatTime, setUTM_NO_P } from '@/libs/outputDatas';
-import { columReceivingPlot1, columReceivingPlot2 } from '@/libs/headName';
+import { dateFormatTime, setStatus, setUTM_NO_P } from '@/libs/outputDatas';
+import { columReceivingPlot1, columReceivingPlot10, columReceivingPlot11, columReceivingPlot12, columReceivingPlot13, columReceivingPlot14, columReceivingPlot15, columReceivingPlot16, columReceivingPlot2, columReceivingPlot3, columReceivingPlot4, columReceivingPlot5, columReceivingPlot6, columReceivingPlot7, columReceivingPlot8, columReceivingPlot9 } from '@/libs/headName';
 
 interface IFReportReceiving {
   setOnDetail?: any;
@@ -34,9 +34,24 @@ export default function ReportReceivingPlot({ setOnDetail, dataSendDepartMent, d
         let UTMMAP1_ = dataItems.UTMMAP1? dataItems.UTMMAP1 : dataItems.UTMCODE;
         let UTMMAP2_ = dataItems.UTMMAP2? dataItems.UTMMAP2 : dataItems.UTMNOP;
         let UTMMAP3_ = dataItems.UTMMAP3? dataItems.UTMMAP3 : dataItems.UTMNO ? dataItems.UTMNO : '';
+        let STATUS_ = dataItems.STATUS ? setStatus(dataItems.STATUS) : '';
+        let REGDATE_ = dataItems.REGDATE ? dateFormatTime(dataItems.REGDATE) : '';
+        let ADDR_ = dataItems.ADDR ? String(dataItems.ADDR) : '';
+        let MOO_ = dataItems.MOO ? String(' หมู่ ' + dataItems.MOO) : '';
+        let BUILDINGNAME_ = dataItems.BUILDINGNAME ? String(' อาคาร ' + dataItems.BUILDINGNAME) : '';
+        let SOI_ = dataItems.SOI ? String(' ซอย ' + dataItems.SOI) : '';
+        let ROAD_ = dataItems.ROAD ? String(' ถนน ' + dataItems.ROAD) : '';
+        let RAINUM_ = dataItems.RAINUM ? dataItems.RAINUM : '';
+        let NGANNUM_ = dataItems.NGANNUM ? dataItems.NGANNUM : '';
+        let WANUM_ = dataItems.WANUM ? dataItems.WANUM : '';
+        let SUBWANUM_ = dataItems.SUBWANUM ? dataItems.SUBWANUM != '0' ? String( '.' + dataItems.SUBWANUM) : '' : '';
         dataItems.ROWNUMBER = String(i + 1);
         dataItems.UTM = String(UTMMAP1_ + ' ' + setUTM_NO_P(UTMMAP2_) + ' ' + UTMMAP3_);
         dataItems.DATEIMPORT = dateFormatTime(dataItems.IMPORT_DATE)
+        dataItems.STATUS_ = STATUS_;
+        dataItems.REGDATE_ = REGDATE_;
+        dataItems.ADDR_ = ADDR_ + MOO_ + BUILDINGNAME_ + SOI_ + ROAD_;
+        dataItems.RAINUM_ = RAINUM_+ '-' + NGANNUM_ + '-' + WANUM_ + SUBWANUM_;
         newData.push(dataItems);
       }
       console.log(newData, 'newData');
@@ -60,6 +75,48 @@ export default function ReportReceivingPlot({ setOnDetail, dataSendDepartMent, d
     }
     if(semiseq === 211 || semiseq === 212 || semiseq === 213){
       await setColum(columReceivingPlot2);
+    }
+    if(semiseq === 214 || semiseq === 215 || semiseq === 216){
+      await setColum(columReceivingPlot3);
+    }
+    if(semiseq === 217 || semiseq === 218){
+      await setColum(columReceivingPlot4);
+    }
+    if(semiseq === 219){
+      await setColum(columReceivingPlot5);
+    }
+    if(semiseq === 221){
+      await setColum(columReceivingPlot6);
+    }
+    if(semiseq === 222){
+      await setColum(columReceivingPlot7);
+    }
+    if(semiseq === 223){
+      await setColum(columReceivingPlot8);
+    }
+    if(semiseq === 224){
+      await setColum(columReceivingPlot9);
+    }
+    if(semiseq === 225){
+      await setColum(columReceivingPlot10);
+    }
+    if(semiseq === 226){
+      await setColum(columReceivingPlot11);
+    }
+    if(semiseq === 227){
+      await setColum(columReceivingPlot12);
+    }
+    if(semiseq === 311){
+      await setColum(columReceivingPlot13);
+    }
+    if(semiseq === 312){
+      await setColum(columReceivingPlot14);
+    }
+    if(semiseq === 313){
+      await setColum(columReceivingPlot15);
+    }
+    if(semiseq === 314 || semiseq === 315){
+      await setColum(columReceivingPlot16);
     }
   }
 
@@ -90,13 +147,11 @@ export default function ReportReceivingPlot({ setOnDetail, dataSendDepartMent, d
           </Tooltip>
           <Typography variant='h5'>{headValue}</Typography>
         </Stack>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <FixedHeaderContent dataList={dataCount} colum={colum} onHandleRetropective={onHandleRetropective} />
-            </TableRow>
-          </TableHead>
-        </Table>
+        <Grid container>
+          <Grid xs={12}>
+              <FixedHeaderContent dataList={dataCount} colum={colum} onHandleRetropective={onHandleRetropective} exportReport/>
+          </Grid>
+        </Grid>
       </>
     </Grid>
   )

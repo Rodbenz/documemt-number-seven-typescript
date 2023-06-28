@@ -16,6 +16,14 @@ export function setUTM_NO_P(utmnop: any) {
     }
 }
 
+export function setStatus(status: any) {
+    if (status == 'ADD') {
+        return 'เพิ่ม';
+    } else if (status == 'DEL') {
+        return 'ลบ';
+    } 
+}
+
 export const numberWithCommas = (x: any) => {
     try {
         var parts = String(x).split(".");

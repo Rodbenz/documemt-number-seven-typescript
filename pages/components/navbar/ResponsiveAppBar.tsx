@@ -15,6 +15,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { useRouter } from 'next/navigation';
 import { useCartContext } from '@/context/Cartcontext';
+import { useRouter as Routter } from 'next/router'
 
 interface ResponsiveAppBarProps {
   setIsMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,6 +23,7 @@ interface ResponsiveAppBarProps {
 
 function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
   const router = useRouter();
+  const routerPath = Routter();
   const {
     setDataSearch,
     setIsMenuSummarize,
@@ -65,6 +67,10 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
   // const handleCloseUserMenu = () => {
   //   setAnchorElUser(null);
   // };
+
+  // React.useEffect(() => {
+  //   console.log(routerPath.route,'5555555555555555555555');
+  // }, [router]);
 
   return (
     <AppBar position="static" sx={{ backgroundColor: '#006e61' }}>
@@ -122,7 +128,7 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
                 router.push('/')
                 handleCloseNavMenu()
               }}
-                selected={activeItem === 'item1'}
+                selected={routerPath.route === '/'}
               >
                 <Typography textAlign="center">หน้าหลัก</Typography>
               </MenuItem>
@@ -130,7 +136,7 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
                 router.push('/components/menu/receivingInformation')
                 handleCloseNavMenu()
               }}
-                selected={activeItem === 'item2'}
+                selected={ routerPath.route === '/components/menu/receivingInformation'}
               >
                 <Typography textAlign="center">การรับข้อมูล</Typography>
               </MenuItem>
@@ -138,6 +144,7 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
                 router.push('/components/menu/dataExports')
                 handleCloseNavMenu()
               }}
+              selected={ routerPath.route === '/components/menu/dataExports'}
               >
                 <Typography textAlign="center">การส่งออกข้อมูล</Typography>
               </MenuItem>
@@ -190,9 +197,8 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
               onClick={() => {
                 router.push('/')
                 handleCloseNavMenu()
-                handleClick('item1')
               }}
-              sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, fontSize: 18, backgroundColor: activeItem === 'item1' ? '#06534a' : '' }}
+              sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, fontSize: 18, backgroundColor: routerPath.route === '/' ? '#06534a' : '' }}
             >
               หน้าหลัก
             </Button>
@@ -200,9 +206,8 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
               onClick={() => {
                 router.push('/components/menu/receivingInformation')
                 handleCloseNavMenu()
-                handleClick('item2')
               }}
-              sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, fontSize: 18, backgroundColor: activeItem === 'item2' ? '#06534a' : '' }}
+              sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, fontSize: 18, backgroundColor: routerPath.route === '/components/menu/receivingInformation' ? '#06534a' : '' }}
             >
               การรับข้อมูล
             </Button>
@@ -210,9 +215,8 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
               onClick={() => {
                 router.push('/components/menu/dataExports')
                 handleCloseNavMenu()
-                handleClick('item3')
               }}
-              sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, fontSize: 18, backgroundColor: activeItem === 'item3' ? '#06534a' : '' }}
+              sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, fontSize: 18, backgroundColor: routerPath.route === '/components/menu/dataExports' ? '#06534a' : '' }}
             >
               การส่งออกข้อมูล
             </Button>
