@@ -7,6 +7,7 @@ import FixedHeaderContent from '@/pages/components/@conponents/fixedHeaderConten
 import { REPORT_RECEIVE_ALL } from '@/service/report';
 import { SplitDataType, SplitDataTypeFile } from '@/libs/dataControl';
 import { dateFormatTime, setUTM_NO_P } from '@/libs/outputDatas';
+import { columReceivingPlot1, columReceivingPlot2 } from '@/libs/headName';
 
 interface IFReportReceiving {
   setOnDetail?: any;
@@ -18,22 +19,28 @@ interface IFReportReceiving {
 export default function ReportReceivingPlot({ setOnDetail, dataSendDepartMent, dataSendListBranch, dataSendListPlot }: IFReportReceiving) {
   const [dataCount, setDataCount] = React.useState<any>([]);
   const [headValue, setHeadValue] = React.useState<string>('');
+  const [colum, setColum] = React.useState<any>([]);
 
   const _resDataList = async () => {
     let newData: any = [];
     let datasend = dataSendListPlot;
     datasend.IMPORT_DATE = datasend.IMPORT_DATE.split('T')[0];
-
+    
     try {
       let res = await REPORT_RECEIVE_ALL(datasend)
+      console.log(res, 'REPORT_RECEIVE_ALL');
       for (let i = 0; i < res.length; i++) {
         let dataItems = res[i];
+        let UTMMAP1_ = dataItems.UTMMAP1? dataItems.UTMMAP1 : dataItems.UTMCODE;
+        let UTMMAP2_ = dataItems.UTMMAP2? dataItems.UTMMAP2 : dataItems.UTMNOP;
+        let UTMMAP3_ = dataItems.UTMMAP3? dataItems.UTMMAP3 : dataItems.UTMNO ? dataItems.UTMNO : '';
         dataItems.ROWNUMBER = String(i + 1);
-        dataItems.UTM = String(dataItems.UTMMAP1 + ' ' + setUTM_NO_P(dataItems.UTMMAP2) + ' ' + dataItems.UTMMAP3);
+        dataItems.UTM = String(UTMMAP1_ + ' ' + setUTM_NO_P(UTMMAP2_) + ' ' + UTMMAP3_);
         dataItems.DATEIMPORT = dateFormatTime(dataItems.IMPORT_DATE)
         newData.push(dataItems);
       }
       console.log(newData, 'newData');
+      await setDataCount([])
       await setDataCount(newData)
 
     } catch (e) {
@@ -45,55 +52,19 @@ export default function ReportReceivingPlot({ setOnDetail, dataSendDepartMent, d
     setOnDetail && setOnDetail(3);
   }
 
-  const colum = [
-    {
-      name: 'ลำดับที่',
-      listname: 'ROWNUMBER',
-      align: 'center',
-    },
-    {
-      name: 'ระวาง',
-      listname: 'UTM',
-      align: 'right',
-    },
-    {
-      name: 'แผ่นที่',
-      listname: 'UTMMAP4',
-      align: 'right',
-    },
-    {
-      name: 'มาตราส่วน',
-      listname: 'UTMSCALE',
-      align: 'right',
-    },
-    {
-      name: 'เลขที่ดิน',
-      listname: 'LAND_NO',
-      align: 'right',
-    },
-    // {
-    //   name: 'เลขที่โฉนด',
-    //   listname: 'DATEIMPORT',
-    //   align: 'right',
-    // },
-    {
-      name: 'อำเภอ',
-      listname: 'AMPHOE_NAME',
-      align: 'Left',
-    },
-    {
-      name: 'ตำบล',
-      listname: 'TAMBOL_NAME',
-      align: 'Left',
-    },
-    {
-      name: 'วัน/เดือน/ปี',
-      listname: 'DATEIMPORT',
-      align: 'left',
-    },
-  ]
+  const configHeader = async (semiseq: any) => {
+    console.log(semiseq, 'semiseq');
+    
+    if (semiseq === 111 || semiseq === 112 || semiseq === 113 || semiseq === 114) {
+      await setColum(columReceivingPlot1);
+    }
+    if(semiseq === 211 || semiseq === 212 || semiseq === 213){
+      await setColum(columReceivingPlot2);
+    }
+  }
 
   React.useEffect(() => {
+    setColum([]);
     console.log(dataSendListPlot, 'dataSendListPlot');
     if (Object.keys(dataSendListPlot).length > 0) {
       _resDataList();
@@ -102,6 +73,8 @@ export default function ReportReceivingPlot({ setOnDetail, dataSendDepartMent, d
   React.useEffect(() => {
     if (Object.keys(dataSendDepartMent).length > 0) {
       setHeadValue(dataSendDepartMent.SEMI_NAME)
+      let semiseq = dataSendDepartMent.SEMI_CODE;
+      configHeader(semiseq);
     }
   }, [dataSendDepartMent])
   return (
@@ -120,26 +93,11 @@ export default function ReportReceivingPlot({ setOnDetail, dataSendDepartMent, d
         <Table>
           <TableHead>
             <TableRow>
-              <FixedHeaderContent dataList={dataCount} colum={colum} onHandleRetropective={onHandleRetropective}/>
+              <FixedHeaderContent dataList={dataCount} colum={colum} onHandleRetropective={onHandleRetropective} />
             </TableRow>
           </TableHead>
         </Table>
       </>
     </Grid>
-  )
-}
-
-interface ICountActive {
-  el: any;
-  onhandleClickCount?: any;
-}
-
-function CountActive({ el, onhandleClickCount }: ICountActive) {
-  return (
-    <>
-      <IconButton size='small' onClick={() => onhandleClickCount(el)}>
-        {el.COUNTIMPORT}
-      </IconButton>
-    </>
   )
 }

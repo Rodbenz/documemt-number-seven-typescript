@@ -7,34 +7,36 @@ import FixedHeaderContent from '@/pages/components/@conponents/fixedHeaderConten
 import { REPORT_RECEIVE_changwat } from '@/service/report';
 import { dateFormatTime } from '@/libs/outputDatas';
 import { SplitDataType, SplitDataTypeFile } from '@/libs/dataControl';
+import { reportReceivingProvincePlot } from '@/libs/headName';
 
 interface IFReportReceiving {
   setOnDetail?: any;
   dataSendDepartMent?: any;
+  setDataSendDepartMent?: any;
   setDataSendListBranch?: any;
 }
 
-export default function ReportReceiving({ setOnDetail, dataSendDepartMent, setDataSendListBranch }: IFReportReceiving) {
+export default function ReportReceiving({ setOnDetail, dataSendDepartMent, setDataSendDepartMent, setDataSendListBranch }: IFReportReceiving) {
   const [dataCount, setDataCount] = React.useState<any>([]);
   const [headValue, setHeadValue] = React.useState<string>('');
-
+  const [colum, setColum] = React.useState<any>([]);
 
   const _resDataList = async () => {
     let datasend: any = new Object();
     datasend.SEMI_CODE = Object.keys(dataSendDepartMent).length > 0 ? String(dataSendDepartMent.SEMI_CODE) : '';
     try {
-      let newData:any = [];
+      let newData: any = [];
       let res = await REPORT_RECEIVE_changwat(datasend)
-      for(let i = 0; i < res.length; i++){
+      for (let i = 0; i < res.length; i++) {
         let dataItems = res[i];
-        dataItems.ROWNUMBER = String(i+1);
+        dataItems.ROWNUMBER = String(i + 1);
         dataItems.FILENAME = SplitDataTypeFile(dataItems.FILE_NAME);
         dataItems.TYPEFILE = SplitDataType(dataItems.FILE_NAME);
         dataItems.COUNT_ = String(dataItems.COUNT_);
         dataItems.IMPORT_DATE_ = dateFormatTime(dataItems.IMPORT_DATE)
         newData.push(dataItems);
       }
-      console.log(newData, 'newData');
+      await setDataCount([])
       await setDataCount(newData)
     } catch (e) {
       console.log(e);
@@ -52,51 +54,21 @@ export default function ReportReceiving({ setOnDetail, dataSendDepartMent, setDa
 
   const onHandleRetropective = async () => {
     setOnDetail && setOnDetail(1);
+    setDataSendDepartMent && setDataSendDepartMent({});
+    setDataSendListBranch && setDataSendListBranch({});
   }
 
-  const colum = [
-    {
-      name: 'ลำดับที่',
-      listname: 'ROWNUMBER',
-      align: 'center',
-    },
-    {
-      name: 'จังหวัด',
-      listname: 'PROVINCENAME',
-      align: 'left',
-    },
-    {
-      name: 'รายการนำเข้า',
-      listname: 'SEMI_NAME',
-      align: 'left',
-    },
-    {
-      name: 'ชื่อไฟล์',
-      listname: 'FILENAME',
-      align: 'left',
-    },
-    {
-      name: 'ประเภทไฟล์',
-      listname: 'TYPEFILE',
-      align: 'left',
-    },
-    {
-      name: 'จำนวน',
-      listname: 'COUNT_',
-      align: 'right',
-    },
-    {
-      name: 'วัน/เดือน/ปี',
-      listname: 'IMPORT_DATE_',
-      align: 'center',
-    },
-  ]
+  const configHeader = async (semiseq:any) => {
+      await setColum(reportReceivingProvincePlot);
+  }
 
   React.useEffect(() => {
     console.log(dataSendDepartMent, 'dataSendDepartMent');
     if (Object.keys(dataSendDepartMent).length > 0) {
       _resDataList();
       setHeadValue(dataSendDepartMent.SEMI_NAME);
+      let semiseq = dataSendDepartMent.SEMI_CODE;
+      configHeader(semiseq)
     }
   }, [dataSendDepartMent])
   return (
@@ -107,6 +79,7 @@ export default function ReportReceiving({ setOnDetail, dataSendDepartMent, setDa
             <IconButton size='small' onClick={() => {
               setOnDetail(1),
                 setDataSendListBranch({})
+                setDataSendDepartMent({})
             }}
             >
               <Avatar sx={{ bgcolor: '#aae8e6', width: 50, height: 50 }}>
@@ -119,7 +92,7 @@ export default function ReportReceiving({ setOnDetail, dataSendDepartMent, setDa
         <Table>
           <TableHead>
             <TableRow>
-              <FixedHeaderContent dataList={dataCount} colum={colum} onhandleClickCount={onhandleClickCount} onHandleRetropective={onHandleRetropective}/>
+              <FixedHeaderContent dataList={dataCount} colum={colum} onhandleClickCount={onhandleClickCount} onHandleRetropective={onHandleRetropective} />
             </TableRow>
           </TableHead>
         </Table>

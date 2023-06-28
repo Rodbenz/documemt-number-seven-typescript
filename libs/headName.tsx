@@ -1,3 +1,4 @@
+// หัวตาราง export ข้อมูล
 export const haedlistMenuExport: any = [
 
     {
@@ -21,7 +22,7 @@ export const haedlistMenuExport: any = [
         color: '#f90c0f',
     },
 ];
-
+// หัวตาราง การรับข้อมูล จาก กรมที่ดิน
 export const headNameReceiving1 = [
     {
         name: 'รายการรับข้อมูล จาก กรมที่ดิน',
@@ -48,6 +49,7 @@ export const headNameReceiving1 = [
         width: 100,
     },
 ]
+// หัวตาราง การรับข้อมูล จาก กรมส่งเสริมการปกครองท้องถิ่น
 export const headNameReceiving2 = [
     {
         name: 'รายการรับข้อมูล จาก กรมส่งเสริมการปกครองท้องถิ่น',
@@ -74,56 +76,177 @@ export const headNameReceiving2 = [
         width: 100,
     },
 ]
+// หัวตาราง จังหวัดทุกจังหวัด
+export const reportReceivingProvincePlot = [
+  {
+    name: 'ลำดับที่',
+    listname: 'ROWNUMBER',
+    align: 'center',
+  },
+  {
+    name: 'จังหวัด',
+    listname: 'PROVINCENAME',
+    align: 'left',
+  },
+  {
+    name: 'รายการนำเข้า',
+    listname: 'SEMI_NAME',
+    align: 'left',
+  },
+  {
+    name: 'ชื่อไฟล์',
+    listname: 'FILENAME',
+    align: 'left',
+  },
+  {
+    name: 'ประเภทไฟล์',
+    listname: 'TYPEFILE',
+    align: 'left',
+  },
+  {
+    name: 'จำนวน',
+    listname: 'COUNT_',
+    align: 'right',
+  },
+  {
+    name: 'วัน/เดือน/ปี',
+    listname: 'IMPORT_DATE_',
+    align: 'center',
+  },
+]
 
-const colum = [
-    {
-      name: 'ลำดับที่',
-      listname: 'ROWNUMBER',
-      align: 'center',
-    },
-    {
-      name: 'จังหวัด',
-      listname: 'PROVINCENAME',
-      align: 'left',
-    },
-    {
-      name: 'อำเภอ',
-      listname: 'SEMI_NAME',
-      align: 'left',
-    },
-    {
-      name: 'ตำบล',
-      listname: 'SEMI_NAME',
-      align: 'left',
-    },
-    {
-      name: 'สำนักงานที่ดิน',
-      listname: 'SEMI_NAME',
-      align: 'left',
-    },
-    {
-      name: 'สำนักงานที่ดิน',
-      listname: 'SEMI_NAME',
-      align: 'left',
-    },
-    {
-      name: 'ชื่อไฟล์',
-      listname: 'FILENAME',
-      align: 'left',
-    },
-    {
-      name: 'ประเภทไฟล์',
-      listname: 'TYPEFILE',
-      align: 'left',
-    },
-    {
-      name: 'จำนวน',
-      listname: 'COUNT_',
-      align: 'right',
-    },
-    {
-      name: 'วัน/เดือน/ปี',
-      listname: 'IMPORT_DATE_',
-      align: 'center',
-    },
-  ]
+// หัวตาราง สำนักงานที่ดิน
+export const columReceivingBranch = [
+  {
+    name: 'ลำดับที่',
+    listname: 'ROWNUMBER',
+    align: 'center',
+  },
+  {
+    name: 'สำนักงานที่ดิน',
+    listname: 'BRANCHNAME',
+    align: 'left',
+  },
+  {
+    name: 'รายการนำเข้า',
+    listname: 'SEMI_NAME',
+    align: 'left',
+  },
+  {
+    name: 'ชื่อไฟล์',
+    listname: 'FILENAME',
+    align: 'left',
+  },
+  {
+    name: 'ประเภทไฟล์',
+    listname: 'TYPEFILE',
+    align: 'left',
+  },
+  {
+    name: 'จำนวน',
+    listname: 'COUNT_',
+    align: 'right',
+  },
+  {
+    name: 'วัน/เดือน/ปี',
+    listname: 'DATEIMPORT',
+    align: 'center',
+  },
+]
+// หัวตาราง ข้อมูลรูปแปลงที่ดินโฉนด (โซน 47,48), ข้อมูลรูปแปลงที่ดิน น.ส.3ก (โซน 47,48)
+export const columReceivingPlot1 = [
+  {
+    name: 'ลำดับที่',
+    listname: 'ROWNUMBER',
+    align: 'center',
+  },
+  {
+    name: 'ระวาง',
+    listname: 'UTM',
+    align: 'right',
+  },
+  {
+    name: 'แผ่นที่',
+    listname: 'UTMMAP4',
+    align: 'right',
+  },
+  {
+    name: 'มาตราส่วน',
+    listname: 'UTMSCALE',
+    align: 'right',
+  },
+  {
+    name: 'เลขที่ดิน',
+    listname: 'LAND_NO',
+    align: 'right',
+  },
+  // {
+  //   name: 'เลขที่โฉนด',
+  //   listname: 'DATEIMPORT',
+  //   align: 'right',
+  // },
+  {
+    name: 'อำเภอ',
+    listname: 'AMPHOE_NAME',
+    align: 'Left',
+  },
+  {
+    name: 'ตำบล',
+    listname: 'TAMBOL_NAME',
+    align: 'Left',
+  },
+  {
+    name: 'วัน/เดือน/ปี',
+    listname: 'DATEIMPORT',
+    align: 'left',
+  },
+]
+// หัวตาราง ข้อมูลโฉนดที่ดิน, ข้อมูล น.ส.3ก, ข้อมูล น.ส.3
+export const columReceivingPlot2 = [
+  {
+    name: 'ลำดับที่',
+    listname: 'ROWNUMBER',
+    align: 'center',
+  },
+  {
+    name: 'ระวาง',
+    listname: 'UTM',
+    align: 'right',
+  },
+  {
+    name: 'แผ่นที่',
+    listname: 'UTMPAGE',
+    align: 'right',
+  },
+  {
+    name: 'มาตราส่วน',
+    listname: 'UTMRATIO',
+    align: 'right',
+  },
+  {
+    name: 'เลขที่ดิน',
+    listname: 'UTMLANDNO',
+    align: 'right',
+  },
+  // {
+  //   name: 'เลขที่โฉนด',
+  //   listname: 'DATEIMPORT',
+  //   align: 'right',
+  // },
+  {
+    name: 'อำเภอ',
+    listname: 'AMPHOE_NAME',
+    align: 'Left',
+  },
+  {
+    name: 'ตำบล',
+    listname: 'TAMBOL_NAME',
+    align: 'Left',
+  },
+  {
+    name: 'วัน/เดือน/ปี',
+    listname: 'DATEIMPORT',
+    align: 'left',
+  },
+]
+// ข้อมูลสิ่งปลูกสร้างบนแปลงที่ดิน

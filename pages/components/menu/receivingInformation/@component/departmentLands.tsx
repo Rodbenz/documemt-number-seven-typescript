@@ -148,6 +148,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                             <ReportReceiving
                                 setOnDetail={setOnDetail}
                                 dataSendDepartMent={dataSendDepartMent}
+                                setDataSendDepartMent={setDataSendDepartMent}
                                 setDataSendListBranch={setDataSendListBranch}
                             />
                         )

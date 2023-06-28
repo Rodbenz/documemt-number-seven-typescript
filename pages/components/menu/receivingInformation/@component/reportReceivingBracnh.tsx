@@ -7,6 +7,7 @@ import FixedHeaderContent from '@/pages/components/@conponents/fixedHeaderConten
 import { REPORT_RECEIVE_BranchCode } from '@/service/report';
 import { dateFormatTime } from '@/libs/outputDatas';
 import { SplitDataType, SplitDataTypeFile } from '@/libs/dataControl';
+import { columReceivingBranch } from '@/libs/headName';
 
 interface IFReportReceiving {
   setOnDetail?: any;
@@ -18,6 +19,7 @@ interface IFReportReceiving {
 export default function ReportReceivingBracnh({ setOnDetail, dataSendDepartMent, dataSendListBranch, setDataSendListPlot }: IFReportReceiving) {
   const [dataCount, setDataCount] = React.useState<any>([]);
   const [headValue, setHeadValue] = React.useState<string>('');
+  const [colum, setColum] = React.useState<any>([]);
 
   const _resDataList = async () => {
     let newData:any = [];
@@ -34,7 +36,7 @@ export default function ReportReceivingBracnh({ setOnDetail, dataSendDepartMent,
         dataItems.DATEIMPORT = dateFormatTime(dataItems.IMPORT_DATE)
         newData.push(dataItems);
       }
-      console.log(newData, 'newData');
+      await setDataCount([])
       await setDataCount(newData)
       
     }catch(e){
@@ -43,55 +45,22 @@ export default function ReportReceivingBracnh({ setOnDetail, dataSendDepartMent,
   }
 
   const onhandleClickCount = async (el: any) => {
-    console.log(el, 'el');
     if (el.COUNTIMPORT !== 0) {
       setOnDetail && setOnDetail(4);
-      setDataSendListPlot && setDataSendListPlot(el);
+      setDataSendListPlot && setDataSendListPlot(el);    
     }
 
   }
 
   const onHandleRetropective = async () => {
     setOnDetail && setOnDetail(2);
+    setDataSendListPlot && setDataSendListPlot({})
   }
 
-  const colum = [
-    {
-      name: 'ลำดับที่',
-      listname: 'ROWNUMBER',
-      align: 'center',
-    },
-    {
-      name: 'สำนักงานที่ดิน',
-      listname: 'BRANCHNAME',
-      align: 'left',
-    },
-    {
-      name: 'รายการนำเข้า',
-      listname: 'SEMI_NAME',
-      align: 'left',
-    },
-    {
-      name: 'ชื่อไฟล์',
-      listname: 'FILENAME',
-      align: 'left',
-    },
-    {
-      name: 'ประเภทไฟล์',
-      listname: 'TYPEFILE',
-      align: 'left',
-    },
-    {
-      name: 'จำนวน',
-      listname: 'COUNT_',
-      align: 'right',
-    },
-    {
-      name: 'วัน/เดือน/ปี',
-      listname: 'DATEIMPORT',
-      align: 'center',
-    },
-  ]
+  const configHeader = async (semiseq:any) => {
+    await setColum([]);
+    await setColum(columReceivingBranch);
+  }
 
   React.useEffect(() => {
     console.log(dataSendListBranch, 'dataSendListBranch');
@@ -102,6 +71,8 @@ export default function ReportReceivingBracnh({ setOnDetail, dataSendDepartMent,
   React.useEffect(() => {
     if(Object.keys(dataSendDepartMent).length > 0){
       setHeadValue(dataSendDepartMent.SEMI_NAME)
+      let semiseq = dataSendDepartMent.SEMI_CODE;
+      configHeader(semiseq)
     }
   }, [dataSendDepartMent])
   return (
@@ -130,20 +101,5 @@ export default function ReportReceivingBracnh({ setOnDetail, dataSendDepartMent,
         </Table>
       </>
     </Grid>
-  )
-}
-
-interface ICountActive {
-  el: any;
-  onhandleClickCount?: any;
-}
-
-function CountActive({ el, onhandleClickCount }: ICountActive) {
-  return (
-    <>
-      <IconButton size='small' onClick={() => onhandleClickCount(el)}>
-        {el.COUNTIMPORT}
-      </IconButton>
-    </>
   )
 }

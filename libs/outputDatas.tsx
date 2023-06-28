@@ -2,6 +2,9 @@ import { right } from "./dataControl";
 import month from "./month";
 
 export function setUTM_NO_P(utmnop: any) {
+    if (utmnop == 0 || utmnop == null || utmnop == undefined || utmnop == '') {
+        return '';
+    }
     if (utmnop == 1) {
         return 'I';
     } else if (utmnop == 2) {
