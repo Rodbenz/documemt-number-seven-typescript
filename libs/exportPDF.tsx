@@ -5,10 +5,10 @@ import './THSarabun.js';
 export async function Report0(datalist: any, reportName: string) {
     let colum: any = [
         [
-            { content: 'ลำดับ',  styles: { halign: 'center' } },
-            { content: 'ประเภทรูปแปลงที่ดิน',  styles: { halign: 'center' } },
-            { content: 'กรมที่ดิน - กรมธนารักษ์',  styles: { halign: 'center' } },
-            { content: 'กรมธนารักษ์ - กรมที่ดิน',  styles: { halign: 'center' } },
+            { content: 'ลำดับ', styles: { halign: 'center' } },
+            { content: 'ประเภทรูปแปลงที่ดิน', styles: { halign: 'center' } },
+            { content: 'กรมที่ดิน - กรมธนารักษ์', styles: { halign: 'center' } },
+            { content: 'กรมธนารักษ์ - กรมที่ดิน', styles: { halign: 'center' } },
         ],
         // [
         //     {content:'โซน 47 แปลง (ระวาง)', styles: { halign: 'center' }}, 
@@ -24,15 +24,15 @@ export async function Report0(datalist: any, reportName: string) {
             for (const [keys, value] of Object.entries(data[key])) {
                 dataRow.push(value);
                 console.log(
-                   value
+                    value
                 );
-                
+
             }
             rows.push(dataRow);
         }
     }
 
-    const doc = new jsPDF('l', 'pt', 'letter');
+    const doc = new jsPDF('l', 'mm', 'a3');
 
     doc.setFont("THSarabunNew");
 
@@ -42,10 +42,10 @@ export async function Report0(datalist: any, reportName: string) {
         head: colum,
         body: rows,
         headStyles: {
-            fillColor: [0,110,97], // Green color
+            fillColor: [0, 110, 97], // Green color
             textColor: [255, 255, 255], // White color
-          },
-        tableLineColor: [0,110,97],
+        },
+        tableLineColor: [0, 110, 97],
         tableLineWidth: 0.1,
         startY: 30,
         styles: {
@@ -56,20 +56,20 @@ export async function Report0(datalist: any, reportName: string) {
             valign: 'middle'
         },
         columnStyles: {
-            0:{
-                halign:'right'
+            0: {
+                halign: 'right'
             },
-            1:{
-                halign:'left'
+            1: {
+                halign: 'left'
             },
-            2:{
-                halign:'right'
+            2: {
+                halign: 'right'
             },
-            3:{
-                halign:'right'
+            3: {
+                halign: 'right'
             },
-            4:{
-                halign:'right'
+            4: {
+                halign: 'right'
             },
         },
     },
@@ -97,9 +97,9 @@ export async function Report2(datalist: any, reportName: string) {
             for (const [keys, value] of Object.entries(data[key])) {
                 dataRow.push(value);
                 console.log(
-                   value
+                    value
                 );
-                
+
             }
             rows.push(dataRow);
         }
@@ -115,10 +115,10 @@ export async function Report2(datalist: any, reportName: string) {
         head: colum,
         body: rows,
         headStyles: {
-            fillColor: [0,110,97], // Green color
+            fillColor: [0, 110, 97], // Green color
             textColor: [255, 255, 255], // White color
-          },
-        tableLineColor: [0,110,97],
+        },
+        tableLineColor: [0, 110, 97],
         tableLineWidth: 0.1,
         startY: 30,
         styles: {
@@ -129,17 +129,17 @@ export async function Report2(datalist: any, reportName: string) {
             valign: 'middle'
         },
         columnStyles: {
-            0:{
-                halign:'right'
+            0: {
+                halign: 'right'
             },
-            1:{
-                halign:'left'
+            1: {
+                halign: 'left'
             },
-            2:{
-                halign:'right'
+            2: {
+                halign: 'right'
             },
-            3:{
-                halign:'right'
+            3: {
+                halign: 'right'
             }
         },
     },
@@ -167,9 +167,9 @@ export async function Report3(datalist: any, reportName: string) {
             for (const [keys, value] of Object.entries(data[key])) {
                 dataRow.push(value);
                 console.log(
-                   value
+                    value
                 );
-                
+
             }
             rows.push(dataRow);
         }
@@ -185,10 +185,10 @@ export async function Report3(datalist: any, reportName: string) {
         head: colum,
         body: rows,
         headStyles: {
-            fillColor: [0,110,97], // Green color
+            fillColor: [0, 110, 97], // Green color
             textColor: [255, 255, 255], // White color
-          },
-        tableLineColor: [0,110,97],
+        },
+        tableLineColor: [0, 110, 97],
         tableLineWidth: 0.1,
         startY: 30,
         styles: {
@@ -199,37 +199,37 @@ export async function Report3(datalist: any, reportName: string) {
             valign: 'middle'
         },
         columnStyles: {
-            0:{
-                halign:'right'
+            0: {
+                halign: 'right'
             },
-            1:{
-                halign:'left'
+            1: {
+                halign: 'left'
             },
-            2:{
-                halign:'left'
+            2: {
+                halign: 'left'
             },
-            3:{
-                halign:'left'
+            3: {
+                halign: 'left'
             },
-            4:{
-                halign:'right'
+            4: {
+                halign: 'right'
             },
-            5:{
-                halign:'right'
+            5: {
+                halign: 'right'
             },
-            6:{
-                halign:'right'
+            6: {
+                halign: 'right'
             },
-            7:{
-                halign:'right'
+            7: {
+                halign: 'right'
             },
-            8:{
-                halign:'right'
+            8: {
+                halign: 'right'
             },
-            9:{
-                halign:'right'
+            9: {
+                halign: 'right'
             },
-            
+
         },
     },
     )
@@ -263,9 +263,9 @@ export async function Report4(datalist: any, reportName: string) {
             for (const [keys, value] of Object.entries(data[key])) {
                 dataRow.push(value);
                 console.log(
-                   value
+                    value
                 );
-                
+
             }
             rows.push(dataRow);
         }
@@ -281,10 +281,10 @@ export async function Report4(datalist: any, reportName: string) {
         head: colum,
         body: rows,
         headStyles: {
-            fillColor: [0,110,97], // Green color
+            fillColor: [0, 110, 97], // Green color
             textColor: [255, 255, 255], // White color
-          },
-        tableLineColor: [0,110,97],
+        },
+        tableLineColor: [0, 110, 97],
         tableLineWidth: 0.1,
         startY: 30,
         styles: {
@@ -295,17 +295,17 @@ export async function Report4(datalist: any, reportName: string) {
             valign: 'middle'
         },
         columnStyles: {
-            0:{
-                halign:'right'
+            0: {
+                halign: 'right'
             },
-            1:{
-                halign:'left'
+            1: {
+                halign: 'left'
             },
-            2:{
-                halign:'right'
+            2: {
+                halign: 'right'
             },
-            3:{
-                halign:'right'
+            3: {
+                halign: 'right'
             }
         },
     },
@@ -336,14 +336,15 @@ function __createData2(datalist: any) {
             NUMBER: datalist[i].NUMBER ? datalist[i].NUMBER : '-',
             SEMI_NAME: datalist[i].SEMI_NAME ? datalist[i].SEMI_NAME : '-',
             COUNT: datalist[i].COUNT ? datalist[i].COUNT : '-',
-            COUNT_: datalist[i].COUNT_ ? datalist[i].COUNT_ : '-',        }
+            COUNT_: datalist[i].COUNT_ ? datalist[i].COUNT_ : '-',
+        }
         data.push(setdata)
     }
     return data
 }
 function __createData3(datalist: any) {
     console.log(datalist);
-    
+
     let data: any = []
     for (let i = 0; i < datalist.length; i++) {
         let setdata = {
@@ -358,7 +359,7 @@ function __createData3(datalist: any) {
 }
 function __createData4(datalist: any) {
     console.log(datalist);
-    
+
     let data: any = []
     for (let i = 0; i < datalist.length; i++) {
         let setdata = {
@@ -377,4 +378,60 @@ function __createData4(datalist: any) {
         data.push(setdata)
     }
     return data
+}
+
+export async function exportPdfReport(column: any, dataList: any, reportName: any) {
+    let columnName: any = [];
+    let columnStyle: any = new Object();
+    let rows: any = [];
+    for (let i = 0; i < column.length; i++) {
+        let dataset = {
+            content: column[i].name, styles: { halign: 'center' },
+        }
+        columnName.push(dataset)
+        Object.assign(columnStyle, { [i]: { halign: column[i].align } })
+    }
+
+    for (var i in dataList) {
+        let dataRow = []
+        for(let j in column) {
+            let value =  dataList[i][column[j].listname];
+            dataRow.push(value);
+        }
+        rows.push(dataRow)
+    }
+
+
+    const doc = new jsPDF('l', 'pt', 'letter');
+
+    doc.setFont("THSarabunNew");
+
+    doc.setLineWidth(2);
+
+    autoTable(doc, {
+        head: [columnName],
+        body: rows,
+        headStyles: {
+            fillColor: [0, 110, 97], // Green color
+            textColor: [255, 255, 255], // White color
+        },
+        tableLineColor: [0, 110, 97],
+        tableLineWidth: 0.1,
+        startY: 30,
+        styles: {
+            overflow: 'linebreak',
+            font: 'THSarabunNew',    // <-- place name of your font here
+            fontStyle: 'normal',
+            fontSize: 16,
+            valign: 'middle'
+        },
+        columnStyles: columnStyle
+    },
+    )
+
+    doc.setPage(1);
+    doc.save(reportName + 'table.pdf')
+    // window.open(doc.output("bloburl"), "_blank");
+    return false
+
 }

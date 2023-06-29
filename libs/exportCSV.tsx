@@ -269,3 +269,45 @@ function __createData4(datalist: any) {
     }
     return data
 }
+
+
+export async function exportCsvReport(colum: any, dataList: any, reportName: string) {
+    let columnName: any = [];
+    let fieldColumn: any = [];
+    for (let i = 0; i < colum.length; i++) {
+        columnName.push(colum[i].name)
+        let setField = {
+            key: colum[i].listname,
+            width: (colum[i].name.length + 10),
+        }
+        fieldColumn.push(setField);
+    }
+    console.log(columnName, fieldColumn, reportName);
+    const workbook = new Excel.Workbook();
+    const worksheet = workbook.addWorksheet("Document");
+
+    worksheet.getRow(1).values = columnName;
+    worksheet.getRow(1).font = { bold: true };
+    worksheet.getRow(1).height = 20.25;
+    worksheet.getRow(1).alignment = { vertical: 'middle', horizontal: 'center' };
+
+    worksheet.columns = fieldColumn;
+
+    for (let i in dataList) {
+        worksheet.addRow(dataList[i]);
+    }
+
+    for(let i = 0; i < colum.length; i++){
+        worksheet.getColumn(i+1).alignment = { vertical: 'middle', horizontal: colum[i].align };
+    }
+
+    const buffer: any = await workbook.csv.writeBuffer();
+    const BOM = "\uFEFF";
+    const datacsv = BOM + buffer;
+    const fileType = 'text/csv;charset=utf-8';
+    const fileExtension = '.csv'
+
+    const blob = new Blob([datacsv], { type: fileType });
+
+    saveAs(blob, reportName + fileExtension);
+}

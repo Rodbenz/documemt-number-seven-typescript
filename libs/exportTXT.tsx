@@ -105,3 +105,38 @@ function __createData4(datalist: any) {
     }
     return data
 }
+
+export async function exportTxtReport(colum: any, dataList: any, reportName: any) {
+    let dataExport: any = [];
+    for (var i = 0; i < dataList.length; i++) {
+        let dataObj: any = new Object();
+        for (let j = 0; j < colum.length; j++) {
+            Object.assign(dataObj, { [colum[j].name]: dataList[i][colum[j].listname] })
+        }
+        dataExport.push(dataObj)
+    }
+
+    var tsv = '';
+
+    Object.keys(dataExport[0]).forEach(function (key) {
+        tsv += key + '\t';
+    });
+    tsv = tsv.slice(0, -1); // Remove trailing tab
+    tsv += '\n';
+
+    // Add data rows
+    dataExport.forEach(function (rowData: any) {
+        Object.values(rowData).forEach(function (value) {
+            tsv += value + '\t';
+        });
+        tsv = tsv.slice(0, -1); // Remove trailing tab
+        tsv += '\n';
+    });
+
+    // Create a Blob object from the TSV string
+    var blob = new Blob([tsv], { type: "text/plain;charset=utf-8" });
+
+    // Save the Blob as a file using FileSaver.js
+    saveAs(blob, reportName + ".txt");
+
+}

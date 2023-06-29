@@ -3,9 +3,12 @@ import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Box from '@mui/material/Box';
 import { RiFileExcel2Line } from "react-icons/ri";
-import { BsFiletypeCsv, BsFiletypeTxt, BsFiletypePdf } from "react-icons/bs";
+import { BsFiletypeCsv, BsFiletypeTxt, BsFiletypePdf, BsFiletypeXlsx } from "react-icons/bs";
 import { Tooltip } from '@mui/material';
 import { exportExcelReport } from '@/libs/exportExcel';
+import { exportCsvReport } from '@/libs/exportCSV';
+import { exportTxtReport } from '@/libs/exportTXT';
+import { exportPdfReport } from '@/libs/exportPDF';
 
 
 interface IEVariantButtonGroup {
@@ -18,7 +21,16 @@ interface IEVariantButtonGroup {
 export default function ButtonGroupsReport({ colum, dataList, typeTable, reportName }: IEVariantButtonGroup) {
 
  const handleOnClickExcel = async (el: any) => {
-  await exportExcelReport(colum, dataList, reportName)
+  await exportExcelReport(colum, dataList, reportName);
+ }
+ const handleOnclickCsv =async () => {
+  await exportCsvReport(colum, dataList, reportName);
+ }
+ const handleOnclickTxt =async () => {
+ await exportTxtReport(colum, dataList, reportName)
+ }
+ const handleOnclickPdf =async () => {
+  await exportPdfReport(colum, dataList, reportName)
  }
   
   return (
@@ -34,17 +46,17 @@ export default function ButtonGroupsReport({ colum, dataList, typeTable, reportN
     >
       <ButtonGroup variant="text" aria-label="text button group">
         <Tooltip title="Excel">
-          <Button sx={{ color: '#00FF00' }} onClick={handleOnClickExcel}><RiFileExcel2Line size={30} /></Button>
+          <Button sx={{ color: '#008000' }} onClick={handleOnClickExcel}><BsFiletypeXlsx size={30} /></Button>
         </Tooltip>
         <Tooltip title="CSV">
-          <Button sx={{ color: '#008000' }} ><BsFiletypeCsv size={30} /></Button>
+          <Button sx={{ color: '#008000' }} onClick={handleOnclickCsv}><BsFiletypeCsv size={30} /></Button>
         </Tooltip>
         <Tooltip title="TXT">
-          <Button ><BsFiletypeTxt size={30} /></Button>
+          <Button onClick={handleOnclickTxt}><BsFiletypeTxt size={30} /></Button>
         </Tooltip>
-        <Tooltip title="PDF">
-          <Button sx={{ color: '#FF0000' }} ><BsFiletypePdf size={30} /></Button>
-        </Tooltip>
+        {/* <Tooltip title="PDF">
+          <Button sx={{ color: '#FF0000' }} onClick={handleOnclickPdf}><BsFiletypePdf size={30} /></Button>
+        </Tooltip> */}
       </ButtonGroup>
     </Box>
   );

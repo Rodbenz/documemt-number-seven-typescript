@@ -7,7 +7,25 @@ import FixedHeaderContent from '@/pages/components/@conponents/fixedHeaderConten
 import { REPORT_RECEIVE_ALL } from '@/service/report';
 import { SplitDataType, SplitDataTypeFile } from '@/libs/dataControl';
 import { dateFormatTime, numberWithCommas, setStatus, setUTM_NO_P } from '@/libs/outputDatas';
-import { columReceivingPlot1, columReceivingPlot10, columReceivingPlot11, columReceivingPlot12, columReceivingPlot13, columReceivingPlot14, columReceivingPlot15, columReceivingPlot16, columReceivingPlot2, columReceivingPlot3, columReceivingPlot4, columReceivingPlot5, columReceivingPlot6, columReceivingPlot7, columReceivingPlot8, columReceivingPlot9 } from '@/libs/headName';
+import { 
+  columReceivingPlot1, 
+  columReceivingPlot2, 
+  columReceivingPlot3, 
+  columReceivingPlot4, 
+  columReceivingPlot5, 
+  columReceivingPlot6, 
+  columReceivingPlot7, 
+  columReceivingPlot8, 
+  columReceivingPlot9,
+  columReceivingPlot10, 
+  columReceivingPlot11, 
+  columReceivingPlot12, 
+  columReceivingPlot13, 
+  columReceivingPlot14, 
+  columReceivingPlot15, 
+  columReceivingPlot16, 
+  columReceivingPlot17
+} from '@/libs/headName';
 
 interface IFReportReceiving {
   setOnDetail?: any;
@@ -139,8 +157,11 @@ export default function ReportReceivingPlot({ setOnDetail, dataSendDepartMent, d
     if(semiseq === 313){
       await setColum(columReceivingPlot15);
     }
-    if(semiseq === 314 || semiseq === 315){
+    if(semiseq === 314){
       await setColum(columReceivingPlot16);
+    }
+    if(semiseq === 315){
+      await setColum(columReceivingPlot17);
     }
   }
 
