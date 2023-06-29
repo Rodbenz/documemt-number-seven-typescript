@@ -29,10 +29,11 @@ interface FixedHeaderContent {
   onhandleClickCount?: any;
   onHandleRetropective?: any;
   exportReport?: any;
+  reportName?:string;
 }
 
 
-export default function FixedHeaderContent({ dataList, colum, colorHeader = '#006e61', btnExport, btnGrpup, typeTable, onhandleClickCount, onHandleRetropective, exportReport }: FixedHeaderContent) {
+export default function FixedHeaderContent({ dataList, colum, colorHeader = '#006e61', btnExport, btnGrpup, typeTable, onhandleClickCount, onHandleRetropective, exportReport, reportName }: FixedHeaderContent) {
   const [page, setPage] = React.useState(1);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [filterValues, setFilterValues] = React.useState<{ [key: string]: string }>({});
@@ -268,7 +269,7 @@ export default function FixedHeaderContent({ dataList, colum, colorHeader = '#00
             <VariantButtonGroup dataList={dataList} colum={colum} typeTable={typeTable} />
           )}
           {exportReport && exportReport && (
-            <ButtonGroupsReport dataList={dataList} colum={colum} typeTable={typeTable} />
+            <ButtonGroupsReport dataList={dataList} colum={colum} typeTable={typeTable} reportName={reportName} />
           )}
           {onHandleRetropective && onHandleRetropective &&
             <Stack py={2} pr={2}>

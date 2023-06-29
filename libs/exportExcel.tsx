@@ -268,18 +268,18 @@ function __createData4(datalist: any) {
 }
 
 
-export async function exportExcelReport(colum: any, dataList: any) {
+export async function exportExcelReport(colum: any, dataList: any, reportName: string) {
     let columnName: any = [];
     let fieldColumn: any = [];
     for (let i = 0; i < colum.length; i++) {
         columnName.push(colum[i].name)
         let setField = {
             key: colum[i].listname,
-            width: 20
+            width: (colum[i].name.length + 10),
         }
-        fieldColumn.push(setField)
+        fieldColumn.push(setField);
     }
-    console.log(columnName, fieldColumn);
+    console.log(columnName, fieldColumn, reportName);
     const workbook = new Excel.Workbook();
     const worksheet = workbook.addWorksheet("Document");
 
@@ -290,7 +290,13 @@ export async function exportExcelReport(colum: any, dataList: any) {
 
     worksheet.columns = fieldColumn;
 
-    worksheet.addRows(dataList);
+    for (let i in dataList) {
+        worksheet.addRow(dataList[i]);
+    }
+
+    for(let i = 0; i < colum.length; i++){
+        worksheet.getColumn(i+1).alignment = { vertical: 'middle', horizontal: colum[i].align };
+    }
 
     const buffer: any = await workbook.xlsx.writeBuffer();
     const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
@@ -298,5 +304,5 @@ export async function exportExcelReport(colum: any, dataList: any) {
 
     const blob = new Blob([buffer], { type: fileType });
 
-    saveAs(blob, 'test' + fileExtension);
+    saveAs(blob, reportName + fileExtension);
 }

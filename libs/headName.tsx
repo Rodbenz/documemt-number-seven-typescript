@@ -215,26 +215,31 @@ export const columReceivingPlot2 = [
     name: 'ลำดับที่',
     listname: 'ROWNUMBER',
     align: 'center',
+    minWidth: 150,
   },
   {
     name: 'ระวาง',
     listname: 'UTM',
     align: 'right',
+    minWidth: 150,
   },
   {
     name: 'แผ่นที่',
     listname: 'UTMPAGE',
     align: 'right',
+    minWidth: 150,
   },
   {
     name: 'มาตราส่วน',
     listname: 'UTMRATIO',
     align: 'right',
+    minWidth: 150,
   },
   {
     name: 'เลขที่ดิน',
     listname: 'UTMLANDNO',
     align: 'right',
+    minWidth: 150,
   },
   // {
   //   name: 'เลขที่โฉนด',
@@ -245,16 +250,19 @@ export const columReceivingPlot2 = [
     name: 'อำเภอ',
     listname: 'AMPHOE_NAME',
     align: 'Left',
+    minWidth: 150,
   },
   {
     name: 'ตำบล',
     listname: 'TAMBOL_NAME',
     align: 'Left',
+    minWidth: 150,
   },
   {
     name: 'วัน/เดือน/ปี',
     listname: 'DATEIMPORT',
     align: 'left',
+    minWidth: 150,
   },
 ];
 
@@ -489,7 +497,7 @@ export const columReceivingPlot6 = [
   {
     name: 'ชื่ออาคารชุด',
     listname: 'CONDONAME',
-    align: 'right',
+    align: 'left',
     minWidth: 250,
   },
   {
@@ -501,7 +509,7 @@ export const columReceivingPlot6 = [
   {
     name: 'ชื่อตึกในอาคารชุด',
     listname: 'BUILDINGNAME',
-    align: 'right',
+    align: 'left',
     minWidth: 250,
   },
   {
@@ -552,19 +560,19 @@ export const columReceivingPlot7 = [
   {
     name: 'เลขที่ใบสั้ง',
     listname: 'ORDERNO',
-    align: 'left',
+    align: 'right',
     minWidth: 230,
   },
   {
     name: 'วันที่จดทะเบียน',
     listname: 'REGDATE_',
-    align: 'right',
+    align: 'left',
     minWidth: 230,
   },
   {
     name: 'ทะเบียนอาคารชุด',
     listname: 'REGNO',
-    align: 'right',
+    align: 'left',
     minWidth: 250,
   },
   {
@@ -588,7 +596,7 @@ export const columReceivingPlot7 = [
   {
     name: 'ชื่อรายการสินทรัพย์',
     listname: 'CPROPERTY_NAME',
-    align: 'right',
+    align: 'left',
     minWidth: 250,
   },
   {
@@ -599,13 +607,13 @@ export const columReceivingPlot7 = [
   },
   {
     name: 'ราคาประเมินที่ดิน / ตร.ว.',
-    listname: 'VALAMT',
+    listname: 'VALAMT_',
     align: 'right',
     minWidth: 250,
   },
   {
     name: 'รวมราคาประเมิน',
-    listname: 'ASSET_VAL_TOT',
+    listname: 'ASSET_VAL_TOT_',
     align: 'right',
     minWidth: 250,
   },
@@ -663,7 +671,7 @@ export const columReceivingPlot8 = [
   {
     name: 'ประผู้ถือกรรมสิทธิ์',
     listname: 'REGOWNERTYPE',
-    align: 'right',
+    align: 'left',
     minWidth: 250,
   },
   {
@@ -739,7 +747,7 @@ export const columReceivingPlot9 = [
   {
     name: 'ทะเบียนอาคารชุด',
     listname: 'REGNO',
-    align: 'left',
+    align: 'right',
     minWidth: 180,
   },
   {
@@ -757,7 +765,7 @@ export const columReceivingPlot9 = [
   {
     name: 'ชื่ออาคาร',
     listname: 'BUILDINGNAME',
-    align: 'right',
+    align: 'left',
     minWidth: 250,
   },
   {
@@ -883,7 +891,7 @@ export const columReceivingPlot11 = [
   {
     name: 'ลำดับที่ทรัพย์สินส่วนกลาง',
     listname: 'ASTSEQNO',
-    align: 'left',
+    align: 'right',
     minWidth: 230,
   },
   {
@@ -895,13 +903,13 @@ export const columReceivingPlot11 = [
   {
     name: 'จำนวน',
     listname: 'ASTAMT',
-    align: 'left',
+    align: 'right',
     minWidth: 250,
   },
   {
     name: 'หน่วยนับ',
     listname: 'ASTUNIT',
-    align: 'left',
+    align: 'right',
     minWidth: 250,
   },
   {
@@ -946,19 +954,19 @@ export const columReceivingPlot12 = [
   {
     name: 'ประเภทเอกสารสิทธิ',
     listname: 'PARCELTYPENAME',
-    align: 'right',
+    align: 'left',
     minWidth: 180,
   },
   {
     name: 'เลขที่เอกสารสิทธิ',
     listname: 'PARCELNUMBER',
-    align: 'left',
+    align: 'right',
     minWidth: 230,
   },
   {
     name: 'ทะเบียนอาคารชุด',
     listname: 'REGNO',
-    align: 'left',
+    align: 'right',
     minWidth: 500,
   },
   {
@@ -970,7 +978,7 @@ export const columReceivingPlot12 = [
   {
     name: 'หมายเลขอาคาร/ของอาคารชุด',
     listname: 'BUILDINGNO',
-    align: 'left',
+    align: 'right',
     minWidth: 250,
   },
   {
@@ -994,13 +1002,13 @@ export const columReceivingPlot12 = [
   {
     name: 'ลำดับภาระผูกพันห้องชุด',
     listname: 'ENCUMBSEQ',
-    align: 'left',
+    align: 'right',
     minWidth: 250,
   },
   {
     name: 'รหัสประเภทการจดทะเบียน (ภาระผูกพัน)',
     listname: 'ENCUMBCODE',
-    align: 'left',
+    align: 'right',
     minWidth: 250,
   },
   {
@@ -1039,19 +1047,19 @@ export const columReceivingPlot13 = [
   {
     name: 'ประเภทเอกสารสิทธิ',
     listname: 'PARCELTYPENAME',
-    align: 'right',
+    align: 'left',
     minWidth: 180,
   },
   {
     name: 'เลขที่เอกสารสิทธิ',
     listname: 'PARCELNUMBER',
-    align: 'left',
+    align: 'right',
     minWidth: 230,
   },
   {
     name: 'ทะเบียนอาคารชุด',
     listname: 'REGNO',
-    align: 'left',
+    align: 'right',
     minWidth: 230,
   },
   {
@@ -1063,7 +1071,7 @@ export const columReceivingPlot13 = [
   {
     name: 'หมายเลขอาคาร/ของอาคารชุด',
     listname: 'BUILDINGNO',
-    align: 'left',
+    align: 'right',
     minWidth: 250,
   },
   {
@@ -1087,19 +1095,19 @@ export const columReceivingPlot13 = [
   {
     name: 'ลำดับที่ประเภทการจดทะเบียน',
     listname: 'PROCESS_SEQ',
-    align: 'left',
+    align: 'right',
     minWidth: 250,
   },
   {
     name: 'เลขที่ใบสั่ง',
     listname: 'ORDERNO',
-    align: 'left',
+    align: 'right',
     minWidth: 250,
   },
   {
     name: 'รหัสประเภทการจดทะเบียน',
     listname: 'REGCODE',
-    align: 'left',
+    align: 'right',
     minWidth: 250,
   },
   {
@@ -1116,32 +1124,32 @@ export const columReceivingPlot13 = [
   },
   {
     name: 'ราคาทุนทรัพย์จดทะเบียน',
-    listname: 'REGAMT',
+    listname: 'REGAMT_',
     align: 'right',
     minWidth: 250,
   },
   {
     name: 'ราคาประเมิน ต่อ ตร.เมตร',
-    listname: 'VALAMTPERWA',
+    listname: 'VALAMTPERWA_',
     align: 'right',
     minWidth: 250,
   },
   {
     name: 'ราคาประเมินรวมจดทะเบียน',
-    listname: 'VAL_AMT',
+    listname: 'VAL_AMT_',
     align: 'right',
     minWidth: 250,
   },
   {
     name: 'ราคารวมค่าใช้จ่ายที่แก้ไขจากเจ้าหน้าที่(บาท)',
-    listname: 'FEE_AMT',
-    align: 'left',
+    listname: 'FEE_AMT_',
+    align: 'right',
     minWidth: 250,
   },
   {
     name: 'รายการแปลงจดทะเบียนรวม',
     listname: 'NUMREG',
-    align: 'left',
+    align: 'right',
     minWidth: 250,
   },
   {
@@ -1188,7 +1196,7 @@ export const columReceivingPlot14 = [
   {
     name: 'ประเภทเอกสารสิทธิ',
     listname: 'PARCELTYPENAME',
-    align: 'right',
+    align: 'left',
     minWidth: 180,
   },
   {
@@ -1235,38 +1243,38 @@ export const columReceivingPlot14 = [
   },
   {
     name: 'ราคาทุนทรัพย์จดทะเบียน',
-    listname: 'REGAMT',
+    listname: 'REGAMT_',
     align: 'right',
     minWidth: 250,
   },
   {
     name: 'ราคาประเมิน ต่อ ตร.วา',
-    listname: 'VALAMTPERWA',
+    listname: 'VALAMTPERWA_',
     align: 'right',
     minWidth: 250,
   },
   {
     name: 'ราคาประเมินรวมจดทะเบียน',
-    listname: 'VALAMT',
+    listname: 'VALAMT_',
     align: 'right',
     minWidth: 250,
   },
   {
     name: 'ราคารวมค่าใช้จ่ายที่แก้ไขจากเจ้าหน้าที่(บาท)',
-    listname: 'FEEAMT',
-    align: 'left',
+    listname: 'FEEAMT_',
+    align: 'right',
     minWidth: 250,
   },
   {
     name: 'รายการแปลงจดทะเบียนรวม',
     listname: 'NUMREG',
-    align: 'left',
+    align: 'right',
     minWidth: 250,
   },
   {
     name: 'สิ่งปลูกสร้าง',
     listname: 'CONSTRFLAG',
-    align: 'right',
+    align: 'left',
     minWidth: 250,
   },
   {
@@ -1352,32 +1360,32 @@ export const columReceivingPlot15 = [
   },
   {
     name: 'ราคาทุนทรัพย์จดทะเบียน',
-    listname: 'REGAMT',
+    listname: 'REGAMT_',
     align: 'right',
     minWidth: 250,
   },
   {
     name: 'ราคาประเมิน ต่อ ตร.วา',
-    listname: 'VALAMTPERWA',
+    listname: 'VALAMTPERWA_',
     align: 'right',
     minWidth: 250,
   },
   {
     name: 'ราคาประเมินรวมจดทะเบียน',
-    listname: 'VALAMT',
+    listname: 'VALAMT_',
     align: 'right',
     minWidth: 250,
   },
   {
     name: 'ราคารวมค่าใช้จ่ายที่แก้ไขจากเจ้าหน้าที่(บาท)',
-    listname: 'FEEAMT',
+    listname: 'FEEAMT_',
     align: 'left',
     minWidth: 250,
   },
   {
     name: 'รายการแปลงจดทะเบียนรวม',
     listname: 'NUMREG',
-    align: 'left',
+    align: 'right',
     minWidth: 250,
   },
   {
@@ -1424,7 +1432,7 @@ export const columReceivingPlot16 = [
   {
     name: 'ประเภทเอกสารสิทธิ',
     listname: 'PARCELTYPENAME',
-    align: 'right',
+    align: 'left',
     minWidth: 180,
   },
   {
@@ -1490,13 +1498,13 @@ export const columReceivingPlot16 = [
   {
     name: 'พื้นที่รวมของสิ่งปลูกสร้าง(ตร.ม.)',
     listname: 'AREA',
-    align: 'left',
+    align: 'right',
     minWidth: 250,
   },
   {
     name: 'จำนวนปีหักค่าเสื่อม',
     listname: 'CONSTRYEAR',
-    align: 'left',
+    align: 'right',
     minWidth: 250,
   },
   {
@@ -1507,31 +1515,31 @@ export const columReceivingPlot16 = [
   },
   {
     name: 'ราคาสิ่งปลูกสร้างทั้งสิ้น',
-    listname: 'VATAMT',
+    listname: 'VATAMT_',
     align: 'right',
     minWidth: 250,
   },
   {
     name: 'ราคาประเมินรวมที่ใช้จริง(ตามสัดส่วนที่โอน)',
-    listname: 'VALREAL',
+    listname: 'VALREAL_',
     align: 'right',
     minWidth: 250,
   },
   {
     name: 'ราคาค่าเสื่อม',
-    listname: 'DEPRECIATION',
+    listname: 'DEPRECIATION_',
     align: 'right',
     minWidth: 250,
   },
   {
     name: 'ราคาประเมินสิ่งปลูกสร้าง',
-    listname: 'VALPMETER',
+    listname: 'VALPMETER_',
     align: 'left',
     minWidth: 250,
   },
   {
     name: 'รวมราคาประเมินสิ่งปลูกสร้าง',
-    listname: 'VALMETERTOT',
+    listname: 'VALMETERTOT_',
     align: 'left',
     minWidth: 250,
   },

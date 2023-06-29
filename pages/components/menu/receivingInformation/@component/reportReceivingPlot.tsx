@@ -6,7 +6,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import FixedHeaderContent from '@/pages/components/@conponents/fixedHeaderContent';
 import { REPORT_RECEIVE_ALL } from '@/service/report';
 import { SplitDataType, SplitDataTypeFile } from '@/libs/dataControl';
-import { dateFormatTime, setStatus, setUTM_NO_P } from '@/libs/outputDatas';
+import { dateFormatTime, numberWithCommas, setStatus, setUTM_NO_P } from '@/libs/outputDatas';
 import { columReceivingPlot1, columReceivingPlot10, columReceivingPlot11, columReceivingPlot12, columReceivingPlot13, columReceivingPlot14, columReceivingPlot15, columReceivingPlot16, columReceivingPlot2, columReceivingPlot3, columReceivingPlot4, columReceivingPlot5, columReceivingPlot6, columReceivingPlot7, columReceivingPlot8, columReceivingPlot9 } from '@/libs/headName';
 
 interface IFReportReceiving {
@@ -44,6 +44,18 @@ export default function ReportReceivingPlot({ setOnDetail, dataSendDepartMent, d
         let RAINUM_ = dataItems.RAINUM ? dataItems.RAINUM : '';
         let NGANNUM_ = dataItems.NGANNUM ? dataItems.NGANNUM : '';
         let WANUM_ = dataItems.WANUM ? dataItems.WANUM : '';
+        let VALAMT_ = dataItems.VALAMT ? numberWithCommas(dataItems.VALAMT) : '';
+        let ASSET_VAL_TOT_ = dataItems.ASSET_VAL_TOT ? numberWithCommas(dataItems.ASSET_VAL_TOT) : '';
+        let REGAMT_ = dataItems.REGAMT ? numberWithCommas(dataItems.REGAMT) : '';
+        let VALAMTPERWA_ = dataItems.VALAMTPERWA ? numberWithCommas(dataItems.VALAMTPERWA) : '';
+        let VAL_AMT_ = dataItems.VAL_AMT ? numberWithCommas(dataItems.VAL_AMT) : '';
+        let FEE_AMT_ = dataItems.FEE_AMT ? numberWithCommas(dataItems.FEE_AMT) : '';
+        let FEEAMT_ = dataItems.FEEAMT ? numberWithCommas(dataItems.FEEAMT) : '';
+        let VATAMT_ = dataItems.VATAMT ? numberWithCommas(dataItems.VATAMT) : '';
+        let VALREAL_ = dataItems.VALREAL ? numberWithCommas(dataItems.VALREAL) : '';
+        let DEPRECIATION_ = dataItems.DEPRECIATION ? numberWithCommas(dataItems.DEPRECIATION) : '';
+        let VALPMETER_ = dataItems.VALPMETER ? numberWithCommas(dataItems.VALPMETER) : '';
+        let VALMETERTOT_ = dataItems.VALMETERTOT ? numberWithCommas(dataItems.VALMETERTOT) : '';
         let SUBWANUM_ = dataItems.SUBWANUM ? dataItems.SUBWANUM != '0' ? String( '.' + dataItems.SUBWANUM) : '' : '';
         dataItems.ROWNUMBER = String(i + 1);
         dataItems.UTM = String(UTMMAP1_ + ' ' + setUTM_NO_P(UTMMAP2_) + ' ' + UTMMAP3_);
@@ -52,6 +64,18 @@ export default function ReportReceivingPlot({ setOnDetail, dataSendDepartMent, d
         dataItems.REGDATE_ = REGDATE_;
         dataItems.ADDR_ = ADDR_ + MOO_ + BUILDINGNAME_ + SOI_ + ROAD_;
         dataItems.RAINUM_ = RAINUM_+ '-' + NGANNUM_ + '-' + WANUM_ + SUBWANUM_;
+        dataItems.VALAMT_ = VALAMT_;
+        dataItems.ASSET_VAL_TOT_ = ASSET_VAL_TOT_;
+        dataItems.VALAMTPERWA_ = VALAMTPERWA_;
+        dataItems.REGAMT_ = REGAMT_;
+        dataItems.VAL_AMT_ = VAL_AMT_;
+        dataItems.FEE_AMT_ = FEE_AMT_;
+        dataItems.FEEAMT_ = FEEAMT_;
+        dataItems.VATAMT_ = VATAMT_;
+        dataItems.VALREAL_ = VALREAL_;
+        dataItems.DEPRECIATION_ = DEPRECIATION_;
+        dataItems.VALPMETER_ = VALPMETER_;
+        dataItems.VALMETERTOT_ = VALMETERTOT_;
         newData.push(dataItems);
       }
       console.log(newData, 'newData');
@@ -149,7 +173,7 @@ export default function ReportReceivingPlot({ setOnDetail, dataSendDepartMent, d
         </Stack>
         <Grid container>
           <Grid xs={12}>
-              <FixedHeaderContent dataList={dataCount} colum={colum} onHandleRetropective={onHandleRetropective} exportReport/>
+              <FixedHeaderContent dataList={dataCount} colum={colum} onHandleRetropective={onHandleRetropective} exportReport reportName={headValue}/>
           </Grid>
         </Grid>
       </>

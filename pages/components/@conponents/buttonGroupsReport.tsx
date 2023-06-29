@@ -12,12 +12,13 @@ interface IEVariantButtonGroup {
   colum?: any;
   dataList?: any;
   typeTable?: any;
+  reportName?:any;
 }
 
-export default function ButtonGroupsReport({ colum, dataList, typeTable }: IEVariantButtonGroup) {
+export default function ButtonGroupsReport({ colum, dataList, typeTable, reportName }: IEVariantButtonGroup) {
 
  const handleOnClickExcel = async (el: any) => {
-  await exportExcelReport(colum, dataList)
+  await exportExcelReport(colum, dataList, reportName)
  }
   
   return (
