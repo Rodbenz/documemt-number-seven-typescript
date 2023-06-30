@@ -1,10 +1,6 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
+import { Paper, Typography, styled } from '@mui/material';
+
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -19,12 +15,12 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
 }));
 
 
-interface IFAutoGridNoWrap {
+interface IFAutoGridNoWrapDisabled {
   el?: any;
   handleOnClick?: any;
 }
 
-export default function AutoGridNoWrapDisabled({ el, handleOnClick }: IFAutoGridNoWrap) {
+export default function AutoGridNoWrapDisabled({ el, handleOnClick }: IFAutoGridNoWrapDisabled) {
   return (
     <StyledPaper
       sx={{
@@ -35,11 +31,11 @@ export default function AutoGridNoWrapDisabled({ el, handleOnClick }: IFAutoGrid
       }}
       // onClick={() => handleOnClick(el)}
     >
-      <img src={el.img} width={el.width} height={el.height} style={{ marginLeft: 5, paddingLeft: el.paddingLeft }} alt='icon' />
+      <img src={el?.img} width={el?.width} height={el?.height} style={{ marginLeft: 5, paddingLeft: el?.paddingLeft }} alt='icon' />
       <div style={{ width: '100%', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }} >
-        <Typography sx={{ color: '#f0f0f0', fontWeight: 'bold', fontSize: '21px' }} pl={2}>{el.name}</Typography>
-        {el.subname &&
-          <Typography sx={{ color: '#f0f0f0', fontWeight: 'bold', fontSize: '21px' }} pl={2}>{el.subname}</Typography>
+        <Typography sx={{ color: '#f0f0f0', fontWeight: 'bold', fontSize: '21px' }} pl={2}>{el?.name}</Typography>
+        {el?.subname &&
+          <Typography sx={{ color: '#f0f0f0', fontWeight: 'bold', fontSize: '21px' }} pl={2}>{el?.subname}</Typography>
         }
       </div>
     </StyledPaper>
