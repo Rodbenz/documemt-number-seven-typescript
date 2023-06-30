@@ -211,6 +211,32 @@ export async function REPORT_RECEIVE_BranchCode(datasend:any) {
         return false
     }
 }
+export async function REPORT_USED_TYPE411(datasend:any) {
+    let url = `${process.env.REACT_APP_API_HOST}/REPORT/REPORT_USED_TYPE411`;
+    AddLoading()
+    try {
+        let res = await axios.post(url,datasend)
+        let data = res.data
+        RemoveLoading()
+        return data.result
+    } catch {
+        RemoveLoading()
+        return false
+    }
+}
+export async function REPORT_USED_ALL411(datasend:any) {
+    let url = `${process.env.REACT_APP_API_HOST}/REPORT/REPORT_USED_ALL411`;
+    AddLoading()
+    try {
+        let res = await axios.post(url,datasend)
+        let data = res.data
+        RemoveLoading()
+        return data.result
+    } catch {
+        RemoveLoading()
+        return false
+    }
+}
 export async function REPORT_RECEIVE_ALL(datasend:any) {
     let url = `${process.env.REACT_APP_API_HOST}/REPORT/REPORT_RECEIVE_ALL`;
     AddLoading()

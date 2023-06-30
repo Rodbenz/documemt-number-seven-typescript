@@ -4,96 +4,71 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useCartContext } from '@/context/Cartcontext';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import FixedHeaderContent from '@/pages/components/@conponents/datatable/fixedHeaderContent';
-import { REPORT_RECEIVE_BranchCode } from '@/service/report';
+import { REPORT_RECEIVE_changwat } from '@/service/report';
 import { dateFormatTime } from '@/libs/outputDatas';
 import { SplitDataType, SplitDataTypeFile } from '@/libs/dataControl';
+import { reportReceivingProvincePlot } from '@/libs/headName';
 
-interface IFReportDataExportBracnh {
+interface IFReportReceiving {
   setOnDetail?: any;
   dataSendDepartMent?: any;
-  dataSendListBranch?: any;
-  setDataSendListPlot?: any;
+  setDataSendDepartMent?: any;
+  setDataSendListBranch?: any;
 }
 
-export default function ReportDataExportBracnh({ setOnDetail, dataSendDepartMent, dataSendListBranch, setDataSendListPlot }: IFReportDataExportBracnh) {
+export default function ReportReceiving({ setOnDetail, dataSendDepartMent, setDataSendDepartMent, setDataSendListBranch }: IFReportReceiving) {
   const [dataCount, setDataCount] = React.useState<any>([]);
   const [headValue, setHeadValue] = React.useState<string>('');
+  const [colum, setColum] = React.useState<any>([]);
 
   const _resDataList = async () => {
-    let newData: any = [];
+    let datasend: any = new Object();
+    datasend.SEMI_CODE = Object.keys(dataSendDepartMent).length > 0 ? String(dataSendDepartMent.SEMI_CODE) : '';
     try {
-      let res = await REPORT_RECEIVE_BranchCode(dataSendListBranch)
-      for (let i = 0; i < res?.length; i++) {
-        let dataItems: any = res[i];
+      let newData: any = [];
+      let res = await REPORT_RECEIVE_changwat(datasend)
+      for (let i = 0; i < res.length; i++) {
+        let dataItems = res[i];
         dataItems.ROWNUMBER = String(i + 1);
         dataItems.FILENAME = SplitDataTypeFile(dataItems.FILE_NAME);
         dataItems.TYPEFILE = SplitDataType(dataItems.FILE_NAME);
         dataItems.COUNT_ = String(dataItems.COUNT_);
-        dataItems.DATEIMPORT = dateFormatTime(dataItems.IMPORT_DATE)
+        dataItems.IMPORT_DATE_ = dateFormatTime(dataItems.IMPORT_DATE)
         newData.push(dataItems);
       }
-      console.log(newData, 'newData');
+      await setDataCount([])
       await setDataCount(newData)
-
     } catch (e) {
       console.log(e);
     }
   }
 
   const onhandleClickCount = async (el: any) => {
-    if (el?.COUNTIMPORT !== 0) {
-      setOnDetail(4);
-      setDataSendListPlot(el);
+    console.log(el, 'el');
+    if (el.COUNTIMPORT != 0) {
+      setOnDetail && setOnDetail(3);
+      setDataSendListBranch && setDataSendListBranch(el);
     }
 
   }
 
-  const colum: any = [
-    {
-      name: 'ลำดับที่',
-      listname: 'ROWNUMBER',
-      align: 'center',
-    },
-    {
-      name: 'สำนักงานที่ดิน',
-      listname: 'BRANCHNAME',
-      align: 'left',
-    },
-    {
-      name: 'รายการนำเข้า',
-      listname: 'SEMI_NAME',
-      align: 'left',
-    },
-    {
-      name: 'ชื่อไฟล์',
-      listname: 'FILENAME',
-      align: 'left',
-    },
-    {
-      name: 'ประเภทไฟล์',
-      listname: 'TYPEFILE',
-      align: 'left',
-    },
-    {
-      name: 'จำนวน',
-      listname: 'COUNT_',
-      align: 'left',
-    },
-    {
-      name: 'วัน/เดือน/ปี',
-      listname: 'DATEIMPORT',
-      align: 'center',
-    },
-  ]
+  const onHandleRetropective = async () => {
+    setOnDetail && setOnDetail(1);
+    setDataSendDepartMent && setDataSendDepartMent({});
+    setDataSendListBranch && setDataSendListBranch({});
+  }
+
+  const configHeader = async (semiseq:any) => {
+      await setColum(reportReceivingProvincePlot);
+  }
 
   React.useEffect(() => {
-    if (Object.keys(dataSendListBranch).length > 0) {
-      _resDataList();
-    }
-  }, [dataSendListBranch])
-  React.useEffect(() => {
+    console.log(dataSendDepartMent, 'dataSendDepartMent');
     if (Object.keys(dataSendDepartMent).length > 0) {
-      setHeadValue(dataSendDepartMent?.SEMI_NAME)
+      _resDataList();
+      setHeadValue(dataSendDepartMent.SEMI_NAME);
+      let semiseq = dataSendDepartMent.SEMI_CODE;
+      configHeader(semiseq)
     }
   }, [dataSendDepartMent])
   return (
@@ -102,8 +77,9 @@ export default function ReportDataExportBracnh({ setOnDetail, dataSendDepartMent
         <Stack direction={'row'} justifyContent={'flex-start'} alignItems={'center'} columnGap={1}>
           <Tooltip title="ย้อนกลับ" placement="right">
             <IconButton size='small' onClick={() => {
-              setOnDetail(2)
-              setDataSendListPlot({})
+              setOnDetail(1),
+                setDataSendListBranch({})
+                setDataSendDepartMent({})
             }}
             >
               <Avatar sx={{ bgcolor: '#aae8e6', width: 50, height: 50 }}>
@@ -116,7 +92,7 @@ export default function ReportDataExportBracnh({ setOnDetail, dataSendDepartMent
         <Table>
           <TableHead>
             <TableRow>
-              <FixedHeaderContent dataList={dataCount} colum={colum} onhandleClickCount={onhandleClickCount} />
+              <FixedHeaderContent dataList={dataCount} colum={colum} onhandleClickCount={onhandleClickCount} onHandleRetropective={onHandleRetropective} />
             </TableRow>
           </TableHead>
         </Table>

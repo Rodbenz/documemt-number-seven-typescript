@@ -3,7 +3,7 @@ import React from 'react'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useCartContext } from '@/context/Cartcontext';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import FixedHeaderContent from '@/pages/components/@conponents/fixedHeaderContent';
+import FixedHeaderContent from '@/pages/components/@conponents/datatable/fixedHeaderContent';
 import { REPORT_RECEIVE_ALL } from '@/service/report';
 import { SplitDataType, SplitDataTypeFile } from '@/libs/dataControl';
 import { dateFormatTime, setUTM_NO_P } from '@/libs/outputDatas';

@@ -1,6 +1,6 @@
 import { Box, Grid, Typography } from '@mui/material'
 import React from 'react'
-import FixedHeaderContent from '../../../@conponents/fixedHeaderContent';
+import FixedHeaderContent from '../../../@conponents/datatable/fixedHeaderContent';
 import { useCartContext } from '@/context/Cartcontext';
 import ButtonEdit from '../../../@conponents/ButtonEdit';
 import { dateFormatTimeTHSlash } from '@/libs/outputDatas';

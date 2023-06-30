@@ -1,10 +1,11 @@
 import { useCartContext } from '@/context/Cartcontext'
 import React from 'react'
-import MenuReceiving from './@component/menuReceiving'
-import DepartmentLands from './@component/departmentLands'
-import ReportReceiving from './@component/reportReceiving'
+import MenuReceiving from './menuReceiving'
+import DepartmentLands from './@componentLands/departmentLands'
+import ReportReceiving from './@componentLands/reportReceiving'
 import { REPORT_RECEIVE } from '@/service/report'
 import { headNameReceiving1, headNameReceiving2 } from '@/libs/headName'
+import DepartmentPromotion from './@componentPromotion/departmentPromotion'
 
 export default function ReceivingInformation() {
     const { isMenuReceiving} = useCartContext();
@@ -55,7 +56,7 @@ export default function ReceivingInformation() {
             {Object.keys(isMenuReceiving).length > 0  && (
                 Array.isArray(dataList) && dataList.length > 0 &&
                 isMenuReceiving.id === 2 &&
-                <DepartmentLands hendname={hendname} dataList={dataList}/>
+                <DepartmentPromotion hendname={hendname} dataList={dataList}/>
             )}
         </div>
     )

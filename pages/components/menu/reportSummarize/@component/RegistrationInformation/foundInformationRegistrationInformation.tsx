@@ -2,7 +2,7 @@ import { Box, Grid, Typography } from '@mui/material'
 import React from 'react'
 import { useCartContext } from '@/context/Cartcontext';
 import ButtonEdit from '../../../../@conponents/ButtonEdit';
-import FixedHeaderContent from '../../../../@conponents/fixedHeaderContent';
+import FixedHeaderContent from '../../../../@conponents/datatable/fixedHeaderContent';
 
 
 export default function FoundInformationRegistrationInformation() {

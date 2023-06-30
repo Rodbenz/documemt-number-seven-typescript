@@ -12,14 +12,14 @@ import TableRow from '@mui/material/TableRow';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import VariantButtonGroup from './buttonGroups';
+import VariantButtonGroup from '../buttonGroups';
 import { Grid, Pagination, Typography, TextField, IconButton, Box, TableSortLabel } from '@mui/material';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
-import ButtonGroupsReport from './buttonGroupsReport';
+import ButtonGroupsReport from '../buttonGroupsReport';
 
 
-interface FixedHeaderContent {
+interface DatatablePromotionUseType {
   dataList: any;
   colum: any;
   colorHeader?: string;
@@ -29,11 +29,24 @@ interface FixedHeaderContent {
   onhandleClickCount?: any;
   onHandleRetropective?: any;
   exportReport?: any;
-  reportName?:string;
+  reportName?: string;
+  onhandleClickCountAll?: any;
 }
 
 
-export default function FixedHeaderContent({ dataList, colum, colorHeader = '#006e61', btnExport, btnGrpup, typeTable, onhandleClickCount, onHandleRetropective, exportReport, reportName }: FixedHeaderContent) {
+export default function DatatablePromotionUseType({
+  dataList,
+  colum,
+  colorHeader = '#006e61',
+  btnExport,
+  btnGrpup,
+  typeTable,
+  onhandleClickCount,
+  onHandleRetropective,
+  exportReport,
+  reportName,
+  onhandleClickCountAll,
+}: DatatablePromotionUseType) {
   const [page, setPage] = React.useState(1);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [filterValues, setFilterValues] = React.useState<{ [key: string]: string }>({});
@@ -45,6 +58,7 @@ export default function FixedHeaderContent({ dataList, colum, colorHeader = '#00
   const [sortConfig, setSortConfig] = React.useState<{ key: string; direction: 'asc' | 'desc' } | null>(
     null
   );
+  const [checkCountAll, setCheckCountAll] = React.useState<any>(['COUNT1', 'COUNT2', 'COUNT3', 'COUNT4', 'COUNT5']);
 
   const handleChangePage = (event: any, newPage: number) => {
     setPage(newPage);
@@ -211,20 +225,19 @@ export default function FixedHeaderContent({ dataList, colum, colorHeader = '#00
                         const value = row[column.listname];
                         return (
                           <TableCell key={index} align={column.align}>
-
-                            {column.listname !== 'COUNT_' ?
+                            {!checkCountAll.includes(column.listname)?
                               column.format && typeof value === 'number'
                                 ? column.format(value)
                                 : value == null || value == '' ? '-' : value
-                              :
-                              onhandleClickCount ? (
-                                <>
-                                  <IconButton size='small' onClick={() => onhandleClickCount(row)}>
-                                    <Typography sx={{ textDecoration: 'underline' }}>{value}</Typography>
-                                  </IconButton>
-                                </>
-                              ) :
-                                value == null || value == '' ? '-' : value
+                            :
+                            onhandleClickCountAll ? (
+                              <>
+                                <IconButton size='small' onClick={() => onhandleClickCountAll(row, column.listname)}>
+                                  <Typography sx={{ textDecoration: 'underline' }}>{value}</Typography>
+                                </IconButton>
+                              </>
+                            ) :
+                              value == null || value == '' ? '-' : value
                             }
                           </TableCell>
                         );
