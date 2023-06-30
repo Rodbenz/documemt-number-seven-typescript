@@ -2,7 +2,7 @@ import { useCartContext } from '@/context/Cartcontext'
 import React from 'react'
 import DepartmentLands from './@component/departmentLands'
 import { REPORT_RECEIVE, REPORT_SEND } from '@/service/report'
-import MenuDataExport from './@component/menuDataExport'
+import MenuDataExport from './menuDataExport'
 import { haedlistMenuExport } from '@/libs/headName'
 
 export default function DataExPort() {

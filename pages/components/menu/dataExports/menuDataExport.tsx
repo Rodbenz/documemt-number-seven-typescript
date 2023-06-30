@@ -3,31 +3,9 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { Grid, Stack, Typography } from '@mui/material';
 import { useCartContext } from '@/context/Cartcontext';
+import AutoGridNoWrap from '../../@conponents/AutoGridNoWrap';
+import AutoGridNoWrapDisabled from '../../@conponents/AutoGridNoWrapDisabled';
 
-const style = {
-  display: 'flex',
-  backgroundColor: "#ffffff",
-  width: '100%',
-  height: 110,
-  borderRadius: 5,
-  borderRight: '10px solid #006e61',
-  // justifyContent: 'center',
-  alignItems: 'center',
-  cursor: 'pointer'
-
-}
-const style2 = {
-  display: 'flex',
-  backgroundColor: "#ffffff",
-  width: '100%',
-  height: 110,
-  borderRadius: 5,
-  borderRight: '10px solid #006e61',
-  // justifyContent: 'center',
-  alignItems: 'center',
-  // cursor: 'pointer'
-
-}
 const bull = (
   <Box
     component="span"
@@ -61,41 +39,26 @@ export default function MenuDataExport() {
   }
   return (
     <div style={{ width: '100%', height: 110, zIndex: 1 }}>
+      <Grid container py={1} pl={20} pr={10}>
+        <Grid item sx={{backgroundColor:'#dbf2f2', width:'100%',  borderRadius:5 }} >
+          <Typography variant='h4'>{bull}การส่งออกข้อมูล</Typography>
+        </Grid>
+      </Grid>
       <Box sx={{ flexGrow: 2, display: { xs: 'none', md: 'flex' } }}>
         <Grid container >
           <Grid item xs={12}  >
             <Grid container>
               <Grid item xs={12} sm={12} >
-                <Grid item sx={{ paddingTop: 10, paddingLeft: 10, paddingRight: 10 }}>
-                  <Grid container py={5} px={5} pl={30} pr={30} spacing={10} justifyContent={'center'} alignItems={'center'}>
+                <Grid item sx={{ paddingLeft: 10, paddingRight: 10 }}>
+                  <Grid container py={5} px={5} spacing={10} justifyContent={'center'} alignItems={'center'}>
                     {options.map((el, index) => (
                       iddisable.includes(el.id) ?
                         <Grid item xs={12} sm={12} md={4} key={index}>
-                          <Paper elevation={6} sx={{ borderRadius: 1 }}>
-                            <div style={style} itemType='button' onClick={() => handleOnClick(el)} >
-                              <img src={el.img} width={el.width} height={el.height} style={{ marginLeft: 5, paddingLeft: el.paddingLeft }} alt='icon' />
-                              <div style={{ width: '100%', display: 'block', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }} >
-                                <Typography variant="h5" sx={{ color: '#006e61', fontWeight: 'bold' }} pl={2}>{el.name}</Typography>
-                                {el.subname &&
-                                  <Typography variant="h5" sx={{ color: '#006e61', fontWeight: 'bold' }} pl={2}>{el.subname}</Typography>
-                                }
-                              </div>
-                            </div>
-                          </Paper>
+                          <AutoGridNoWrap el={el} handleOnClick={handleOnClick} />
                         </Grid>
                         :
                         <Grid item xs={12} sm={12} md={4} key={index}>
-                          <Paper elevation={6} sx={{ borderRadius: 1 }}>
-                            <div style={style2} itemType='button' >
-                              <img src={el.img} width={el.width} height={el.height} style={{ marginLeft: 5, paddingLeft: el.paddingLeft }} alt='icon' />
-                              <div style={{ width: '100%', display: 'block', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }} >
-                                <Typography variant="h5" sx={{ color: '#e1e4e5', fontWeight: 'bold' }} pl={2}>{el.name}</Typography>
-                                {el.subname &&
-                                  <Typography variant="h5" sx={{ color: '#e1e4e5', fontWeight: 'bold' }} pl={2}>{el.subname}</Typography>
-                                }
-                              </div>
-                            </div>
-                          </Paper>
+                          <AutoGridNoWrapDisabled el={el} handleOnClick={handleOnClick} />
                         </Grid>
                     ))}
                   </Grid>
@@ -105,41 +68,21 @@ export default function MenuDataExport() {
           </Grid>
         </Grid>
       </Box>
-      <Box sx={{ flexGrow: 2, display: { xs: 'flex', md: 'none' }}}>
+      <Box sx={{ flexGrow: 2, display: { xs: 'flex', md: 'none' } }}>
         <Grid container >
           <Grid item xs={12}  >
             <Grid container>
               <Grid item xs={12} sm={12} >
-                <Grid item sx={{ paddingTop: 10}}>
+                <Grid item sx={{ paddingTop: 10 }}>
                   <Grid container py={5} px={5} spacing={10} justifyContent={'center'} alignItems={'center'}>
                     {options.map((el, index) => (
                       iddisable.includes(el.id) ?
-                        <Grid item xs={12} sm={12} md={12} key={index}>
-                          <Paper elevation={6} sx={{ borderRadius: 1 }}>
-                            <div style={style} itemType='button' onClick={() => handleOnClick(el)} >
-                              <img src={el.img} width={el.width} height={el.height} style={{ marginLeft: 5, paddingLeft: el.paddingLeft }} alt='icon' />
-                              <div style={{ width: '100%', display: 'block', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }} >
-                                <Typography variant="h6" sx={{ color: '#006e61', fontWeight: 'bold' }} pl={2}>{el.name}</Typography>
-                                {el.subname &&
-                                  <Typography variant="h6" sx={{ color: '#006e61', fontWeight: 'bold' }} pl={2}>{el.subname}</Typography>
-                                }
-                              </div>
-                            </div>
-                          </Paper>
+                        <Grid item xs={12} sm={12} md={4} key={index}>
+                          <AutoGridNoWrap el={el} handleOnClick={handleOnClick} />
                         </Grid>
                         :
-                        <Grid item xs={12} sm={12} md={12} key={index}>
-                          <Paper elevation={6} sx={{ borderRadius: 1 }}>
-                            <div style={style2} itemType='button' >
-                              <img src={el.img} width={el.width} height={el.height} style={{ marginLeft: 5, paddingLeft: el.paddingLeft }} alt='icon' />
-                              <div style={{ width: '100%', display: 'block', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }} >
-                                <Typography variant="h6" sx={{ color: '#e1e4e5', fontWeight: 'bold' }} pl={2}>{el.name}</Typography>
-                                {el.subname &&
-                                  <Typography variant="h6" sx={{ color: '#e1e4e5', fontWeight: 'bold' }} pl={2}>{el.subname}</Typography>
-                                }
-                              </div>
-                            </div>
-                          </Paper>
+                        <Grid item xs={12} sm={12} md={4} key={index}>
+                          <AutoGridNoWrapDisabled el={el} handleOnClick={handleOnClick} />
                         </Grid>
                     ))}
                   </Grid>
