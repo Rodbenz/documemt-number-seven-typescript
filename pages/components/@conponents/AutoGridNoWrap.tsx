@@ -11,7 +11,10 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
   borderRight: '10px solid #006e61',
   display: 'flex',
   alignItems: 'center',
-  cursor: 'pointer'
+  cursor: 'pointer',
+  "&:hover": {
+    backgroundColor: "#b5c8cf"
+  }
 }));
 
 

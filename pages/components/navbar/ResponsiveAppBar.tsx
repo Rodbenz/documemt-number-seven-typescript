@@ -198,7 +198,17 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
                 router.push('/')
                 handleCloseNavMenu()
               }}
-              sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, fontSize: 18, backgroundColor: routerPath.route === '/' ? '#06534a' : '' }}
+              sx={{ 
+                my: 2, 
+                color: 'white', 
+                display: 'block', 
+                fontWeight: 700, 
+                fontSize: 18, 
+                backgroundColor: routerPath.route === '/' ? '#06534a' : '' ,
+                "&:hover": {
+                  backgroundColor: "#79b7b0"
+                }
+              }}
             >
               หน้าหลัก
             </Button>
@@ -207,7 +217,17 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
                 router.push('/components/menu/receivingInformation')
                 handleCloseNavMenu()
               }}
-              sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, fontSize: 18, backgroundColor: routerPath.route === '/components/menu/receivingInformation' ? '#06534a' : '' }}
+              sx={{ 
+                my: 2, 
+                color: 'white', 
+                display: 'block', 
+                fontWeight: 700, 
+                fontSize: 18, 
+                backgroundColor: routerPath.route === '/components/menu/receivingInformation' ? '#06534a' : '',
+                "&:hover": {
+                  backgroundColor: "#79b7b0"
+                }
+              }}
             >
               การรับข้อมูล
             </Button>
@@ -216,7 +236,17 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
                 router.push('/components/menu/dataExports')
                 handleCloseNavMenu()
               }}
-              sx={{ my: 2, color: 'white', display: 'block', fontWeight: 700, fontSize: 18, backgroundColor: routerPath.route === '/components/menu/dataExports' ? '#06534a' : '' }}
+              sx={{ 
+                my: 2, 
+                color: 'white', 
+                display: 'block', 
+                fontWeight: 700, 
+                fontSize: 18, 
+                backgroundColor: routerPath.route === '/components/menu/dataExports' ? '#06534a' : '',
+                "&:hover": {
+                  backgroundColor: "#79b7b0"
+                }
+              }}
             >
               การส่งออกข้อมูล
             </Button>

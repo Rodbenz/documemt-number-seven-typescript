@@ -13,34 +13,66 @@ import ConfirmDialog2 from './components/@conponents/popup/ComfirmDialog';
 import SnackBarDiaLog from './components/@conponents/popup/SnackbarSet';
 import LoadingScreen from './components/@conponents/loadingscreen';
 import BoxFooters from './components/footers';
+import { ThemeProvider, createTheme } from '@mui/material';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [isMenu, setIsMenu] = React.useState(false);
   const router = useRouter()
-  console.log(router.route);
+
+  const theme = createTheme({
+    typography: {
+      fontFamily: [
+        "Kanit",
+        "Roboto",
+        "-apple-system",
+        "BlinkMacSystemFont",
+        '"Segoe UI"',
+        '"Helvetica Neue"',
+        "Arial",
+        "sans-serif",
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+      ].join(","),
+    },
+    components: {
+      MuiTextField: {
+        defaultProps: {
+          size: "small",
+        },
+      },
+      MuiTable: {
+        defaultProps: {
+          size: "small",
+        },
+      },
+    },
+  });
 
   return (
     <Provider store={store}>
-      <div>
-        <CartProvider>
-          {/* <CheckLogin /> */}
-          <ConfirmDialog2 />
-          <SnackBarDiaLog />
-          <LoadingScreen />
-          <div style={{
-            backgroundImage: "url(/image/building-2.png)", backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: 'center',
-            height: '93vh', width: '100%', overflowY: 'hidden', overflowX: 'hidden'
-          }} >
-            <div className={router.route == '/' ? "" : styles.box}>
-              {skipPage.includes(router.route) ? null : <HaederNavbar setIsMenu={setIsMenu} />}
-              <div style={{ width: '100%', height: '75vh', overflowY: 'auto', overflowX: 'hidden' }}>
-                <Component {...pageProps} />
+      <ThemeProvider theme={theme}>
+        <div>
+          <CartProvider>
+            {/* <CheckLogin /> */}
+            <ConfirmDialog2 />
+            <SnackBarDiaLog />
+            <LoadingScreen />
+            <div style={{
+              backgroundImage: "url(/image/building-2.png)", backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: 'center',
+              height: '93vh', width: '100%', overflowY: 'hidden', overflowX: 'hidden'
+            }} >
+              <div className={router.route == '/' ? "" : styles.box}>
+                {skipPage.includes(router.route) ? null : <HaederNavbar setIsMenu={setIsMenu} />}
+                <div style={{ width: '100%', height: '75vh', overflowY: 'auto', overflowX: 'hidden' }}>
+                  <Component {...pageProps} />
+                </div>
               </div>
             </div>
-          </div>
-          <BoxFooters/>
-        </CartProvider>
-      </div>
+            <BoxFooters />
+          </CartProvider>
+        </div>
+      </ThemeProvider>
     </Provider>
   )
 }
