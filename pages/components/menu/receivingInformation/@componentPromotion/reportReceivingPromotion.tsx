@@ -90,7 +90,7 @@ export default function ReportReceivingPromotion({ setOnDetail, dataSendDepartMe
           <Typography variant='h5'>{headValue}</Typography>
         </Stack>
         <Grid container>
-          <Grid>
+          <Grid xs={12}>
               <FixedHeaderContent dataList={dataCount} colum={colum} onhandleClickCount={onhandleClickCount} onHandleRetropective={onHandleRetropective} />
           </Grid>
         </Grid>

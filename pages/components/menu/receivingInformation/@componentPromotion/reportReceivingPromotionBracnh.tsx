@@ -22,16 +22,16 @@ export default function ReportReceivingPromotionBracnh({ setOnDetail, dataSendDe
   const [colum, setColum] = React.useState<any>([]);
 
   const _resDataList = async () => {
-    let newData:any = [];
+    let newData: any = [];
     let datasend = dataSendListBranch;
     datasend.IMPORT_DATE = datasend.IMPORT_DATE ? datasend.IMPORT_DATE.split('T')[0] : "";
-    try{
+    try {
       let res = await REPORT_RECEIVE_BranchCode(datasend)
-      console.log(res, 'REPORT_RECEIVE_BranchCode',datasend);
-      
-      for(let i = 0; i < res.length; i++){
+      console.log(res, 'REPORT_RECEIVE_BranchCode', datasend);
+
+      for (let i = 0; i < res.length; i++) {
         let dataItems = res[i];
-        dataItems.ROWNUMBER = String(i+1);
+        dataItems.ROWNUMBER = String(i + 1);
         dataItems.FILENAME = SplitDataTypeFile(dataItems.FILE_NAME);
         dataItems.TYPEFILE = SplitDataType(dataItems.FILE_NAME);
         dataItems.COUNT_ = String(dataItems.COUNT_);
@@ -40,8 +40,8 @@ export default function ReportReceivingPromotionBracnh({ setOnDetail, dataSendDe
       }
       await setDataCount([])
       await setDataCount(newData)
-      
-    }catch(e){
+
+    } catch (e) {
       console.log(e);
     }
   }
@@ -49,7 +49,7 @@ export default function ReportReceivingPromotionBracnh({ setOnDetail, dataSendDe
   const onhandleClickCount = async (el: any) => {
     if (el.COUNTIMPORT !== 0) {
       setOnDetail && setOnDetail(4);
-      setDataSendUsetype && setDataSendUsetype(el);    
+      setDataSendUsetype && setDataSendUsetype(el);
     }
 
   }
@@ -59,19 +59,19 @@ export default function ReportReceivingPromotionBracnh({ setOnDetail, dataSendDe
     setDataSendUsetype && setDataSendUsetype({})
   }
 
-  const configHeader = async (semiseq:any) => {
+  const configHeader = async (semiseq: any) => {
     await setColum([]);
     await setColum(columReceivingBranch);
   }
 
   React.useEffect(() => {
     console.log(dataSendListBranch, 'dataSendListBranch');
-    if (Object.keys(dataSendListBranch).length > 0 ) {
+    if (Object.keys(dataSendListBranch).length > 0) {
       _resDataList();
     }
   }, [dataSendListBranch])
   React.useEffect(() => {
-    if(Object.keys(dataSendDepartMent).length > 0){
+    if (Object.keys(dataSendDepartMent).length > 0) {
       setHeadValue(dataSendDepartMent.SEMI_NAME)
       let semiseq = dataSendDepartMent.SEMI_CODE;
       configHeader(semiseq)
@@ -94,13 +94,11 @@ export default function ReportReceivingPromotionBracnh({ setOnDetail, dataSendDe
           </Tooltip>
           <Typography variant='h5'>{headValue}</Typography>
         </Stack>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <FixedHeaderContent dataList={dataCount} colum={colum} onhandleClickCount={onhandleClickCount} onHandleRetropective={onHandleRetropective}/>
-            </TableRow>
-          </TableHead>
-        </Table>
+        <Grid container>
+          <Grid xs={12}>
+            <FixedHeaderContent dataList={dataCount} colum={colum} onhandleClickCount={onhandleClickCount} onHandleRetropective={onHandleRetropective} />
+          </Grid>
+        </Grid>
       </>
     </Grid>
   )
