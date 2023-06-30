@@ -58,8 +58,8 @@ export default function ReportReceivingPromotion({ setOnDetail, dataSendDepartMe
     setDataSendListBranch && setDataSendListBranch({});
   }
 
-  const configHeader = async (semiseq:any) => {
-      await setColum(reportReceivingProvincePlot);
+  const configHeader = async (semiseq: any) => {
+    await setColum(reportReceivingProvincePlot);
   }
 
   React.useEffect(() => {
@@ -79,7 +79,7 @@ export default function ReportReceivingPromotion({ setOnDetail, dataSendDepartMe
             <IconButton size='small' onClick={() => {
               setOnDetail(1),
                 setDataSendListBranch({})
-                setDataSendDepartMent({})
+              setDataSendDepartMent({})
             }}
             >
               <Avatar sx={{ bgcolor: '#aae8e6', width: 50, height: 50 }}>
@@ -89,13 +89,11 @@ export default function ReportReceivingPromotion({ setOnDetail, dataSendDepartMe
           </Tooltip>
           <Typography variant='h5'>{headValue}</Typography>
         </Stack>
-        <Table>
-          <TableHead>
-            <TableRow>
+        <Grid container>
+          <Grid>
               <FixedHeaderContent dataList={dataCount} colum={colum} onhandleClickCount={onhandleClickCount} onHandleRetropective={onHandleRetropective} />
-            </TableRow>
-          </TableHead>
-        </Table>
+          </Grid>
+        </Grid>
       </>
     </Grid>
   )
