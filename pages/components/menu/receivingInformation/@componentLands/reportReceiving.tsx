@@ -1,4 +1,4 @@
-import { Avatar, Box, Grid, Typography, Stack, IconButton, Table, TableHead, TableRow, Tooltip } from '@mui/material'
+import { Avatar, Box, Grid, Typography, Stack, IconButton, Table, TableHead, TableRow, Tooltip, Button } from '@mui/material'
 import React from 'react'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useCartContext } from '@/context/Cartcontext';
@@ -8,6 +8,7 @@ import { REPORT_RECEIVE_changwat } from '@/service/report';
 import { dateFormatTime } from '@/libs/outputDatas';
 import { SplitDataType, SplitDataTypeFile } from '@/libs/dataControl';
 import { reportReceivingProvincePlot } from '@/libs/headName';
+import BetweenDatetime from '../BetweenDatetime';
 
 interface IFReportReceiving {
   setOnDetail?: any;
@@ -18,15 +19,20 @@ interface IFReportReceiving {
 
 export default function ReportReceiving({ setOnDetail, dataSendDepartMent, setDataSendDepartMent, setDataSendListBranch }: IFReportReceiving) {
   const [dataCount, setDataCount] = React.useState<any>([]);
+  const [dataList, setDataList] = React.useState<any>([]);
   const [headValue, setHeadValue] = React.useState<string>('');
   const [colum, setColum] = React.useState<any>([]);
+  const [startDate, setStartDate] = React.useState<any>(null)
+  const [endDate, setEndDate] = React.useState<any>(null)
 
   const _resDataList = async () => {
     let datasend: any = new Object();
     datasend.SEMI_CODE = Object.keys(dataSendDepartMent).length > 0 ? String(dataSendDepartMent.SEMI_CODE) : '';
     try {
       let newData: any = [];
-      let res = await REPORT_RECEIVE_changwat(datasend)
+      let res = await REPORT_RECEIVE_changwat(datasend);
+      console.log('REPORT_RECEIVE_changwat', res);
+
       for (let i = 0; i < res.length; i++) {
         let dataItems = res[i];
         dataItems.ROWNUMBER = String(i + 1);
@@ -38,6 +44,8 @@ export default function ReportReceiving({ setOnDetail, dataSendDepartMent, setDa
       }
       await setDataCount([])
       await setDataCount(newData)
+      await setDataList([])
+      await setDataList(newData)
     } catch (e) {
       console.log(e);
     }
@@ -58,8 +66,26 @@ export default function ReportReceiving({ setOnDetail, dataSendDepartMent, setDa
     setDataSendListBranch && setDataSendListBranch({});
   }
 
-  const configHeader = async (semiseq:any) => {
-      await setColum(reportReceivingProvincePlot);
+  const configHeader = async (semiseq: any) => {
+    await setColum(reportReceivingProvincePlot);
+  }
+
+  const onSearchDatebetween = () => {
+    const filteredData: any = dataList.filter((item: any) => {
+      const itemDate = item.IMPORT_DATE.split('T');
+      if(itemDate[0] >= startDate && itemDate[0] <= endDate){
+        console.log(itemDate[0], '>=', startDate ,'&&', itemDate[0] ,'<=', endDate);
+      }
+      return itemDate[0] >= startDate && itemDate[0] <= endDate;
+    });
+    console.log(filteredData);
+
+    setDataCount(filteredData)
+  }
+  const onClearValue = () => {
+    setStartDate(null);
+    setEndDate(null);
+    setDataCount(dataList)
   }
 
   React.useEffect(() => {
@@ -79,7 +105,7 @@ export default function ReportReceiving({ setOnDetail, dataSendDepartMent, setDa
             <IconButton size='small' onClick={() => {
               setOnDetail(1),
                 setDataSendListBranch({})
-                setDataSendDepartMent({})
+              setDataSendDepartMent({})
             }}
             >
               <Avatar sx={{ bgcolor: '#aae8e6', width: 50, height: 50 }}>
@@ -89,13 +115,19 @@ export default function ReportReceiving({ setOnDetail, dataSendDepartMent, setDa
           </Tooltip>
           <Typography variant='h5'>{headValue}</Typography>
         </Stack>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <FixedHeaderContent dataList={dataCount} colum={colum} onhandleClickCount={onhandleClickCount} onHandleRetropective={onHandleRetropective} />
-            </TableRow>
-          </TableHead>
-        </Table>
+        <Grid container>
+          <Grid xs={12}>
+            <BetweenDatetime
+              startDate={startDate}
+              setStartDate={setStartDate}
+              endDate={endDate}
+              setEndDate={setEndDate}
+              onSearch={onSearchDatebetween}
+              onClearValue={onClearValue}
+            />
+            <FixedHeaderContent dataList={dataCount} colum={colum} onhandleClickCount={onhandleClickCount} onHandleRetropective={onHandleRetropective} />
+          </Grid>
+        </Grid>
       </>
     </Grid>
   )

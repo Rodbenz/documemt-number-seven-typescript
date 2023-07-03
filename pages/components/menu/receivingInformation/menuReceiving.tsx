@@ -64,8 +64,9 @@ export default function MenuReceiving() {
   return (
     <div style={{ width: '100%', height: 110, zIndex: 1 }}>
       <Grid container py={1} pl={20} pr={10}>
-        <Grid item sx={{ backgroundColor: '#dbf2f2', width: '100%', borderRadius:5 }} >
-          <Typography variant='h4'>{bull}การรับข้อมูล</Typography>
+        <Grid item sx={{ backgroundColor: '#dbf2f2', width: '100%', borderRadius: 5 }} pb={1}>
+          {/* <img src='../../../image/receiving.png' width={50} height={40} style={{ marginLeft: 5, paddingLeft: 0 }} alt='icon' /> */}
+          <Typography variant='h4' pl={2}>การรับข้อมูล</Typography>
         </Grid>
       </Grid>
       <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>

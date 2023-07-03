@@ -40,8 +40,8 @@ export default function MenuDataExport() {
   return (
     <div style={{ width: '100%', height: 110, zIndex: 1 }}>
       <Grid container py={1} pl={20} pr={10}>
-        <Grid item sx={{backgroundColor:'#dbf2f2', width:'100%',  borderRadius:5 }} >
-          <Typography variant='h4'>{bull}การส่งออกข้อมูล</Typography>
+        <Grid item sx={{backgroundColor:'#dbf2f2', width:'100%',  borderRadius:5 }} pb={1} pl={2}>
+          <Typography variant='h4'>การส่งออกข้อมูล</Typography>
         </Grid>
       </Grid>
       <Box sx={{ flexGrow: 2, display: { xs: 'none', md: 'flex' } }}>
