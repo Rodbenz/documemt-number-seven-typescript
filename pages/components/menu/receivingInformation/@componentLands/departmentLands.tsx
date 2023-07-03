@@ -95,7 +95,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                                 {item.COUNTDOL}
                                                             </Typography>
                                                         ) : (
-                                                            <Typography sx={{ cursor: 'pointer', textDecoration: 'underline' }}>
+                                                            <Typography sx={{ cursor: 'pointer', textDecoration: 'underline', "&:hover": { backgroundColor: "#e3f2fd" }  }}>
                                                                 {item.COUNTDOL}
                                                             </Typography>
                                                         )}
@@ -111,7 +111,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                                 {item.COUNTIMPORT}
                                                             </Typography>
                                                         ) : (
-                                                            <Typography sx={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={() => handleOnClick(item)}>
+                                                            <Typography sx={{ cursor: 'pointer', textDecoration: 'underline', "&:hover": { backgroundColor: "#e4c23e" } }} onClick={() => handleOnClick(item)}>
                                                                 {item.COUNTIMPORT}
                                                             </Typography>
                                                         )}
@@ -127,7 +127,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                                 {item.DEF}
                                                             </Typography>
                                                         ) : (
-                                                            <Typography sx={{cursor:'pointer', textDecoration:'underline'}}>
+                                                            <Typography sx={{ cursor: 'pointer', textDecoration: 'underline', "&:hover": { backgroundColor: "#e3f2fd" }  }}>
                                                                 {item.DEF}
                                                             </Typography>
                                                         )}
