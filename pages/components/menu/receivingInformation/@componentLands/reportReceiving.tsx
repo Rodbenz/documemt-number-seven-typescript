@@ -9,6 +9,8 @@ import { dateFormatTime } from '@/libs/outputDatas';
 import { SplitDataType, SplitDataTypeFile } from '@/libs/dataControl';
 import { reportReceivingProvincePlot } from '@/libs/headName';
 import BetweenDatetime from '../BetweenDatetime';
+import dayjs from 'dayjs';
+import { SnackbarSet } from '@/pages/components/@conponents/popup/SnackbarSet';
 
 interface IFReportReceiving {
   setOnDetail?: any;
@@ -71,15 +73,19 @@ export default function ReportReceiving({ setOnDetail, dataSendDepartMent, setDa
   }
 
   const onSearchDatebetween = () => {
+    if(!startDate){
+      SnackbarSet('กรุณาเลือกเดือน', 'error', 3000);
+      return;
+    }
+    if(!endDate){
+      SnackbarSet('กรุณาเลือกปี', 'error', 3000);
+      return;
+    }
+    let year = dayjs(endDate).format('YYYY');
     const filteredData: any = dataList.filter((item: any) => {
-      const itemDate = item.IMPORT_DATE.split('T');
-      if(itemDate[0] >= startDate && itemDate[0] <= endDate){
-        console.log(itemDate[0], '>=', startDate ,'&&', itemDate[0] ,'<=', endDate);
-      }
-      return itemDate[0] >= startDate && itemDate[0] <= endDate;
+      const itemDate = item.IMPORT_DATE.split('-');
+      return itemDate[1] == startDate.MONTH_ID && itemDate[0] == year;
     });
-    console.log(filteredData);
-
     setDataCount(filteredData)
   }
   const onClearValue = () => {
@@ -118,10 +124,10 @@ export default function ReportReceiving({ setOnDetail, dataSendDepartMent, setDa
         <Grid container>
           <Grid xs={12}>
             <BetweenDatetime
-              startDate={startDate}
-              setStartDate={setStartDate}
-              endDate={endDate}
-              setEndDate={setEndDate}
+              month={startDate}
+              setMonth={setStartDate}
+              year={endDate}
+              setYear={setEndDate}
               onSearch={onSearchDatebetween}
               onClearValue={onClearValue}
             />

@@ -90,15 +90,9 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                         backgroundColor: '#53F8AA',
 
                                                     }}>
-                                                        {item.COUNTDOL === 0 ? (
-                                                            <Typography >
-                                                                {item.COUNTDOL}
-                                                            </Typography>
-                                                        ) : (
-                                                            <Typography sx={{ cursor: 'pointer', textDecoration: 'underline', "&:hover": { backgroundColor: "#e3f2fd" }  }}>
-                                                                {item.COUNTDOL}
-                                                            </Typography>
-                                                        )}
+                                                        <Typography >
+                                                            {item.COUNTDOL}
+                                                        </Typography>
                                                     </Box>
                                                 </TableCell>
                                                 <TableCell align='center' sx={{ border: 'none' }}>
@@ -107,11 +101,11 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                         // width: 100
                                                     }}>
                                                         {item.COUNTIMPORT === 0 ? (
-                                                            <Typography >
+                                                            <Typography sx={{ color: '#1976d2' }}>
                                                                 {item.COUNTIMPORT}
                                                             </Typography>
                                                         ) : (
-                                                            <Typography sx={{ cursor: 'pointer', textDecoration: 'underline', "&:hover": { backgroundColor: "#e4c23e" } }} onClick={() => handleOnClick(item)}>
+                                                            <Typography sx={{ color: '#1976d2', cursor: 'pointer', textDecoration: 'underline', "&:hover": { backgroundColor: "#e4c23e" } }} onClick={() => handleOnClick(item)}>
                                                                 {item.COUNTIMPORT}
                                                             </Typography>
                                                         )}
@@ -123,11 +117,11 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                         // width: 100
                                                     }}>
                                                         {item.DEF === 0 ? (
-                                                            <Typography >
+                                                            <Typography sx={{ color: '#f92b2f' }}>
                                                                 {item.DEF}
                                                             </Typography>
                                                         ) : (
-                                                            <Typography sx={{ cursor: 'pointer', textDecoration: 'underline', "&:hover": { backgroundColor: "#e3f2fd" }  }}>
+                                                            <Typography sx={{ color: '#f92b2f', cursor: 'pointer', textDecoration: 'underline', "&:hover": { backgroundColor: "#e3f2fd" } }}>
                                                                 {item.DEF}
                                                             </Typography>
                                                         )}

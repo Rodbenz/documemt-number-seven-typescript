@@ -5,7 +5,7 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { masMonth } from '@/service/mas';
+import month from '@/libs/month';
 
 interface IAutocompleteMonth {
   values?: any;
@@ -15,20 +15,9 @@ interface IAutocompleteMonth {
   size?: 'small' | 'medium' | 'large';
 }
 
-export default function AutocompleteMonth({ values, nameLabel = 'กรุณาเลือกรายการ', onchange, datalist, size = 'medium' }: IAutocompleteMonth) {
+export default function AutocompleteMonth({ values, nameLabel = 'กรุณาเลือกรายการ', onchange, datalist, size }: IAutocompleteMonth) {
   const [value, setValue] = React.useState(null);
   const [options, setOptions] = React.useState<any>([]);
-
-  const res_masMonth = async () => {
-    try {
-      let res = await masMonth()
-      if (res) {
-        setOptions(res)
-      }
-    }catch(e){
-      console.log(e)
-    }
-  }
 
   const handleOnChange = (event: any, value: any) => {
     // setValue(value)
@@ -38,9 +27,6 @@ export default function AutocompleteMonth({ values, nameLabel = 'กรุณา
   }
 
   React.useEffect(() => {
-    res_masMonth()
-  }, [])
-  React.useEffect(() => {
     setValue(values)
   }, [values]);
   return (
@@ -48,11 +34,11 @@ export default function AutocompleteMonth({ values, nameLabel = 'กรุณา
       <Autocomplete
         onChange={handleOnChange}
         id="controllable-states-demo"
-        options={options}
-        getOptionLabel={(option: any) => option.NAMETH}
+        options={month}
+        getOptionLabel={(option: any) => option.MONTH_NAME_TH || ''}
         value={value}
         sx={{ width: '100%' }}
-        renderInput={(params) => <TextField {...params} label={nameLabel} size={'medium'} />}
+        renderInput={(params) => <TextField {...params} label={nameLabel} size={'small'} />}
       />
     </>
   );

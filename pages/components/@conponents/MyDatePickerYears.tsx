@@ -4,15 +4,17 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import OverwriteAdapterDayjs from '@/libs/date_adapter/OverwriteLibs';
+import dayjs from 'dayjs';
 
 interface IAutocompleteYear {
   nameLabel?: string;
   onchange?: (value: string) => void;
   datalist?: any;
-  size?: 'small' | 'medium' | 'large' | undefined;
+  values?:any;
 }
 
-export default function MydatePikerYears({ nameLabel = 'กรุณาเลือกรายการ', onchange, datalist, size }: IAutocompleteYear) {
+export default function MydatePikerYears({ nameLabel = 'กรุณาเลือกรายการ', onchange, datalist, values }: IAutocompleteYear) {
   const [value, setValue] = React.useState(null);
 
   const handleOnChange = (newValue: any) => {
@@ -23,14 +25,20 @@ export default function MydatePikerYears({ nameLabel = 'กรุณาเลื
       onchange(newValue)
     }
   }
+ 
+  React.useEffect(()=>{
+    setValue(values)
+  },[values])
 
   return (
     <>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <LocalizationProvider dateAdapter={OverwriteAdapterDayjs}>
         <DatePicker
-          label={'ปี'}
+          label={nameLabel}
           views={['year']}
+          value={value}
           onChange={(newValue) => {handleOnChange(newValue)}}
+          sx={{ width: '100%', size: 'small' }}
         />
       </LocalizationProvider>
     </>
