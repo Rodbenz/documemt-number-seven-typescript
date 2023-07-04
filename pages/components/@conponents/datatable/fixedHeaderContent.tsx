@@ -29,20 +29,20 @@ interface FixedHeaderContent {
   onhandleClickCount?: any;
   onHandleRetropective?: any;
   exportReport?: any;
-  reportName?:string;
+  reportName?: string;
 }
 
 
 export default function FixedHeaderContent(
-  { dataList, 
-    colum, 
-    colorHeader = '#006e61', 
-    btnExport, 
-    btnGrpup, 
-    typeTable, 
-    onhandleClickCount, 
-    onHandleRetropective, 
-    exportReport, 
+  { dataList,
+    colum,
+    colorHeader = '#006e61',
+    btnExport,
+    btnGrpup,
+    typeTable,
+    onhandleClickCount,
+    onHandleRetropective,
+    exportReport,
     reportName
   }: FixedHeaderContent) {
   const [page, setPage] = React.useState(1);
@@ -177,7 +177,7 @@ export default function FixedHeaderContent(
                   <TableCell
                     key={index}
                     align={'center'}
-                    style={{ minWidth: column.minWidth, backgroundColor: colorHeader, color: 'white', fontWeight: 'bold', borderLeftColor: 'white', borderRightColor: 'white', borderRightWidth: 1, borderRightStyle: 'solid', borderLeftWidth: 1, borderLeftStyle: 'solid' }}
+                    style={{ fontSize: '18px', minWidth: column.minWidth, backgroundColor: colorHeader, color: 'white', fontWeight: 'bold', borderLeftColor: 'white', borderRightColor: 'white', borderRightWidth: 1, borderRightStyle: 'solid', borderLeftWidth: 1, borderLeftStyle: 'solid' }}
                   >
                     <Stack direction={'row'} justifyContent={'center'} alignItems={'center'}>
                       {/* <Typography>{column.name}</Typography> */}
@@ -221,7 +221,7 @@ export default function FixedHeaderContent(
                       {colum?.map((column: any, index: number) => {
                         const value = row[column.listname];
                         return (
-                          <TableCell key={index} align={column.align}>
+                          <TableCell key={index} align={column.align} sx={{ fontSize: '18px' }}>
 
                             {column.listname !== 'COUNT_' ?
                               column.format && typeof value === 'number'
@@ -231,13 +231,15 @@ export default function FixedHeaderContent(
                               onhandleClickCount ? (
                                 <>
                                   <IconButton size='small' onClick={() => onhandleClickCount(row)}>
-                                    <Typography sx={{ textDecoration: 'underline' }}>{value}</Typography>
+                                    <Typography sx={{ textDecoration: 'underline', fontSize: '18px', color:'#1976d2' }}>{value}</Typography>
                                   </IconButton>
                                 </>
                               ) :
-                                value == null || value == '' ? '-' : value
+                                <Typography sx={{fontSize:'18px'}}>
+                                  {value == null || value == '' ? '-' : value}
+                                </Typography>
                             }
-                           
+
                           </TableCell>
                         );
                       })}

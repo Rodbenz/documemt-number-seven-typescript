@@ -8,6 +8,7 @@ import { REPORT_RECEIVE_BranchCode } from '@/service/report';
 import { dateFormatTime } from '@/libs/outputDatas';
 import { SplitDataType, SplitDataTypeFile } from '@/libs/dataControl';
 import { columReceivingBranch } from '@/libs/headName';
+import { columReceivingBranchPromotion } from '@/libs/headNamePromotion';
 
 interface IFReportReceivingPromotionBracnh {
   setOnDetail?: any;
@@ -24,7 +25,7 @@ export default function ReportReceivingPromotionBracnh({ setOnDetail, dataSendDe
   const _resDataList = async () => {
     let newData: any = [];
     let datasend = dataSendListBranch;
-    datasend.IMPORT_DATE = datasend.IMPORT_DATE ? datasend.IMPORT_DATE.split('T')[0] : "";
+    datasend.IMPORT_DATE = ''//datasend.IMPORT_DATE ? datasend.IMPORT_DATE.split('T')[0] : "";
     try {
       let res = await REPORT_RECEIVE_BranchCode(datasend)
       console.log(res, 'REPORT_RECEIVE_BranchCode', datasend);
@@ -61,7 +62,7 @@ export default function ReportReceivingPromotionBracnh({ setOnDetail, dataSendDe
 
   const configHeader = async (semiseq: any) => {
     await setColum([]);
-    await setColum(columReceivingBranch);
+    await setColum(columReceivingBranchPromotion);
   }
 
   React.useEffect(() => {

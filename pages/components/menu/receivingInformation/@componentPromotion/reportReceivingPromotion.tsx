@@ -8,6 +8,9 @@ import { REPORT_RECEIVE_changwat } from '@/service/report';
 import { dateFormatTime } from '@/libs/outputDatas';
 import { SplitDataType, SplitDataTypeFile } from '@/libs/dataControl';
 import { reportReceivingProvincePlot } from '@/libs/headName';
+import BetweenDatetime from '../BetweenDatetime';
+import { SnackbarSet } from '@/pages/components/@conponents/popup/SnackbarSet';
+import dayjs from 'dayjs';
 
 interface IFReportReceivingPromotion {
   setOnDetail?: any;
@@ -18,8 +21,11 @@ interface IFReportReceivingPromotion {
 
 export default function ReportReceivingPromotion({ setOnDetail, dataSendDepartMent, setDataSendDepartMent, setDataSendListBranch }: IFReportReceivingPromotion) {
   const [dataCount, setDataCount] = React.useState<any>([]);
+  const [dataList, setDataList] = React.useState<any>([]);
   const [headValue, setHeadValue] = React.useState<string>('');
   const [colum, setColum] = React.useState<any>([]);
+  const [month, setMonth] = React.useState<any>(null)
+  const [year, setYear] = React.useState<any>(null)
 
   const _resDataList = async () => {
     let datasend: any = new Object();
@@ -38,6 +44,8 @@ export default function ReportReceivingPromotion({ setOnDetail, dataSendDepartMe
       }
       await setDataCount([])
       await setDataCount(newData)
+      await setDataList([])
+      await setDataList(newData)
     } catch (e) {
       console.log(e);
     }
@@ -60,6 +68,28 @@ export default function ReportReceivingPromotion({ setOnDetail, dataSendDepartMe
 
   const configHeader = async (semiseq: any) => {
     await setColum(reportReceivingProvincePlot);
+  }
+
+  const onSearchDatebetween = () => {
+    if (!month) {
+      SnackbarSet('กรุณาเลือกเดือน', 'error', 3000);
+      return;
+    }
+    if (!year) {
+      SnackbarSet('กรุณาเลือกปี', 'error', 3000);
+      return;
+    }
+    let subyear = dayjs(year).format('YYYY');
+    const filteredData: any = dataList.filter((item: any) => {
+      const itemDate = item.IMPORT_DATE.split('-');
+      return itemDate[1] == month.MONTH_ID && itemDate[0] == subyear;
+    });
+    setDataCount(filteredData)
+  }
+  const onClearValue = () => {
+    setMonth(null);
+    setYear(null);
+    setDataCount(dataList)
   }
 
   React.useEffect(() => {
@@ -91,7 +121,15 @@ export default function ReportReceivingPromotion({ setOnDetail, dataSendDepartMe
         </Stack>
         <Grid container>
           <Grid xs={12}>
-              <FixedHeaderContent dataList={dataCount} colum={colum} onhandleClickCount={onhandleClickCount} onHandleRetropective={onHandleRetropective} />
+            <BetweenDatetime
+              month={month}
+              setMonth={setMonth}
+              year={year}
+              setYear={setYear}
+              onSearch={onSearchDatebetween}
+              onClearValue={onClearValue}
+            />
+            <FixedHeaderContent dataList={dataCount} colum={colum} onhandleClickCount={onhandleClickCount} onHandleRetropective={onHandleRetropective} />
           </Grid>
         </Grid>
       </>
