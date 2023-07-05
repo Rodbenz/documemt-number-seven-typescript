@@ -276,3 +276,16 @@ export async function REPORT_SEND_changwat() {
         return false
     }
 }
+export async function REPORT_SEND_ALL() {
+    let url = `${process.env.REACT_APP_API_HOST}/REPORT/REPORT_SEND_ALL`;
+    AddLoading()
+    try {
+        let res = await axios.get(url)
+        let data = res.data
+        RemoveLoading()
+        return data.result
+    } catch {
+        RemoveLoading()
+        return false
+    }
+}

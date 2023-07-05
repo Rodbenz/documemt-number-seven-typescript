@@ -98,27 +98,11 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                     }}>
                                                         {item.POST_DOL1 == 0 ? (
                                                             <Typography >
-                                                                {item.POST_DOL1}
+                                                                {item.POST_DOL1 ? item.POST_DOL1 : '0'}
                                                             </Typography>
                                                         ) : (
                                                             <Typography sx={{ textDecoration: 'underline', cursor: 'pointer' }}>
-                                                                {item.POST_DOL1}
-                                                            </Typography>
-                                                        )}
-                                                    </Box>
-                                                </TableCell>
-                                                <TableCell align='center' sx={{ border: 'none' }}>
-                                                    <Box py={1} sx={{
-                                                        backgroundColor: '#e3f2fd',
-                                                        // width: 100
-                                                    }}>
-                                                        {item.POST_DOL2 == 0 ? (
-                                                            <Typography >
-                                                                {item.POST_DOL2}
-                                                            </Typography>
-                                                        ) : (
-                                                            <Typography sx={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={() => handleOnClick(item)}>
-                                                                {item.POST_DOL2}
+                                                                {item.POST_DOL3 ? item.POST_DOL3 : '0'}
                                                             </Typography>
                                                         )}
                                                     </Box>
@@ -130,11 +114,61 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                     }}>
                                                         {item.POST_DOL3 == 0 ? (
                                                             <Typography >
-                                                                {item.POST_DOL3}
+                                                                {item.POST_DOL3 ? item.POST_DOL3 : '0'}
+                                                            </Typography>
+                                                        ) : (
+                                                            <Typography sx={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={() => handleOnClick(item)}>
+                                                                {item.POST_DOL3 ? item.POST_DOL3 : '0'}
+                                                            </Typography>
+                                                        )}
+                                                    </Box>
+                                                </TableCell>
+                                                <TableCell align='center' sx={{ border: 'none' }}>
+                                                    <Box py={1} sx={{
+                                                        backgroundColor: '#e3f2fd',
+                                                        // width: 100
+                                                    }}>
+                                                        {item.POST_DOL2 == 0 ? (
+                                                            <Typography >
+                                                                {item.POST_DOL2 ? item.POST_DOL2 : '0'}
                                                             </Typography>
                                                         ) : (
                                                             <Typography sx={{ cursor: 'pointer', textDecoration: 'underline' }}>
-                                                                {item.POST_DOL3}
+                                                                {item.POST_DOL2 ? item.POST_DOL2 : '0'}
+                                                            </Typography>
+                                                        )}
+                                                        {/* //วัน/เดือน/ปี ส่งออก */}
+                                                    </Box>
+                                                    </TableCell>
+                                                <TableCell align='center' sx={{ border: 'none' }}>
+                                                    <Box py={1} sx={{
+                                                        // backgroundColor: '#e3f2fd',
+                                                        // width: 100
+                                                    }}>
+                                                        {item.UPDATE_DATE == 0 ? (
+                                                            <Typography >
+                                                                {item.UPDATE_DATE ? dateFormatTime(item.UPDATE_DATE) : ' '}
+                                                            </Typography>
+                                                        ) : (
+                                                            <Typography>
+                                                                {item.UPDATE_DATE ? dateFormatTime(item.UPDATE_DATE) : '-'}
+                                                            </Typography>
+                                                        )}
+                                                    </Box>
+                                                    </TableCell>
+                                                <TableCell align='center' sx={{ border: 'none' }}>
+                                                    <Box py={1} sx={{
+                                                        // backgroundColor: '#e3f2fd',
+                                                        // width: 100
+                                                    }}>
+                                                        {item.POST_SAVE == 0 ? (
+                                                            <Typography >
+                                                                {/* {item.POST_DOL2 ? item.POST_DOL2 : '0'} */}
+                                                            </Typography>
+                                                        ) : (
+                                                            <Typography >
+                                                             10.13.16.21\D:\Data2DOL\LAND\ระหว่างรอบบัญชี 2566-2569\LOCAL   
+                                                                {/* {item.POST_DOL2 ? item.POST_DOL2 : '0'} */}
                                                             </Typography>
                                                         )}
                                                     </Box>

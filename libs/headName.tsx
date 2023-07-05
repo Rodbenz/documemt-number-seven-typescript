@@ -4,7 +4,7 @@ export const haedlistMenuExport: any = [
     {
         name: 'รายการส่งออก กรมที่ดิน',
         width: 10,
-        color: '#000000',
+        color: '#383838',
     },
     {
         name: 'เตรียมส่ง',
@@ -21,6 +21,16 @@ export const haedlistMenuExport: any = [
         width: 10,
         color: '#f90c0f',
     },
+    {
+      name: 'วัน/เดือน/ปี ที่ส่งออกข้อมูล',
+      width: 10,
+      color: '#383838',
+  },
+  {
+    name: 'ที่เก็บไฟล์',
+    width: 10,
+    color: '#383838',
+},
 ];
 // หัวตาราง การรับข้อมูล จาก กรมที่ดิน
 export const headNameReceiving1 = [
