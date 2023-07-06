@@ -30,7 +30,7 @@ const options = [
   { id: 12, name: 'กรุงเทพมหานคร', img: '../../../image/LOGO/กรุงเทพมหานคร.jpg', width: 110, height: 100, paddingLeft: 10 },
 ]
 
-const iddisable = [1, 2];
+const iddisable = [1];
 export default function MenuDataExport() {
   const { isMenuDataExport, setIsMenuDataExport } = useCartContext();
 
