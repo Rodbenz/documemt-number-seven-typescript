@@ -4,61 +4,61 @@ export const columnReceivingPromotion = [
       name: 'ลำดับที่',
       listname: 'ROWNUMBER',
       align: 'center',
-      minWidth:200
+      minWidth:120
     },
     {
       name: 'จังหวัด',
-      listname: 'AMPHUR_DESCRIPTION',
+      listname: 'PROVINCE_NAME_TH',
       align: 'left',
-      minWidth:300
+      minWidth:250
     },
     {
       name: 'อำเภอ',
       listname: 'AMPHUR_DESCRIPTION',
       align: 'left',
-      minWidth:300
+      minWidth:250
     },
     {
       name: 'เขตการปกครอง',
       listname: 'ORG_NAME',
       align: 'left',
-      minWidth:300
+      minWidth:250
     },
     {
       name: 'เกษตรกรรม',
       listname: 'COUNT1',
       align: 'right',
-      minWidth:150
+      minWidth:180
     },
     {
       name: 'ที่อยู่อาศัย',
       listname: 'COUNT2',
       align: 'right',
-      minWidth:150
+      minWidth:180
     },
     {
       name: 'อื่นๆ (ไม่ใช่เกษตรกรรมหรือที่อยู่อาศัย)',
       listname: 'COUNT3',
       align: 'right',
-      minWidth:200
+      minWidth:180
     },
     {
       name: 'ทิ้งไว้ว่างเปล่า/รกร้าง',
       listname: 'COUNT4',
       align: 'right',
-      minWidth:200
+      minWidth:180
     },
     {
       name: 'ใช้ประโยชน์หลายประเภท',
       listname: 'COUNT5',
       align: 'right',
-      minWidth:200
+      minWidth:180
     },
     {
       name: 'วัน/เดือน/ปี',
       listname: 'IMPORT_DATE_',
       align: 'center',
-      minWidth:200
+      minWidth:180
     },
   ];
 
@@ -149,7 +149,7 @@ export const columReceivingBranchPromotion = [
   {
     name: 'จำนวน',
     listname: 'COUNT_',
-    align: 'right',
+    align: 'center',
   },
   {
     name: 'วัน/เดือน/ปี',

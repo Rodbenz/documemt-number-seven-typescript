@@ -18,7 +18,7 @@ import { useState } from 'react';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ReportReceiving from './reportReceiving';
-import { dateFormatTime } from '@/libs/outputDatas';
+import { dateFormatTime, numberWithCommas } from '@/libs/outputDatas';
 import ReportReceivingBracnh from './reportReceivingBracnh';
 import ReportReceivingPlot from './reportReceivingPlot';
 
@@ -91,7 +91,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
 
                                                     }}>
                                                         <Typography >
-                                                            {item.COUNTDOL}
+                                                            {numberWithCommas(item.COUNTDOL)}
                                                         </Typography>
                                                     </Box>
                                                 </TableCell>
@@ -106,7 +106,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                             </Typography>
                                                         ) : (
                                                             <Typography sx={{ color: '#1976d2', cursor: 'pointer', textDecoration: 'underline', "&:hover": { backgroundColor: "#e4c23e" } }} onClick={() => handleOnClick(item)}>
-                                                                {item.COUNTIMPORT}
+                                                                {numberWithCommas(item.COUNTIMPORT)}
                                                             </Typography>
                                                         )}
                                                     </Box>
@@ -122,7 +122,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                             </Typography>
                                                         ) : (
                                                             <Typography sx={{ color: '#f92b2f', cursor: 'pointer', textDecoration: 'underline', "&:hover": { backgroundColor: "#e3f2fd" } }}>
-                                                                {item.DEF}
+                                                                {numberWithCommas(item.DEF)}
                                                             </Typography>
                                                         )}
                                                     </Box>

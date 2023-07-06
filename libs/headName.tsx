@@ -172,6 +172,18 @@ export const columReceivingPlot1 = [
     minWidth: 100,
   },
   {
+    name: 'อำเภอ',
+    listname: 'AMPHOE_NAME',
+    align: 'Left',
+    minWidth: 150,
+  },
+  {
+    name: 'ตำบล',
+    listname: 'TAMBOL_NAME',
+    align: 'Left',
+    minWidth: 150,
+  },
+  {
     name: 'ระวาง',
     listname: 'UTM',
     align: 'center',
@@ -200,18 +212,7 @@ export const columReceivingPlot1 = [
   //   listname: 'DATEIMPORT',
   //   align: 'right',
   // },
-  {
-    name: 'อำเภอ',
-    listname: 'AMPHOE_NAME',
-    align: 'Left',
-    minWidth: 150,
-  },
-  {
-    name: 'ตำบล',
-    listname: 'TAMBOL_NAME',
-    align: 'Left',
-    minWidth: 150,
-  },
+
   {
     name: 'วัน/เดือน/ปี',
     listname: 'DATEIMPORT',
@@ -225,6 +226,18 @@ export const columReceivingPlot2 = [
     name: 'ลำดับที่',
     listname: 'ROWNUMBER',
     align: 'center',
+    minWidth: 150,
+  },
+  {
+    name: 'อำเภอ',
+    listname: 'AMPHOE_NAME',
+    align: 'Left',
+    minWidth: 150,
+  },
+  {
+    name: 'ตำบล',
+    listname: 'TAMBOL_NAME',
+    align: 'Left',
     minWidth: 150,
   },
   {
@@ -256,18 +269,6 @@ export const columReceivingPlot2 = [
   //   listname: 'DATEIMPORT',
   //   align: 'right',
   // },
-  {
-    name: 'อำเภอ',
-    listname: 'AMPHOE_NAME',
-    align: 'Left',
-    minWidth: 150,
-  },
-  {
-    name: 'ตำบล',
-    listname: 'TAMBOL_NAME',
-    align: 'Left',
-    minWidth: 150,
-  },
   {
     name: 'วัน/เดือน/ปี',
     listname: 'DATEIMPORT',
@@ -913,7 +914,7 @@ export const columReceivingPlot11 = [
   {
     name: 'จำนวน',
     listname: 'ASTAMT',
-    align: 'right',
+    align: 'center',
     minWidth: 250,
   },
   {

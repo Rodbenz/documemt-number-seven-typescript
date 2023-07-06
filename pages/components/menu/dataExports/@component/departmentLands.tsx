@@ -107,7 +107,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                             </Typography>
                                                         ) : (
                                                             <Typography sx={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={() => handleOnClick(item, 1)}>
-                                                                {item.POST_DOL3 ? item.POST_DOL3 : '0'}
+                                                                {item.POST_DOL3 ? numberWithCommas(item.POST_DOL3) : '0'}
                                                             </Typography>
                                                         )}
                                                     </Box>

@@ -5,7 +5,7 @@ import { useCartContext } from '@/context/Cartcontext';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import FixedHeaderContent from '@/pages/components/@conponents/datatable/fixedHeaderContent';
 import { REPORT_RECEIVE_BranchCode } from '@/service/report';
-import { dateFormatTime } from '@/libs/outputDatas';
+import { dateFormatTime, numberWithCommas } from '@/libs/outputDatas';
 import { SplitDataType, SplitDataTypeFile } from '@/libs/dataControl';
 
 interface IFReportDataExportBracnh {
@@ -28,7 +28,7 @@ export default function ReportDataExportBracnh({ setOnDetail, dataSendAll, dataS
         dataItems.ROWNUMBER = String(i + 1);
         dataItems.FILENAME = SplitDataTypeFile(dataItems.FILE_NAME);
         dataItems.TYPEFILE = SplitDataType(dataItems.FILE_NAME);
-        dataItems.COUNT_ = String(dataItems.COUNT_);
+        dataItems.COUNT_ = String (numberWithCommas(dataItems.COUNT_));
         dataItems.DATEIMPORT = dateFormatTime(dataItems.IMPORT_DATE)
         newData.push(dataItems);
       }

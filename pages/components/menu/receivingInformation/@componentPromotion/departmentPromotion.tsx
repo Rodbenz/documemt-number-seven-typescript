@@ -18,7 +18,7 @@ import { useState } from 'react';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ReportReceivingPromotion from './reportReceivingPromotion';
-import { dateFormatTime } from '@/libs/outputDatas';
+import { dateFormatTime, numberWithCommas } from '@/libs/outputDatas';
 import ReportReceivingPromotionBracnh from './reportReceivingPromotionBracnh';
 import ReportReceivingPlot from './reportReceivingPromotionPlot';
 import ReportReceivingPromotionUsedtype from './reportReceivingPromotionUsedtype';
@@ -120,7 +120,7 @@ export default function DepartmentPromotion({ dataList, hendname }: IFDepartment
                                                             </Typography>
                                                         ) : (
                                                             <Typography sx={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={() => handleOnClick(item)}>
-                                                                {item.COUNTIMPORT}
+                                                                {numberWithCommas (item.COUNTIMPORT)}
                                                             </Typography>
                                                         )}
                                                     </Box>

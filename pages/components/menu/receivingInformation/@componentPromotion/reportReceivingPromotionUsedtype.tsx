@@ -5,7 +5,7 @@ import { useCartContext } from '@/context/Cartcontext';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import FixedHeaderContent from '@/pages/components/@conponents/datatable/fixedHeaderContent';
 import { REPORT_RECEIVE_BranchCode, REPORT_USED_TYPE411 } from '@/service/report';
-import { dateFormatTime } from '@/libs/outputDatas';
+import { dateFormatTime, numberWithCommas } from '@/libs/outputDatas';
 import { SplitDataType, SplitDataTypeFile } from '@/libs/dataControl';
 import { columReceivingBranch } from '@/libs/headName';
 import { columnReceivingPromotion } from '@/libs/headNamePromotion';
@@ -37,7 +37,11 @@ export default function ReportReceivingPromotionUsedtype({ setOnDetail, dataSend
         dataItems.ROWNUMBER = String(i + 1);
         dataItems.FILENAME = SplitDataTypeFile(dataItems.FILE_NAME);
         dataItems.TYPEFILE = SplitDataType(dataItems.FILE_NAME);
-        dataItems.COUNT_ = String(dataItems.COUNT_);
+        dataItems.COUNT1= String (numberWithCommas(dataItems.COUNT1));
+        dataItems.COUNT2= String (numberWithCommas(dataItems.COUNT2));
+        dataItems.COUNT3= String (numberWithCommas(dataItems.COUNT3));
+        dataItems.COUNT4= String (numberWithCommas(dataItems.COUNT4));
+        dataItems.COUNT5= String (numberWithCommas(dataItems.COUNT5));
         dataItems.DATEIMPORT = dateFormatTime(dataItems.IMPORT_DATE)
         newData.push(dataItems);
       }

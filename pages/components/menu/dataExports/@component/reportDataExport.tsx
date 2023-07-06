@@ -99,67 +99,67 @@ export default function ReportDataExport({ setOnDetail, dataSendAll, setDataSend
     {
       name: 'รอบบัญชี',
       listname: 'PERIODS_NAME',
-      align: 'left',
+      align: 'center',
       minWidth: 200
     },
     {
       name: 'เลขที่โฉนด',
       listname: 'CHANODE_NO',
-      align: 'left',
+      align: 'center',
       minWidth: 200
     },
     {
       name: 'หน้าสำรวจ',
       listname: 'SURVEY_NO',
-      align: 'left',
+      align: 'center',
       minWidth: 200
     },
     {
       name: 'แผนที่ภูมิประเทศ',
       listname: 'UTM',
-      align: 'right',
+      align: 'center',
       minWidth: 200
     },
     {
       name: 'แผ่น',
       listname: 'UTM_PAGE',
-      align: 'right',
+      align: 'center',
       minWidth: 200
     },
     {
       name: 'มาตราส่วน',
       listname: 'UTM_RATIO',
-      align: 'right',
+      align: 'center',
       minWidth: 200
     },
     {
       name: 'เลขที่ดิน',
       listname: 'UTM_LANDNO',
-      align: 'right',
+      align: 'center',
       minWidth: 200
     },
     {
       name: 'เนื้อที่ (ไร่-งาน-วา)',
       listname: 'RNV',
-      align: 'right',
+      align: 'center',
       minWidth: 200
     },
     {
-      name: 'ราคา (บาท/ตร.ว.)',
+      name: 'ราคาประเมิน (บาท/ตร.ว.)',
       listname: 'VAL_P_WA',
-      align: 'right',
+      align: 'center',
       minWidth: 200
     },
     {
       name: 'วันที่ประกาศ',
       listname: 'PUBLIC_DATE_',
-      align: 'right',
+      align: 'center',
       minWidth: 200
     },
     {
       name: 'วันที่มีผลบังคับใช้',
       listname: 'ENFORCE_DATE_',
-      align: 'right',
+      align: 'center',
       minWidth: 200
     },
   ]
