@@ -4,7 +4,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useCartContext } from '@/context/Cartcontext';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import FixedHeaderContent from '@/pages/components/@conponents/datatable/fixedHeaderContent';
-import { REPORT_RECEIVE_changwat, REPORT_SEND_ALL, REPORT_SEND_changwat } from '@/service/report';
+import { REPORT_RECEIVE_changwat, REPORT_SEND_ALL, REPORT_SEND_PROVINCE, REPORT_SEND_changwat } from '@/service/report';
 import { dateFormatTime, numberWithCommas, setUTM_NO_P } from '@/libs/outputDatas';
 import { SplitDataType, SplitDataTypeFile } from '@/libs/dataControl';
 
@@ -19,28 +19,29 @@ export default function ReportDataExport({ setOnDetail, dataSendAll, setDataSend
   const [dataCount, setDataCount] = React.useState<any>([]);
   const [headValue, setHeadValue] = React.useState<string>('');
 
+  const listnameSend = (val:any) =>{
+    if(val == 1){
+      return 'เตรียมส่ง';
+    }
+    if(val == 2){
+      return 'ส่งไม่สำเร็จ';
+    }
+    if(val == 3){
+      return 'ส่งสำเร็จ';
+    }
+  }
 
   const _resDataList = async () => {
     let datasend: any = dataSendAll;
     try {
       let newData: any = [];
-      let res = await REPORT_SEND_ALL(datasend)
-      console.log(res, 'REPORT_SEND_ALL');
+      let res = await REPORT_SEND_PROVINCE(datasend)
+      console.log(res, 'REPORT_SEND_PROVINCE');
       for (let i = 0; i < res.length; i++) {
         let dataItems = res[i];
-        let UTM_CODE_ = dataItems.UTM_CODE ? dataItems.UTM_CODE:'';
-        let UTM_NO_P_ = dataItems.UTM_NO_P ? setUTM_NO_P(dataItems.UTM_NO_P):'';
-        let UTM_NO_ = dataItems.UTM_NO ? dataItems.UTM_NO:'';
         dataItems.ROWNUMBER = String(i + 1);
-        dataItems.PROVINCE_NAME_TH = String(dataItems.PROVINCE_NAME_TH);
-        dataItems.AMPHUR_NAME = String(dataItems.AMPHUR_NAME? dataItems.AMPHUR_NAME: '');
-        dataItems.TUMBON_NAME = String(dataItems.TUMBON_NAME? dataItems.TUMBON_NAME: '' );
-        dataItems.BRANCH_NAME = String(dataItems.BRANCH_NAME);
-        dataItems.UTM = UTM_CODE_ + ' ' +  UTM_NO_P_ + ' ' + UTM_NO_
-        dataItems.VAL_P_WA = numberWithCommas(dataItems.VAL_P_WA);
-        dataItems.PUBLIC_DATE_ = dateFormatTime(dataItems.PUBLIC_DATE)
-        dataItems.ENFORCE_DATE_ = dateFormatTime(dataItems.ENFORCE_DATE)
-        dataItems.RNV = `${dataItems.NRAI} - ${dataItems.NNHAN} - ${dataItems.NWAH}`
+        dataItems.POS_DOLNAME = listnameSend(dataItems.POS_DOL)
+        dataItems.COUNT_ = dataItems.ST_POSTDOL3? numberWithCommas(dataItems.ST_POSTDOL3) : 0;
         newData.push(dataItems);
       }
       console.log(newData, 'newData');
@@ -53,6 +54,10 @@ export default function ReportDataExport({ setOnDetail, dataSendAll, setDataSend
 
   const onhandleClickCount = async (el: any) => {
     console.log(el, 'el');
+    el.CHANGWAT_CODE = String(el.CHANGWAT_CODE)
+    el.FLAG_TYPE = String(el.FLAG_TYPE)
+    el.PARCEL_TYPE = String(el.PARCEL_TYPE)
+    el.POST_DOL = String(el.POS_DOL)
     if (el.COUNTIMPORT != 0) {
       setOnDetail && setOnDetail(3);
       setDataSendListBranch && setDataSendListBranch(el);
@@ -74,94 +79,23 @@ export default function ReportDataExport({ setOnDetail, dataSendAll, setDataSend
     },
     {
       name: 'จังหวัด',
-      listname: 'PROVINCE_NAME_TH',
+      listname: 'CHANGWAT_NAME',
       align: 'left',
       minWidth: 200
     },
     {
-      name: 'อำเภอ',
-      listname: 'AMPHUR_NAME',
+      name: 'รายการนำส่ง',
+      listname: 'POS_DOLNAME',
       align: 'left',
       minWidth: 200
     },
     {
-      name: 'ตำบล',
-      listname: 'TUMBON_NAME',
+      name: 'รายการนำส่ง',
+      listname: 'COUNT_',
       align: 'left',
       minWidth: 200
     },
-    {
-      name: 'สำนักงานที่ดิน',
-      listname: 'BRANCH_NAME',
-      align: 'left',
-      minWidth: 250
-    },
-    {
-      name: 'รอบบัญชี',
-      listname: 'PERIODS_NAME',
-      align: 'center',
-      minWidth: 200
-    },
-    {
-      name: 'เลขที่โฉนด',
-      listname: 'CHANODE_NO',
-      align: 'center',
-      minWidth: 200
-    },
-    {
-      name: 'หน้าสำรวจ',
-      listname: 'SURVEY_NO',
-      align: 'center',
-      minWidth: 200
-    },
-    {
-      name: 'แผนที่ภูมิประเทศ',
-      listname: 'UTM',
-      align: 'center',
-      minWidth: 200
-    },
-    {
-      name: 'แผ่น',
-      listname: 'UTM_PAGE',
-      align: 'center',
-      minWidth: 200
-    },
-    {
-      name: 'มาตราส่วน',
-      listname: 'UTM_RATIO',
-      align: 'center',
-      minWidth: 200
-    },
-    {
-      name: 'เลขที่ดิน',
-      listname: 'UTM_LANDNO',
-      align: 'center',
-      minWidth: 200
-    },
-    {
-      name: 'เนื้อที่ (ไร่-งาน-วา)',
-      listname: 'RNV',
-      align: 'center',
-      minWidth: 200
-    },
-    {
-      name: 'ราคาประเมิน (บาท/ตร.ว.)',
-      listname: 'VAL_P_WA',
-      align: 'center',
-      minWidth: 200
-    },
-    {
-      name: 'วันที่ประกาศ',
-      listname: 'PUBLIC_DATE_',
-      align: 'center',
-      minWidth: 200
-    },
-    {
-      name: 'วันที่มีผลบังคับใช้',
-      listname: 'ENFORCE_DATE_',
-      align: 'center',
-      minWidth: 200
-    },
+   
   ]
 
   React.useEffect(() => {

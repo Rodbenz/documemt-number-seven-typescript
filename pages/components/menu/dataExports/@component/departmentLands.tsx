@@ -195,7 +195,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                             />
                         )
                     )}
-                {/* {onDetail === 3 &&
+                {onDetail === 3 &&
                     (
                         Object.keys(dataSendAll).length > 0 && Object.keys(dataSendListBranch).length > 0 && (
                             <ReportDataExportBracnh
@@ -206,7 +206,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                             />
                         )
                     )}
-                {onDetail === 4 &&
+                {/* {onDetail === 4 &&
                     (
                         Object.keys(dataSendAll).length > 0 && Object.keys(dataSendListBranch).length > 0 && Object.keys(dataSendListPlot).length > 0 && (
                             <ReportDataExportPlot

@@ -289,3 +289,16 @@ export async function REPORT_SEND_ALL(datasend:any) {
         return false
     }
 }
+export async function REPORT_SEND_PROVINCE(datasend:any) {
+    let url = `${process.env.REACT_APP_API_HOST}/REPORT/REPORT_SEND_changwat`;
+    AddLoading()
+    try {
+        let res = await axios.post(url, datasend)
+        let data = res.data
+        RemoveLoading()
+        return data.result
+    } catch {
+        RemoveLoading()
+        return false
+    }
+}

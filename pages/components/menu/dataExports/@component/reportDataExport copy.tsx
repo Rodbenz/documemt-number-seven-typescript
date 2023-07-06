@@ -4,23 +4,24 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useCartContext } from '@/context/Cartcontext';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import FixedHeaderContent from '@/pages/components/@conponents/datatable/fixedHeaderContent';
-import { REPORT_RECEIVE_BranchCode, REPORT_SEND_ALL } from '@/service/report';
+import { REPORT_RECEIVE_changwat, REPORT_SEND_ALL, REPORT_SEND_changwat } from '@/service/report';
 import { dateFormatTime, numberWithCommas, setUTM_NO_P } from '@/libs/outputDatas';
 import { SplitDataType, SplitDataTypeFile } from '@/libs/dataControl';
 
-interface IFReportDataExportBracnh {
+interface IFReportDataExport {
   setOnDetail?: any;
   dataSendAll?: any;
-  dataSendListBranch?: any;
-  setDataSendListPlot?: any;
+  setDataSendListBranch?: any;
 }
 
-export default function ReportDataExportBracnh({ setOnDetail, dataSendAll, dataSendListBranch, setDataSendListPlot }: IFReportDataExportBracnh) {
+export default function ReportDataExport({ setOnDetail, dataSendAll, setDataSendListBranch }: IFReportDataExport) {
+  const { isMenuSeq } = useCartContext();
   const [dataCount, setDataCount] = React.useState<any>([]);
   const [headValue, setHeadValue] = React.useState<string>('');
 
+
   const _resDataList = async () => {
-    let datasend: any = dataSendListBranch;
+    let datasend: any = dataSendAll;
     try {
       let newData: any = [];
       let res = await REPORT_SEND_ALL(datasend)
@@ -51,11 +52,17 @@ export default function ReportDataExportBracnh({ setOnDetail, dataSendAll, dataS
   }
 
   const onhandleClickCount = async (el: any) => {
-    if (el?.COUNTIMPORT !== 0) {
-      setOnDetail(4);
-      setDataSendListPlot(el);
+    console.log(el, 'el');
+    if (el.COUNTIMPORT != 0) {
+      setOnDetail && setOnDetail(3);
+      setDataSendListBranch && setDataSendListBranch(el);
     }
 
+  }
+
+  const onHandleRetropective = async () => {
+    setOnDetail && setOnDetail(1);
+    setDataSendListBranch && setDataSendListBranch({});
   }
 
   const colum = [
@@ -157,20 +164,11 @@ export default function ReportDataExportBracnh({ setOnDetail, dataSendAll, dataS
     },
   ]
 
-  const onHandleRetropective = async () => {
-    setOnDetail && setOnDetail(2);
-    setDataSendListPlot && setDataSendListPlot({})
-  }
-
   React.useEffect(() => {
-    console.log(dataSendListBranch,'dataSendListBranch');
-    if (Object.keys(dataSendListBranch).length > 0) {
-      _resDataList();
-    }
-  }, [dataSendListBranch])
-  React.useEffect(() => {
+    console.log(dataSendAll, 'dataSendAll');
     if (Object.keys(dataSendAll).length > 0) {
-      setHeadValue(dataSendAll?.SEMI_NAME)
+      _resDataList();
+      setHeadValue(dataSendAll.REPORT);
     }
   }, [dataSendAll])
   return (
@@ -179,8 +177,8 @@ export default function ReportDataExportBracnh({ setOnDetail, dataSendAll, dataS
         <Stack direction={'row'} justifyContent={'flex-start'} alignItems={'center'} columnGap={1}>
           <Tooltip title="ย้อนกลับ" placement="right">
             <IconButton size='small' onClick={() => {
-              setOnDetail(2)
-              setDataSendListPlot({})
+              setOnDetail(1),
+                setDataSendListBranch(null)
             }}
             >
               <Avatar sx={{ bgcolor: '#aae8e6', width: 50, height: 50 }}>
@@ -192,8 +190,8 @@ export default function ReportDataExportBracnh({ setOnDetail, dataSendAll, dataS
         </Stack>
         <Grid container>
           <Grid xs={12}>
-              <FixedHeaderContent dataList={dataCount} colum={colum} onhandleClickCount={onhandleClickCount} onHandleRetropective={onHandleRetropective} exportReport/>
-            </Grid>
+            <FixedHeaderContent dataList={dataCount} colum={colum} onhandleClickCount={onhandleClickCount} onHandleRetropective={onHandleRetropective} exportReport/>
+          </Grid>
         </Grid>
       </>
     </Grid>

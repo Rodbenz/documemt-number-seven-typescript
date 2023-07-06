@@ -14,6 +14,7 @@ import SnackBarDiaLog from './components/@conponents/popup/SnackbarSet';
 import LoadingScreen from './components/@conponents/loadingscreen';
 import BoxFooters from './components/footers';
 import { ThemeProvider, createTheme } from '@mui/material';
+import { UPD_REPORT_SEND, UPD_REPORT_SEND_PROV } from '@/service/upd';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [isMenu, setIsMenu] = React.useState(false);
@@ -48,6 +49,19 @@ export default function App({ Component, pageProps }: AppProps) {
       },
     },
   });
+
+  const updateSendExport = () => {
+    try {
+      let updsendall = UPD_REPORT_SEND()
+      let updsendprov = UPD_REPORT_SEND_PROV()  
+    } catch (e) {
+
+    }
+  }
+
+  React.useEffect(() => {
+    updateSendExport()
+  }, [])
 
   return (
     <Provider store={store}>
