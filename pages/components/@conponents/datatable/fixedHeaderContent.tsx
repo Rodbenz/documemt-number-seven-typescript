@@ -105,7 +105,7 @@ export default function FixedHeaderContent(
     for (const key in filterValues) {
       if (filterValues[key] !== '' && row[key] !== undefined) {
         if (
-          row[key]
+          String(row[key])
             .toString()
             .toLowerCase()
             .includes(filterValues[key].toLowerCase())

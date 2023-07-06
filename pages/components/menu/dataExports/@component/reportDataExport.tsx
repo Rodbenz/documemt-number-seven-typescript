@@ -40,6 +40,7 @@ export default function ReportDataExport({ setOnDetail, dataSendAll, setDataSend
         dataItems.VAL_P_WA = numberWithCommas(dataItems.VAL_P_WA);
         dataItems.PUBLIC_DATE_ = dateFormatTime(dataItems.PUBLIC_DATE)
         dataItems.ENFORCE_DATE_ = dateFormatTime(dataItems.ENFORCE_DATE)
+        dataItems.RNV = `${dataItems.NRAI} - ${dataItems.NNHAN} - ${dataItems.NWAH}`
         newData.push(dataItems);
       }
       console.log(newData, 'newData');
@@ -139,7 +140,7 @@ export default function ReportDataExport({ setOnDetail, dataSendAll, setDataSend
     },
     {
       name: 'เนื้อที่ (ไร่-งาน-วา)',
-      listname: 'COUNT_',
+      listname: 'RNV',
       align: 'right',
       minWidth: 200
     },
