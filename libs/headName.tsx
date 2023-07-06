@@ -51,7 +51,7 @@ export const headNameReceiving1 = [
         width: 10,
     },
     {
-        name: 'วันที่ รับข้อมูล',
+        name: 'วันที่รับข้อมูลล่าสุด',
         width: 10,
     },
     {
@@ -116,7 +116,7 @@ export const reportReceivingProvincePlot = [
   {
     name: 'จำนวน',
     listname: 'COUNT_',
-    align: 'right',
+    align: 'center',
   },
   {
     name: 'วัน/เดือน/ปี',
@@ -155,7 +155,7 @@ export const columReceivingBranch = [
   {
     name: 'จำนวน',
     listname: 'COUNT_',
-    align: 'right',
+    align: 'center',
   },
   {
     name: 'วัน/เดือน/ปี',
@@ -169,30 +169,30 @@ export const columReceivingPlot1 = [
     name: 'ลำดับที่',
     listname: 'ROWNUMBER',
     align: 'center',
-    minWidth: 150,
+    minWidth: 100,
   },
   {
     name: 'ระวาง',
     listname: 'UTM',
-    align: 'right',
+    align: 'center',
     minWidth: 150,
   },
   {
     name: 'แผ่นที่',
     listname: 'UTMMAP4',
-    align: 'right',
+    align: 'center',
     minWidth: 150,
   },
   {
     name: 'มาตราส่วน',
     listname: 'UTMSCALE',
-    align: 'right',
+    align: 'center',
     minWidth: 150,
   },
   {
     name: 'เลขที่ดิน',
     listname: 'LAND_NO',
-    align: 'right',
+    align: 'center',
     minWidth: 150,
   },
   // {
@@ -215,7 +215,7 @@ export const columReceivingPlot1 = [
   {
     name: 'วัน/เดือน/ปี',
     listname: 'DATEIMPORT',
-    align: 'left',
+    align: 'center',
     minWidth: 150,
   },
 ]
