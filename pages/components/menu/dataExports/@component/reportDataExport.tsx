@@ -88,13 +88,13 @@ export default function ReportDataExport({ setOnDetail, dataSendAll, setDataSend
     {
       name: 'รายการนำส่ง',
       listname: 'POS_DOLNAME',
-      align: 'left',
+      align: 'center',
       minWidth: 200
     },
     {
-      name: 'รายการนำส่ง',
+      name: 'จำนวน',
       listname: 'COUNT_',
-      align: 'left',
+      align: 'center',
       minWidth: 200
     },
    

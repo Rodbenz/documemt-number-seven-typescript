@@ -22,7 +22,7 @@ export const haedlistMenuExport: any = [
         color: '#f90c0f',
     },
     {
-      name: 'วัน/เดือน/ปี ที่ส่งออกข้อมูล',
+      name: 'วัน/เดือน/ปี ที่ส่งออกข้อมูลล่าสุด',
       width: 10,
       color: '#383838',
   },
@@ -101,7 +101,7 @@ export const reportReceivingProvincePlot = [
   {
     name: 'รายการนำเข้า',
     listname: 'SEMI_NAME',
-    align: 'left',
+    align: 'center',
   },
   {
     name: 'ชื่อไฟล์',
