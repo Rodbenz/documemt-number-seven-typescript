@@ -47,9 +47,9 @@ export default function DepartmentPromotion({ dataList, hendname }: IFDepartment
     }
 
     React.useEffect(() => {
-        console.log(dataSendDepartMent, dataSendListBranch, dataSendUsetype, '555555555555555');
+        console.log(dataList, 'dataListdataListdataListdataList');
 
-    }, [dataSendDepartMent, dataSendListBranch, dataSendUsetype])
+    }, [dataList])
 
     return (
         <Grid container >
@@ -98,9 +98,9 @@ export default function DepartmentPromotion({ dataList, hendname }: IFDepartment
                                                         backgroundColor: '#53F8AA',
 
                                                     }}>
-                                                        {item.COUNTDOL === 0 ? (
+                                                        {item.COUNTDOL === null ? (
                                                             <Typography >
-                                                                {item.COUNTDOL}
+                                                                {item.COUNTDOL ? item.COUNTDOL : '0'}
                                                             </Typography>
                                                         ) : (
                                                             <Typography sx={{ cursor: 'pointer', textDecoration: 'underline' }}>
@@ -114,9 +114,9 @@ export default function DepartmentPromotion({ dataList, hendname }: IFDepartment
                                                         backgroundColor: '#FFE817',
                                                         // width: 100
                                                     }}>
-                                                        {item.COUNTIMPORT === 0 ? (
+                                                        {item.COUNTIMPORT === null ? (
                                                             <Typography >
-                                                                {item.COUNTIMPORT}
+                                                                {item.COUNTIMPORT ? item.COUNTIMPORT : '0'}
                                                             </Typography>
                                                         ) : (
                                                             <Typography sx={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={() => handleOnClick(item)}>
@@ -130,9 +130,9 @@ export default function DepartmentPromotion({ dataList, hendname }: IFDepartment
                                                         backgroundColor: '#B9B9B9',
                                                         // width: 100
                                                     }}>
-                                                        {item.DEF === 0 ? (
+                                                        {item.DEF === null ? (
                                                             <Typography >
-                                                                {item.DEF}
+                                                                {item.DEF ? item.DEF : '0'}
                                                             </Typography>
                                                         ) : (
                                                             <Typography sx={{ cursor: 'pointer', textDecoration: 'underline' }}>
@@ -176,14 +176,23 @@ export default function DepartmentPromotion({ dataList, hendname }: IFDepartment
                 {onDetail === 4 &&
                     (
                         Object.keys(dataSendDepartMent).length > 0 && Object.keys(dataSendListBranch).length > 0 && Object.keys(dataSendUsetype).length > 0 && (
-                            dataSendDepartMent.SEMI_CODE == 411 &&
-                            <ReportReceivingPromotionUsedtype
-                                setOnDetail={setOnDetail}
-                                dataSendDepartMent={dataSendDepartMent}
-                                dataSendListBranch={dataSendListBranch}
-                                dataSendUsetype={dataSendUsetype}
-                                setDataSendSubUseType={setDataSendSubUseType}
-                            />
+                            dataSendDepartMent.SEMI_CODE == 411 ? (
+                                <ReportReceivingPromotionUsedtype
+                                    setOnDetail={setOnDetail}
+                                    dataSendDepartMent={dataSendDepartMent}
+                                    dataSendListBranch={dataSendListBranch}
+                                    dataSendUsetype={dataSendUsetype}
+                                    setDataSendSubUseType={setDataSendSubUseType}
+                                />
+                            ) : (
+                                dataSendDepartMent.SEMI_CODE == 511 &&
+                                <ReportReceivingPlot
+                                    setOnDetail={setOnDetail}
+                                    dataSendDepartMent={dataSendDepartMent}
+                                    dataSendListBranch={dataSendListBranch}
+                                    dataSendUsetype={dataSendUsetype}
+                                />
+                            )
                         )
                     )
                 }
@@ -199,17 +208,6 @@ export default function DepartmentPromotion({ dataList, hendname }: IFDepartment
                     )
                 )
                 }
-                {/* {onDetail ===  &&
-                    (
-                        Object.keys(dataSendDepartMent).length > 0 && Object.keys(dataSendListBranch).length > 0 && Object.keys(dataSendListPlot).length > 0 && (
-                            <ReportReceivingPlot
-                                setOnDetail={setOnDetail}
-                                dataSendDepartMent={dataSendDepartMent}
-                                dataSendListBranch={dataSendListBranch}
-                                dataSendListPlot={dataSendListPlot}
-                            />
-                        )
-                    )} */}
             </Grid>
         </Grid>
     )

@@ -10,12 +10,12 @@ import { dateFormatTime, setUTM_NO_P } from '@/libs/outputDatas';
 
 interface IFReportDataExportPlot {
   setOnDetail?: any;
-  dataSendDepartMent?: any;
+  dataSendAll?: any;
   dataSendListBranch?: any;
   dataSendListPlot?: any;
 }
 
-export default function ReportDataExportPlot({ setOnDetail, dataSendDepartMent, dataSendListBranch, dataSendListPlot }: IFReportDataExportPlot) {
+export default function ReportDataExportPlot({ setOnDetail, dataSendAll, dataSendListBranch, dataSendListPlot }: IFReportDataExportPlot) {
   const [dataCount, setDataCount] = React.useState<any>([]);
   const [headValue, setHeadValue] = React.useState<string>('');
 
@@ -95,10 +95,10 @@ export default function ReportDataExportPlot({ setOnDetail, dataSendDepartMent, 
   }, [dataSendListPlot])
 
   React.useEffect(() => {
-    if (Object.keys(dataSendDepartMent).length > 0) {
-      setHeadValue(dataSendDepartMent?.SEMI_NAME)
+    if (Object.keys(dataSendAll).length > 0) {
+      setHeadValue(dataSendAll?.SEMI_NAME)
     }
-  }, [dataSendDepartMent])
+  }, [dataSendAll])
   return (
     <Grid container pl={2} pr={2}>
       <>

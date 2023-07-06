@@ -156,4 +156,49 @@ export const columReceivingBranchPromotion = [
     listname: 'DATEIMPORT',
     align: 'center',
   },
+];
+
+export const columnPromotionCodo = [
+  {
+    name: 'ลำดับที่',
+    listname: 'ROWNUMBER',
+    align: 'center',
+    minWidth:200
+  },
+  {
+    name: 'จังหวัด',
+    listname: 'PROVINCE_NAME_TH',
+    align: 'left',
+    minWidth:200
+  },
+  {
+    name: 'อำเภอ',
+    listname: 'AMPHUR_NAME',
+    align: 'left',
+    minWidth:200
+  },
+  {
+    name: 'เขตการปกครอง',
+    listname: 'ORG_NAME',
+    align: 'left',
+    minWidth:300
+  },
+  {
+    name: 'จำนวนภาษีที่ต้องชำระ',
+    listname: 'TAX_PAY',
+    align: 'right',
+    minWidth:200
+  },
+  {
+    name: 'รวมราคาประเมินที่ดินและสิ่งปลูกสร้าง หรือห้องชุด',
+    listname: 'TOTAL_PRICE_',
+    align: 'right',
+    minWidth:350
+  },
+  {
+    name: 'วัน/เดือน/ปี',
+    listname: 'DATEIMPORT',
+    align: 'left',
+    minWidth:200
+  },
 ]

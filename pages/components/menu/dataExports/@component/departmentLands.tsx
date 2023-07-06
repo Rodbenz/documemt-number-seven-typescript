@@ -31,14 +31,19 @@ interface IFDepartmentLands {
 
 export default function DepartmentLands({ dataList, hendname }: IFDepartmentLands) {
     const [onDetail, setOnDetail] = useState(1)
-    const [dataSendDepartMent, setDataSendDepartMent] = useState<any>({})
+    const [dataSendAll, setDataSendAll] = useState<any>({})
     const [dataSendListBranch, setDataSendListBranch] = useState<any>({})
     const [dataSendListPlot, setDataSendListPlot] = useState<any>({})
 
-    const handleOnClick = async (el: any) => {
+    const handleOnClick = async (el: any, type:number) => {
+        el.FLAG_TYPE = String(el.FLAG_TYPE)
+        el.PARCEL_TYPE = String(el.PARCEL_TYPE)
+        el.POST_DOL = String(type)
+        console.log(el);
+        
         if (el.COUNTIMPORT != 0) {
             await setOnDetail(2)
-            await setDataSendDepartMent(el)
+            await setDataSendAll(el)
         }
 
     }
@@ -96,12 +101,12 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                         backgroundColor: '#e3f2fd',
 
                                                     }}>
-                                                        {item.POST_DOL1 == 0 ? (
+                                                        {item.POST_DOL1 == null ? (
                                                             <Typography >
                                                                 {item.POST_DOL1 ? item.POST_DOL1 : '0'}
                                                             </Typography>
                                                         ) : (
-                                                            <Typography sx={{ textDecoration: 'underline', cursor: 'pointer' }}>
+                                                            <Typography sx={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={() => handleOnClick(item, 1)}>
                                                                 {item.POST_DOL3 ? item.POST_DOL3 : '0'}
                                                             </Typography>
                                                         )}
@@ -112,12 +117,12 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                         backgroundColor: '#e3f2fd',
                                                         // width: 100
                                                     }}>
-                                                        {item.POST_DOL3 == 0 ? (
+                                                        {item.POST_DOL3 == null ? (
                                                             <Typography >
                                                                 {item.POST_DOL3 ? item.POST_DOL3 : '0'}
                                                             </Typography>
                                                         ) : (
-                                                            <Typography sx={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={() => handleOnClick(item)}>
+                                                            <Typography sx={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={() => handleOnClick(item, 3)}>
                                                                 {item.POST_DOL3 ? item.POST_DOL3 : '0'}
                                                             </Typography>
                                                         )}
@@ -128,18 +133,18 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                         backgroundColor: '#e3f2fd',
                                                         // width: 100
                                                     }}>
-                                                        {item.POST_DOL2 == 0 ? (
+                                                        {item.POST_DOL2 == null ? (
                                                             <Typography >
                                                                 {item.POST_DOL2 ? item.POST_DOL2 : '0'}
                                                             </Typography>
                                                         ) : (
-                                                            <Typography sx={{ cursor: 'pointer', textDecoration: 'underline' }}>
+                                                            <Typography sx={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={() => handleOnClick(item, 2)}>
                                                                 {item.POST_DOL2 ? item.POST_DOL2 : '0'}
                                                             </Typography>
                                                         )}
                                                         {/* //วัน/เดือน/ปี ส่งออก */}
                                                     </Box>
-                                                    </TableCell>
+                                                </TableCell>
                                                 <TableCell align='center' sx={{ border: 'none' }}>
                                                     <Box py={1} sx={{
                                                         // backgroundColor: '#e3f2fd',
@@ -155,7 +160,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                             </Typography>
                                                         )}
                                                     </Box>
-                                                    </TableCell>
+                                                </TableCell>
                                                 <TableCell align='center' sx={{ border: 'none' }}>
                                                     <Box py={1} sx={{
                                                         // backgroundColor: '#e3f2fd',
@@ -167,7 +172,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                             </Typography>
                                                         ) : (
                                                             <Typography >
-                                                             10.13.16.21\D:\Data2DOL\LAND\ระหว่างรอบบัญชี 2566-2569\LOCAL   
+                                                                10.13.16.21\D:\Data2DOL\LAND\ระหว่างรอบบัญชี 2566-2569\LOCAL
                                                                 {/* {item.POST_DOL2 ? item.POST_DOL2 : '0'} */}
                                                             </Typography>
                                                         )}
@@ -182,20 +187,20 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                     )}
                 {onDetail === 2 &&
                     (
-                        Object.keys(dataSendDepartMent).length > 0 && (
+                        Object.keys(dataSendAll).length > 0 && (
                             <ReportDataExport
                                 setOnDetail={setOnDetail}
-                                dataSendDepartMent={dataSendDepartMent}
+                                dataSendAll={dataSendAll}
                                 setDataSendListBranch={setDataSendListBranch}
                             />
                         )
                     )}
-                {onDetail === 3 &&
+                {/* {onDetail === 3 &&
                     (
-                        Object.keys(dataSendDepartMent).length > 0 && Object.keys(dataSendListBranch).length > 0 && (
+                        Object.keys(dataSendAll).length > 0 && Object.keys(dataSendListBranch).length > 0 && (
                             <ReportDataExportBracnh
                                 setOnDetail={setOnDetail}
-                                dataSendDepartMent={dataSendDepartMent}
+                                dataSendAll={dataSendAll}
                                 dataSendListBranch={dataSendListBranch}
                                 setDataSendListPlot={setDataSendListPlot}
                             />
@@ -203,15 +208,15 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                     )}
                 {onDetail === 4 &&
                     (
-                        Object.keys(dataSendDepartMent).length > 0 && Object.keys(dataSendListBranch).length > 0 && Object.keys(dataSendListPlot).length > 0 && (
+                        Object.keys(dataSendAll).length > 0 && Object.keys(dataSendListBranch).length > 0 && Object.keys(dataSendListPlot).length > 0 && (
                             <ReportDataExportPlot
                                 setOnDetail={setOnDetail}
-                                dataSendDepartMent={dataSendDepartMent}
+                                dataSendAll={dataSendAll}
                                 dataSendListBranch={dataSendListBranch}
                                 dataSendListPlot={dataSendListPlot}
                             />
                         )
-                    )}
+                    )} */}
             </Grid>
         </Grid>
     )

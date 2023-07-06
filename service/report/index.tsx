@@ -276,11 +276,11 @@ export async function REPORT_SEND_changwat() {
         return false
     }
 }
-export async function REPORT_SEND_ALL() {
+export async function REPORT_SEND_ALL(datasend:any) {
     let url = `${process.env.REACT_APP_API_HOST}/REPORT/REPORT_SEND_ALL`;
     AddLoading()
     try {
-        let res = await axios.get(url)
+        let res = await axios.post(url, datasend)
         let data = res.data
         RemoveLoading()
         return data.result

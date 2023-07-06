@@ -5,39 +5,42 @@ import { useCartContext } from '@/context/Cartcontext';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import FixedHeaderContent from '@/pages/components/@conponents/datatable/fixedHeaderContent';
 import { REPORT_RECEIVE_changwat, REPORT_SEND_ALL, REPORT_SEND_changwat } from '@/service/report';
-import { dateFormatTime } from '@/libs/outputDatas';
+import { dateFormatTime, numberWithCommas } from '@/libs/outputDatas';
 import { SplitDataType, SplitDataTypeFile } from '@/libs/dataControl';
 
 interface IFReportDataExport {
   setOnDetail?: any;
-  dataSendDepartMent?: any;
+  dataSendAll?: any;
   setDataSendListBranch?: any;
 }
 
-export default function ReportDataExport({ setOnDetail, dataSendDepartMent, setDataSendListBranch }: IFReportDataExport) {
+export default function ReportDataExport({ setOnDetail, dataSendAll, setDataSendListBranch }: IFReportDataExport) {
   const { isMenuSeq } = useCartContext();
   const [dataCount, setDataCount] = React.useState<any>([]);
   const [headValue, setHeadValue] = React.useState<string>('');
 
 
   const _resDataList = async () => {
-    let datasend: any = new Object();
-    datasend.SEMI_CODE = Object.keys(dataSendDepartMent).length > 0 ? String(dataSendDepartMent.SEMI_CODE) : '';
+    let datasend: any = dataSendAll;
     try {
-      let newData:any = [];
-      let res = await REPORT_SEND_ALL()
-      for(let i = 0; i < res.length; i++){
+      let newData: any = [];
+      let res = await REPORT_SEND_ALL(datasend)
+      console.log(res, 'REPORT_SEND_ALL');
+      for (let i = 0; i < res.length; i++) {
         let dataItems = res[i];
-        dataItems.ROWNUMBER = String(i+1);
+        dataItems.ROWNUMBER = String(i + 1);
         dataItems.PROVINCE_NAME_TH = String(dataItems.PROVINCE_NAME_TH);
-        // dataItems.FILENAME = SplitDataTypeFile(dataItems.FILE_NAME);
-        // dataItems.TYPEFILE = SplitDataType(dataItems.FILE_NAME);
-        // dataItems.COUNT_ = String(dataItems.COUNT_);
-        // dataItems.IMPORT_DATE_ = dateFormatTime(dataItems.IMPORT_DATE)
+        dataItems.AMPHUR_NAME = String(dataItems.AMPHUR_NAME? dataItems.AMPHUR_NAME: '');
+        dataItems.TUMBON_NAME = String(dataItems.TUMBON_NAME? dataItems.TUMBON_NAME: '' );
+        dataItems.BRANCH_NAME = String(dataItems.BRANCH_NAME);
+        dataItems.VAL_P_WA = numberWithCommas(dataItems.VAL_P_WA);
+        dataItems.PUBLIC_DATE_ = dateFormatTime(dataItems.PUBLIC_DATE)
+        dataItems.ENFORCE_DATE_ = dateFormatTime(dataItems.ENFORCE_DATE)
         newData.push(dataItems);
       }
       console.log(newData, 'newData');
       await setDataCount([])
+      await setDataCount(newData)
     } catch (e) {
       console.log(e);
     }
@@ -52,101 +55,123 @@ export default function ReportDataExport({ setOnDetail, dataSendDepartMent, setD
 
   }
 
+  const onHandleRetropective = async () => {
+    setOnDetail && setOnDetail(1);
+    setDataSendListBranch && setDataSendListBranch({});
+  }
+
   const colum = [
     {
       name: 'ลำดับที่',
       listname: 'ROWNUMBER',
       align: 'center',
+      minWidth: 180
     },
     {
       name: 'จังหวัด',
       listname: 'PROVINCE_NAME_TH',
       align: 'left',
+      minWidth: 200
     },
     {
       name: 'อำเภอ',
       listname: 'AMPHUR_NAME',
       align: 'left',
+      minWidth: 200
     },
     {
       name: 'ตำบล',
       listname: 'TUMBON_NAME',
       align: 'left',
+      minWidth: 200
     },
     {
       name: 'สำนักงานที่ดิน',
       listname: 'BRANCH_NAME',
       align: 'left',
+      minWidth: 250
     },
     {
       name: 'รอบบัญชี',
       listname: 'PERIODS_NAME',
       align: 'left',
+      minWidth: 200
     },
     {
       name: 'เลขที่โฉนด',
       listname: 'CHANODE_NO',
       align: 'left',
+      minWidth: 200
     },
     {
       name: 'หน้าสำรวจ',
       listname: 'SURVEY_NO',
       align: 'left',
+      minWidth: 200
     },
     {
       name: 'แผนที่ภูมิประเทศ',
       listname: 'UTM_CODE',
       align: 'right',
+      minWidth: 200
     },
     {
       name: 'ระวาง',
       listname: 'UTM_NO',
       align: 'right',
+      minWidth: 200
     },
     {
       name: 'แผ่น',
       listname: 'UTM_PAGE',
       align: 'right',
+      minWidth: 200
     },
     {
       name: 'มาตราส่วน',
       listname: 'UTM_RATIO',
       align: 'right',
+      minWidth: 200
     },
     {
       name: 'เลขที่ดิน',
       listname: 'UTM_LANDNO',
       align: 'right',
+      minWidth: 200
     },
     {
       name: 'เนื้อที่ (ไร่-งาน-วา)',
       listname: 'COUNT_',
       align: 'right',
+      minWidth: 200
     },
     {
       name: 'ราคา (บาท/ตร.ว.)',
       listname: 'VAL_P_WA',
       align: 'right',
+      minWidth: 200
     },
     {
       name: 'วันที่ประกาศ',
-      listname: 'PUBLIC_DATE',
+      listname: 'PUBLIC_DATE_',
       align: 'right',
+      minWidth: 200
     },
     {
       name: 'วันที่มีผลบังคับใช้',
-      listname: 'ENFORCE_DATE',
+      listname: 'ENFORCE_DATE_',
       align: 'right',
-    },    
+      minWidth: 200
+    },
   ]
 
   React.useEffect(() => {
-    console.log(dataSendDepartMent, 'dataSendDepartMent');
-    if (Object.keys(dataSendDepartMent).length > 0) {
+    console.log(dataSendAll, 'dataSendAll');
+    if (Object.keys(dataSendAll).length > 0) {
       _resDataList();
-      setHeadValue(dataSendDepartMent.SEMI_NAME);
+      setHeadValue(dataSendAll.REPORT);
     }
-  }, [dataSendDepartMent])
+  }, [dataSendAll])
   return (
     <Grid container pl={2} pr={2}>
       <>
@@ -164,13 +189,11 @@ export default function ReportDataExport({ setOnDetail, dataSendDepartMent, setD
           </Tooltip>
           <Typography variant='h5'>{headValue}</Typography>
         </Stack>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <FixedHeaderContent dataList={dataCount} colum={colum} onhandleClickCount={onhandleClickCount}/>
-            </TableRow>
-          </TableHead>
-        </Table>
+        <Grid container>
+          <Grid xs={12}>
+            <FixedHeaderContent dataList={dataCount} colum={colum} onhandleClickCount={onhandleClickCount} onHandleRetropective={onHandleRetropective} exportReport/>
+          </Grid>
+        </Grid>
       </>
     </Grid>
   )

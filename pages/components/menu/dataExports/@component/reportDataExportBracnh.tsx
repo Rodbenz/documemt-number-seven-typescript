@@ -10,12 +10,12 @@ import { SplitDataType, SplitDataTypeFile } from '@/libs/dataControl';
 
 interface IFReportDataExportBracnh {
   setOnDetail?: any;
-  dataSendDepartMent?: any;
+  dataSendAll?: any;
   dataSendListBranch?: any;
   setDataSendListPlot?: any;
 }
 
-export default function ReportDataExportBracnh({ setOnDetail, dataSendDepartMent, dataSendListBranch, setDataSendListPlot }: IFReportDataExportBracnh) {
+export default function ReportDataExportBracnh({ setOnDetail, dataSendAll, dataSendListBranch, setDataSendListPlot }: IFReportDataExportBracnh) {
   const [dataCount, setDataCount] = React.useState<any>([]);
   const [headValue, setHeadValue] = React.useState<string>('');
 
@@ -92,10 +92,10 @@ export default function ReportDataExportBracnh({ setOnDetail, dataSendDepartMent
     }
   }, [dataSendListBranch])
   React.useEffect(() => {
-    if (Object.keys(dataSendDepartMent).length > 0) {
-      setHeadValue(dataSendDepartMent?.SEMI_NAME)
+    if (Object.keys(dataSendAll).length > 0) {
+      setHeadValue(dataSendAll?.SEMI_NAME)
     }
-  }, [dataSendDepartMent])
+  }, [dataSendAll])
   return (
     <Grid container pl={2} pr={2}>
       <>
