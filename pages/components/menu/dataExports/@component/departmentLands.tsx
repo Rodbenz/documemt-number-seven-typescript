@@ -19,7 +19,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 import ReportDataExport from './reportDataExport';
-import { dateFormatTime } from '@/libs/outputDatas';
+import { dateFormatTime, numberWithCommas } from '@/libs/outputDatas';
 import ReportDataExportBracnh from './reportDataExportBracnh';
 import ReportDataExportPlot from './reportDataExportPlot';
 
@@ -123,7 +123,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                             </Typography>
                                                         ) : (
                                                             <Typography sx={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={() => handleOnClick(item, 3)}>
-                                                                {item.POST_DOL3 ? item.POST_DOL3 : '0'}
+                                                                {item.POST_DOL3 ? numberWithCommas(item.POST_DOL3) : '0'}
                                                             </Typography>
                                                         )}
                                                     </Box>
@@ -135,11 +135,11 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                     }}>
                                                         {item.POST_DOL2 == null ? (
                                                             <Typography >
-                                                                {item.POST_DOL2 ? item.POST_DOL2 : '0'}
+                                                                {item.POST_DOL2 ? numberWithCommas(item.POST_DOL2) : '0'}
                                                             </Typography>
                                                         ) : (
                                                             <Typography sx={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={() => handleOnClick(item, 2)}>
-                                                                {item.POST_DOL2 ? item.POST_DOL2 : '0'}
+                                                                {item.POST_DOL2 ? numberWithCommas(item.POST_DOL2) : '0'}
                                                             </Typography>
                                                         )}
                                                         {/* //วัน/เดือน/ปี ส่งออก */}
