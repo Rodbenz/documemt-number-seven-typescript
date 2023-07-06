@@ -5,7 +5,7 @@ import { useCartContext } from '@/context/Cartcontext';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import FixedHeaderContent from '@/pages/components/@conponents/datatable/fixedHeaderContent';
 import { REPORT_RECEIVE_changwat, REPORT_SEND_ALL, REPORT_SEND_changwat } from '@/service/report';
-import { dateFormatTime, numberWithCommas } from '@/libs/outputDatas';
+import { dateFormatTime, numberWithCommas, setUTM_NO_P } from '@/libs/outputDatas';
 import { SplitDataType, SplitDataTypeFile } from '@/libs/dataControl';
 
 interface IFReportDataExport {
@@ -28,11 +28,15 @@ export default function ReportDataExport({ setOnDetail, dataSendAll, setDataSend
       console.log(res, 'REPORT_SEND_ALL');
       for (let i = 0; i < res.length; i++) {
         let dataItems = res[i];
+        let UTM_CODE_ = dataItems.UTM_CODE ? dataItems.UTM_CODE:'';
+        let UTM_NO_P_ = dataItems.UTM_NO_P ? setUTM_NO_P(dataItems.UTM_NO_P):'';
+        let UTM_NO_ = dataItems.UTM_NO ? dataItems.UTM_NO:'';
         dataItems.ROWNUMBER = String(i + 1);
         dataItems.PROVINCE_NAME_TH = String(dataItems.PROVINCE_NAME_TH);
         dataItems.AMPHUR_NAME = String(dataItems.AMPHUR_NAME? dataItems.AMPHUR_NAME: '');
         dataItems.TUMBON_NAME = String(dataItems.TUMBON_NAME? dataItems.TUMBON_NAME: '' );
         dataItems.BRANCH_NAME = String(dataItems.BRANCH_NAME);
+        dataItems.UTM = UTM_CODE_ + ' ' +  UTM_NO_P_ + ' ' + UTM_NO_
         dataItems.VAL_P_WA = numberWithCommas(dataItems.VAL_P_WA);
         dataItems.PUBLIC_DATE_ = dateFormatTime(dataItems.PUBLIC_DATE)
         dataItems.ENFORCE_DATE_ = dateFormatTime(dataItems.ENFORCE_DATE)
@@ -111,13 +115,7 @@ export default function ReportDataExport({ setOnDetail, dataSendAll, setDataSend
     },
     {
       name: 'แผนที่ภูมิประเทศ',
-      listname: 'UTM_CODE',
-      align: 'right',
-      minWidth: 200
-    },
-    {
-      name: 'ระวาง',
-      listname: 'UTM_NO',
+      listname: 'UTM',
       align: 'right',
       minWidth: 200
     },
