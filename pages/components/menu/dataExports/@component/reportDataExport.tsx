@@ -11,10 +11,11 @@ import { SplitDataType, SplitDataTypeFile } from '@/libs/dataControl';
 interface IFReportDataExport {
   setOnDetail?: any;
   dataSendAll?: any;
+  setDataSendAll?:any;
   setDataSendListBranch?: any;
 }
 
-export default function ReportDataExport({ setOnDetail, dataSendAll, setDataSendListBranch }: IFReportDataExport) {
+export default function ReportDataExport({ setOnDetail, dataSendAll, setDataSendAll, setDataSendListBranch }: IFReportDataExport) {
   const { isMenuSeq } = useCartContext();
   const [dataCount, setDataCount] = React.useState<any>([]);
   const [headValue, setHeadValue] = React.useState<string>('');
@@ -68,6 +69,7 @@ export default function ReportDataExport({ setOnDetail, dataSendAll, setDataSend
   const onHandleRetropective = async () => {
     setOnDetail && setOnDetail(1);
     setDataSendListBranch && setDataSendListBranch({});
+    setDataSendAll && setDataSendAll({})
   }
 
   const colum = [
@@ -112,7 +114,8 @@ export default function ReportDataExport({ setOnDetail, dataSendAll, setDataSend
           <Tooltip title="ย้อนกลับ" placement="right">
             <IconButton size='small' onClick={() => {
               setOnDetail(1),
-                setDataSendListBranch(null)
+                setDataSendListBranch({}),
+                setDataSendAll && setDataSendAll({})
             }}
             >
               <Avatar sx={{ bgcolor: '#aae8e6', width: 50, height: 50 }}>
