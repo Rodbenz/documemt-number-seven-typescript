@@ -72,6 +72,12 @@ export default function ReportDataExportBracnh({ setOnDetail, dataSendAll, dataS
       minWidth: 200
     },
     {
+      name: 'สำนักงานที่ดิน',
+      listname: 'BRANCH_NAME',
+      align: 'left',
+      minWidth: 250
+    },
+    {
       name: 'อำเภอ',
       listname: 'AMPHUR_NAME',
       align: 'left',
@@ -82,12 +88,6 @@ export default function ReportDataExportBracnh({ setOnDetail, dataSendAll, dataS
       listname: 'TUMBON_NAME',
       align: 'left',
       minWidth: 200
-    },
-    {
-      name: 'สำนักงานที่ดิน',
-      listname: 'BRANCH_NAME',
-      align: 'left',
-      minWidth: 250
     },
     {
       name: 'รอบบัญชี',
