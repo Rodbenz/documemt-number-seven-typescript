@@ -24,7 +24,7 @@ export default function ReportDataExportBracnh({ setOnDetail, dataSendAll, dataS
     try {
       let newData: any = [];
       let res = await REPORT_SEND_ALL(datasend)
-      console.log(res, 'REPORT_SEND_ALL');
+      console.log(res, 'REPORT_SEND_ALL', datasend);
       for (let i = 0; i < res.length; i++) {
         let dataItems = res[i];
         let UTM_CODE_ = dataItems.UTM_CODE ? dataItems.UTM_CODE:'';
@@ -170,7 +170,7 @@ export default function ReportDataExportBracnh({ setOnDetail, dataSendAll, dataS
   }, [dataSendListBranch])
   React.useEffect(() => {
     if (Object.keys(dataSendAll).length > 0) {
-      setHeadValue(dataSendAll?.SEMI_NAME)
+      setHeadValue(dataSendAll?.REPORT)
     }
   }, [dataSendAll])
   return (

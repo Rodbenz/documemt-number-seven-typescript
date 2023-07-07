@@ -50,10 +50,10 @@ export default function App({ Component, pageProps }: AppProps) {
     },
   });
 
-  const updateSendExport = () => {
+  const updateSendExport = async () => {
     try {
-      let updsendall = UPD_REPORT_SEND()
-      let updsendprov = UPD_REPORT_SEND_PROV()  
+      let updsendall = await UPD_REPORT_SEND()
+      let updsendprov = await UPD_REPORT_SEND_PROV()  
     } catch (e) {
 
     }
