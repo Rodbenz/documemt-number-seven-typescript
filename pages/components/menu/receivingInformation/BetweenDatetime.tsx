@@ -42,7 +42,7 @@ export default function BetweenDatetime(props: BetweenDatetime) {
                         <Stack direction={'row'} spacing={1}>
                             {/* <BasicDateTimePicker values={props.startDate} onChange={onchangesStartDate} namLabel='ตั้งแต่วันที่'/> */}
                             <AutocompleteMonth values={props.month} onchange={onchangesMonth} nameLabel='กรุณาเลือกเดือน'/>
-                            <MydatePikerYears values={props.year} onchange={onchangesYear} nameLabel='ถึงวันที่'/>
+                            <MydatePikerYears values={props.year} onchange={onchangesYear} nameLabel='กรุณาเลือกปี'/>
                             <Button variant='contained' size='small' onClick={props.onSearch}>ค้นหา</Button>
                             <Button variant='contained' size='small' color='error' sx={{color:'white'}} onClick={props.onClearValue}>ล้างค่า</Button>
                         </Stack>

@@ -141,10 +141,16 @@ export async function exportTxtReport(colum: any, dataList: any, reportName: any
 
 }
 
-export async function DownLoadLog(value:string, namefile:string) {
-    var blob = new Blob([value], { type: "text/plain;charset=utf-8" });
+export async function DownLoadLog(value:any, namefile:string) {
 
-    // Save the Blob as a file using FileSaver.js
-    saveAs(blob, namefile + ".txt");
+    if(Array.isArray(value)){
+        var blob = new Blob([value[0].txtLog], { type: "text/plain;charset=utf-8" });
+        saveAs(blob, namefile + ".txt");
+    }else{
+        var blob = new Blob([value], { type: "text/plain;charset=utf-8" });
+        saveAs(blob, namefile + ".txt");
+    }
+
+    // Save the Blob as a file using FileSaver.j
 
 }
