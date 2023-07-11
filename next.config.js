@@ -16,7 +16,11 @@ const nextConfig = {
     REACT_APP_API_AUTH: process.env.REACT_APP_API_AUTH,
     REACT_APP_API_EPVLINK: process.env.REACT_APP_API_EPVLINK,
     REACT_APP_API_BETW: process.env.REACT_APP_API_BETW,
-  }
+    REACT_APP_API_AIRFLOW: process.env.REACT_APP_API_AIRFLOW,
+  },
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production"
+  },
  
 }
 

@@ -39,6 +39,10 @@ export const headNameReceiving1 = [
         width: 100,
     },
     {
+        name: 'Action',
+        width: 100,
+    },
+    {
         name: 'จำนวนที่จัดส่ง',
         width: 10,
     },

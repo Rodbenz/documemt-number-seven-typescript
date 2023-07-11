@@ -140,3 +140,11 @@ export async function exportTxtReport(colum: any, dataList: any, reportName: any
     saveAs(blob, reportName + ".txt");
 
 }
+
+export async function DownLoadLog(value:string, namefile:string) {
+    var blob = new Blob([value], { type: "text/plain;charset=utf-8" });
+
+    // Save the Blob as a file using FileSaver.js
+    saveAs(blob, namefile + ".txt");
+
+}
