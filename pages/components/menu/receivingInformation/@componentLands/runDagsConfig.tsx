@@ -92,7 +92,7 @@ export default function RunDagsConfig(props: IRunDagsConfig) {
         await setNamefile(el.Description);
         let datasend: any = new Object();
         datasend.DAG = Object.keys(props.ele).length > 0 ? String(props.ele.DAG) : '';
-        datasend.year = el ? String(el.GET_YEARS) : '';
+        datasend.year = el ? String(el.GET_YEARS + 543) : '';
         datasend.month = el ? convertMonth(el.GET_MONTH) : '';
         datasend.land_office = el ? el.OrganizationID : '';
         try {
@@ -114,7 +114,7 @@ export default function RunDagsConfig(props: IRunDagsConfig) {
                 await setIsOpenLog(el.OrganizationID);
                 await setIsPlays("");
                 log != '' && (SnackbarSet('Run Dag เสร็จสิ้น', 'success', 3000));
-            }, 20000)
+            }, 30000)
         } catch (e) {
             console.log(e);
 
