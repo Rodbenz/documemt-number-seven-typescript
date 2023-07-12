@@ -114,7 +114,7 @@ export default function RunDagsConfig(props: IRunDagsConfig) {
                 await setIsOpenLog(el.OrganizationID);
                 await setIsPlays("");
                 log != '' && (SnackbarSet('Run Dag เสร็จสิ้น', 'success', 3000));
-            }, 30000)
+            }, 20000)
         } catch (e) {
             console.log(e);
 

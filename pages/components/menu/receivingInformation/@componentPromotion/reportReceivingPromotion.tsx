@@ -24,8 +24,8 @@ export default function ReportReceivingPromotion({ setOnDetail, dataSendDepartMe
   const [dataList, setDataList] = React.useState<any>([]);
   const [headValue, setHeadValue] = React.useState<string>('');
   const [colum, setColum] = React.useState<any>([]);
-  const [month, setMonth] = React.useState<any>(null)
-  const [year, setYear] = React.useState<any>(null)
+  const [startDate, setStartDate] = React.useState<any>(null)
+  const [endDate, setEndDate] = React.useState<any>(dayjs(new Date()).format('YYYY-MM-DD'))
 
   const _resDataList = async () => {
     let datasend: any = new Object();
@@ -71,24 +71,24 @@ export default function ReportReceivingPromotion({ setOnDetail, dataSendDepartMe
   }
 
   const onSearchDatebetween = () => {
-    if (!month) {
-      SnackbarSet('กรุณาเลือกเดือน', 'error', 3000);
-      return;
-    }
-    if (!year) {
-      SnackbarSet('กรุณาเลือกปี', 'error', 3000);
-      return;
-    }
-    let subyear = dayjs(year).format('YYYY');
+    // if (!month) {
+    //   SnackbarSet('กรุณาเลือกเดือน', 'error', 3000);
+    //   return;
+    // }
+    // if (!year) {
+    //   SnackbarSet('กรุณาเลือกปี', 'error', 3000);
+    //   return;
+    // }
+    let stDate = startDate? startDate :(`${dayjs(new Date()).format('YYYY')}-01-01`)
     const filteredData: any = dataList.filter((item: any) => {
-      const itemDate = item.IMPORT_DATE.split('-');
-      return itemDate[1] == month.MONTH_ID && itemDate[0] == subyear;
-    });
+      const itemDate = item.IMPORT_DATE.split('T')[0]
+      return itemDate >= stDate && itemDate <= endDate;
+    })
     setDataCount(filteredData)
   }
   const onClearValue = () => {
-    setMonth(null);
-    setYear(null);
+    setStartDate(null);
+    setEndDate(dayjs(new Date()).format('YYYY-MM-DD'));
     setDataCount(dataList)
   }
 
@@ -122,10 +122,10 @@ export default function ReportReceivingPromotion({ setOnDetail, dataSendDepartMe
         <Grid container>
           <Grid xs={12}>
             <BetweenDatetime
-              month={month}
-              setMonth={setMonth}
-              year={year}
-              setYear={setYear}
+              startDate={startDate}
+              setStartDate={setStartDate}
+              endDate={endDate}
+              setEndDate={setEndDate}
               onSearch={onSearchDatebetween}
               onClearValue={onClearValue}
             />

@@ -25,7 +25,7 @@ export default function ReportReceiving({ setOnDetail, dataSendDepartMent, setDa
   const [headValue, setHeadValue] = React.useState<string>('');
   const [colum, setColum] = React.useState<any>([]);
   const [startDate, setStartDate] = React.useState<any>(null)
-  const [endDate, setEndDate] = React.useState<any>(null)
+  const [endDate, setEndDate] = React.useState<any>(dayjs(new Date()).format('YYYY-MM-DD'))
 
   const _resDataList = async () => {
     let datasend: any = new Object();
@@ -73,24 +73,25 @@ export default function ReportReceiving({ setOnDetail, dataSendDepartMent, setDa
   }
 
   const onSearchDatebetween = () => {
-    if(!startDate){
-      SnackbarSet('กรุณาเลือกเดือน', 'error', 3000);
-      return;
-    }
-    if(!endDate){
-      SnackbarSet('กรุณาเลือกปี', 'error', 3000);
-      return;
-    }
-    let year = dayjs(endDate).format('YYYY');
+    
+    // if(!startDate){
+    //   SnackbarSet('กรุณาเลือกตั้งแต่วันที่', 'error', 3000);
+    //   return;
+    // }
+    // if(!endDate){
+    //   SnackbarSet('กรุณาเลือกปี', 'error', 3000);
+    //   return;
+    // }
+    let stDate = startDate? startDate :(`${dayjs(new Date()).format('YYYY')}-01-01`)
     const filteredData: any = dataList.filter((item: any) => {
-      const itemDate = item.IMPORT_DATE.split('-');
-      return itemDate[1] == startDate.MONTH_ID && itemDate[0] == year;
-    });
+      const itemDate = item.IMPORT_DATE.split('T')[0]
+      return itemDate >= stDate && itemDate <= endDate;
+    })
     setDataCount(filteredData)
   }
   const onClearValue = () => {
     setStartDate(null);
-    setEndDate(null);
+    setEndDate(dayjs(new Date()).format('YYYY-MM-DD'));
     setDataCount(dataList)
   }
 
@@ -124,10 +125,10 @@ export default function ReportReceiving({ setOnDetail, dataSendDepartMent, setDa
         <Grid container>
           <Grid xs={12}>
             <BetweenDatetime
-              month={startDate}
-              setMonth={setStartDate}
-              year={endDate}
-              setYear={setEndDate}
+              startDate={startDate}
+              setStartDate={setStartDate}
+              endDate={endDate}
+              setEndDate={setEndDate}
               onSearch={onSearchDatebetween}
               onClearValue={onClearValue}
             />

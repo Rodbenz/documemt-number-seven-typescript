@@ -40,6 +40,7 @@ import { useCartContext } from '@/context/Cartcontext';
 interface IFDepartmentLands {
     dataList?: any;
     hendname?: any;
+    refreshMenu:()=>void;
 }
 
 interface obj {
@@ -54,7 +55,7 @@ interface obj {
 }
 
 
-export default function DepartmentLands({ dataList, hendname }: IFDepartmentLands) {
+export default function DepartmentLands({ dataList, hendname, refreshMenu }: IFDepartmentLands) {
     const {setIsMenuReceiving} = useCartContext()
     const [onDetail, setOnDetail] = useState(1)
     const [dataSendDepartMent, setDataSendDepartMent] = useState<any>({})
@@ -97,6 +98,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                 await setLog(log);
                 await setIsOpenLog(el.SEMI_CODE);
                 log != '' && (SnackbarSet('Run Dag เสร็จสิ้น', 'success', 3000));
+                log != '' && refreshMenu()
                 await setIsPlays(0);
             }, 30000)
         } catch (e) {
@@ -123,6 +125,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
     };
     const handleCloseDagConfig = () => {
         setIsOpenpopConfig(false);
+        refreshMenu()
         console.log('5555555555555');
         
     };
@@ -139,8 +142,8 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                     'aria-labelledby': 'basic-button',
                 }}
             >
-                <MenuItem onClick={handleOnPlays}>Trigger Run Dag</MenuItem>
-                <MenuItem onClick={handleRunDagConfig}>Trigger Run Dag / config</MenuItem>
+                <MenuItem onClick={handleOnPlays}>รันข้อมูล ณ ปัจจุบัน</MenuItem>
+                <MenuItem onClick={handleRunDagConfig}>รันข้อมูลตามสำนักงาน</MenuItem>
             </Menu>
             <Grid container >
                 <Grid item xs={12}>

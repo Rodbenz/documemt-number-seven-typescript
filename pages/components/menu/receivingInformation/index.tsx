@@ -25,6 +25,10 @@ export default function ReceivingInformation() {
         }
     }
 
+    const refreshMenu = async() =>{
+        _selMenu(isMenuReceiving)
+    }
+
     React.useEffect(() => {
         if(Object.keys(isMenuReceiving).length > 0){
             console.log(isMenuReceiving,'isMenuSeq');
@@ -51,7 +55,7 @@ export default function ReceivingInformation() {
             {Object.keys(isMenuReceiving).length > 0  && (
                 Array.isArray(dataList) && dataList.length > 0 &&
                 isMenuReceiving.id === 1 &&
-                <DepartmentLands hendname={hendname} dataList={dataList}/>
+                <DepartmentLands hendname={hendname} dataList={dataList} refreshMenu={refreshMenu}/>
             )}
             {Object.keys(isMenuReceiving).length > 0  && (
                 Array.isArray(dataList) && dataList.length > 0 &&
