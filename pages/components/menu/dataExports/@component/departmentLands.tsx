@@ -12,6 +12,7 @@ import {
     Stack,
     Avatar,
     Paper,
+    Button,
 } from '@mui/material'
 import React from 'react'
 import { useState } from 'react';
@@ -22,6 +23,7 @@ import ReportDataExport from './reportDataExport';
 import { dateFormatTime, numberWithCommas } from '@/libs/outputDatas';
 import ReportDataExportBracnh from './reportDataExportBracnh';
 import ReportDataExportPlot from './reportDataExportPlot';
+import { useCartContext } from '@/context/Cartcontext';
 
 interface IFDepartmentLands {
     dataList?: any;
@@ -30,6 +32,7 @@ interface IFDepartmentLands {
 
 
 export default function DepartmentLands({ dataList, hendname }: IFDepartmentLands) {
+    const {setIsMenuDataExport} = useCartContext();
     const [onDetail, setOnDetail] = useState(1)
     const [dataSendAll, setDataSendAll] = useState<any>({})
     const [dataSendListBranch, setDataSendListBranch] = useState<any>({})
@@ -183,6 +186,9 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                     </TableBody>
                                 </Table>
                             </TableContainer>
+                            <Stack direction={'row'} justifyContent={'end'} pr={2} pb={1}>
+                                <Button variant='contained' onClick={() => setIsMenuDataExport({})}>ย้อนกลับ</Button>
+                            </Stack>
                         </Paper>
                     )}
                 {onDetail === 2 &&

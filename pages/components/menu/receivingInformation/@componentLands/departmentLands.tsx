@@ -14,7 +14,8 @@ import {
     Paper,
     Tooltip,
     Menu,
-    MenuItem
+    MenuItem,
+    Button
 } from '@mui/material'
 import React from 'react'
 import { useState } from 'react';
@@ -34,6 +35,7 @@ import el from 'date-fns/esm/locale/el/index.js';
 import FormDialog from '@/pages/components/@conponents/FormDialog';
 import RunDagsConfig from './runDagsConfig';
 import { SnackbarSet } from '@/pages/components/@conponents/popup/SnackbarSet';
+import { useCartContext } from '@/context/Cartcontext';
 
 interface IFDepartmentLands {
     dataList?: any;
@@ -53,6 +55,7 @@ interface obj {
 
 
 export default function DepartmentLands({ dataList, hendname }: IFDepartmentLands) {
+    const {setIsMenuReceiving} = useCartContext()
     const [onDetail, setOnDetail] = useState(1)
     const [dataSendDepartMent, setDataSendDepartMent] = useState<any>({})
     const [dataSendListBranch, setDataSendListBranch] = useState<any>({})
@@ -144,7 +147,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                     {onDetail === 1
                         && (
                             <Paper sx={{ width: '100%' }}>
-                                <TableContainer>
+                                <TableContainer sx={{ maxHeight: 700 }}>
                                     <Table>
                                         <TableHead>
                                             <TableRow>
@@ -265,6 +268,9 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                         </TableBody>
                                     </Table>
                                 </TableContainer>
+                                <Stack direction={'row'} justifyContent={'end'} pr={2} pb={1}>
+                                    <Button variant='contained' onClick={()=>setIsMenuReceiving({})}>ย้อนกลับ</Button>
+                                </Stack>
                             </Paper>
                         )}
                     {onDetail === 2 &&

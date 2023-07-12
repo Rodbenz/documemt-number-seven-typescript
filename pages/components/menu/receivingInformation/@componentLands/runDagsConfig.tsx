@@ -143,7 +143,7 @@ export default function RunDagsConfig(props: IRunDagsConfig) {
             </Grid>
             <Grid container>
                 <Paper sx={{ width: '100%' }}>
-                    <TableContainer sx={{ maxHeight: 700 }}>
+                    <TableContainer sx={{ maxHeight: 710 }}>
                         <Table>
                             <TableHead>
                                 <TableRow>

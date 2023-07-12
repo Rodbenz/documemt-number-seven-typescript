@@ -32,7 +32,7 @@ function BootstrapDialogTitle(props: DialogTitleProps) {
     const { children, onClose, ...other } = props;
 
     return (
-        <DialogTitle sx={{ m: 0, p: 2, backgroundColor: '#006e61' , color:'white'}} {...other}>
+        <DialogTitle sx={{ m: 0, p: 2, backgroundColor: '#006e61', color: 'white' }} {...other}>
             {children}
             {onClose ? (
                 <IconButton
@@ -71,6 +71,9 @@ export default function FormDialog({ open, formContent, namTitle, iconHeader, ma
                         formContent
                     }
                 </DialogContent>
+                <DialogActions>
+                    <Button variant={'contained'} onClick={handleClose}>ย้อนกลับ</Button>
+                </DialogActions>
             </Dialog>
         </div>
     );

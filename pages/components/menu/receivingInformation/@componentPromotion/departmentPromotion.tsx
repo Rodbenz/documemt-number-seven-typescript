@@ -12,6 +12,7 @@ import {
     Stack,
     Avatar,
     Paper,
+    Button,
 } from '@mui/material'
 import React from 'react'
 import { useState } from 'react';
@@ -23,6 +24,7 @@ import ReportReceivingPromotionBracnh from './reportReceivingPromotionBracnh';
 import ReportReceivingPlot from './reportReceivingPromotionPlot';
 import ReportReceivingPromotionUsedtype from './reportReceivingPromotionUsedtype';
 import RepportPromotionSubUseType from './repportPromotionSubUseType';
+import { useCartContext } from '@/context/Cartcontext';
 
 interface IFDepartmentPromotion {
     dataList?: any;
@@ -31,6 +33,7 @@ interface IFDepartmentPromotion {
 
 
 export default function DepartmentPromotion({ dataList, hendname }: IFDepartmentPromotion) {
+    const { setIsMenuReceiving } = useCartContext()
     const [onDetail, setOnDetail] = useState(1)
     const [dataSendDepartMent, setDataSendDepartMent] = useState<any>({})
     const [dataSendListBranch, setDataSendListBranch] = useState<any>({})
@@ -120,7 +123,7 @@ export default function DepartmentPromotion({ dataList, hendname }: IFDepartment
                                                             </Typography>
                                                         ) : (
                                                             <Typography sx={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={() => handleOnClick(item)}>
-                                                                {numberWithCommas (item.COUNTIMPORT)}
+                                                                {numberWithCommas(item.COUNTIMPORT)}
                                                             </Typography>
                                                         )}
                                                     </Box>
@@ -148,6 +151,9 @@ export default function DepartmentPromotion({ dataList, hendname }: IFDepartment
                                     </TableBody>
                                 </Table>
                             </TableContainer>
+                            <Stack direction={'row'} justifyContent={'end'} pr={2} pb={1}>
+                                <Button variant='contained' onClick={() => setIsMenuReceiving({})}>ย้อนกลับ</Button>
+                            </Stack>
                         </Paper>
                     )}
                 {onDetail === 2 &&
