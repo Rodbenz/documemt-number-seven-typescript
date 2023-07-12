@@ -33,6 +33,7 @@ import { DownLoadLog } from '@/libs/exportTXT';
 import el from 'date-fns/esm/locale/el/index.js';
 import FormDialog from '@/pages/components/@conponents/FormDialog';
 import RunDagsConfig from './runDagsConfig';
+import { SnackbarSet } from '@/pages/components/@conponents/popup/SnackbarSet';
 
 interface IFDepartmentLands {
     dataList?: any;
@@ -92,13 +93,12 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                 console.log(log);
                 await setLog(log);
                 await setIsOpenLog(el.SEMI_CODE);
-            }, 20000)
+                log != '' && (SnackbarSet('Run Dag เสร็จสิ้น', 'success', 3000));
+                await setIsPlays(0);
+            }, 30000)
         } catch (e) {
 
         }
-        setTimeout(async () => {
-            await setIsPlays(0);
-        }, 20000)
     }
 
     const handleRunDagConfig=()=>{

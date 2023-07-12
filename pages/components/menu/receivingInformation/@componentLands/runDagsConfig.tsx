@@ -8,6 +8,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import { DownLoadLog } from '@/libs/exportTXT';
+import { SnackbarSet } from '@/pages/components/@conponents/popup/SnackbarSet';
 
 interface IRunDagsConfig {
     ele?: any;
@@ -111,6 +112,7 @@ export default function RunDagsConfig(props: IRunDagsConfig) {
                 await setLogImport(data);
                 await setIsOpenLog(el.OrganizationID);
                 await setIsPlays("");
+                log != '' && (SnackbarSet('Run Dag เสร็จสิ้น', 'success', 3000));
             }, 20000)
         } catch (e) {
             console.log(e);
