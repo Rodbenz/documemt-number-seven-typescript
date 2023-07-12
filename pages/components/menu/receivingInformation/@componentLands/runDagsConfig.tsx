@@ -54,15 +54,16 @@ export default function RunDagsConfig(props: IRunDagsConfig) {
     const onClearValue = () => {
         setMonth(null);
         setYear(null);
+        setDataList([])
     }
 
     const hendname = [
-        // {
-        //     name: 'ปี/เดือน',
-        //     width: 100,
-        // },
         {
-            name: 'สำนักงาน',
+            name: 'รายการรับข้อมูล จาก กรมที่ดิน',
+            width: 100,
+        },
+        {
+            name: 'สำนักงานที่ดิน',
             width: 100,
         },
         {
@@ -70,7 +71,7 @@ export default function RunDagsConfig(props: IRunDagsConfig) {
             width: 100,
         },
         {
-            name: 'รายการรับข้อมูล จาก กรมที่ดิน',
+            name: 'จำนวน',
             width: 100,
         },
         {
@@ -105,8 +106,8 @@ export default function RunDagsConfig(props: IRunDagsConfig) {
                 dage.TYPE_NUMBER = taskIn[0].try_number;
                 let log = await taskInstancesLog(dage);
                 let setdata = {
-                    land_office:el.OrganizationID,
-                    txtLog:log
+                    land_office: el.OrganizationID,
+                    txtLog: log
                 }
                 let data = ([...logImport, setdata]);
                 await setLogImport(data);
@@ -120,14 +121,14 @@ export default function RunDagsConfig(props: IRunDagsConfig) {
         }
     }
 
-    const handledownLoadLog = (el:any) => {
+    const handledownLoadLog = (el: any) => {
         let data = (logImport.filter(person => person.land_office === el.OrganizationID));
         DownLoadLog(data, namefile)
     }
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         console.log(logImport);
-    },[logImport])
+    }, [logImport])
 
     return (
         <div>
@@ -168,6 +169,11 @@ export default function RunDagsConfig(props: IRunDagsConfig) {
                             <TableBody>
                                 {dataList?.map((item: any, index: any) => (
                                     <TableRow key={index}>
+                                        <TableCell align='center' sx={{ border: 'none' }}>
+                                            <Typography variant={'body1'} sx={{ ml: 1 }} >
+                                                {`${item.Description}`}
+                                            </Typography>
+                                        </TableCell>
                                         <TableCell align='left' sx={{ border: 'none' }}>
                                             <Typography variant={'body1'} sx={{ ml: 1, paddingLeft: 10 }} >
                                                 {`${item.OrganizationName}`}
@@ -180,7 +186,7 @@ export default function RunDagsConfig(props: IRunDagsConfig) {
                                         </TableCell>
                                         <TableCell align='center' sx={{ border: 'none' }}>
                                             <Typography variant={'body1'} sx={{ ml: 1 }} >
-                                                {`${item.Description}`}
+                                                {`${item.RecordTotal}`}
                                             </Typography>
                                         </TableCell>
                                         <TableCell align='center' sx={{ border: 'none' }}>
@@ -197,8 +203,8 @@ export default function RunDagsConfig(props: IRunDagsConfig) {
                                                     </IconButton>
                                                 </Tooltip>
                                                 <Tooltip title={'DownLoad log AirFlow'}>
-                                                    {logImport.some(person => person.land_office === item.OrganizationID)  ?
-                                                        <IconButton onClick={()=>handledownLoadLog(item)}>
+                                                    {logImport.some(person => person.land_office === item.OrganizationID) ?
+                                                        <IconButton onClick={() => handledownLoadLog(item)}>
                                                             <Avatar>
                                                                 <FileDownloadIcon color={'error'} />
                                                             </Avatar>
