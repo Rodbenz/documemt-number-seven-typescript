@@ -54,7 +54,7 @@ const options = [
   { id: 12, name: 'กรุงเทพมหานคร', img: '../../../image/LOGO/กรุงเทพมหานคร.jpg', width: 110, height: 100, paddingLeft: 10 },
 ]
 
-const iddisable = [1, 2, 3, 4 , 5, 6, 7, 8,9,10,11,12];
+const iddisable = [1, 2, 3, 4 , 5, 6, 7, 8,9];
 export default function MenuReceiving() {
   const { isMenuReceiving, setIsMenuReceiving } = useCartContext();
 

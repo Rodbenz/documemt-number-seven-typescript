@@ -26,31 +26,11 @@ export default function ReceivingInformation() {
 
         }
     }
-    const _selMenutype = async (el: any) => {
-        let datasend: any = {
-            "GOV_TYPE": String(el.id),
-        }
-        try {
-            let res = await REPORT_RECEIVE(datasend)
-            console.log(res, 'res');
-            await setDataList(res)
-        } catch (err) {
-
-        }
-    }
-
-    const refreshMenu = async () => {
-        _selMenu(isMenuReceiving)
-    }
-
     React.useEffect(() => {
         if (Object.keys(isMenuReceiving).length > 0) {
             console.log(isMenuReceiving, 'isMenuSeq');
-            if (isMenuReceiving.id == 1 || 2) {
                 _selMenu(isMenuReceiving)
-            } else {
-                _selMenutype(isMenuReceiving)
-            }
+
         }
         if (Object.keys(isMenuReceiving).length > 0) {
             setHendname([])
@@ -96,6 +76,14 @@ export default function ReceivingInformation() {
             setHendname([])
         }
     }, [isMenuReceiving])
+
+    const refreshMenu = () =>{
+        if (Object.keys(isMenuReceiving).length > 0) {
+            console.log(isMenuReceiving, 'isMenuSeq');
+                _selMenu(isMenuReceiving)
+
+        }
+    }
 
     return (
         <div>

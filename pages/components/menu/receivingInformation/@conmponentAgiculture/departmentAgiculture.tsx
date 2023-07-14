@@ -173,42 +173,7 @@ export default function DepartmentAgiculture({ dataList, hendname }: IFDepartmen
                                                             </Typography>
                                                         </div>
                                                     </TableCell>
-                                                    <TableCell align='center' sx={{ border: 'none' }} >
-                                                        <Box
-                                                            sx={{
-                                                                display: 'flex',
-                                                                flexDirection: 'row',
-                                                                alignItems: 'center',
-                                                            }}
-                                                        >
-                                                            <Tooltip title={'Run AirFlow'}>
-                                                                <IconButton onClick={(e) => handleClick(e, item)} >
-                                                                    <Avatar>
-                                                                        {item.SEMI_CODE === isPlays ?
-                                                                            <PauseIcon color='success' />
-                                                                            :
-                                                                            <PlayArrowIcon color={'primary'} />
-                                                                        }
-                                                                    </Avatar>
-                                                                </IconButton>
-                                                            </Tooltip>
-                                                            <Tooltip title={'DownLoad log AirFlow'}>
-                                                                {item.SEMI_CODE === isOpenLog && log != "" ?
-                                                                    <IconButton onClick={() => handledownLoadLog()}>
-                                                                        <Avatar>
-                                                                            <FileDownloadIcon color={'error'} />
-                                                                        </Avatar>
-                                                                    </IconButton>
-                                                                    :
-                                                                    <IconButton disabled>
-                                                                        <Avatar>
-                                                                            <FileDownloadIcon color={'disabled'} />
-                                                                        </Avatar>
-                                                                    </IconButton>
-                                                                }
-                                                            </Tooltip>
-                                                        </Box>
-                                                    </TableCell>
+                                                    
                                                     <TableCell align='center' sx={{ border: 'none' }} >
                                                         <Box py={1} sx={{
                                                             backgroundColor: '#53F8AA',
@@ -251,8 +216,8 @@ export default function DepartmentAgiculture({ dataList, hendname }: IFDepartmen
                                                             )}
                                                         </Box>
                                                     </TableCell>
-                                                    <TableCell align='center' sx={{ border: 'none' }}>{dateFormatTime(item.IMPORT_DATE)}</TableCell>
-                                                    <TableCell align='left' sx={{ border: 'none' }}>{item.TABLE_NAME}</TableCell>
+                                                    {/* <TableCell align='center' sx={{ border: 'none' }}>{dateFormatTime(item.IMPORT_DATE)}</TableCell>
+                                                    <TableCell align='left' sx={{ border: 'none' }}>{item.TABLE_NAME}</TableCell> */}
                                                 </TableRow>
                                             ))}
                                         </TableBody>
