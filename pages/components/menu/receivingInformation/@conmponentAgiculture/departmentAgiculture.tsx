@@ -21,10 +21,10 @@ import React from 'react'
 import { useState } from 'react';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import ReportReceiving from './reportReceiving';
+// import ReportReceiving from './reportReceiving';
 import { dateFormatTime, numberWithCommas } from '@/libs/outputDatas';
-import ReportReceivingBracnh from './reportReceivingBracnh';
-import ReportReceivingPlot from './reportReceivingPlot';
+// import ReportReceivingBracnh from './reportReceivingBracnh';
+// import ReportReceivingPlot from './reportReceivingPlot';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import { dagRuns, taskInstances, taskInstancesLog } from '@/service/run';
@@ -33,14 +33,14 @@ import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import { DownLoadLog } from '@/libs/exportTXT';
 import el from 'date-fns/esm/locale/el/index.js';
 import FormDialog from '@/pages/components/@conponents/FormDialog';
-import RunDagsConfig from './runDagsConfig';
+// import RunDagsConfig from './runDagsConfig';
 import { SnackbarSet } from '@/pages/components/@conponents/popup/SnackbarSet';
 import { useCartContext } from '@/context/Cartcontext';
 
 interface IFDepartmentLands {
     dataList?: any;
     hendname?: any;
-    refreshMenu:()=>void;
+    // refreshMenu?:()=>void;
 }
 
 interface obj {
@@ -55,7 +55,7 @@ interface obj {
 }
 
 
-export default function DepartmentLands({ dataList, hendname, refreshMenu }: IFDepartmentLands) {
+export default function DepartmentAgiculture({ dataList, hendname }: IFDepartmentLands) {
     const {setIsMenuReceiving} = useCartContext()
     const [onDetail, setOnDetail] = useState(1)
     const [dataSendDepartMent, setDataSendDepartMent] = useState<any>({})
@@ -98,7 +98,7 @@ export default function DepartmentLands({ dataList, hendname, refreshMenu }: IFD
                 await setLog(log);
                 await setIsOpenLog(el.SEMI_CODE);
                 log != '' && (SnackbarSet('Run Dag เสร็จสิ้น', 'success', 3000));
-                log != '' && refreshMenu()
+                // log != '' && refreshMenu()
                 await setIsPlays(0);
             }, 30000)
         } catch (e) {
@@ -125,26 +125,13 @@ export default function DepartmentLands({ dataList, hendname, refreshMenu }: IFD
     };
     const handleCloseDagConfig = () => {
         setIsOpenpopConfig(false);
-        refreshMenu()
+        // refreshMenu()
         console.log('5555555555555');
         
     };
 
     return (
         <React.Fragment>
-            <FormDialog open={isOpenpopConfig} formContent={(<RunDagsConfig ele={elementDag}/>)} namTitle={'RUN DAG'} handleClose={handleCloseDagConfig}/>
-            <Menu
-                id="basic-menu"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                MenuListProps={{
-                    'aria-labelledby': 'basic-button',
-                }}
-            >
-                <MenuItem onClick={handleOnPlays}>รันข้อมูล ณ ปัจจุบัน</MenuItem>
-                <MenuItem onClick={handleRunDagConfig}>รันข้อมูลตามสำนักงาน</MenuItem>
-            </Menu>
             <Grid container >
                 <Grid item xs={12}>
                     {onDetail === 1
@@ -276,7 +263,7 @@ export default function DepartmentLands({ dataList, hendname, refreshMenu }: IFD
                                 </Stack>
                             </Paper>
                         )}
-                    {onDetail === 2 &&
+                    {/* {onDetail === 2 &&
                         (
                             Object.keys(dataSendDepartMent).length > 0 && (
                                 <ReportReceiving
@@ -308,7 +295,7 @@ export default function DepartmentLands({ dataList, hendname, refreshMenu }: IFD
                                     dataSendListPlot={dataSendListPlot}
                                 />
                             )
-                        )}
+                        )} */}
                 </Grid>
             </Grid>
         </React.Fragment>

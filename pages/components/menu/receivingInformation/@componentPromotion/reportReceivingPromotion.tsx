@@ -79,7 +79,7 @@ export default function ReportReceivingPromotion({ setOnDetail, dataSendDepartMe
     //   SnackbarSet('กรุณาเลือกปี', 'error', 3000);
     //   return;
     // }
-    let stDate = startDate? startDate :(`${dayjs(new Date()).format('YYYY')}-01-01`)
+    let stDate = startDate? startDate :(`${dayjs(new Date()).format('YYYY-MM-DD')}`)
     const filteredData: any = dataList.filter((item: any) => {
       const itemDate = item.IMPORT_DATE.split('T')[0]
       return itemDate >= stDate && itemDate <= endDate;

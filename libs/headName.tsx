@@ -90,6 +90,186 @@ export const headNameReceiving2 = [
         width: 100,
     },
 ]
+export const headNameReceiving3 = [
+    {
+        name: 'กรมทางหลวง',
+        width: 100
+    },
+    {
+        name: 'จำนวนที่จัดส่ง',
+        width: 10,
+    },
+    {
+        name: 'จำนวนที่รับข้อมูลได้',
+        width: 10,
+    },
+    {
+        name: 'จำนวนที่รับข้อมูลไม่ได้',
+        width: 10,
+    },
+]
+export const headNameReceiving4 = [
+    {
+        name: 'สำนักงานการปฏิรูปที่ดินเพื่อเกษตรกรรม',
+        width: 100
+    },
+    {
+        name: 'จำนวนที่จัดส่ง',
+        width: 10,
+    },
+    {
+        name: 'จำนวนที่รับข้อมูลได้',
+        width: 10,
+    },
+    {
+        name: 'จำนวนที่รับข้อมูลไม่ได้',
+        width: 10,
+    },
+  ]
+export const headNameReceiving5 = [
+    {
+        name: 'การเคหะแห่งชาติ',
+        width: 100
+    },
+    {
+        name: 'จำนวนที่จัดส่ง',
+        width: 10,
+    },
+    {
+        name: 'จำนวนที่รับข้อมูลได้',
+        width: 10,
+    },
+    {
+        name: 'จำนวนที่รับข้อมูลไม่ได้',
+        width: 10,
+    },
+]
+export const headNameReceiving6 = [
+    {
+        name: 'สำนักงานการปฏิรูปที่ดินเพื่อเกษตรกรรม',
+        width: 100
+    },
+    {
+        name: 'จำนวนที่จัดส่ง',
+        width: 10,
+    },
+    {
+        name: 'จำนวนที่รับข้อมูลได้',
+        width: 10,
+    },
+    {
+        name: 'จำนวนที่รับข้อมูลไม่ได้',
+        width: 10,
+    },
+]
+export const headNameReceiving7 = [
+    {
+        name: 'ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร',
+        width: 100
+    },
+    {
+        name: 'จำนวนที่จัดส่ง',
+        width: 10,
+    },
+    {
+        name: 'จำนวนที่รับข้อมูลได้',
+        width: 10,
+    },
+    {
+        name: 'จำนวนที่รับข้อมูลไม่ได้',
+        width: 10,
+    },
+]
+export const headNameReceiving8 = [
+    {
+        name: 'ธนาคารอาคารสงเคราะห์',
+        width: 100
+    },
+    {
+        name: 'จำนวนที่จัดส่ง',
+        width: 10,
+    },
+    {
+        name: 'จำนวนที่รับข้อมูลได้',
+        width: 10,
+    },
+    {
+        name: 'จำนวนที่รับข้อมูลไม่ได้',
+        width: 10,
+    },
+]
+export const headNameReceiving9 = [
+    {
+        name: 'ศูนย์ข้อมูลอสังหาริมทรัพย์',
+        width: 100
+    },
+    {
+        name: 'จำนวนที่จัดส่ง',
+        width: 10,
+    },
+    {
+        name: 'จำนวนที่รับข้อมูลได้',
+        width: 10,
+    },
+    {
+        name: 'จำนวนที่รับข้อมูลไม่ได้',
+        width: 10,
+    },
+]
+export const headNameReceiving10 = [
+    {
+        name: 'การไฟฟ้าฝ่ายผลิตแห่งประเทศไทย',
+        width: 100
+    },
+    {
+        name: 'จำนวนที่จัดส่ง',
+        width: 10,
+    },
+    {
+        name: 'จำนวนที่รับข้อมูลได้',
+        width: 10,
+    },
+    {
+        name: 'จำนวนที่รับข้อมูลไม่ได้',
+        width: 10,
+    },
+]
+export const headNameReceiving11 = [
+    {
+        name: 'การรถไฟแห่งประเทศไทย',
+        width: 100
+    },
+    {
+        name: 'จำนวนที่จัดส่ง',
+        width: 10,
+    },
+    {
+        name: 'จำนวนที่รับข้อมูลได้',
+        width: 10,
+    },
+    {
+        name: 'จำนวนที่รับข้อมูลไม่ได้',
+        width: 10,
+    },
+]
+export const headNameReceiving12 = [
+    {
+        name: 'กรุงเทพมหานคร',
+        width: 100
+    },
+    {
+        name: 'จำนวนที่จัดส่ง',
+        width: 10,
+    },
+    {
+        name: 'จำนวนที่รับข้อมูลได้',
+        width: 10,
+    },
+    {
+        name: 'จำนวนที่รับข้อมูลไม่ได้',
+        width: 10,
+    },
+]
 // หัวตาราง จังหวัดทุกจังหวัด
 export const reportReceivingProvincePlot = [
   {
