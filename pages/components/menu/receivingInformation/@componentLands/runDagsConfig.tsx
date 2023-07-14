@@ -21,7 +21,7 @@ interface Xlog {
 
 export default function RunDagsConfig(props: IRunDagsConfig) {
     const [month, setMonth] = React.useState<any>(null)
-    const [year, setYear] = React.useState(null)
+    const [year, setYear] = React.useState<any>(dayjs(new Date()))
     const [dataList, setDataList] = React.useState<any>([])
     const [isPlays, setIsPlays] = React.useState<string>("")
     const [isOpenLog, setIsOpenLog] = React.useState<string>("")
@@ -53,7 +53,7 @@ export default function RunDagsConfig(props: IRunDagsConfig) {
     }
     const onClearValue = () => {
         setMonth(null);
-        setYear(null);
+        setYear(dayjs(new Date()));
         setDataList([])
     }
 
