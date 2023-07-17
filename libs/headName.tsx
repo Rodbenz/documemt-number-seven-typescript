@@ -32,6 +32,270 @@ export const haedlistMenuExport: any = [
     color: '#383838',
 },
 ];
+export const haedlistMenuExport2: any = [
+
+    {
+        name: 'กรมส่งเสริมการปกครองท้องถิ่น',
+        width: 10,
+        color: '#383838',
+    },
+    {
+        name: 'เตรียมส่ง',
+        width: 10,
+        color: '#f78801',
+    },
+    {
+        name: 'ส่งสำเร็จ',
+        width: 10,
+        color: '#02953f',
+    },
+    {
+        name: 'ส่งไม่สำเร็จ',
+        width: 10,
+        color: '#f90c0f',
+    },
+    {
+      name: 'วัน/เดือน/ปี ที่ส่งออกข้อมูลล่าสุด',
+      width: 10,
+      color: '#383838',
+  },
+  {
+    name: 'ที่เก็บไฟล์',
+    width: 10,
+    color: '#383838',
+},
+];
+export const haedlistMenuExport3: any = [
+
+    {
+        name: 'กรมทางหลวง',
+        width: 10,
+        color: '#383838',
+    },
+    {
+        name: 'เตรียมส่ง',
+        width: 10,
+        color: '#f78801',
+    },
+    {
+        name: 'ส่งสำเร็จ',
+        width: 10,
+        color: '#02953f',
+    },
+    {
+        name: 'ส่งไม่สำเร็จ',
+        width: 10,
+        color: '#f90c0f',
+    },
+    {
+      name: 'วัน/เดือน/ปี ที่ส่งออกข้อมูลล่าสุด',
+      width: 10,
+      color: '#383838',
+  },
+  {
+    name: 'ที่เก็บไฟล์',
+    width: 10,
+    color: '#383838',
+},
+];
+export const haedlistMenuExport4: any = [
+
+    {
+        name: 'สำนักงานการปฏิรูปที่ดินเพื่อเกษตรกรรม',
+        width: 10,
+        color: '#383838',
+    },
+    {
+        name: 'เตรียมส่ง',
+        width: 10,
+        color: '#f78801',
+    },
+    {
+        name: 'ส่งสำเร็จ',
+        width: 10,
+        color: '#02953f',
+    },
+    {
+        name: 'ส่งไม่สำเร็จ',
+        width: 10,
+        color: '#f90c0f',
+    },
+    {
+      name: 'วัน/เดือน/ปี ที่ส่งออกข้อมูลล่าสุด',
+      width: 10,
+      color: '#383838',
+  },
+  {
+    name: 'ที่เก็บไฟล์',
+    width: 10,
+    color: '#383838',
+},
+];
+export const haedlistMenuExport5: any = [
+
+    {
+        name: 'การทางพิเศษแห่งประเทศไทย',
+        width: 10,
+        color: '#383838',
+    },
+    {
+        name: 'เตรียมส่ง',
+        width: 10,
+        color: '#f78801',
+    },
+    {
+        name: 'ส่งสำเร็จ',
+        width: 10,
+        color: '#02953f',
+    },
+    {
+        name: 'ส่งไม่สำเร็จ',
+        width: 10,
+        color: '#f90c0f',
+    },
+    {
+      name: 'วัน/เดือน/ปี ที่ส่งออกข้อมูลล่าสุด',
+      width: 10,
+      color: '#383838',
+  },
+  {
+    name: 'ที่เก็บไฟล์',
+    width: 10,
+    color: '#383838',
+},
+];
+export const haedlistMenuExport6: any = [
+
+    {
+        name: 'การเคหะแห่งชาติ',
+        width: 10,
+        color: '#383838',
+    },
+    {
+        name: 'เตรียมส่ง',
+        width: 10,
+        color: '#f78801',
+    },
+    {
+        name: 'ส่งสำเร็จ',
+        width: 10,
+        color: '#02953f',
+    },
+    {
+        name: 'ส่งไม่สำเร็จ',
+        width: 10,
+        color: '#f90c0f',
+    },
+    {
+      name: 'วัน/เดือน/ปี ที่ส่งออกข้อมูลล่าสุด',
+      width: 10,
+      color: '#383838',
+  },
+  {
+    name: 'ที่เก็บไฟล์',
+    width: 10,
+    color: '#383838',
+},
+];
+export const haedlistMenuExport7: any = [
+
+    {
+        name: 'ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร',
+        width: 10,
+        color: '#383838',
+    },
+    {
+        name: 'เตรียมส่ง',
+        width: 10,
+        color: '#f78801',
+    },
+    {
+        name: 'ส่งสำเร็จ',
+        width: 10,
+        color: '#02953f',
+    },
+    {
+        name: 'ส่งไม่สำเร็จ',
+        width: 10,
+        color: '#f90c0f',
+    },
+    {
+      name: 'วัน/เดือน/ปี ที่ส่งออกข้อมูลล่าสุด',
+      width: 10,
+      color: '#383838',
+  },
+  {
+    name: 'ที่เก็บไฟล์',
+    width: 10,
+    color: '#383838',
+},
+];
+export const haedlistMenuExport8: any = [
+
+    {
+        name: 'ธนาคารอาคารสงเคราะห์',
+        width: 10,
+        color: '#383838',
+    },
+    {
+        name: 'เตรียมส่ง',
+        width: 10,
+        color: '#f78801',
+    },
+    {
+        name: 'ส่งสำเร็จ',
+        width: 10,
+        color: '#02953f',
+    },
+    {
+        name: 'ส่งไม่สำเร็จ',
+        width: 10,
+        color: '#f90c0f',
+    },
+    {
+      name: 'วัน/เดือน/ปี ที่ส่งออกข้อมูลล่าสุด',
+      width: 10,
+      color: '#383838',
+  },
+  {
+    name: 'ที่เก็บไฟล์',
+    width: 10,
+    color: '#383838',
+},
+];
+export const haedlistMenuExport9: any = [
+
+    {
+        name: 'ศูนย์ข้อมูลอสังหาริมทรัพย์',
+        width: 10,
+        color: '#383838',
+    },
+    {
+        name: 'เตรียมส่ง',
+        width: 10,
+        color: '#f78801',
+    },
+    {
+        name: 'ส่งสำเร็จ',
+        width: 10,
+        color: '#02953f',
+    },
+    {
+        name: 'ส่งไม่สำเร็จ',
+        width: 10,
+        color: '#f90c0f',
+    },
+    {
+      name: 'วัน/เดือน/ปี ที่ส่งออกข้อมูลล่าสุด',
+      width: 10,
+      color: '#383838',
+  },
+  {
+    name: 'ที่เก็บไฟล์',
+    width: 10,
+    color: '#383838',
+},
+];
 // หัวตาราง การรับข้อมูล จาก กรมที่ดิน
 export const headNameReceiving1 = [
     {

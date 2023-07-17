@@ -95,7 +95,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                         </Avatar>
                                                         <Typography>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Typography>
                                                         <Typography variant={'body1'} sx={{ ml: 1 }} >
-                                                            {`${index + 1}.${item.REPORT}`}
+                                                            {`${index + 1}.${item.TYPE_NAME}`}
                                                         </Typography>
                                                     </div>
                                                 </TableCell>
@@ -104,13 +104,13 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                         backgroundColor: '#e3f2fd',
 
                                                     }}>
-                                                        {item.POST_DOL1 == null ? (
+                                                        {item.ST_POSTDOL1 == null ? (
                                                             <Typography >
-                                                                {item.POST_DOL1 ? item.POST_DOL1 : '0'}
+                                                                {item.ST_POSTDOL1 ? item.ST_POSTDOL1 : '0'}
                                                             </Typography>
                                                         ) : (
                                                             <Typography sx={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={() => handleOnClick(item, 1)}>
-                                                                {item.POST_DOL1 ? numberWithCommas(item.POST_DOL1) : '0'}
+                                                                {item.ST_POSTDOL1 ? numberWithCommas(item.ST_POSTDOL1) : '0'}
                                                             </Typography>
                                                         )}
                                                     </Box>
@@ -120,13 +120,13 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                         backgroundColor: '#e3f2fd',
                                                         // width: 100
                                                     }}>
-                                                        {item.POST_DOL3 == null ? (
+                                                        {item.ST_POSTDOL3 == null ? (
                                                             <Typography >
-                                                                {item.POST_DOL3 ? item.POST_DOL3 : '0'}
+                                                                {item.ST_POSTDOL3 ? item.ST_POSTDOL3 : '0'}
                                                             </Typography>
                                                         ) : (
                                                             <Typography sx={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={() => handleOnClick(item, 3)}>
-                                                                {item.POST_DOL3 ? numberWithCommas(item.POST_DOL3) : '0'}
+                                                                {item.ST_POSTDOL3 ? numberWithCommas(item.ST_POSTDOL3) : '0'}
                                                             </Typography>
                                                         )}
                                                     </Box>
@@ -136,13 +136,13 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                         backgroundColor: '#e3f2fd',
                                                         // width: 100
                                                     }}>
-                                                        {item.POST_DOL2 == null ? (
+                                                        {item.ST_POSTDOL2 == null ? (
                                                             <Typography >
-                                                                {item.POST_DOL2 ? numberWithCommas(item.POST_DOL2) : '0'}
+                                                                {item.ST_POSTDOL2 ? numberWithCommas(item.ST_POSTDOL2) : '0'}
                                                             </Typography>
                                                         ) : (
                                                             <Typography sx={{ cursor: 'pointer', textDecoration: 'underline' }} onClick={() => handleOnClick(item, 2)}>
-                                                                {item.POST_DOL2 ? numberWithCommas(item.POST_DOL2) : '0'}
+                                                                {item.ST_POSTDOL2 ? numberWithCommas(item.ST_POSTDOL2) : '0'}
                                                             </Typography>
                                                         )}
                                                         {/* //วัน/เดือน/ปี ส่งออก */}
@@ -171,12 +171,12 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                     }}>
                                                         {item.POST_SAVE == 0 ? (
                                                             <Typography >
-                                                                {/* {item.POST_DOL2 ? item.POST_DOL2 : '0'} */}
+                                                                {/* {item.ST_POSTDOL2 ? item.ST_POSTDOL2 : '0'} */}
                                                             </Typography>
                                                         ) : (
                                                             <Typography >
                                                                 10.13.16.21\D:\Data2DOL\LAND\ระหว่างรอบบัญชี 2566-2569\LOCAL
-                                                                {/* {item.POST_DOL2 ? item.POST_DOL2 : '0'} */}
+                                                                {/* {item.ST_POSTDOL2 ? item.ST_POSTDOL2 : '0'} */}
                                                             </Typography>
                                                         )}
                                                     </Box>

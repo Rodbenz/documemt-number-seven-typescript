@@ -30,7 +30,7 @@ const options = [
   { id: 12, name: 'กรุงเทพมหานคร', img: '../../../image/LOGO/กรุงเทพมหานคร.jpg', width: 110, height: 100, paddingLeft: 10 },
 ]
 
-const iddisable = [1];
+const iddisable = [1, 2, 3, 4, 5, 6, 7, 8, 9,];
 export default function MenuDataExport() {
   const { isMenuDataExport, setIsMenuDataExport } = useCartContext();
 
@@ -40,7 +40,7 @@ export default function MenuDataExport() {
   return (
     <div style={{ width: '100%', height: 110, zIndex: 1 }}>
       <Grid container py={1} pl={20} pr={10}>
-        <Grid item sx={{backgroundColor:'#dbf2f2', width:'100%',  borderRadius:5 }} pb={1} pl={2}>
+        <Grid item sx={{ backgroundColor: '#dbf2f2', width: '100%', borderRadius: 5 }} pb={1} pl={2}>
           <Typography variant='h4'>การส่งออกข้อมูล</Typography>
         </Grid>
       </Grid>

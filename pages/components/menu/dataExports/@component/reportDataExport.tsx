@@ -34,10 +34,10 @@ export default function ReportDataExport({ setOnDetail, dataSendAll, setDataSend
 
   const _resDataList = async () => {
     let datasend: any = dataSendAll;
-    try {
+    // try {
       let newData: any = [];
       let res = await REPORT_SEND_PROVINCE(datasend)
-      console.log(res, 'REPORT_SEND_PROVINCE');
+      console.log(res, 'REPORT_SEND_PROVINCE', datasend);
       for (let i = 0; i < res.length; i++) {
         let dataItems = res[i];
         dataItems.ROWNUMBER = String(i + 1);
@@ -48,9 +48,9 @@ export default function ReportDataExport({ setOnDetail, dataSendAll, setDataSend
       console.log(newData, 'newData');
       await setDataCount([])
       await setDataCount(newData)
-    } catch (e) {
-      console.log(e);
-    }
+    // } catch (e) {
+    //   console.log(e);
+    // }
   }
 
   const onhandleClickCount = async (el: any) => {

@@ -250,8 +250,8 @@ export async function REPORT_RECEIVE_ALL(datasend:any) {
         return false
     }
 }
-export async function REPORT_SEND() {
-    let url = `${process.env.REACT_APP_API_HOST}/REPORT/REPORT_SEND`;
+export async function REPORT_SEND(id:any) {
+    let url = `${process.env.REACT_APP_API_HOST}/REPORT/REPORT_SEND${id}`;
     AddLoading()
     try {
         let res = await axios.get(url)
@@ -294,6 +294,8 @@ export async function REPORT_SEND_PROVINCE(datasend:any) {
     AddLoading()
     try {
         let res = await axios.post(url, datasend)
+        console.log(res,'5555555555555555');
+        
         let data = res.data
         RemoveLoading()
         return data.result
