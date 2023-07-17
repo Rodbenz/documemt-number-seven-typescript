@@ -32,18 +32,18 @@ interface IFDepartmentLands {
 
 
 export default function DepartmentLands({ dataList, hendname }: IFDepartmentLands) {
-    const {setIsMenuDataExport} = useCartContext();
+    const { isMenuDataExport, setIsMenuDataExport } = useCartContext();
     const [onDetail, setOnDetail] = useState(1)
     const [dataSendAll, setDataSendAll] = useState<any>({})
     const [dataSendListBranch, setDataSendListBranch] = useState<any>({})
     const [dataSendListPlot, setDataSendListPlot] = useState<any>({})
 
-    const handleOnClick = async (el: any, type:number) => {
+    const handleOnClick = async (el: any, type: number) => {
         el.FLAG_TYPE = String(el.FLAG_TYPE)
         el.PARCEL_TYPE = String(el.PARCEL_TYPE)
         el.POST_DOL = String(type)
         console.log(el);
-        
+
         if (el.COUNTIMPORT != 0) {
             await setOnDetail(2)
             await setDataSendAll(el)
@@ -174,10 +174,15 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                                                 {/* {item.ST_POSTDOL2 ? item.ST_POSTDOL2 : '0'} */}
                                                             </Typography>
                                                         ) : (
-                                                            <Typography >
-                                                                10.13.16.21\D:\Data2DOL\LAND\ระหว่างรอบบัญชี 2566-2569\LOCAL
-                                                                {/* {item.ST_POSTDOL2 ? item.ST_POSTDOL2 : '0'} */}
-                                                            </Typography>
+                                                            isMenuDataExport.id == 1 ?
+                                                                <Typography >
+                                                                    10.13.16.21\D:\Data2DOL\LAND\ระหว่างรอบบัญชี 2566-2569\LOCAL
+                                                                    {/* {item.ST_POSTDOL2 ? item.ST_POSTDOL2 : '0'} */}
+                                                                </Typography>
+                                                                :
+                                                                <Typography >
+
+                                                                </Typography>
                                                         )}
                                                     </Box>
                                                 </TableCell>
