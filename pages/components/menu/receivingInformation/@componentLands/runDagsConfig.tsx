@@ -9,6 +9,7 @@ import PauseIcon from '@mui/icons-material/Pause';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import { DownLoadLog } from '@/libs/exportTXT';
 import { SnackbarSet } from '@/pages/components/@conponents/popup/SnackbarSet';
+import { delDags } from '@/service/del';
 
 interface IRunDagsConfig {
     ele?: any;
@@ -45,7 +46,7 @@ export default function RunDagsConfig(props: IRunDagsConfig) {
 
         try {
             let res = await DATASUMMARY(datasend);
-            console.log(res, datasend);
+            console.log(res, 'DATASUMMARY', datasend);
             await setDataList(res);
         } catch (e) {
 
@@ -114,6 +115,7 @@ export default function RunDagsConfig(props: IRunDagsConfig) {
                 await setIsOpenLog(el.OrganizationID);
                 await setIsPlays("");
                 log != '' && (SnackbarSet('Run Dag เสร็จสิ้น', 'success', 3000));
+                log != '' && (airflowDeleteData(el));
             }, 20000)
         } catch (e) {
             console.log(e);
@@ -126,9 +128,26 @@ export default function RunDagsConfig(props: IRunDagsConfig) {
         DownLoadLog(data, namefile)
     }
 
+    const airflowDeleteData = async (el: any) => {
+        try {
+            let datasend: any = new Object();
+            datasend.GET_YEARS = year ? (dayjs(year).format('YYYY-MM-DD')).split('-')[0] : '';
+            datasend.GET_MONTH = month ? String(month.MONTH_SEQ) : '';
+            datasend.SEMI_CODE = Object.keys(props.ele).length > 0 ? String(props.ele.SEMI_CODE) : '';
+            datasend.BRANCH_CODE = el ? el.OrganizationID : '';
+            setTimeout(async () => {
+                let dag = Object.keys(props.ele).length > 0 ? props.ele.DAG : '';
+                let del = await delDags(dag, datasend);
+                console.log(del, 'airflowDeleteData');
+            }, 1000)
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     React.useEffect(() => {
-        console.log(logImport);
-    }, [logImport])
+        console.log(props.ele, 'elelelelelelelele');
+    }, [props.ele])
 
     return (
         <div>
@@ -192,15 +211,23 @@ export default function RunDagsConfig(props: IRunDagsConfig) {
                                         <TableCell align='center' sx={{ border: 'none' }}>
                                             <Stack direction={'row'} justifyContent={'center'}>
                                                 <Tooltip title={'Run AirFlow'}>
-                                                    <IconButton onClick={() => handleOnPlays(item)}>
-                                                        <Avatar>
-                                                            {item.OrganizationID === isPlays ?
-                                                                <PauseIcon color='success' />
-                                                                :
-                                                                <PlayArrowIcon color={'primary'} />
-                                                            }
-                                                        </Avatar>
-                                                    </IconButton>
+                                                    {item.DEF == 0 ?
+                                                        <IconButton disabled>
+                                                            <Avatar>
+                                                                <PlayArrowIcon />
+                                                            </Avatar>
+                                                        </IconButton>
+                                                        :
+                                                        <IconButton onClick={() => handleOnPlays(item)}>
+                                                            <Avatar>
+                                                                {item.OrganizationID === isPlays ?
+                                                                    <PauseIcon color='success' />
+                                                                    :
+                                                                    <PlayArrowIcon color={'primary'} />
+                                                                }
+                                                            </Avatar>
+                                                        </IconButton>
+                                                    }
                                                 </Tooltip>
                                                 <Tooltip title={'DownLoad log AirFlow'}>
                                                     {logImport.some(person => person.land_office === item.OrganizationID) ?

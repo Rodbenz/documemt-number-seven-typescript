@@ -8,7 +8,7 @@
     "start": "next start -p 1000",
     "lint": "next lint",
     "export": "next build && next export",
-    "PRO":"next build && next start -p 1000"
+    "PRO": "next build && next start -p 1000"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -23,6 +23,7 @@
     "@types/react": "18.0.31",
     "@types/react-dom": "18.0.11",
     "axios": "^1.4.0",
+    "chart.js": "^4.3.0",
     "date-fns": "^2.29.3",
     "dayjs": "^1.11.7",
     "eslint": "8.37.0",
@@ -38,6 +39,7 @@
     "next": "13.2.4",
     "npm": "^9.7.1",
     "react": "18.2.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
     "react-redux": "^8.0.5",

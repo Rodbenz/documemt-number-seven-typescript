@@ -148,6 +148,14 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
               >
                 <Typography textAlign="center">การส่งออกข้อมูล</Typography>
               </MenuItem>
+              <MenuItem onClick={() => {
+                router.push('/components/menu/overview')
+                handleCloseNavMenu()
+              }}
+              selected={ routerPath.route === '/components/menu/overview'}
+              >
+                <Typography textAlign="center">ภาพรวม</Typography>
+              </MenuItem>
               {/* <MenuItem onClick={() => {
                 router.push('/components/menu/reportImport')
                 handleCloseNavMenu()
@@ -249,6 +257,25 @@ function ResponsiveAppBar({ setIsMenu }: ResponsiveAppBarProps) {
               }}
             >
               การส่งออกข้อมูล
+            </Button>
+            <Button
+              onClick={() => {
+                router.push('/components/menu/overview')
+                handleCloseNavMenu()
+              }}
+              sx={{ 
+                my: 2, 
+                color: 'white', 
+                display: 'block', 
+                fontWeight: 700, 
+                fontSize: 18, 
+                backgroundColor: routerPath.route === '/components/menu/overview' ? '#06534a' : '',
+                "&:hover": {
+                  backgroundColor: "#79b7b0"
+                }
+              }}
+            >
+              ภาพรวม
             </Button>
             {/* <Button
               onClick={() => {
