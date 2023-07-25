@@ -346,7 +346,7 @@ export const headNameReceiving2 = [
         width: 10,
     },
     {
-        name: 'วันที่ รับข้อมูล',
+        name: 'วันที่รับข้อมูลล่าสุด',
         width: 10,
     },
     {
