@@ -275,27 +275,33 @@ export async function exportExcelReport(colum: any, dataList: any, reportName: s
         columnName.push(colum[i].name)
         let setField = {
             key: colum[i].listname,
-            width: (colum[i].name.length + 10),
+            width: (colum[i].name.length + 5),
         }
         fieldColumn.push(setField);
     }
     console.log(columnName, fieldColumn, reportName);
     const workbook = new Excel.Workbook();
     const worksheet = workbook.addWorksheet("Document");
+    worksheet.mergeCells(`A1:D1`);
+    worksheet.getCell("A1").value = reportName;
+    worksheet.getCell("A1").font = { bold: true };
+    
+    // worksheet.getCell('A1').alignment = { horizontal: 'center', vertical: 'middle' };
 
-    worksheet.getRow(1).values = columnName;
-    worksheet.getRow(1).font = { bold: true };
-    worksheet.getRow(1).height = 20.25;
-    worksheet.getRow(1).alignment = { vertical: 'middle', horizontal: 'center' };
+    worksheet.getRow(3).height = 22.00;
+    worksheet.getRow(3).values = columnName;
+    worksheet.getRow(3).font = { bold: true };
+    worksheet.getRow(3).height = 20.25;
+    worksheet.getRow(3).alignment = { vertical: 'middle', horizontal: 'center' };
 
     worksheet.columns = fieldColumn;
 
     for (let i in dataList) {
-        worksheet.addRow(dataList[i]);
+        worksheet.addRow(dataList[i])
     }
 
-    for(let i = 0; i < colum.length; i++){
-        worksheet.getColumn(i+1).alignment = { vertical: 'middle', horizontal: colum[i].align };
+    for (let i = 0; i < colum.length; i++) {
+        worksheet.getColumn(i + 1).alignment = { vertical: 'middle', horizontal: colum[i].align };
     }
 
     const buffer: any = await workbook.xlsx.writeBuffer();
@@ -306,3 +312,4 @@ export async function exportExcelReport(colum: any, dataList: any, reportName: s
 
     saveAs(blob, reportName + fileExtension);
 }
+
