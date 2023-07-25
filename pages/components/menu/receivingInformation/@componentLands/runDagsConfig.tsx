@@ -100,7 +100,7 @@ export default function RunDagsConfig(props: IRunDagsConfig) {
             let dage = await dagRunsCofig(datasend);
             dage.DAG = dage.dag_id;
             dage.DAG_RUN_ID = dage.dag_run_id;
-            console.log(dage, 'handleOnPlays');
+            console.log(dage, 'handleOnPlays',datasend);
             setTimeout(async () => {
                 let taskIn = await taskInstances(dage);
                 dage.TASK_ID = taskIn[0].task_id;
