@@ -392,7 +392,7 @@ export const headNameReceiving4 = [
   ]
 export const headNameReceiving5 = [
     {
-        name: 'การเคหะแห่งชาติ',
+        name: 'การทางพิเศษแห่งประเทศไทย',
         width: 100
     },
     {
@@ -410,7 +410,7 @@ export const headNameReceiving5 = [
 ]
 export const headNameReceiving6 = [
     {
-        name: 'สำนักงานการปฏิรูปที่ดินเพื่อเกษตรกรรม',
+        name: 'การเคหะแห่งชาติ',
         width: 100
     },
     {
