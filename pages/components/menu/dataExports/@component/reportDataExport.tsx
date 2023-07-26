@@ -104,7 +104,7 @@ export default function ReportDataExport({ setOnDetail, dataSendAll, setDataSend
     console.log(dataSendAll, 'dataSendAll');
     if (Object.keys(dataSendAll).length > 0) {
       _resDataList();
-      setHeadValue(dataSendAll.REPORT);
+      setHeadValue(dataSendAll.TYPE_NAME);
     }
   }, [dataSendAll])
   return (
