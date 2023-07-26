@@ -170,7 +170,7 @@ export default function ReportDataExportBracnh({ setOnDetail, dataSendAll, dataS
   }, [dataSendListBranch])
   React.useEffect(() => {
     if (Object.keys(dataSendAll).length > 0) {
-      setHeadValue(dataSendAll?.REPORT)
+      setHeadValue(dataSendAll?.TYPE_NAME)
     }
   }, [dataSendAll])
   return (
@@ -192,7 +192,7 @@ export default function ReportDataExportBracnh({ setOnDetail, dataSendAll, dataS
         </Stack>
         <Grid container>
           <Grid xs={12}>
-              <FixedHeaderContent dataList={dataCount} colum={colum} onhandleClickCount={onhandleClickCount} onHandleRetropective={onHandleRetropective} exportReport/>
+              <FixedHeaderContent dataList={dataCount} colum={colum} onhandleClickCount={onhandleClickCount} onHandleRetropective={onHandleRetropective} reportName={headValue} exportReport />
             </Grid>
         </Grid>
       </>

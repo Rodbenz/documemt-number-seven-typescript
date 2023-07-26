@@ -127,7 +127,7 @@ export default function ReportDataExport({ setOnDetail, dataSendAll, setDataSend
         </Stack>
         <Grid container>
           <Grid xs={12}>
-            <FixedHeaderContent dataList={dataCount} colum={colum} onhandleClickCount={onhandleClickCount} onHandleRetropective={onHandleRetropective} exportReport/>
+            <FixedHeaderContent dataList={dataCount} colum={colum} onhandleClickCount={onhandleClickCount} onHandleRetropective={onHandleRetropective} />
           </Grid>
         </Grid>
       </>
