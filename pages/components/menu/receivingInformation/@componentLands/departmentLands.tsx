@@ -271,7 +271,7 @@ export default function DepartmentLands({ dataList, hendname, refreshMenu }: IFD
                                         </TableBody>
                                     </Table>
                                 </TableContainer>
-                                <Stack direction={'row'} justifyContent={'end'} pr={2} pb={1}>
+                                <Stack direction={'row'} justifyContent={'end'} pr={2} pb={0.5}>
                                     <Button variant='contained' onClick={()=>setIsMenuReceiving({})}>ย้อนกลับ</Button>
                                 </Stack>
                             </Paper>

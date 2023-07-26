@@ -62,7 +62,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                 {onDetail === 1
                     && (
                         <Paper sx={{ width: '100%' }}>
-                            <TableContainer>
+                            <TableContainer sx={{ maxHeight: 700 }}>
                                 <Table>
                                     <TableHead>
                                         <TableRow>
@@ -191,7 +191,7 @@ export default function DepartmentLands({ dataList, hendname }: IFDepartmentLand
                                     </TableBody>
                                 </Table>
                             </TableContainer>
-                            <Stack direction={'row'} justifyContent={'end'} pr={2} pb={1}>
+                            <Stack direction={'row'} justifyContent={'end'} pr={2} pb={0.5}>
                                 <Button variant='contained' onClick={() => setIsMenuDataExport({})}>ย้อนกลับ</Button>
                             </Stack>
                         </Paper>

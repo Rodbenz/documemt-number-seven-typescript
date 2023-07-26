@@ -18,7 +18,11 @@ import { UPD_REPORT_SEND, UPD_REPORT_SEND_PROV } from '@/service/upd';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [isMenu, setIsMenu] = React.useState(false);
-  const router = useRouter()
+  const router:any = useRouter()
+
+  React.useEffect(()=>{
+    console.log(router.query.token);
+  },[router])
 
   const theme = createTheme({
     typography: {

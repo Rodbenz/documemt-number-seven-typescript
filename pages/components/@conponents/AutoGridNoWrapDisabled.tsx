@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Paper, Typography, styled } from '@mui/material';
+import { Card, Paper, Typography, styled } from '@mui/material';
 
 
-const StyledPaper = styled(Paper)(({ theme }) => ({
+const StyledPaper = styled(Card)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
   padding: theme.spacing(2),
