@@ -72,7 +72,15 @@ export default function RunDagsConfig(props: IRunDagsConfig) {
             width: 100,
         },
         {
-            name: 'จำนวน',
+            name: 'จำนวนข้อมูลต้นทาง',
+            width: 100,
+        },
+        {
+            name: 'จำนวนข้อมูลที่ได้รับ',
+            width: 100,
+        },
+        {
+            name: 'จำนวนข้อมูลที่พบปัญหา',
             width: 100,
         },
         {
@@ -206,6 +214,16 @@ export default function RunDagsConfig(props: IRunDagsConfig) {
                                         <TableCell align='center' sx={{ border: 'none' }}>
                                             <Typography variant={'body1'} sx={{ ml: 1 }} >
                                                 {`${item.RecordTotal}`}
+                                            </Typography>
+                                        </TableCell>
+                                        <TableCell align='center' sx={{ border: 'none' }}>
+                                            <Typography variant={'body1'} sx={{ ml: 1 }} >
+                                                {item.COUNT_ ? `${item.COUNT_}`:`0`}
+                                            </Typography>
+                                        </TableCell>
+                                        <TableCell align='center' sx={{ border: 'none' }}>
+                                            <Typography variant={'body1'} sx={{ ml: 1 }} >
+                                                {item.DEF ? `${item.DEF}`:`0`}
                                             </Typography>
                                         </TableCell>
                                         <TableCell align='center' sx={{ border: 'none' }}>
