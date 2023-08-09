@@ -21,7 +21,7 @@ export function setStatus(status: any) {
         return 'เพิ่ม';
     } else if (status == 'DEL') {
         return 'ลบ';
-    } 
+    }
 }
 
 export const numberWithCommas = (x: any) => {
@@ -75,7 +75,7 @@ export const dateFormat = (date: any, props = ['d', 'm', 'y'], col = "MONTH_NAME
     }
 }
 
-export const dateFormatTime = (date:any, method:any = null) => {
+export const dateFormatTime = (date: any, method: any = null) => {
     if (method == null) {
         method = 'MONTH_NAME_TH'
     }
@@ -84,7 +84,7 @@ export const dateFormatTime = (date:any, method:any = null) => {
         return ""
     }
     let datex = date.split("T")
-    
+
     try {
         let newdate = datex[0].split("-")
         let year = newdate[0]
@@ -103,7 +103,7 @@ export const dateFormatTime = (date:any, method:any = null) => {
         return false
     }
 }
-export const dateFormatFullTime = (date:any, method:any = null) => {
+export const dateFormatFullTime = (date: any, method: any = null) => {
     if (method == null) {
         method = 'MONTH_NAME_TH'
     }
@@ -181,6 +181,32 @@ export const dateFormatTimeTHSlash = (date: any, method: any = null) => {
             }
         }
         return String(parseInt(d)) + " " + mname + " " + (parseInt(year))
+    }
+    catch {
+        return false
+    }
+}
+export const dateFormatTimeKheed = (date: any, method: any = null) => {
+    // data yyyy-mm-d
+    if (method == null) {
+        method = 'MONTH_NAME_TH'
+    }
+    if (date == null) {
+        return "-"
+    }
+    try {
+        let newdate = date.split("-")
+        let year = newdate[0]
+        let m = newdate[1]
+        let d = newdate[2]
+        let mname = ""
+        // console.log(m)
+        for (var i in month) {
+            if (month[i].MONTH_ID == m) {
+                mname = month[i].MONTH_NAME_TH
+            }
+        }
+        return String(parseInt(d)) + " " + mname + " " + (parseInt(year) + 543)
     }
     catch {
         return false

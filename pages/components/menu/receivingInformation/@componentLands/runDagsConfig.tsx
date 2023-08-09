@@ -10,6 +10,7 @@ import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import { DownLoadLog } from '@/libs/exportTXT';
 import { SnackbarSet } from '@/pages/components/@conponents/popup/SnackbarSet';
 import { delDags } from '@/service/del';
+import { dateFormatTimeKheed } from '@/libs/outputDatas';
 
 interface IRunDagsConfig {
     ele?: any;
@@ -82,6 +83,10 @@ export default function RunDagsConfig(props: IRunDagsConfig) {
         {
             name: 'จำนวนข้อมูลที่พบปัญหา',
             width: 100,
+        },
+        {
+            name: 'วันที่รันล่าสุด',
+            width: 200,
         },
         {
             name: 'Action',
@@ -224,6 +229,11 @@ export default function RunDagsConfig(props: IRunDagsConfig) {
                                         <TableCell align='center' sx={{ border: 'none' }}>
                                             <Typography variant={'body1'} sx={{ ml: 1 }} >
                                                 {item.DEF ? `${item.DEF}`:`0`}
+                                            </Typography>
+                                        </TableCell>
+                                        <TableCell align='center' sx={{ border: 'none' }}>
+                                            <Typography variant={'body1'} sx={{ ml: 1 }} >
+                                                {dateFormatTimeKheed(item.DATES)}
                                             </Typography>
                                         </TableCell>
                                         <TableCell align='center' sx={{ border: 'none' }}>
