@@ -187,11 +187,12 @@ export const dateFormatTimeTHSlash = (date: any, method: any = null) => {
     }
 }
 export const dateFormatTimeKheed = (date: any, method: any = null) => {
+    console.log(date,'dateFormatTimeKheed');
     // data yyyy-mm-d
     if (method == null) {
         method = 'MONTH_NAME_TH'
     }
-    if (date == null) {
+    if (date == null || date == undefined || date == '-') {
         return "-"
     }
     try {
