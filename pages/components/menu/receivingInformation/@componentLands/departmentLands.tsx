@@ -132,7 +132,7 @@ export default function DepartmentLands({ dataList, hendname, refreshMenu }: IFD
 
     return (
         <React.Fragment>
-            <FormDialog open={isOpenpopConfig} formContent={(<RunDagsConfig ele={elementDag}/>)} namTitle={'RUN DAG'} handleClose={handleCloseDagConfig}/>
+            <FormDialog open={isOpenpopConfig} formContent={(<RunDagsConfig ele={elementDag}/>)} namTitle={'นำเข้าข้อมูลจาก กรมที่ดิน'} handleClose={handleCloseDagConfig}/>
             <Menu
                 id="basic-menu"
                 anchorEl={anchorEl}
