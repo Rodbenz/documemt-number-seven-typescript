@@ -304,3 +304,44 @@ export async function REPORT_SEND_PROVINCE(datasend:any) {
         return false
     }
 }
+export async function Dash_REPORT_1(datasend:any) {
+    let url = `${process.env.REACT_APP_API_HOST}/REPORT/REPORT_1`;
+    AddLoading()
+    try {
+        let res = await axios.post(url, datasend)
+        let data = res.data
+        RemoveLoading()
+        return data.result
+    } catch {
+        RemoveLoading()
+        return false
+    }
+}
+export async function Dash_REPORT_2(datasend:any) {
+    let url = `${process.env.REACT_APP_API_HOST}/REPORT/REPORT_2`;
+    AddLoading()
+    try {
+        let res = await axios.post(url, datasend)
+        let data = res.data
+        RemoveLoading()
+        return data.result
+    } catch {
+        RemoveLoading()
+        return false
+    }
+}
+export async function Dash_REPORT_3(datasend:any) {
+    let url = `${process.env.REACT_APP_API_HOST}/REPORT/REPORT_3`;
+    AddLoading()
+    try {
+        let res = await axios.post(url, datasend)
+        console.log(res,'res');
+        
+        let data = res.data
+        RemoveLoading()
+        return data.result
+    } catch {
+        RemoveLoading()
+        return false
+    }
+}

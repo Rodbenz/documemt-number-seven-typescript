@@ -1,17 +1,11 @@
 'use server';
 import * as React from 'react';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { DatePicker, DesktopDatePicker, MobileDatePicker } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
 import 'dayjs/locale/th';
-import { th } from 'date-fns/locale';
-import { TextField } from '@mui/material';
-import PropType from 'prop-types';
 import LocalizedFormat from 'dayjs/plugin/buddhistEra';
 import OverwriteAdapterDayjs from '@/libs/date_adapter/OverwriteLibs';
-import moment from 'moment';
 
 dayjs.locale('th');
 dayjs.extend(LocalizedFormat);
@@ -54,7 +48,7 @@ export default function BasicDateTimePicker({ values, namLabel = 'กรุณ�
 
   return (
     <div style={{ width: '100%' }}>
-      <LocalizationProvider dateAdapter={OverwriteAdapterDayjs} locale={th} >
+      <LocalizationProvider dateAdapter={OverwriteAdapterDayjs} adapterLocale='th'>
         <DesktopDatePicker
           sx={{ width: '100%', size: 'small' }}
           label={namLabel}
