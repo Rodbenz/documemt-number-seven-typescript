@@ -4,7 +4,7 @@ import { DASHBORD_SEND3, Dash_REPORT_3 } from '@/service/report';
 import Dashgboadbar from '../@component/dashgboadbar';
 
 function calrai(x: any) {
-    return x + "%";
+    return x + " รายการ";
 }
 const tooltip = {
     callbacks: {
