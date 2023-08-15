@@ -1,7 +1,7 @@
 import React from 'react';
-import { Grid, Box } from "@mui/material";
-import Dashgboadbar from './dashgboadbar';
-import { Dash_REPORT_1 } from '@/service/report';
+import { Grid, Box, Stack, Button, Typography } from "@mui/material";
+import { DASHBORD_SEND3, Dash_REPORT_3 } from '@/service/report';
+import Dashgboadbar from '../@component/dashgboadbar';
 
 function calrai(x: any) {
     return x + "%";
@@ -24,22 +24,29 @@ const tooltip = {
     }
 }
 
-interface IFCreatDataDashboardReceiving{
-    setDataSendProvince?:any;
+interface IFCreatDataDashboardListBrach {
+    dataSendProvince?: any;
+    setDataSendProvince?: any;
+    dataSendBranch?: any;
+    setDataSendBranch?: any;
 }
 
-export default function CreatDataDashboardReceiving({setDataSendProvince}:IFCreatDataDashboardReceiving) {
+export default function CreatDataDashboardListBrach({ dataSendProvince, setDataSendProvince, setDataSendBranch, dataSendBranch }: IFCreatDataDashboardListBrach) {
     const [dataList, setDataList] = React.useState([]);
     const [lebel, setLabel] = React.useState([]);
-    const [percens, setPercens] = React.useState([]);
-    const [percensmax, setPercensmax] = React.useState([]);
+    const [dataSuccess, setDataSucces] = React.useState([]);
+    const [dataPerpare, setDataPerpare] = React.useState([]);
+    const [labelp, setLabelp] = React.useState("");
 
     const res_dashboardReport1 = async () => {
-        let dataSend: any = new Object();
-        dataSend.GOV_TYPE = '1'
+        let dataSend: any = dataSendBranch;
+        dataSend.GOV_TYPE = String(dataSendBranch.GOV_TYPE);
+        dataSend.FLAG_TYPE = String(dataSendBranch.FLAG_TYPE);
+        dataSend.PARCEL_TYPE = String(dataSendBranch.PARCEL_TYPE);
+        dataSend.CHANGWAT_CODE = String(dataSendBranch.CHANGWAT_CODE);
         try {
-            let res = await Dash_REPORT_1(dataSend);
-            console.log(res, 'res_dashboardReport1');
+            let res = await DASHBORD_SEND3(dataSend);
+            console.log(res, 'res_dashboardReport3', dataSend);
             await setDataList(res)
             await createDataDash(res)
         } catch (e) {
@@ -50,17 +57,16 @@ export default function CreatDataDashboardReceiving({setDataSendProvince}:IFCrea
 
     const createDataDash = (data: any) => {
         let objlabel: any = [];
-        let percens: any = [];
-        let datapercensmax: any = [];
+        let dataSuccess: any = [];
+        let dataPerpare: any = [];
         for (let i = 0; i < data.length; i++) {
-            objlabel.push(data[i].SEMI_NAME);
-            percens.push(data[i].PERCENTS);
-            let minus = (100 - data[i].PERCENTS)
-            datapercensmax.push(minus);
+            objlabel.push(data[i].BRANCH_NAME);
+            dataSuccess.push(data[i].ST_POSTDOL3);
+            dataPerpare.push(data[i].ST_POSTDOL1);
         }
         setLabel(objlabel);
-        setPercens(percens);
-        setPercensmax(datapercensmax);
+        setDataSucces(dataSuccess);
+        setDataPerpare(dataPerpare);
     }
 
     const handleOnchange = (data: any) => {
@@ -69,7 +75,7 @@ export default function CreatDataDashboardReceiving({setDataSendProvince}:IFCrea
         for (let i = 0; i < dataList.length; i++) {
             if (graph === i) {
                 console.log(dataList[i], 'handleOnchange');
-                setDataSendProvince(dataList[i]);
+                // setDataSendBranch(dataList[i]);
             }
         }
 
@@ -79,16 +85,16 @@ export default function CreatDataDashboardReceiving({setDataSendProvince}:IFCrea
         labels: lebel,
         datasets: [
             {
-                label: "ที่รับจากกรมที่ดิน",
-                data: percens,
+                label: "ส่งสำเร็จ",
+                data: dataSuccess,
                 borderColor: 'rgb(53, 162, 235)',
                 backgroundColor: 'rgba(53, 162, 235, 0.5)',
                 borderWidth: 2,
                 dataList: dataList
             },
             {
-                label: "ที่รับยังไม่ได้จากกรมที่ดิน",
-                data: percensmax,
+                label: "เตรียมส่ง",
+                data: dataPerpare,
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
                 borderWidth: 2,
@@ -97,20 +103,20 @@ export default function CreatDataDashboardReceiving({setDataSendProvince}:IFCrea
         ],
     };
 
-    const options: any= {
+    const options: any = {
         responsive: true,
         scales: {
             // remove the [ & ] here
             x: {
-                stacked: true,
-                ticks: {
-                }
+                // stacked: true,
+                // ticks: {
+                // }
             },
             y: {
-                stacked: true,
+                // stacked: true,
                 ticks: {
                     callback: function (value: string) {
-                        return value + "%"
+                        return value + " รายการ"
                     }
                 }
             },
@@ -127,12 +133,23 @@ export default function CreatDataDashboardReceiving({setDataSendProvince}:IFCrea
         }
     }
 
+    const handleBackPage = () => {
+        // setDataSendProvince({})
+        setDataSendBranch({})
+    }
 
     React.useEffect(() => {
         res_dashboardReport1()
-    }, [])
+        if (Object.keys(dataSendProvince).length > 0 && Object.keys(dataSendBranch).length > 0) {
+            setLabelp(`${dataSendProvince.FLAG_NAME} จังหวัด${dataSendBranch.CHANGWAT_NAME}`);
+        }
+    }, [dataSendBranch])
     return (
         <Box>
+            <Stack direction={'row'} justifyContent={'space-between'}>
+                <Typography sx={{ color: '#4267b2', fontSize: '21px' }}>{`${labelp}`}</Typography>
+                <Button variant={'outlined'} color={'success'} onClick={handleBackPage}>{'<< กลับหน้ากราฟจังหวัด'}</Button>
+            </Stack>
             <Grid container>
                 <Grid item xs={1.5}>
                 </Grid>

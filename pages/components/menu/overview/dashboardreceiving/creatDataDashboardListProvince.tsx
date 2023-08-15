@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Box, Stack, Button, Typography } from "@mui/material";
-import Dashgboadbar from './dashgboadbar';
 import { Dash_REPORT_2 } from '@/service/report';
+import Dashgboadbar from '../@component/dashgboadbar';
 
 function calrai(x: any) {
     return x + "%";

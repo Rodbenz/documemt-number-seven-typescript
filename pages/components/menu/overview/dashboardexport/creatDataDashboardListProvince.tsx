@@ -1,10 +1,10 @@
 import React from 'react';
 import { Grid, Box, Stack, Button, Typography } from "@mui/material";
-import Dashgboadbar from './dashgboadbar';
-import { Dash_REPORT_3 } from '@/service/report';
+import { DASHBORD_SEND2, Dash_REPORT_2 } from '@/service/report';
+import Dashgboadbar from '../@component/dashgboadbar';
 
 function calrai(x: any) {
-    return x + "%";
+    return x + " รายการ";
 }
 const tooltip = {
     callbacks: {
@@ -24,28 +24,26 @@ const tooltip = {
     }
 }
 
-interface IFCreatDataDashboardListBrach {
+interface IFCreatDataDashboardListProvince {
     dataSendProvince?: any;
     setDataSendProvince?: any;
-    dataSendBranch?: any;
     setDataSendBranch?: any;
 }
 
-export default function CreatDataDashboardListBrach({ dataSendProvince, setDataSendProvince, setDataSendBranch, dataSendBranch }: IFCreatDataDashboardListBrach) {
+export default function CreatDataDashboardListProvince({ dataSendProvince, setDataSendProvince, setDataSendBranch }: IFCreatDataDashboardListProvince) {
     const [dataList, setDataList] = React.useState([]);
     const [lebel, setLabel] = React.useState([]);
-    const [percens, setPercens] = React.useState([]);
-    const [percensmax, setPercensmax] = React.useState([]);
+    const [dataSuccess, setDataSuccess] = React.useState([]);
+    const [dataPerpare, setDtatPerpare] = React.useState([]);
     const [labelp, setLabelp] = React.useState("");
 
     const res_dashboardReport1 = async () => {
-        let dataSend: any = Object();
-        dataSend.GOV_TYPE = String(dataSendBranch.GOV_TYPE);
-        dataSend.SEMI_CODE = String(dataSendBranch.SEMI_CODE);
-        dataSend.CHANGWAT_CODE = String(dataSendBranch.PROVINCE_CODE);
+        let dataSend: any = dataSendProvince;
+        dataSend.GOV_TYPE = String(dataSend.GOV_TYPE);
+        dataSend.SEMI_CODE = String(dataSend.SEMI_CODE);
         try {
-            let res = await Dash_REPORT_3(dataSend);
-            console.log(res, 'res_dashboardReport1', dataSend);
+            let res = await DASHBORD_SEND2(dataSend);
+            console.log(res, 'res_dashboardReport1');
             await setDataList(res)
             await createDataDash(res)
         } catch (e) {
@@ -56,17 +54,16 @@ export default function CreatDataDashboardListBrach({ dataSendProvince, setDataS
 
     const createDataDash = (data: any) => {
         let objlabel: any = [];
-        let percens: any = [];
-        let datapercensmax: any = [];
+        let dataSuccess: any = [];
+        let dataPerpare: any = [];
         for (let i = 0; i < data.length; i++) {
-            objlabel.push(data[i].BRANCH_NAME);
-            percens.push(data[i].PERCENTS);
-            let minus = (100 - data[i].PERCENTS)
-            datapercensmax.push(minus);
+            objlabel.push(data[i].CHANGWAT_NAME);
+            dataSuccess.push(data[i].ST_POSTDOL3);
+            dataPerpare.push(data[i].ST_POSTDOL3);
         }
         setLabel(objlabel);
-        setPercens(percens);
-        setPercensmax(datapercensmax);
+        setDataSuccess(dataSuccess);
+        setDtatPerpare(dataPerpare);
     }
 
     const handleOnchange = (data: any) => {
@@ -75,7 +72,7 @@ export default function CreatDataDashboardListBrach({ dataSendProvince, setDataS
         for (let i = 0; i < dataList.length; i++) {
             if (graph === i) {
                 console.log(dataList[i], 'handleOnchange');
-                // setDataSendBranch(dataList[i]);
+                setDataSendBranch(dataList[i]);
             }
         }
 
@@ -85,38 +82,38 @@ export default function CreatDataDashboardListBrach({ dataSendProvince, setDataS
         labels: lebel,
         datasets: [
             {
-                label: "ที่รับจากกรมที่ดิน",
-                data: percens,
+                label: "ส่งสำเร็จ",
+                data: dataSuccess,
                 borderColor: 'rgb(53, 162, 235)',
                 backgroundColor: 'rgba(53, 162, 235, 0.5)',
                 borderWidth: 2,
                 dataList: dataList
             },
-            {
-                label: "ที่รับยังไม่ได้จากกรมที่ดิน",
-                data: percensmax,
-                borderColor: 'rgb(255, 99, 132)',
-                backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                borderWidth: 2,
-                dataList: dataList
-            },
+            // {
+            //     label: "ที่รับยังไม่ได้จากกรมที่ดิน",
+            //     data: percensmax,
+            //     borderColor: 'rgb(255, 99, 132)',
+            //     backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            //     borderWidth: 2,
+            //     dataList: dataList
+            // },
         ],
     };
 
-    const options: any = {
+    const options:any= {
         responsive: true,
         scales: {
             // remove the [ & ] here
             x: {
-                stacked: true,
+                // stacked: true,
                 ticks: {
                 }
             },
             y: {
-                stacked: true,
+                // stacked: true,
                 ticks: {
                     callback: function (value: string) {
-                        return value + "%"
+                        return value + " รายการ"
                     }
                 }
             },
@@ -134,29 +131,28 @@ export default function CreatDataDashboardListBrach({ dataSendProvince, setDataS
     }
 
     const handleBackPage = () => {
-        // setDataSendProvince({})
-        setDataSendBranch({})
+        setDataSendProvince({})
     }
 
     React.useEffect(() => {
         res_dashboardReport1()
-        if (Object.keys(dataSendProvince).length > 0 && Object.keys(dataSendBranch).length > 0) {
-            setLabelp(`${dataSendProvince.SEMI_NAME} จังหวัด${dataSendBranch.PROVINCE_NAME}`);
+        if (Object.keys(dataSendProvince).length > 0) {
+            setLabelp(dataSendProvince.FLAG_NAME);
         }
-    }, [dataSendBranch])
+    }, [dataSendProvince])
     return (
         <Box>
-            <Stack direction={'row'} justifyContent={'space-between'}>
+            <Stack direction={'row'} justifyContent={'space-between'} pl={20}>
                 <Typography sx={{ color: '#4267b2', fontSize: '21px' }}>{`${labelp}`}</Typography>
-                <Button variant={'outlined'} color={'success'} onClick={handleBackPage}>{'<< กลับหน้ากราฟจังหวัด'}</Button>
+                <Button variant={'outlined'} color={'success'} onClick={handleBackPage}>{'<< กลับกราฟแรก'}</Button>
             </Stack>
             <Grid container>
-                <Grid item xs={1.5}>
+                <Grid item xs={0}>
                 </Grid>
-                <Grid item xs={9}>
+                <Grid item xs={12}>
                     <Dashgboadbar data={data} options={options} handleOnchange={handleOnchange} />
                 </Grid>
-                <Grid item xs={1.5}>
+                <Grid item xs={0}>
                 </Grid>
             </Grid>
         </Box>

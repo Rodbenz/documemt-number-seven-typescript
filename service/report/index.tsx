@@ -345,3 +345,48 @@ export async function Dash_REPORT_3(datasend:any) {
         return false
     }
 }
+export async function DASHBORD_SEND1(datasend:any) {
+    let url = `${process.env.REACT_APP_API_HOST}/REPORT/DASHBORD_SEND1`;
+    AddLoading()
+    try {
+        let res = await axios.post(url, datasend)
+        console.log(res,'res');
+        
+        let data = res.data
+        RemoveLoading()
+        return data.result
+    } catch {
+        RemoveLoading()
+        return false
+    }
+}
+export async function DASHBORD_SEND2(datasend:any) {
+    let url = `${process.env.REACT_APP_API_HOST}/REPORT/DASHBORD_SEND2`;
+    AddLoading()
+    try {
+        let res = await axios.post(url, datasend)
+        console.log(res,'res');
+        
+        let data = res.data
+        RemoveLoading()
+        return data.result
+    } catch {
+        RemoveLoading()
+        return false
+    }
+}
+export async function DASHBORD_SEND3(datasend:any) {
+    let url = `${process.env.REACT_APP_API_HOST}/REPORT/DASHBORD_SEND3`;
+    AddLoading()
+    try {
+        let res = await axios.post(url, datasend)
+        console.log(res,'res');
+        
+        let data = res.data
+        RemoveLoading()
+        return data.result
+    } catch {
+        RemoveLoading()
+        return false
+    }
+}

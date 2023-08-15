@@ -1,9 +1,12 @@
 import React from 'react'
 import DashboadPie from './@component/dashboadPie'
-import CreatDataDashboardReceiving from './@component/creatDataDashboardReceiving'
 import { Box, Tab, Tabs, Typography } from '@mui/material'
-import CreatDataDashboardListProvince from './@component/creatDataDashboardListProvince';
-import CreatDataDashboardListBrach from './@component/creatDataDashboardListBrach';
+import CreatDataDashboardListBrach from './dashboardreceiving/creatDataDashboardListBrach';
+import CreatDataDashboardReceiving from './dashboardreceiving/creatDataDashboardReceiving';
+import CreatDataDashboardListProvince from './dashboardreceiving/creatDataDashboardListProvince';
+import CreatDataDashboardExport from './dashboardexport/creatDataDashboardExport';
+import CreatDataDashboardExportProvince from './dashboardexport/creatDataDashboardListProvince';
+import CreatDataDashboardExportBranch from './dashboardexport/creatDataDashboardListBrach';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -48,8 +51,9 @@ export default function Overview() {
   };
 
   React.useEffect(() => {
-    console.log(dataSendBranch, 'dataSendBranch');
-  }, [dataSendBranch])
+    setDataSendProvince({})
+    setDataSendBranch({})
+  }, [value])
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -68,6 +72,17 @@ export default function Overview() {
         )}
         {Object.keys(dataSendProvince).length > 0 && Object.keys(dataSendBranch).length > 0 && (
           <CreatDataDashboardListBrach dataSendProvince={dataSendProvince} setDataSendProvince={setDataSendProvince} dataSendBranch={dataSendBranch} setDataSendBranch={setDataSendBranch}/>
+        )}
+      </CustomTabPanel >
+      <CustomTabPanel value={value} index={1}>
+        {Object.keys(dataSendProvince).length == 0 && Object.keys(dataSendBranch).length == 0 && (
+          <CreatDataDashboardExport setDataSendProvince={setDataSendProvince} />
+        )}
+        {Object.keys(dataSendProvince).length > 0 && Object.keys(dataSendBranch).length == 0 && (
+          <CreatDataDashboardExportProvince dataSendProvince={dataSendProvince} setDataSendProvince={setDataSendProvince} setDataSendBranch={setDataSendBranch}/>
+        )}
+        {Object.keys(dataSendProvince).length > 0 && Object.keys(dataSendBranch).length > 0 && (
+          <CreatDataDashboardExportBranch dataSendProvince={dataSendProvince} setDataSendProvince={setDataSendProvince} dataSendBranch={dataSendBranch} setDataSendBranch={setDataSendBranch}/>
         )}
       </CustomTabPanel >
     </Box>
