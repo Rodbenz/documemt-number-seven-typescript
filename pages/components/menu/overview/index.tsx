@@ -1,90 +1,56 @@
-import React from 'react'
-import DashboadPie from './@component/dashboadPie'
-import { Box, Tab, Tabs, Typography } from '@mui/material'
-import CreatDataDashboardListBrach from './dashboardreceiving/creatDataDashboardListBrach';
-import CreatDataDashboardReceiving from './dashboardreceiving/creatDataDashboardReceiving';
-import CreatDataDashboardListProvince from './dashboardreceiving/creatDataDashboardListProvince';
-import CreatDataDashboardExport from './dashboardexport/creatDataDashboardExport';
-import CreatDataDashboardExportProvince from './dashboardexport/creatDataDashboardListProvince';
-import CreatDataDashboardExportBranch from './dashboardexport/creatDataDashboardListBrach';
+import * as React from 'react';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import DashLands from './dashLands';
 
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
+export default function BasicAccordion() {
+  const [expanded, setExpanded] = React.useState<string | false>('panel1');
 
-function CustomTabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
+  const handleChange =
+    (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
+      setExpanded(newExpanded ? panel : false);
+    };
   return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          {children}
-        </Box>
-      )}
+    <div style={{ backgroundColor: "#dbf2f2" }}>
+      <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography>กรมที่ดิน</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <DashLands />
+        </AccordionDetails>
+      </Accordion>
+      <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel2a-content"
+          id="panel2a-header"
+        >
+          <Typography>กรมส่งเสริม</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <DashLands />
+        </AccordionDetails>
+      </Accordion>
+      <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel3a-content"
+          id="panel3a-header"
+        >
+           <Typography>กรมทางหลวง</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <DashLands />
+        </AccordionDetails>
+      </Accordion>
     </div>
   );
-}
-
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
-
-export default function Overview() {
-  const [value, setValue] = React.useState(0);
-  const [dataSendProvince, setDataSendProvince] = React.useState<any>({})
-  const [dataSendBranch, setDataSendBranch] = React.useState<any>({})
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
-
-  React.useEffect(() => {
-    setDataSendProvince({})
-    setDataSendBranch({})
-  }, [value])
-
-  return (
-    <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="การรับข้อมูล" {...a11yProps(0)} />
-          <Tab label="การส่งออกข้อมูล" {...a11yProps(1)} />
-        </Tabs>
-      </Box>
-      <CustomTabPanel value={value} index={0}>
-        {Object.keys(dataSendProvince).length == 0 && Object.keys(dataSendBranch).length == 0 && (
-          <CreatDataDashboardReceiving setDataSendProvince={setDataSendProvince} />
-        )}
-        {Object.keys(dataSendProvince).length > 0 && Object.keys(dataSendBranch).length == 0 && (
-          <CreatDataDashboardListProvince dataSendProvince={dataSendProvince} setDataSendProvince={setDataSendProvince} setDataSendBranch={setDataSendBranch}/>
-        )}
-        {Object.keys(dataSendProvince).length > 0 && Object.keys(dataSendBranch).length > 0 && (
-          <CreatDataDashboardListBrach dataSendProvince={dataSendProvince} setDataSendProvince={setDataSendProvince} dataSendBranch={dataSendBranch} setDataSendBranch={setDataSendBranch}/>
-        )}
-      </CustomTabPanel >
-      <CustomTabPanel value={value} index={1}>
-        {Object.keys(dataSendProvince).length == 0 && Object.keys(dataSendBranch).length == 0 && (
-          <CreatDataDashboardExport setDataSendProvince={setDataSendProvince} />
-        )}
-        {Object.keys(dataSendProvince).length > 0 && Object.keys(dataSendBranch).length == 0 && (
-          <CreatDataDashboardExportProvince dataSendProvince={dataSendProvince} setDataSendProvince={setDataSendProvince} setDataSendBranch={setDataSendBranch}/>
-        )}
-        {Object.keys(dataSendProvince).length > 0 && Object.keys(dataSendBranch).length > 0 && (
-          <CreatDataDashboardExportBranch dataSendProvince={dataSendProvince} setDataSendProvince={setDataSendProvince} dataSendBranch={dataSendBranch} setDataSendBranch={setDataSendBranch}/>
-        )}
-      </CustomTabPanel >
-    </Box>
-  )
 }
