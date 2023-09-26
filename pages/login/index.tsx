@@ -75,7 +75,7 @@ export default function SignInSide( props: ILogin) {
           sm={4}
           md={8}
           sx={{
-            backgroundImage: 'url(/image/building-2.png)',
+            backgroundImage: `url(${process.env.REACT_APP_API_IMAGES}/image/building-2.png)`,
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],

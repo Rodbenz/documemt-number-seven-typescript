@@ -15,14 +15,15 @@ import LoadingScreen from './components/@conponents/loadingscreen';
 import BoxFooters from './components/footers';
 import { ThemeProvider, createTheme } from '@mui/material';
 import { UPD_REPORT_SEND, UPD_REPORT_SEND_PROV } from '@/service/upd';
+import Head from 'next/head';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [isMenu, setIsMenu] = React.useState(false);
-  const router:any = useRouter()
+  const router: any = useRouter()
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
     console.log(router.query.token);
-  },[router])
+  }, [router])
 
   const theme = createTheme({
     typography: {
@@ -57,7 +58,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const updateSendExport = async () => {
     try {
       let updsendall = await UPD_REPORT_SEND()
-      let updsendprov = await UPD_REPORT_SEND_PROV()  
+      let updsendprov = await UPD_REPORT_SEND_PROV()
     } catch (e) {
 
     }
@@ -70,6 +71,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
+        <Head>
+          <title>ระบบเชื่อมโยงแลกเปลี่ยนข้อมูล</title>
+        </Head>
         <div>
           <CartProvider>
             {/* <CheckLogin /> */}
@@ -77,7 +81,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <SnackBarDiaLog />
             <LoadingScreen />
             <div style={{
-              backgroundImage: "url(/image/building-2.png)", backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: 'center',
+              backgroundImage: `url(${process.env.REACT_APP_API_IMAGES}/image/building-2.png)`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: 'center',
               height: '93vh', width: '100%', overflowY: 'hidden', overflowX: 'hidden'
             }} >
               <div className={router.route == '/' ? "" : styles.box}>

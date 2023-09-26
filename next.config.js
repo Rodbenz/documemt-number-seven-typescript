@@ -17,6 +17,7 @@ const nextConfig = {
     REACT_APP_API_EPVLINK: process.env.REACT_APP_API_EPVLINK,
     REACT_APP_API_BETW: process.env.REACT_APP_API_BETW,
     REACT_APP_API_AIRFLOW: process.env.REACT_APP_API_AIRFLOW,
+    REACT_APP_API_IMAGES: process.env.REACT_APP_API_IMAGES,
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === "production"

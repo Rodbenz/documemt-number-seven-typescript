@@ -37,7 +37,7 @@ const bull = (
   </Box>
 );
 
-const options = [{ id: 1, name: 'ข้อมูลแปลงที่ดิน', img: '../../../image/teedin.png', width: 60, height: 30, paddingLeft: 10 }, { id: 2, name: 'ข้อมูลทะเบียนที่ดินและห้องชุด', img: '../../../image/data.png', width: 50, height: 50, paddingLeft: 10 }, { id: 3, name: 'ข้อมูลซื้อขายจดทะเบียนและห้องชุด', img: '../../../image/Vector.png', width: 50, height: 50, paddingLeft: 10 }]
+const options = [{ id: 1, name: 'ข้อมูลแปลงที่ดิน', img: `${process.env.REACT_APP_API_IMAGES}/image/teedin.png`, width: 60, height: 30, paddingLeft: 10 }, { id: 2, name: 'ข้อมูลทะเบียนที่ดินและห้องชุด', img:  `${process.env.REACT_APP_API_IMAGES}/image/data.png`, width: 50, height: 50, paddingLeft: 10 }, { id: 3, name: 'ข้อมูลซื้อขายจดทะเบียนและห้องชุด', img:  `${process.env.REACT_APP_API_IMAGES}/image/Vector.png`, width: 50, height: 50, paddingLeft: 10 }]
 
 export default function MenuSummarize() {
   const { isMenuSummarize, setIsMenuSummarize } = useCartContext();
@@ -70,7 +70,7 @@ export default function MenuSummarize() {
                 <Grid container py={5} px={5} spacing={5}>
                   <Grid item xs={12} sm={12} md={4} >
                     <div style={style2} itemType='button' onClick={() => handleOnClick({ id: 4, name: 'ข้อมูลภาษีที่ดินและสิ่งปลูกสร้าง', img: '', width: 50, height: 50, paddingLeft: 10 })}>
-                    <img src="../../../image/data.png" width={50} height={50} style={{ paddingLeft: 10 }} alt='icon' />
+                      <img src={`${process.env.REACT_APP_API_IMAGES}/image/data.png`} width={50} height={50} style={{ paddingLeft: 10 }} alt='icon' />
                       <div>
                         <Typography variant="h5" p={1} sx={{ color: '#006e61', fontWeight: 'bold', letterSpacing: '.2rem', ontFamily: 'monospace', }} pl={2}>{'ข้อมูลภาษีที่ดินและสิ่งปลูกสร้าง'}</Typography>
                         <Typography variant={'body2'} sx={{ color: '#006e61', fontWeight: 'bold', letterSpacing: '.2rem', ontFamily: 'monospace', }} pl={2}>{'กรมส่งเสริมการปกครองท้องถิ่น'}</Typography>

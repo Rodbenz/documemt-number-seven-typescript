@@ -3,13 +3,12 @@ import * as React from 'react';
 import { Box, Grid, Typography, ButtonBase, Stack, Button } from '@mui/material';
 import ResponsiveAppBar from './ResponsiveAppBar';
 import AccountMenu from './accountMenu';
-import Image from 'next/image';
 
 interface Props {
     setIsMenu: any;
 }
 
-export default function HaederNavbar({ setIsMenu}: Props) {
+export default function HaederNavbar({ setIsMenu }: Props) {
     return (
         <Box sx={{}}>
             <Grid container
@@ -28,7 +27,7 @@ export default function HaederNavbar({ setIsMenu}: Props) {
                     bgcolor: '#f9f9f9',
                 }}>
 
-                <Image src="/Comu.png" alt="Picture of the author" width={300} height={76} />
+                <img src={`${process.env.REACT_APP_API_IMAGES}/Comu.png`} alt="Picture of the author" width={300} height={76} />
                 <Typography variant='h4'
                     sx={{
                         mr: 2,
@@ -46,7 +45,7 @@ export default function HaederNavbar({ setIsMenu}: Props) {
                 <AccountMenu />
             </Grid>
 
-            <ResponsiveAppBar setIsMenu={setIsMenu}/>
+            <ResponsiveAppBar setIsMenu={setIsMenu} />
         </Box>
     );
 }
