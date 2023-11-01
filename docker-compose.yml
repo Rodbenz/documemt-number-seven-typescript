@@ -1,0 +1,9 @@
+version: '3'
+services:
+  web:
+    image: app7 # Set your desired image name
+    build:
+      context: .
+      dockerfile: Dockerfile  # Use the Dockerfile you provided
+    ports:
+      - "3007:3007"  # Map container port 3000 to host port 3000

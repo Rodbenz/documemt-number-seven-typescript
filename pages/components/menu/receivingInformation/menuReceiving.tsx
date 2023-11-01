@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import { Grid, Stack, Typography } from '@mui/material';
 import { useCartContext } from '@/context/Cartcontext';
 import AutoGridNoWrap from '../../@conponents/AutoGridNoWrap';

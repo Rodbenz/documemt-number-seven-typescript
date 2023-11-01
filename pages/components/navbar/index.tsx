@@ -3,12 +3,19 @@ import * as React from 'react';
 import { Box, Grid, Typography, ButtonBase, Stack, Button } from '@mui/material';
 import ResponsiveAppBar from './ResponsiveAppBar';
 import AccountMenu from './accountMenu';
+import { useSession, signIn, signOut } from "next-auth/react";
+import { useRouter } from 'next/navigation';
 
 interface Props {
     setIsMenu: any;
 }
 
 export default function HaederNavbar({ setIsMenu }: Props) {
+    const { data: session } = useSession()
+    const Router = useRouter();
+    React.useEffect(()=>{
+        !session ? Router.push('/') : ""
+    },[session])
     return (
         <Box sx={{}}>
             <Grid container
@@ -44,8 +51,9 @@ export default function HaederNavbar({ setIsMenu }: Props) {
                 </Typography>
                 <AccountMenu />
             </Grid>
-
-            <ResponsiveAppBar setIsMenu={setIsMenu} />
+            {session && (
+                <ResponsiveAppBar setIsMenu={setIsMenu} />
+            )}
         </Box>
     );
 }

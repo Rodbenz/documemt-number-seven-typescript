@@ -1,0 +1,71 @@
+# Install dependencies only when needed
+FROM node:16-alpine AS deps
+
+ENV NODE_ENV production
+
+RUN apk add --no-cache libc6-compat
+
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+
+RUN npm install --frozen-lockfile
+
+# Rebuild the source code only when needed
+FROM node:16-alpine AS builder
+
+ENV NODE_ENV production
+
+WORKDIR /app
+
+COPY next.config.js ./
+COPY package.json package-lock.json ./
+COPY --from=deps /app/node_modules ./node_modules
+
+COPY pages ./pages
+COPY public ./public
+COPY styles ./styles
+COPY context ./context
+COPY libs ./libs
+COPY service ./service
+COPY store ./store
+COPY types ./types
+COPY . .
+
+RUN npm run build
+
+# Production image, copy all the files and run next
+FROM node:16-alpine AS runner
+WORKDIR /app
+
+ENV NODE_ENV production
+
+# RUN addgroup --system --gid 1001 bloggroup
+# RUN adduser --system --uid 1001 bloguser
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+COPY --from=builder /app/context ./context
+COPY --from=builder /app/libs ./libs
+COPY --from=builder /app/service ./service
+COPY --from=builder /app/store ./store
+COPY --from=builder /app/types ./types
+COPY --from=builder /app/styles ./styles
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/node_modules ./node_modules
+
+# Automatically leverage output traces to reduce image size
+# https://nextjs.org/docs/advanced-features/output-file-tracing
+# COPY --from=builder --chown=bloguser:bloggroup /app/.next/standalone ./
+# COPY --from=builder --chown=bloguser:bloggroup /app/.next/static ./.next/static
+# COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
+
+USER nextjs
+
+EXPOSE 3007
+
+ENV PORT 3007
+
+CMD ["npm", "start"]

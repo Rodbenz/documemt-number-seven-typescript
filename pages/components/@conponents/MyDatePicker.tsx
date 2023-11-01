@@ -1,4 +1,4 @@
-'use server';
+'use client';
 import * as React from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker, DesktopDatePicker, MobileDatePicker } from '@mui/x-date-pickers';

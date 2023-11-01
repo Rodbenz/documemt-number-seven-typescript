@@ -1,3 +1,4 @@
+"use client"
 import { useCartContext } from '@/context/Cartcontext'
 import React from 'react'
 import DepartmentLands from './@component/departmentLands'

@@ -3,13 +3,11 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    unoptimized: true
+    unoptimized: true,
   },
-  // basePath: '/document-number-seven',
-  // assetPrefix: '/document-number-seven/',
-
+  basePath: process.env.NODE_ENV === "production" ? "/app7" : "",
   env: {
-    v : "1.0002" ,
+    v: "1.0002",
     REACT_APP_API_PRIVATEKEY: process.env.REACT_APP_API_PRIVATEKEY,
     REACT_APP_API_HOST: process.env.REACT_APP_API_HOST,
     REACT_APP_API_URL: process.env.REACT_APP_API_URL,
@@ -20,9 +18,8 @@ const nextConfig = {
     REACT_APP_API_IMAGES: process.env.REACT_APP_API_IMAGES,
   },
   compiler: {
-    removeConsole: process.env.NODE_ENV === "production"
+    removeConsole: process.env.NODE_ENV === "production",
   },
- 
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

@@ -16,8 +16,9 @@ import BoxFooters from './components/footers';
 import { ThemeProvider, createTheme } from '@mui/material';
 import { UPD_REPORT_SEND, UPD_REPORT_SEND_PROV } from '@/service/upd';
 import Head from 'next/head';
+import { SessionProvider } from "next-auth/react"
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps:{session, ...pageProps} }: AppProps) {
   const [isMenu, setIsMenu] = React.useState(false);
   const router: any = useRouter()
 
@@ -64,37 +65,39 @@ export default function App({ Component, pageProps }: AppProps) {
     }
   }
 
-  React.useEffect(() => {
-    updateSendExport()
-  }, [])
+  // React.useEffect(() => {
+  //   updateSendExport()
+  // }, [])
 
   return (
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <Head>
-          <title>ระบบเชื่อมโยงแลกเปลี่ยนข้อมูล</title>
-        </Head>
-        <div>
-          <CartProvider>
-            {/* <CheckLogin /> */}
-            <ConfirmDialog2 />
-            <SnackBarDiaLog />
-            <LoadingScreen />
-            <div style={{
-              backgroundImage: `url(${process.env.REACT_APP_API_IMAGES}/image/building-2.png)`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: 'center',
-              height: '93vh', width: '100%', overflowY: 'hidden', overflowX: 'hidden'
-            }} >
-              <div className={router.route == '/' ? "" : styles.box}>
-                {skipPage.includes(router.route) ? null : <HaederNavbar setIsMenu={setIsMenu} />}
-                <div style={{ width: '100%', height: '75vh', overflowY: 'auto', overflowX: 'hidden' }}>
-                  <Component {...pageProps} />
+    <SessionProvider session={session}>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <Head>
+            <title>ระบบเชื่อมโยงแลกเปลี่ยนข้อมูล</title>
+          </Head>
+          <div>
+            <CartProvider>
+              {/* <CheckLogin /> */}
+              <ConfirmDialog2 />
+              <SnackBarDiaLog />
+              <LoadingScreen />
+              <div style={{
+                backgroundImage: `url(${process.env.REACT_APP_API_IMAGES}/image/building-2.png)`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: 'center',
+                height: '93vh', width: '100%', overflowY: 'hidden', overflowX: 'hidden'
+              }} >
+                <div className={router.route == '/' ? "" : styles.box}>
+                  {skipPage.includes(router.route) ? null : <HaederNavbar setIsMenu={setIsMenu} />}
+                  <div style={{ width: '100%', height: '75vh', overflowY: 'auto', overflowX: 'hidden' }}>
+                    <Component {...pageProps} />
+                  </div>
                 </div>
               </div>
-            </div>
-            <BoxFooters />
-          </CartProvider>
-        </div>
-      </ThemeProvider>
-    </Provider>
+              <BoxFooters />
+            </CartProvider>
+          </div>
+        </ThemeProvider>
+      </Provider>
+    </SessionProvider>
   )
 }
